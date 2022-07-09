@@ -334,7 +334,7 @@ public:
 		//maybe, I will write a script to multiply the amplitudes in this map on the amp-time dependence
 
 		//basedirExp = "/work/users/konctbel/calibs/R007-001/output/ntuples/MHAD2020/col/*col.root";	//directory with exp col stream files to which apply calibration
-		basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/eecalib/*col.root";		//directory with exp col stream files to which apply calibration
+		basedirExp = "/work/users/kladov/snd2k/R007-002output/ntuples/MHAD2019/*col.root";		//directory with exp col stream files to which apply calibration
 		basedirMod = "/work/users/kladov/snd2k/R007-001/2019/";										//directory with mod files after map creation
 
 		workingDir = "/work/users/kladov/snd2k/R006-003/maindir/2019/";								//specify where to store temporary files
@@ -1464,6 +1464,12 @@ void CalibrExp::raspr() {
 			//hprof[j][i] = new TProfile(name,title, 4800, 0, 7.0);
 		}
 	}
+	TProfile* hprofMean[9];
+	for (int i = 0; i < 9; i++) {
+		sprintf(name, "hprofrpZm%d", i + 1);
+		sprintf(title, "zobl%d,sensor%d;phi;ach",i + 1);
+		hprofMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
+	}
 	//eff vs phi
 	TProfile* hprofeff[14][9];
 	for (int j = 0; j < 14; j++) {
@@ -1472,6 +1478,12 @@ void CalibrExp::raspr() {
 			sprintf(title, "zobl%d,sensor%d;phi;eff", j + 1, i + 1);
 			hprofeff[j][i] = new TProfile(name, title, 100, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 		}
+	}
+	TProfile* hprofEffMean[9];
+	for (int i = 0; i < 9; i++) {
+		sprintf(name, "hprofeffZm%d", i + 1);
+		sprintf(title, "zobl%d,sensor%d;phi;ach", i + 1);
+		hprofEffMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 	}
 
 	//hists for zasel po phi
@@ -1580,15 +1592,19 @@ void CalibrExp::raspr() {
 							ach1[maxampla] = (ach[maxampla] - ach[scount1]) * sin(theta[pind]);
 						if (ach[maxampla] < achCut && ach1[maxampla] > -10) {
 							hprof[zoblInd][j]->Fill(phi[pind], ach1[maxampla]);
+							hprofMean[j]->Fill(phi[pind], ach1[maxampla]);
 						}
 
 						//efficiency
+						double effWhatFill = 0.;
 						if (ach[maxampla] - ped[zoblInd][j] >= 0.2)
-						//if (schr[scount1+1] >= 0.2)
-							hprofeff[zoblInd][j]->Fill(phi[pind], 1.);
-						if (ach[maxampla] - ped[zoblInd][j] < 0.2)
+							//if (schr[scount1+1] >= 0.2)
+							effWhatFill = 1.;
+						else if (ach[maxampla] - ped[zoblInd][j] < 0.2)
 						//if (schr[scount1+1] < 0.2)
-							hprofeff[zoblInd][j]->Fill(phi[pind], 0.);
+							effWhatFill = 0.;
+						hprofeff[zoblInd][j]->Fill(phi[pind], effWhatFill);
+						hprofEffMean[j]->Fill(phi[pind], effWhatFill);
 					}
 				
 					//ped int po phi
@@ -1629,6 +1645,10 @@ void CalibrExp::raspr() {
 			hprof[m][i]->Write(title);
 		}
 	}
+	for (Int_t i = 0; i < 9; i++) {
+		sprintf(title, "mean,sensor%d", i + 1);
+		hprofMean[i]->Write(title);
+	}
 	MyFile->Close();
 
 	TFile* MyFileEff = new TFile((workingDir + "profilesEff.root").c_str(), "RECREATE");
@@ -1637,6 +1657,10 @@ void CalibrExp::raspr() {
 			sprintf(title, "zobl%d,sensor%d", m + 1, i + 1);
 			hprofeff[m][i]->Write(title);
 		}
+	}
+	for (Int_t i = 0; i < 9; i++) {
+		sprintf(title, "mean,sensor%d", i + 1);
+		hprofEffMean[i]->Write(title);
 	}
 	MyFileEff->Close();
 
@@ -1696,6 +1720,12 @@ void CalibrExp::rasprmod() {
 			hprof[m][j] = new TProfile(name, title, 100, (float)(j - 1.) * (2. * PI) / 9., (float)(j + 2.) * (2. * PI) / 9.);
 		}
 	}
+	TProfile* hprofMean[9];
+	for (int i = 0; i < 9; i++) {
+		sprintf(name, "hprofrpZm%d", i + 1);
+		sprintf(title, "zobl%d,sensor%d;phi;ach", i + 1);
+		hprofMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
+	}
 	//eff vs phi
 	TProfile* hprofeff[14][9];
 	for (int j = 0; j < 14; j++) {
@@ -1704,6 +1734,12 @@ void CalibrExp::rasprmod() {
 			sprintf(title, "zobl%d,sensor%d;phi;eff", j + 1, i + 1);
 			hprofeff[j][i] = new TProfile(name, title, 100, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 		}
+	}
+	TProfile* hprofEffMean[9];
+	for (int i = 0; i < 9; i++) {
+		sprintf(name, "hprofeffZm%d", i + 1);
+		sprintf(title, "zobl%d,sensor%d;phi;ach", i + 1);
+		hprofEffMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 	}
 
 	int Count = 0, count1 = 0;
@@ -1756,16 +1792,21 @@ void CalibrExp::rasprmod() {
 						ach1[j] = ach[j] * aerWidth * fabs(cos(theta[pind])) / (aerBord[aerBordInd] - fabs(zin[pind]));
 					else if ((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) >= aerWidth)
 						ach1[j] = ach[j] * sin(theta[pind]);
-					if (ach[j] < achCut && ach1[j] >-10)
+					if (ach[j] < achCut && ach1[j] >-10) {
 						hprof[zoblInd][j]->Fill(phi[pind], ach1[j]);
+						hprofMean[j]->Fill(phi[pind], ach1[j]);
+					}
 
 					//eff
+					double effWhatFill = 0.;
 					if (ach[j] >= 0.2)
 					//if (tch[j] < 900)
-						hprofeff[zoblInd][j]->Fill(phi[pind], 1.);
+						effWhatFill = 1.;
 					if (ach[j] < 0.2)
 					//if (tch[j] > 900)
-						hprofeff[zoblInd][j]->Fill(phi[pind], 0.);
+						effWhatFill = 0.;
+					hprofeff[zoblInd][j]->Fill(phi[pind], effWhatFill);
+					hprofEffMean[j]->Fill(phi[pind], effWhatFill);
 				}
 			}
 			scount += 1;
@@ -1790,6 +1831,10 @@ void CalibrExp::rasprmod() {
 			hprof[i][m]->Write(title);
 		}
 	}
+	for (Int_t i = 0; i < 9; i++) {
+		sprintf(title, "mean,sensor%d", i + 1);
+		hprofMean[i]->Write(title);
+	}
 	MyFile->Close();
 
 	TFile* MyFileEff = new TFile((workingDir + "profilesEffMod.root").c_str(), "RECREATE");
@@ -1798,6 +1843,10 @@ void CalibrExp::rasprmod() {
 			sprintf(title, "zobl%d,sensor%d", m + 1, i + 1);
 			hprofeff[m][i]->Write(title);
 		}
+	}
+	for (Int_t i = 0; i < 9; i++) {
+		sprintf(title, "mean,sensor%d", i + 1);
+		hprofEffMean[i]->Write(title);
 	}
 	MyFileEff->Close();
 }
@@ -5109,9 +5158,11 @@ void CalibrExp::compareAmpSpectr() {
 	cin.get();
 	double koefnewp[9][14];
 	double koefnewpErr[9][14];
+	double koefnewpM[9];
+	double koefnewpMErr[9];
 	double koefnewh[9][14];
 	double modelGran[9][4] = { 3.96954, 17.4603, 30.8096, 42.9946, 43.6686, 58.0747, 70.5603, 82.8407, 83.7598, 97.8676, 110.007, 122.273, 124.125, 138.028, 150.658, 163.491, 164.016, 178.457, 192.73, 203.046, 203.326, 217.694, 231.488, 242.669, 244.352, 258.508, 271.534, 282.903, 283.639, 298.182, 310.422, 322.809, 323.23, 337.838, 351.363, 362 };
-	for (size_t obl = 0; obl < 14; obl++) {
+	for (size_t obl = 0; obl < 1; obl++) {
 		//TProfile* hprof10 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", zobl + 1, 1));
 		//TProfile* hprof20 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", zobl + 1, 1));
 		//hprof10->SetLineColor(2);
@@ -5131,8 +5182,10 @@ void CalibrExp::compareAmpSpectr() {
 			//TDirectory* d1 = (TDirectory*)f2->Get(Form("zobl%d,sensor%d", obl+1, counter+1));
 			cout << "asdasdasd" << endl;
 			//TF1* tf1 = (TF1*)d1->Get(Form("zobl%d,sensor%d,full", 2, 8));
-			TProfile* hprof1 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
-			TProfile* hprof2 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			//TProfile* hprof1 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			TProfile* hprof1 = (TProfile*)f1->Get(Form("mean,sensor%d", counter + 1));
+			//TProfile* hprof2 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			TProfile* hprof2 = (TProfile*)f2->Get(Form("mean,sensor%d", counter + 1));
 			TProfile* hz = (TProfile*)f3->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
 			/*hprof1->SetLineColor(2);
 			hprof1->GetXaxis()->SetRangeUser(3./4.*hprof1->GetBinCenter(1)+1./4.*hprof1->GetBinCenter(hprof1->GetNbinsX()-1), 1./4.*hprof1->GetBinCenter(1)+3./4.*hprof1->GetBinCenter(hprof1->GetNbinsX()-1));
@@ -5186,10 +5239,10 @@ void CalibrExp::compareAmpSpectr() {
 					else if (x.back() >= hprof1->GetBinCenter(modBin))
 						modA = hprof1->GetBinContent(modBin) + (hprof1->GetBinContent(modBin+1) - hprof1->GetBinContent(modBin)) / (hprof1->GetBinCenter(modBin+1) - hprof1->GetBinCenter(modBin)) * (x.back() - hprof1->GetBinCenter(modBin));
 
-					y.push_back(modA /hprof2->GetBinContent(i));
-					dy.push_back(sqrt(pow(hprof1->GetBinError(i)/hprof2->GetBinContent(i),2) + pow(y.back()*hprof2->GetBinError(i)/hprof2->GetBinContent(i),2)));
-					//y.push_back(hprof1->GetBinContent(i) / hprof2->GetBinContent(modBin));
-					//dy.push_back(sqrt(pow(hprof1->GetBinError(i) / hprof2->GetBinContent(modBin), 2) + pow(y.back() * hprof2->GetBinError(modBin) / hprof2->GetBinContent(modBin), 2)));
+					//y.push_back(modA /hprof2->GetBinContent(i));
+					//dy.push_back(sqrt(pow(hprof1->GetBinError(i)/hprof2->GetBinContent(i),2) + pow(y.back()*hprof2->GetBinError(i)/hprof2->GetBinContent(i),2)));
+					y.push_back(hprof1->GetBinContent(i) / hprof2->GetBinContent(modBin));
+					dy.push_back(sqrt(pow(hprof1->GetBinError(i) / hprof2->GetBinContent(modBin), 2) + pow(y.back() * hprof2->GetBinError(modBin) / hprof2->GetBinContent(modBin), 2)));
 
 					z.push_back(modA / scphi(&x.back(),&fitPar[counter][obl][0]));
 					dz.push_back(sqrt(pow(hprof1->GetBinError(modBin) / scphi(&x.back(), &fitPar[counter][obl][0]), 2) + pow(z.back() * 0. / scphi(&x.back(), &fitPar[counter][obl][0]), 2)));
@@ -5212,7 +5265,7 @@ void CalibrExp::compareAmpSpectr() {
 			graph1->SetMarkerColor(kRed);
 			graph1->GetYaxis()->SetRangeUser(0.75, 1.25);
 			graph->Draw("AP");
-			graph1->Draw("sameP");
+			//graph1->Draw("sameP");
 			lineg1->Draw("same");
 			lineg2->Draw("same");
 			lineg3->Draw("same");
@@ -5222,9 +5275,11 @@ void CalibrExp::compareAmpSpectr() {
 			graph->Fit("f1", "", "", lgran[0], lgran[3]);
 			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
 			c->Update();
-			//cin.get();
+			cin.get();
 			koefnewp[counter][obl] = coef[obl][counter] * f1->GetParameter(0);
 			koefnewpErr[counter][obl] = f1->GetParError(0);
+			koefnewpM[counter] = 1 * f1->GetParameter(0);
+			koefnewpMErr[counter] = f1->GetParError(0);
 		}
 	}
 	readNcoef();
@@ -5239,6 +5294,14 @@ void CalibrExp::compareAmpSpectr() {
 			koefnewhErr[counter][obl] = 0.01;
 		}
 	}
+	double oblast9[9] = {1,2,3,4,5,6,7,8,9};
+	double nol9[9] = {0,0,0,0,0,0,0,0,0};
+	TGraphErrors* gro = new TGraphErrors(9, &oblast9[0], &koefnewpM[0], &nol9[0], &koefnewpMErr[0]);
+	gro->SetLineColor(1);
+	gro->SetMarkerStyle(21);
+	gro->SetMarkerColor(1);
+	gro->Draw("APL");
+
 	for (int j = 0; j < 9; j++) {
 		TGraphErrors* gr = new TGraphErrors(14, &oblast[0], &koefnewh[j][0], &noll[0], &koefnewhErr[j][0]);
 		TGraphErrors* gr1 = new TGraphErrors(14, &oblast[0], &koefnewp[j][0], &noll[0], &koefnewpErr[j][0]);
@@ -5254,13 +5317,15 @@ void CalibrExp::compareAmpSpectr() {
 		gr1->SetMarkerColor(2);
 		//gr->GetYaxis()->SetRangeUser(1., 12.);
 		gr->SetTitle("secondary particles contribution;z,sm;percent");
-		gr->Draw("APL");
-		gr1->Draw("PLsame");
+		
+		//gr->Draw("APL");
+		//gr1->Draw("PLsame");
+
 		fn->SetLineColor(kRed);
 		//gr->Fit("fn", "", "", -9, 9);
 		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
 		c->Update();
-		cin.get();
+		//cin.get();
 		//cout << fn->GetParameter(0) << endl;
 	}
 	for (size_t obl = 0; obl < 14; obl++) {

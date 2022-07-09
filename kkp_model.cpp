@@ -192,8 +192,7 @@ public:
 	vector< vector<int> > countSelectedEventsEE[8];
 	vector<double> energyMod;
 	vector<double> energyExp;
-	vector<TH1*> dEdxMod1;
-	vector<TH1*> dEdxExp1;
+	
 	vector< vector<int> > entriesExp[8];
 	vector< vector<double> > efficiency[8];
 	vector< vector<double> > efficiencyErr[8];
@@ -428,17 +427,19 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 	vector<TH1*> hDz0;// = new TH1F("hDz0", "z01 - z02", 100, -15, 15);
 	vector<TH1*> hdExn;// = new TH1F("hDz0", "z01 - z02", 100, -15, 15);
 
+	vector<TH1*> dEdxMod1;
+	vector<TH1*> dEdxExp1;
 
 	TFile* MyFile = new TFile(file, "RECREATE");
 	
 	for (int e = 0; e < entries; e++) {
 		chain.GetEntry(e);
 		bool newEnPoint = true;
-		int pointIndex = energyPoints.size();
+		size_t pointIndex = energyPoints.size();
 		for (size_t i = 0; i < energyPoints.size(); i++) {
 			if (energyPoints[i] == (double)beam) {
 				newEnPoint = false;
-				pointIndex = i;
+				pointIndex = (int)i;
 			}
 		}
 		if (newEnPoint) {
@@ -457,7 +458,7 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 			hPhi.push_back(new TH1F(Form("hPhi%f", energyPoints.back()), "phi1 - phi2 - pi", 100, -0.5, 0.5));
 			hDd0.push_back(new TH1F(Form("hDd0%f", energyPoints.back()), "d01 - d02", 100, -1.5, 1.5));
 			hDz0.push_back(new TH1F(Form("hDz0%f", energyPoints.back()), "z01 - z02", 100, -10, 10));
-			hdExn.push_back(new TH1F(Form("hdExn%f", energyPoints.back()), ";dE/dx", 100, 0, 10));
+			hdExn.push_back(new TH1F(Form("hdExn%f", energyPoints.back()), ";dE/dx", 100, 0, 10000));
 
 			alle.push_back(0.);
 			allt.push_back(0.);
@@ -476,12 +477,12 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 			ndExncount.push_back(0);
 			if (b.Contains("eemod")) {
 				meandExn.push_back(0);
-				cout << Form("dEdxMod1%d", (int)(energyPoints.back()) + pointIndex) << endl;
-				dEdxMod1.push_back(new TH1F(Form("dEdxMod1%d", (int)energyPoints.back()+ pointIndex), ";dE/dx", 1000, 0, 5000));
+				cout << Form("histbad%d", (int)pointIndex) << endl;
+				dEdxMod1.push_back(new TH1F(Form("histbad%d", (int)pointIndex), ";dE/dx", 1000, 0, 5000));
 			}
 			if (b.Contains("MHAD")) {
 				meandExnC.push_back(0);
-				dEdxExp1.push_back(new TH1F(Form("dEdxExp1%d", (int)energyPoints.back() + pointIndex), ";dE/dx", 1000, 0, 10));
+				dEdxExp1.push_back(new TH1F(Form("dEdxExp1%d", (int)pointIndex), ";dE/dx", 1000, 0, 10));
 			}
 		}
 		else
@@ -550,6 +551,8 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 				}
 				hdExn[pointIndex]->Fill(dExn[0]/temparraydE2011[closestPind]);
 				hdExn[pointIndex]->Fill(dExn[1]/temparraydE2011[closestPind]);
+				//hdExn[pointIndex]->Fill(dExn[0]);
+				//hdExn[pointIndex]->Fill(dExn[1]);
 				dEdxMod1[pointIndex]->Fill(dExn[0]);
 				dEdxMod1[pointIndex]->Fill(dExn[1]);
 				//if(dExn[0]/680. < 3.5 && dExn[1]/680. < 3.5){
@@ -615,6 +618,10 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 		hDd0[i]->Write(Form("hDd0_%.3f", energyPoints[i]));
 		hDz0[i]->Write(Form("hDz0_%.3f", energyPoints[i]));
 		hdExn[i]->Write(Form("hdExn_%.3f", energyPoints[i]));
+		if (b.Contains("eemod"))
+			dEdxMod1[i]->Write(Form("histbad%d", (int)i));
+		else if (b.Contains("MHAD"))
+			dEdxExp1[i]->Write(Form("histbad%d", (int)i));
 	}
 	MyFile->Close();
 
@@ -655,23 +662,36 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 		}
 	}
 
+	char* fileToSaveDeh = "";
+	if (b.Contains("eemod")) {
+		fileToSaveDeh = "/work/users/kladov/snd2k/R007-001/hDexnMod.root";
+	}
+	else if (b.Contains("MHAD")) {
+		fileToSaveDeh = "/work/users/kladov/snd2k/R007-001/hDexnExp.root";
+	}
+	TFile* MyFile1 = new TFile(fileToSaveDeh, "RECREATE");
 	for (size_t i = 0; i < energyPoints.size(); i++) {
 		if (b.Contains("eemod")) {
 			meandExnErr.push_back(200. / sqrt(ndExncount[i]));   //taken from histogramm for modeling
 			cout << energyPoints[i] << endl;
-			cout << dEdxMod1[i]->GetEntries() << "	" << i << endl;
-			dEdxMod1[i]->Draw();
-			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			c->Update();
+			cout << dEdxMod1[i] << endl;
+			//hdExn[i]->Write(Form("histbad%d", (int)i));
+			//hdExn[i]->Draw();
+			//cout << dEdxMod1[i]->GetEntries() << "	" << i << endl;
+			//dEdxMod1[i]->Draw();
+			//TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+			//c->Update();
 			//cin.get();
 		}
-		if (b.Contains("MHAD")) {
+		else if (b.Contains("MHAD")) {
 			meandExnCErr.push_back(0.4 / sqrt(ndExncount[i]));
-			dEdxExp1[i]->Draw();
-			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			c->Update();
+			//dEdxExp1[i]->Write(Form("histbad%d", (int)i));
+			//dEdxExp1[i]->Draw();
+			//TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+			//c->Update();
 		}
 	}
+	MyFile1->Close();
 
 	/*for (size_t i = 0; i < energyPoints.size(); i++) {
                 energyMod.push_back(energyPoints[i]);
@@ -1189,6 +1209,17 @@ void luminCalculation::luminosityCalc() {
 	}
 	cout << "expProcessed" << endl;
 
+	vector<TH1> dEdxMod1;
+	vector<TH1> dEdxExp1;
+	TFile* MyFileM = new TFile("/work/users/kladov/snd2k/R007-001/2012/lumdistrMod.root");
+	TFile* MyFileE = new TFile("/work/users/kladov/snd2k/R007-001/2012/lumdistrExp.root");
+	//for (size_t i = 0; i < energyMod.size(); i++) {
+	//	dEdxMod1.push_back((TH1F)MyFileM->Get(Form("histbad%d", (int)i)));
+	//}
+	//for (size_t i = 0; i < energyExp.size(); i++) {
+	//	dEdxExp1.push_back((TH1F)MyFileE->Get(Form("histbad%d", (int)i)));
+	//}
+
 	vector<double> enparticle;
 	vector<double> enparticleErr;
 	vector<double> coeff;
@@ -1198,7 +1229,10 @@ void luminCalculation::luminosityCalc() {
 	//cin.get();
 	dedxe->Draw();
 	c->Update();
-
+	
+	vector<double> nolls;
+	vector<double> koefFit;
+	vector<double> koefFitErr;
 	for (size_t i = 0; i < energyExp.size(); i++) {
 		cout << "a" << endl;
 		size_t closestPInd;
@@ -1212,30 +1246,49 @@ void luminCalculation::luminosityCalc() {
 		cout << "b" << endl;
 		cout << dEdxMod1.size() << endl;
 		cout << closestPInd << endl;
-		dEdxMod1[closestPInd]->SetLineColor(2);
-		dEdxMod1[closestPInd]->Draw();
+		TH1F* hm = (TH1F*)MyFileM->Get(Form("histbad%d", closestPInd));
+		hm->SetLineColor(2);
+		hm->Draw();
 		cout << "b0" << endl;
-		double maximumCenter = dEdxMod1[closestPInd]->GetBinCenter(dEdxMod1[closestPInd]->GetMaximumBin());
-		double rMS = dEdxMod1[closestPInd]->GetRMS();
+		double maximumCenter = hm->GetBinCenter(hm->GetMaximumBin());
+		double rMS = hm->GetRMS();
 		cout << "ba" << endl;
-		TF1* f1 = new TF1("f1", "[0]*Landau(-x,[1],[2])", maximumCenter-rMS, maximumCenter + rMS);
-		f1->SetParameters(dEdxMod1[closestPInd]->GetMaximum(), maximumCenter, rMS);
-		dEdxMod1[closestPInd]->Fit("f1", "", "", maximumCenter - rMS, maximumCenter + rMS);
+		TF1* f1 = new TF1("f1", "[0]*exp(-(x-[1])*(x-[1]) / (x<[1]?[2]*[2]:[3]*[3]))", maximumCenter-2.5*rMS, maximumCenter + 2.5*rMS);
+		f1->SetParameters(hm->GetMaximum(), maximumCenter, rMS, rMS);
+		hm->Fit("f1", "", "", maximumCenter - 0.5 * rMS, maximumCenter + rMS);
+		hm->Fit("f1", "", "", maximumCenter - 0.5 * f1->GetParameter(2), maximumCenter + 0.5 * f1->GetParameter(2));
+		double modMean = f1->GetParameter(1);
 		
 		//TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
 		c->Update();
 		cin.get();
 		cout << "c" << endl;
-		dEdxExp1[i]->SetLineColor(2);
-		dEdxExp1[i]->Draw();
-		maximumCenter = dEdxExp1[i]->GetBinCenter(dEdxExp1[i]->GetMaximumBin());
-		rMS = dEdxExp1[i]->GetRMS();
-		TF1* f2 = new TF1("f1", "[0]*Landau(-x,[1],[2])", maximumCenter - rMS, maximumCenter + rMS);
-		f2->SetParameters(dEdxExp1[i]->GetMaximum(), maximumCenter, rMS);
-		dEdxExp1[i]->Fit("f2", "", "", maximumCenter - rMS, maximumCenter + rMS);
+		TH1F* he = (TH1F*)MyFileE->Get(Form("histbad%d", i));
+		he->SetLineColor(2);
+		he->Draw();
+		maximumCenter = he->GetBinCenter(he->GetMaximumBin());
+		rMS = he->GetRMS();
+		TF1* f2 = new TF1("f2", "[0]*exp(-(x-[1])*(x-[1]) / (x<[1]?[2]*[2]:[3]*[3]))", maximumCenter - 2.5 * rMS, maximumCenter + 2.5 * rMS);
+		f2->SetParameters(he->GetMaximum(), maximumCenter, rMS, rMS);
+		he->Fit("f2", "", "", maximumCenter - 0.5 * rMS, maximumCenter + rMS);
+		hm->Fit("f2", "", "", maximumCenter - 0.5 * f2->GetParameter(2), maximumCenter + 0.5 * f2->GetParameter(2));
+		double expMean = f2->GetParameter(1);
 		c->Update();
 		cin.get();
+
+		cout << "<<<<<<<<<<<<<<<<<" << modMean / expMean << ">>>>>>>>>>>>>>>>>>" << endl;
+		koefFit.push_back(modMean / expMean);
+		koefFitErr.push_back(sqrt(pow(f1->GetParError(1)/expMean,2) + pow(f2->GetParError(1)*modMean/expMean/expMean,2)));
+		nolls.push_back(0);
 	}
+	MyFileM->Close();
+	MyFileE->Close();
+	TGraphErrors* grd = new TGraphErrors(energyExp.size(), &energyExp[0], &koefFit[0], &nolls[0], &koefFitErr[0]);
+	grd->SetMarkerColor(4);
+	grd->SetTitle("dedx correction");
+	grd->SetMarkerStyle(21);
+	grd->Draw("AP");
+	c->Update();
 
 	//dEx for beam dependence 
 	vector<double> nulvector;
@@ -1293,12 +1346,12 @@ void luminCalculation::luminosityCalc() {
 	gr1->SetMarkerColor(4);
 	gr1->SetTitle("dedx correction");
 	gr1->SetMarkerStyle(21);
-	gr1->Draw("AP");
+	//gr1->Draw("AP");
 	TF1* f1 = new TF1("f1", "[0]", 500, 1100);
 	f1->SetParameter(0,950);
-	gr1->Fit("f1", "", "", 500, 1100);
+	//gr1->Fit("f1", "", "", 500, 1100);
 	c->Update();
-	cout << f1->GetParameter(0) << "	" << f1->GetParError(0) << endl;
+	//cout << f1->GetParameter(0) << "	" << f1->GetParError(0) << endl;
 	//cout
 	for(size_t i = 0; i < tempEnSorted.size(); i++){
 		cout << tempEnSorted[i] << ", ";
