@@ -272,6 +272,7 @@ public:
 	string prefixSelectedMod;
 	float timeCut;
 	double aerBord[2];
+	double aerRLowBord;
 	double aerWidth;
 	double achCut;
 	int entriesInGoodRun;
@@ -334,7 +335,8 @@ public:
 		//maybe, I will write a script to multiply the amplitudes in this map on the amp-time dependence
 
 		//basedirExp = "/work/users/konctbel/calibs/R007-001/output/ntuples/MHAD2020/col/*col.root";	//directory with exp col stream files to which apply calibration
-		basedirExp = "/work/users/kladov/snd2k/R007-002output/ntuples/MHAD2019/*col.root";		//directory with exp col stream files to which apply calibration
+		//basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/*col.root";			//directory with exp col stream files to which apply calibration
+		basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/eecalib/*col.root";			//directory with exp col stream files to which apply calibration
 		basedirMod = "/work/users/kladov/snd2k/R007-001/2019/";										//directory with mod files after map creation
 
 		workingDir = "/work/users/kladov/snd2k/R006-003/maindir/2019/";								//specify where to store temporary files
@@ -342,10 +344,11 @@ public:
 		dirSelectedMod = workingDir + "model/selected/";											//where to store selected Baba events for modeling
 		prefixSelectedExp = "true1__";
 		prefixSelectedMod = "true_";
-		timeCut = 110;
+		timeCut = 1100;
 		//timeCut = 88;
 		aerBord[0] = 11.7; //11.7
 		aerBord[1] = 10.8; //10.8
+		aerRLowBord = 10.5;
 		aerWidth = 3.4; //3.4
 		achCut = 70.;
 		entriesInGoodRun = 2000;
@@ -751,6 +754,7 @@ public:
 		fout1.close();
 	}
 
+	double recalculateZ(double zin, double theta, double ach, double pedz);
 	void copy1();
 	void copymod();
 	void findrunborders();
@@ -794,7 +798,28 @@ bool CalibrExp::TimeIsGood(int signnumb) {
 }
 
 bool CalibrExp::RunIsGood(int run) {
-	return (run - (MinimRun + 1)) < 0 ? (bool)0 : goodrun[run - MinimRun - 1];
+	bool isrungood = (run - (MinimRun + 1)) < 0 ? false : goodrun[run - MinimRun - 1];
+	TString dirSelectedExpT = (TString)dirSelectedExp;
+	isrungood = isrungood && (run > 27250 || !dirSelectedExpT.EndsWith("2017/"));
+	return isrungood;
+}
+
+double CalibrExp::recalculateZ(double zin, double theta, double ach, double pedz) {
+	double amplitude = -1.0;
+	int aerBordInd = -1;
+	if (zin >= 0)
+		aerBordInd = 1;
+	else
+		aerBordInd = 0;
+	if (((aerBord[aerBordInd] - fabs(zin)) * fabs(tan(theta)) < aerWidth) && (fabs(aerBord[aerBordInd] - fabs(zin)) >= 0.01)) {
+
+		amplitude = (ach - pedz) * aerWidth * fabs(cos(theta)) / fabs(aerBord[aerBordInd] - fabs(zin));
+	}
+	else if ((aerBord[aerBordInd] - fabs(zin)) * fabs(tan(theta)) >= aerWidth) {
+
+		amplitude = (ach - pedz) * sin(theta);
+	}
+	return amplitude;
 }
 
 //copy only e+e- entries (cond above) from col stream, located in "basedir", to a new directory "dir", 
@@ -994,6 +1019,7 @@ void CalibrExp::findruns(int amount, double effThreshold) {
 				lgran[3] = truegran1[j][3] - 3. * meanshir[j][2];// -0.03;
 
 				if ((((phi[0] > lgran[0]) && (phi[0] < lgran[1])) || ((phi[0] > lgran[2]) && (phi[0] < lgran[3]))) && (ztr > zobl[0]) && (ztr < zobl[14])) {
+					cout << schr[1 + scount1] << endl;
 					hprof[j]->Fill(run, schr[1 + scount1]);
 				}
 				if ((((phi[1] > lgran[0]) && (phi[1] < lgran[1])) || ((phi[1] > lgran[2]) && (phi[1] < lgran[3]))) && (ztr1 > zobl[0]) && (ztr1 < zobl[14]))
@@ -1118,92 +1144,67 @@ void CalibrExp::zraspr() {
 		chain.GetEntry(e);
 		ztr[0] = 12.0 / tan(theta[0]) + z0[0];
 		ztr[1] = 12.0 / tan(theta[1]) + z0[1];
-		zin[0] = 10.5 / tan(theta[0]) + z0[0];
-		zin[1] = 10.5 / tan(theta[1]) + z0[1];
+		zin[0] = aerRLowBord / tan(theta[0]) + z0[0];
+		zin[1] = aerRLowBord / tan(theta[1]) + z0[1];
 		schr[nch] = 0.;
-		if ( (run > 27250) && (RunIsGood(run)) && (eventtime == 0)/* && (run > 39420 && run < 39580) run < 39350*/) {
-			scount = 0;
-			scount1 = 0;
-			for (int j = 0; j < 9; j++) {
-				if (j == 8) {
-					if (phi[0] < 1.)
-						phi[0] = phi[0] + 2. * PI;
-					if (phi[1] < 1.)
-						phi[1] = phi[1] + 2. * PI;
-					//while (1 + scount < nch) { scount += 1; }
-				}
-				//else
-					while (schr[1 + scount] > 0.5) { scount += 1; }
-
-				lgran[0] = max(truegran1[j][0], truegran1m[j][0]) + 3. * max(meanshir[j][0], meanshirm[j][0]);
-				lgran[1] = min(truegran1[j][1], truegran1m[j][1]) - 3. * max(meanshir[j][1], meanshirm[j][1]);// -0.045;
-				lgran[2] = max(truegran1[j][1], truegran1m[j][1]) + 3. * max(meanshir[j][1], meanshirm[j][1]);// +0.045;
-				lgran[3] = min(truegran1[j][3], truegran1m[j][3]) - 3. * max(meanshir[j][2], meanshirm[j][2]);// -0.03;
-
-				
-
-				maxach = -1000.;
-				for (int f = scount1; f <= scount; f++) {
-					if (ach[f] > maxach) {
-						maxach = ach[f];
-						maxampla = f;
-					}
-				}
-				int p = 2;
-				if (run > 32000 && run < 32800)
-					p = 0;
-				if (run > 33000 && run < 34200)
-					p = 1;
-				p = 1;
-				int aerBordInd = 0;
-				
-				if ((((phi[0] > lgran[0]) && (phi[0] < lgran[1])) || ((phi[0] > lgran[2]) && (phi[0] < lgran[3]))) && TimeIsGood(maxampla))
-					h[j]->Fill(ach[scount1]);
-				if ((((phi[1] > lgran[0]) && (phi[1] < lgran[1])) || ((phi[1] > lgran[2]) && (phi[1] < lgran[3]))) && TimeIsGood(maxampla))
-					h[j]->Fill(ach[scount1]);
-
-				for (int prtc = 0; prtc < 2; prtc++) {
-					if ((((phi[prtc] > lgran[0]) && (phi[prtc] < lgran[1])) || ((phi[prtc] > lgran[2]) && (phi[prtc] < lgran[3]))) && (p < 2) && (TimeIsGood(maxampla)) && ach[maxampla]<achCut) {
-						
-						//fill 0 hists with standart sin
-						ach1[maxampla] = (ach[maxampla] - pedz[j]) * sin(theta[prtc]);
-						hprof01[p]->Fill(zin[prtc], ach1[maxampla]); 
-						hprof0[j]->Fill(zin[prtc], ach1[maxampla]);
-
-						//fill with recalculated
-						if (zin[prtc] >= 0)
-							aerBordInd = 1;
-						else
-							aerBordInd = 0;
-
-						if (((aerBord[aerBordInd] - fabs(zin[prtc])) * fabs(tan(theta[prtc])) < aerWidth) && (fabs(aerBord[aerBordInd] - fabs(zin[prtc])) >= 0.01)) {
-
-							ach1[maxampla] = (ach[maxampla] - pedz[j]) * aerWidth * fabs(cos(theta[prtc])) / fabs(aerBord[aerBordInd] - fabs(zin[prtc]));
-
-							hl->Fill(zin[prtc]);
-							//hprof[j]->Fill((zin - 11.77) / 2., ach1[scount]);
-							//hprof1->Fill((zin - 11.77) / 2., ach1[scount]);
-							hprof[j]->Fill(zin[prtc], ach1[maxampla]);
-							hprof1[p]->Fill(zin[prtc], ach1[maxampla]);
-						}
-						else if ((aerBord[aerBordInd] - fabs(zin[prtc])) * fabs(tan(theta[prtc])) >= aerWidth) {
-
-							ach1[maxampla] = (ach[maxampla] - pedz[j]) * sin(theta[prtc]);
-
-							hprof[j]->Fill(zin[prtc], ach1[maxampla]);
-							hprof1[p]->Fill(zin[prtc], ach1[maxampla]);
-							
-						}
-						/*else {
-							ach1[maxampla] = ach[maxampla] - pedz[j];
-							hprof[j]->Fill(zin[prtc], ach1[maxampla]);
-							hprof1[p]->Fill(zin[prtc], ach1[maxampla]);
-						}*/
-					}
-				}
-				scount += 1;
-				scount1 = scount;
+		TString dirSelectedExpT = (TString)dirSelectedExp;
+		if ((!RunIsGood(run)) || (eventtime != 0)/* && (run > 39420 && run < 39580) run < 39350*/) {
+			continue;
+		}
+		scount = 0;
+		scount1 = 0;
+		for (int j = 0; j < 9; j++) {
+			if (j == 8) {
+				if (phi[0] < 1.)
+					phi[0] = phi[0] + 2. * PI;
+				if (phi[1] < 1.)
+					phi[1] = phi[1] + 2. * PI;
+				//while (1 + scount < nch) { scount += 1; }
 			}
+			//else
+				while (schr[1 + scount] > 0.5) { scount += 1; }
+
+			lgran[0] = max(truegran1[j][0], truegran1m[j][0]) + 3. * max(meanshir[j][0], meanshirm[j][0]);
+			lgran[1] = min(truegran1[j][1], truegran1m[j][1]) - 3. * max(meanshir[j][1], meanshirm[j][1]);// -0.045;
+			lgran[2] = max(truegran1[j][1], truegran1m[j][1]) + 3. * max(meanshir[j][1], meanshirm[j][1]);// +0.045;
+			lgran[3] = min(truegran1[j][3], truegran1m[j][3]) - 3. * max(meanshir[j][2], meanshirm[j][2]);// -0.03;
+
+
+			maxach = -1000.;
+			for (int f = scount1; f <= scount; f++) {
+				if (ach[f] > maxach) {
+					maxach = ach[f];
+					maxampla = f;
+				}
+			}
+			int aerBordInd = 0;
+
+				
+			for (int prtc = 0; prtc < 2; prtc++) {
+
+				if (!(((phi[prtc] > lgran[0]) && (phi[prtc] < lgran[1])) || ((phi[prtc] > lgran[2]) && (phi[prtc] < lgran[3]))) || !TimeIsGood(maxampla))
+					continue;
+					
+				//for pedestals
+				h[j]->Fill(ach[scount1]);
+
+				//for amplitude vs z
+				//fill 0 hists with standart sin
+				hprof01[prtc]->Fill(zin[prtc], (ach[maxampla] - pedz[j]) * sin(theta[prtc]));
+				hprof0[j]->Fill(zin[prtc], (ach[maxampla] - pedz[j]) * sin(theta[prtc]));
+
+				//fill with recalculated
+				double fillAmplitude = recalculateZ(zin[prtc], theta[prtc], ach[maxampla], pedz[j]);
+				if (fillAmplitude == -1.0 || ach[maxampla] > achCut)
+					continue;
+
+				hprof[j]->Fill(zin[prtc], fillAmplitude);
+				hprof1[prtc]->Fill(zin[prtc], fillAmplitude);
+
+			}
+			scount += 1;
+			scount1 = scount;
+		
 		}
 		Count += 1;
 		if (Count == 1000000) {
@@ -1305,8 +1306,8 @@ void CalibrExp::zrasprmod() {
 		chain.GetEntry(e);
 		ztr[0] = 12.0 / tan(theta[0]) + z0[0];
 		ztr[1] = 12.0 / tan(theta[1]) + z0[1];
-		zin[0] = 10.5 / tan(theta[0]) + z0[0];
-		zin[1] = 10.5 / tan(theta[1]) + z0[1];
+		zin[0] = aerRLowBord / tan(theta[0]) + z0[0];
+		zin[1] = aerRLowBord / tan(theta[1]) + z0[1];
 		scount = 0;
 		scount1 = 0;
 		for (int j = 0; j < 9; j++) {
@@ -1326,37 +1327,21 @@ void CalibrExp::zrasprmod() {
 			int aerBordInd = 0;
 
 			for (int prtc = 0; prtc < 2; prtc++) {
-				if ((((phi[prtc] > lgran[0]) && (phi[prtc] < lgran[1])) || ((phi[prtc] > lgran[2]) && (phi[prtc] < lgran[3]))) && ach[j]<achCut) {
-					//fill 0 hists with standart sin
-					ach1[j] = (ach[j]) * sin(theta[prtc]);
-					hprof01->Fill(zin[prtc], ach1[j]);
-					hprof0[j]->Fill(zin[prtc], ach1[j]);
 
-					//fill with recalculated
-					if (zin[prtc] >= 0)
-						aerBordInd = 1;
-					else
-						aerBordInd = 0;
+				if (!(((phi[prtc] > lgran[0]) && (phi[prtc] < lgran[1])) || ((phi[prtc] > lgran[2]) && (phi[prtc] < lgran[3]))))
+					continue;
 
-					if (((aerBord[aerBordInd] - fabs(zin[prtc])) * fabs(tan(theta[prtc])) < aerWidth) && (fabs(aerBord[aerBordInd] - fabs(zin[prtc])) >= 0.01)) {
-						ach1[j] = (ach[j]) * aerWidth * fabs(cos(theta[prtc])) / fabs(aerBord[aerBordInd] - fabs(zin[prtc]));
-						//hprof[j]->Fill((zin - 11.77) / 2., ach1[scount]);
-						//hprof1->Fill((zin - 11.77) / 2., ach1[scount]);
-						hprof[j]->Fill(zin[prtc], ach1[j]);
-						hprof1->Fill(zin[prtc], ach1[j]);
-					}
-					else if ((aerBord[aerBordInd] - fabs(zin[prtc])) * fabs(tan(theta[prtc])) >= aerWidth) {
+				//fill 0 hists with standart sin
+				hprof01->Fill(zin[prtc], (ach[j] - 0.0) * sin(theta[prtc]));
+				hprof0[j]->Fill(zin[prtc], (ach[j] - 0.0) * sin(theta[prtc]));
 
-						ach1[j] = (ach[j]) * sin(theta[prtc]);
-						hprof[j]->Fill(zin[prtc], ach1[j]);
-						hprof1->Fill(zin[prtc], ach1[j]);
-					}
-					/*else {
-						ach1[maxampla] = ach[maxampla] - pedz[j];
-						hprof[j]->Fill(zin[prtc], ach1[maxampla]);
-						hprof1[p]->Fill(zin[prtc], ach1[maxampla]);
-					}*/
-				}
+				//fill with recalculated
+				double fillAmplitude = recalculateZ(zin[prtc], theta[prtc], ach[j], 0);
+				if (fillAmplitude == -1.0 || ach[j] > achCut)
+					continue;
+				hprof[j]->Fill(zin[prtc], fillAmplitude);
+				hprof1->Fill(zin[prtc], fillAmplitude);
+
 			}
 			scount += 1;
 			scount1 = scount;
@@ -1467,7 +1452,7 @@ void CalibrExp::raspr() {
 	TProfile* hprofMean[9];
 	for (int i = 0; i < 9; i++) {
 		sprintf(name, "hprofrpZm%d", i + 1);
-		sprintf(title, "zobl%d,sensor%d;phi;ach",i + 1);
+		sprintf(title, "sensor%d;phi;ach",i + 1);
 		hprofMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 	}
 	//eff vs phi
@@ -1482,7 +1467,7 @@ void CalibrExp::raspr() {
 	TProfile* hprofEffMean[9];
 	for (int i = 0; i < 9; i++) {
 		sprintf(name, "hprofeffZm%d", i + 1);
-		sprintf(title, "zobl%d,sensor%d;phi;ach", i + 1);
+		sprintf(title, "sensor%d;phi;ach", i + 1);
 		hprofEffMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 	}
 
@@ -1533,100 +1518,92 @@ void CalibrExp::raspr() {
 		//cout << beam << endl;
 		ztr[0] = 12.0 / tan(theta[0]) + z0[0];
 		ztr[1] = 12.0 / tan(theta[1]) + z0[1];
-		zin[0] = 10.5 / tan(theta[0]) + z0[0];
-		zin[1] = 10.5 / tan(theta[1]) + z0[1];
+		zin[0] = aerRLowBord / tan(theta[0]) + z0[0];
+		zin[1] = aerRLowBord / tan(theta[1]) + z0[1];
 		schr[nch] = 0.;
-		if (((run > 27251 /*29800*/) && RunIsGood(run))/* && eventtime == 0*/) {
-			scount = 0;     //2017: 4001, 25500, 29501    ; 2018: 6001, 29800, 35801       ; 2019: 38000-43001       ; 2020: 45040-46541
-			scount1 = 0;
-			for (int j = 0; j < 9; j++) {
-				//wichcounter1[j] = scount1;
+		if ((!RunIsGood(run))/* || eventtime != 0*/) {
+			continue;
+		}
+		scount = 0;     //2017: 4001, 25500, 29501    ; 2018: 6001, 29800, 35801       ; 2019: 38000-43001       ; 2020: 45040-46541
+		scount1 = 0;
+		for (int j = 0; j < 9; j++) {
+			//wichcounter1[j] = scount1;
 				//counters are shifted in oreder to determine first one and direction of count, I think. Because of this 9th counter have the tail of signal around 0, I transfer it on >2pi
 				//nch is >= 9 in 2017+, so for one counter I choose from scount1 to scount 2 the highest amplitude 
-				if (j == 8) {
-					if (phi[0] < 1.)
-						phi[0] = phi[0] + 2. * PI;
-					if (phi[1] < 1.)
-						phi[1] = phi[1] + 2. * PI;
-					while (1 + scount < nch) { scount += 1; }
+			if (j == 8) {
+				if (phi[0] < 1.)
+					phi[0] = phi[0] + 2. * PI;
+				if (phi[1] < 1.)
+					phi[1] = phi[1] + 2. * PI;
+				while (1 + scount < nch) { scount += 1; }
+			}
+			else
+				while (schr[1 + scount] > 0.5) { scount += 1; }
+			
+			maxach = -100.;
+			maxampla = scount1;
+			for (int f = scount1; f <= scount; f++) {
+				if (ach[f] > maxach) {
+					maxach = ach[f];
+					maxampla = f;
 				}
-				else
-					while (schr[1 + scount] > 0.5) { scount += 1; }
-				
-				maxach = -100.;
-				maxampla = scount1;
-				for (int f = scount1; f <= scount; f++) {
-					if (ach[f] > maxach) {
-						maxach = ach[f];
-						maxampla = f;
-					}
-				}
-				
-				//ach*sin ot phi 
+			}
+			
+			//ach*sin ot phi 
 				//parameters: good t in timeisgood, aerBord - assumed left and right borders of aerogel, aerWidth - width of aerogel to find intersection with its end, achCut - treshold to prevent random high signals
-				int aerBordInd = 0;
-				int zoblInd = -1;
-
-				for (size_t pind = 0; pind < 2; pind++) {
-					if (zin[pind] >= 0)
-						aerBordInd = 1;
-					else
-						aerBordInd = 0;
-					zoblInd = -1;
-					for (int i = 0; i < 14; i++) {
-						if ((ztr[pind] >= zobl[i]) && (ztr[pind] < zobl[i + 1]))
-							zoblInd = i;
-					}
-					//if(tchr[scount1]<200){
+			int aerBordInd = 0;
+			int zoblInd = -1;
+			
+			for (size_t pind = 0; pind < 2; pind++) {
+				zoblInd = -1;
+				for (int i = 0; i < 14; i++) {
+					if ((ztr[pind] >= zobl[i]) && (ztr[pind] < zobl[i + 1]))
+						zoblInd = i;
+				}
+				//if(tchr[scount1]<200){
 					//	maxampla = scount1;
 					//}
 					//ach*sin ot phi 
-					if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && (TimeIsGood(maxampla)) && (TimeIsGood(scount1)) && zoblInd != -1) {
-						//hprof[zoblInd][j]->Fill(phi[pind], (ach[maxampla] - ped[zoblInd][j]) * sin(theta[pind]));
-						ach1[maxampla] = -50;
-						if (((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) < aerWidth) && ((aerBord[aerBordInd] - fabs(zin[pind])) > 0.05))
-							//ach1[maxampla] = (ach[maxampla] - ped[zoblInd][j]) * aerWidth * fabs(cos(theta[pind])) / (aerBord[aerBordInd] - fabs(zin[pind]));
-							ach1[maxampla] = (ach[maxampla] - ach[scount1]) * aerWidth * fabs(cos(theta[pind])) / (aerBord[aerBordInd] - fabs(zin[pind]));
-						else if ((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) >= aerWidth)
-							//ach1[maxampla] = (ach[maxampla] - ped[zoblInd][j]) * sin(theta[pind]);
-							ach1[maxampla] = (ach[maxampla] - ach[scount1]) * sin(theta[pind]);
-						if (ach[maxampla] < achCut && ach1[maxampla] > -10) {
-							hprof[zoblInd][j]->Fill(phi[pind], ach1[maxampla]);
-							hprofMean[j]->Fill(phi[pind], ach1[maxampla]);
-						}
+				if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && (TimeIsGood(maxampla)) && (TimeIsGood(scount1)) && zoblInd != -1) {
+					//hprof[zoblInd][j]->Fill(phi[pind], (ach[maxampla] - ped[zoblInd][j]) * sin(theta[pind]));
 
-						//efficiency
-						double effWhatFill = 0.;
-						if (ach[maxampla] - ped[zoblInd][j] >= 0.2)
-							//if (schr[scount1+1] >= 0.2)
-							effWhatFill = 1.;
-						else if (ach[maxampla] - ped[zoblInd][j] < 0.2)
-						//if (schr[scount1+1] < 0.2)
-							effWhatFill = 0.;
-						hprofeff[zoblInd][j]->Fill(phi[pind], effWhatFill);
-						hprofEffMean[j]->Fill(phi[pind], effWhatFill);
+					double fillAmplitude = recalculateZ(zin[pind], theta[pind], ach[maxampla], ach[scount1]);
+					if (fillAmplitude != -1.0 && ach[maxampla] < achCut) {
+						hprof[zoblInd][j]->Fill(phi[pind], fillAmplitude);
+						hprofMean[j]->Fill(phi[pind], fillAmplitude);
 					}
+
+					//efficiency
+					double effWhatFill = 0.;
+					if (ach[maxampla] - ach[scount1] >= 0.2)
+						//if (schr[scount1+1] >= 0.2)
+						effWhatFill = 1.;
+					else if (ach[maxampla] - ach[scount1] < 0.2)
+					//if (schr[scount1+1] < 0.2)
+						effWhatFill = 0.;
+					hprofeff[zoblInd][j]->Fill(phi[pind], effWhatFill);
+					hprofEffMean[j]->Fill(phi[pind], effWhatFill);
+				}
 				
-					//ped int po phi
+				//ped int po phi
 					//if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && zoblInd != -1 && (TimeIsGood(maxampla))) {
-					if (((phi[pind] >= (float)(j + 1.5) * (2. * PI) / 9. && phi[pind] < (float)(j + 2) * (2. * PI) / 9.) || (phi[pind] >= (float)(j - 1.0) * (2. * PI) / 9. && phi[pind] < (float)(j - 0.5) * (2. * PI) / 9.)) && zoblInd != -1 && (TimeIsGood(maxampla))) {
-						if (((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) < aerWidth) && ((aerBord[aerBordInd] - fabs(zin[pind])) >= 0.01)) {
-							h[zoblInd][j]->Fill(ach[maxampla]); //scount1
-						}
-						else if ((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) >= aerWidth) {
-							h[zoblInd][j]->Fill(ach[maxampla]); //scount1
-						}
+				if (((phi[pind] >= (float)(j + 1.5) * (2. * PI) / 9. && phi[pind] < (float)(j + 2) * (2. * PI) / 9.) || (phi[pind] >= (float)(j - 1.0) * (2. * PI) / 9. && phi[pind] < (float)(j - 0.5) * (2. * PI) / 9.)) && zoblInd != -1 && (TimeIsGood(maxampla))) {
+					if (((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) < aerWidth) && ((aerBord[aerBordInd] - fabs(zin[pind])) >= 0.01)) {
+						h[zoblInd][j]->Fill(ach[maxampla]); //scount1
 					}
-
-					//zasel po phi
-					if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && zoblInd != -1) {
-						hza[zoblInd][j]->Fill(phi[pind]);
+					else if ((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) >= aerWidth) {
+						h[zoblInd][j]->Fill(ach[maxampla]); //scount1
 					}
 				}
 
-				scount += 1;
-				scount1 = scount;
+				//zasel po phi
+				if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && zoblInd != -1) {
+					hza[zoblInd][j]->Fill(phi[pind]);
+				}
 			}
+
+			scount += 1;
+			scount1 = scount;
 		}
 		
 		Count += 1;
@@ -1723,7 +1700,7 @@ void CalibrExp::rasprmod() {
 	TProfile* hprofMean[9];
 	for (int i = 0; i < 9; i++) {
 		sprintf(name, "hprofrpZm%d", i + 1);
-		sprintf(title, "zobl%d,sensor%d;phi;ach", i + 1);
+		sprintf(title, "sensor%d;phi;ach", i + 1);
 		hprofMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 	}
 	//eff vs phi
@@ -1738,7 +1715,7 @@ void CalibrExp::rasprmod() {
 	TProfile* hprofEffMean[9];
 	for (int i = 0; i < 9; i++) {
 		sprintf(name, "hprofeffZm%d", i + 1);
-		sprintf(title, "zobl%d,sensor%d;phi;ach", i + 1);
+		sprintf(title, "sensor%d;phi;ach", i + 1);
 		hprofEffMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 	}
 
@@ -1750,8 +1727,8 @@ void CalibrExp::rasprmod() {
 		//cout << beam << endl;
 		ztr[0] = 12.0 / tan(theta[0]) + z0[0];
 		ztr[1] = 12.0 / tan(theta[1]) + z0[1];
-		zin[0] = 10.5 / tan(theta[0]) + z0[0];
-		zin[1] = 10.5 / tan(theta[1]) + z0[1];
+		zin[0] = aerRLowBord / tan(theta[0]) + z0[0];
+		zin[1] = aerRLowBord / tan(theta[1]) + z0[1];
 
 		/*if(fabs(mcphi[0]-phi[0])<0.2 && fabs(mcphi[1]-phi[1])<0.2){
 			phi[0] = mcphi[0];
@@ -1787,14 +1764,11 @@ void CalibrExp::rasprmod() {
 				
 				if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && zoblInd != -1) {
 					//hprof[zoblInd][j]->Fill(phi[pind], ach[j] * sin(theta[pind]));
-					ach1[j] = -50;
-					if (((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) < aerWidth) && ((aerBord[aerBordInd] - fabs(zin[pind])) > 0.01))
-						ach1[j] = ach[j] * aerWidth * fabs(cos(theta[pind])) / (aerBord[aerBordInd] - fabs(zin[pind]));
-					else if ((aerBord[aerBordInd] - fabs(zin[pind])) * fabs(tan(theta[pind])) >= aerWidth)
-						ach1[j] = ach[j] * sin(theta[pind]);
-					if (ach[j] < achCut && ach1[j] >-10) {
-						hprof[zoblInd][j]->Fill(phi[pind], ach1[j]);
-						hprofMean[j]->Fill(phi[pind], ach1[j]);
+
+					double fillAmplitude = recalculateZ(zin[pind], theta[pind], ach[j], 0);
+					if (fillAmplitude != -1.0 && ach[j] < achCut) {
+						hprof[zoblInd][j]->Fill(phi[pind], fillAmplitude);
+						hprofMean[j]->Fill(phi[pind], fillAmplitude);
 					}
 
 					//eff
@@ -2073,58 +2047,61 @@ void CalibrExp::ampltime() {
 			eench.push_back(beam);
 		}
 		beamlast = beam;
-		if ((run > 27251 /*29800*/) && RunIsGood(run)/* && (eventtime == 0)*/) {
-			scount = 0;     //2017: 4001, 25500, 29501    ; 2018: 6001, 29800, 35801       ; 2019: 38000-43001       ; 2020: 45040-46541
-			scount1 = 0;
-			for (int j = 0; j < 9; j++) {
-				//wichcounter1[j] = scount1;
-				if (j == 8) {
-					if (phi[0] < 1.)
-						phi[0] = phi[0] + 2. * PI;
-					if (phi[1] < 1.)
-						phi[1] = phi[1] + 2. * PI;
-					//while (1 + scount < nch) { scount += 1; }
+		if (!RunIsGood(run)/* || (eventtime != 0)*/) {
+			continue;
+		}
+			
+		scount = 0;     //2017: 4001, 25500, 29501    ; 2018: 6001, 29800, 35801       ; 2019: 38000-43001       ; 2020: 45040-46541
+		scount1 = 0;
+
+		for (int j = 0; j < 9; j++) {
+			//wichcounter1[j] = scount1;
+			if (j == 8) {
+				if (phi[0] < 1.)
+					phi[0] = phi[0] + 2. * PI;
+				if (phi[1] < 1.)
+					phi[1] = phi[1] + 2. * PI;
+			}
+			//else
+			while (schr[1 + scount] > 0.5) { scount += 1; }
+
+			lgran[0] = truegran1[j][0] + 3. * meanshir[j][0];// +0.03;
+			lgran[1] = truegran1[j][1] - 3. * meanshir[j][1];// -0.045;
+			lgran[2] = truegran1[j][1] + 3. * meanshir[j][1];// +0.045;
+			lgran[3] = truegran1[j][3] - 3. * meanshir[j][2];// -0.03;
+
+
+			maxach = 0.;
+			//find maxach and its index in amp signal array for this counter
+			for (int f = scount1; f <= scount; f++) {
+				if (ach[f] > maxach) {
+					maxach = ach[f];
+					maxampla = f;
 				}
-				//else
-					while (schr[1 + scount] > 0.5) { scount += 1; }
-
-				lgran[0] = truegran1[j][0] + 3. * meanshir[j][0];// +0.03;
-				lgran[1] = truegran1[j][1] - 3. * meanshir[j][1];// -0.045;
-				lgran[2] = truegran1[j][1] + 3. * meanshir[j][1];// +0.045;
-				lgran[3] = truegran1[j][3] - 3. * meanshir[j][2];// -0.03;
-
-
-				maxach = 0.;
-				//find maxach and its index in amp signal array for this counter
-				for (int f = scount1; f <= scount; f++) {
-					if (ach[f] > maxach) {
-						maxach = ach[f];
-						maxampla = f;
+			}
+			//split into run ranges to check amplitude distributions
+			for (int i = 0; i < 14; i++) {
+				if ((run > MinimRun + i*(MaximRun-MinimRun)/14) && (run < MinimRun + (i+1)*(MaximRun - MinimRun) / 14))
+					runrange = i;
+			}
+			for (size_t pind = 0; pind < 2; pind++) {
+				int zoblInd = -1;
+				for (int k = 1; k < 13; k++) {
+					if ((ztr[pind] > zobl[k]) && (ztr[pind] < zobl[k + 1])) {
+						zoblInd = k;
 					}
 				}
-				//find what z area is
-				for (int i = 0; i < 14; i++) {
-					if ((run > MinimRun + i*(MaximRun-MinimRun)/14) && (run < MinimRun + (i+1)*(MaximRun - MinimRun) / 14))
-						runrange = i;
-				}
-				for (size_t pind = 0; pind < 2; pind++) {
-					int zoblInd = -1;
-					for (int k = 1; k < 13; k++) {
-						if ((ztr[pind] > zobl[k]) && (ztr[pind] < zobl[k + 1])) {
-							zoblInd = k;
-						}
-					}
-					if ((((phi[pind] > lgran[0]) && (phi[pind] < lgran[1])) || ((phi[pind] > lgran[2]) && (phi[pind] < lgran[3]))) && (TimeIsGood(maxampla)) && zoblInd != -1 && ach[maxampla] < achCut) {
-						ach1[maxampla] = ach[maxampla]*sin(theta[pind]) -ped[zoblInd][j];
-						bool eff = (bool)schr[scount1 + 1] && ach1[maxampla]>0.2;
-						he[0]->Fill(run, (int)eff);
-						he[j + 1]->Fill(run, (int)eff);
-						ampspectre[j][runrange]->Fill(ach1[scount]);
-						if((schr[maxampla] > 0.5)) {
-							ha[0]->Fill(run, ach1[maxampla]);
-							ha[j + 1]->Fill(run, ach1[maxampla]);
+				if ((((phi[pind] > lgran[0]) && (phi[pind] < lgran[1])) || ((phi[pind] > lgran[2]) && (phi[pind] < lgran[3]))) && (TimeIsGood(maxampla)) && (TimeIsGood(scount1)) && zoblInd != -1 && ach[maxampla] < achCut) {
+					ach1[maxampla] = ach[maxampla]*sin(theta[pind]) - ach[scount1];
+					bool eff = (bool)schr[scount1 + 1] && ach1[maxampla]>0.2;
+					he[0]->Fill(run, (int)eff);
+					he[j + 1]->Fill(run, (int)eff);
+					ampspectre[j][runrange]->Fill(ach1[scount]);
+					if((schr[maxampla] > 0.5)) {
+						ha[0]->Fill(run, ach1[maxampla]);
+						ha[j + 1]->Fill(run, ach1[maxampla]);
 
-							if (run > 39420 && run < 39580 && j == 7) {
+						/*if (run > 39420 && run < 39580 && j == 7) {
 								achsp->Fill(ach1[maxampla]);
 								tchrdistr->Fill(tchr[maxampla]);//scount1 for efficiency
 								if(schr[scount1+1]==0){
@@ -2134,7 +2111,7 @@ void CalibrExp::ampltime() {
 								if (ach1[maxampla] > 0.2)
 									achspGood->Fill(ach1[maxampla]);
 							}
-							if (run > 39000 && run < 39350 && j == 7){
+						if (run > 39000 && run < 39350 && j == 7){
 								achsp1->Fill(ach1[maxampla]);
 								tchrdistr1->Fill(tchr[maxampla]);
 								if(schr[scount1+1]==0){
@@ -2144,7 +2121,7 @@ void CalibrExp::ampltime() {
 								if (ach1[maxampla] > 0.2)
 									achspGood1->Fill(ach1[maxampla]);
 							}
-							if (run > 39650 && run < 39850 && j == 7) {
+						if (run > 39650 && run < 39850 && j == 7) {
 								achsp2->Fill(ach1[maxampla]);
 								tchrdistr2->Fill(tchr[maxampla]);
 								if(schr[scount1+1]==0){
@@ -2153,17 +2130,16 @@ void CalibrExp::ampltime() {
 								}
 								if (ach1[maxampla] > 0.2)
 									achspGood2->Fill(ach1[maxampla]);
-							}
-							ampCounter[j]->Fill(ach1[maxampla] * sin(theta[pind]));
-						}
+							}*/
+						ampCounter[j]->Fill(ach1[maxampla] * sin(theta[pind]));
 					}
 				}
-
-
-
-				scount += 1;
-				scount1 = scount;
 			}
+
+
+
+			scount += 1;
+			scount1 = scount;
 		}
 
 		Count += 1;
@@ -2220,13 +2196,13 @@ void CalibrExp::ampltime() {
 	TFile* MyFileT = new TFile("/work/users/kladov/snd2k/R007-002/tempSpectra2.root", "RECREATE");
 	/*tchrdistr->Write("tchrdistr");
 	tchrdistr1->Write("tchrdistr1");
-	tchrdistr2->Write("tchrdistr2");*/
+	tchrdistr2->Write("tchrdistr2");
 	thetadistrzero->Write("thetadistrzero");
 	thetadistrzero1->Write("thetadistrzero1");
 	thetadistrzero2->Write("thetadistrzero2");
 	achspZero->Write("achspZero");
 	achspZero1->Write("achspZero1");
-	achspZero2->Write("achspZero2");
+	achspZero2->Write("achspZero2");*/
 	MyFileT->Close();
 
 	TFile* MyFile2 = new TFile((workingDir + "achSpectCount.root").c_str(), "RECREATE");
@@ -2562,6 +2538,7 @@ void CalibrExp::timespectra() {
 
 	TH1* histo = new TH1F("histo", "time spectre;time,TDC chanels;", 500, -150, 350);
 	TH1* histi = new TH1F("histi", "time spectre;time,TDC chanels;", 500, -150, 350);
+	TH1* histp = new TH1F("histp", "time spectre;time,TDC chanels;", 1000, -150, 850);
 
 	int Count = 0, count1 = 0;
 	float ztr[2] = { 0.,0. };
@@ -2575,64 +2552,68 @@ void CalibrExp::timespectra() {
 		ztr[0] = 12.0 / tan(theta[0]) + z0[0];
 		ztr[1] = 12.0 / tan(theta[1]) + z0[1];
 		schr[nch] = 0.;
-		if (((run > 27251) && RunIsGood(run))) {
-			scount = 0;
-			scount1 = 0;
-			for (int j = 0; j < 9; j++) {
-				if (j == 8) {
-					if (phi[0] < 1.)
-						phi[0] = phi[0] + 2. * PI;
-					if (phi[1] < 1.)
-						phi[1] = phi[1] + 2. * PI;
-					while (1 + scount < nch) { scount += 1; }
-				}
-				else
-					while (schr[1 + scount] > 0.5) { scount += 1; }
-
-				lgran[0] = truegran1[j][0] + 3. * meanshir[j][0];
-				lgran[1] = truegran1[j][1] - 3. * meanshir[j][1];// -0.045;
-				lgran[2] = truegran1[j][1] + 3. * meanshir[j][1];// +0.045;
-				lgran[3] = truegran1[j][3] - 3. * meanshir[j][2];// -0.03;
-
-				predmaxach = -1.;
-				maxach = -100.;
-				predmaxampla = scount1;
-				for (int f = scount1; f <= scount; f++) {
-					if (ach[f] > maxach) {
-						maxach = ach[f];
-						maxampla = f;
-					}
-					if (ach[f] < maxach-0.0001 && ach[f] > predmaxach) {
-						predmaxach = ach[f];
-						predmaxampla = f;
-					}
-				}
-				for (size_t partI = 0; partI < 2; partI++) {
-					//scount 1 is always 0, so if we have some signal other than 0 
-					if (scount - scount1 > 0.5 && (ztr[partI] > zobl[1]) && (ztr[partI] < zobl[13])) {
-						for (int a = maxampla; a >= maxampla; a--) {
-							if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (schr[a] > 0.5))
-								histo->Fill(tchr[a]);
-								//histo->Fill(tchr[scount1]);
-						}
-					}
-					// if it for example 0 1 2 0 - second by amplitude signal exists
-					if (scount - scount1 > 1.5 && (ztr[partI] > zobl[1]) && (ztr[partI] < zobl[13])) {
-						for (int a = predmaxampla; a >= predmaxampla; a--) {
-							if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (schr[a] > 0.5))
-								histi->Fill(tchr[a]);
-						}
-					}
-				}
-				scount += 1;
-				scount1 = scount;
-			}
+		if (!RunIsGood(run)) {
+			continue;
 		}
+		scount = 0;
+		scount1 = 0;
+		for (int j = 0; j < 9; j++) {
+			if (j == 8) {
+				if (phi[0] < 1.)
+					phi[0] = phi[0] + 2. * PI;
+				if (phi[1] < 1.)
+					phi[1] = phi[1] + 2. * PI;
+			}
+			while (schr[1 + scount] > 0.5) { scount += 1; }
+
+			lgran[0] = truegran1[j][0] + 3. * meanshir[j][0];
+			lgran[1] = truegran1[j][1] - 3. * meanshir[j][1];// -0.045;
+			lgran[2] = truegran1[j][1] + 3. * meanshir[j][1];// +0.045;
+			lgran[3] = truegran1[j][3] - 3. * meanshir[j][2];// -0.03;
+
+			predmaxach = -1.;
+			maxach = -100.;
+			predmaxampla = scount1;
+			for (int f = scount1; f <= scount; f++) {
+				if (ach[f] > maxach) {
+					maxach = ach[f];
+					maxampla = f;
+				}
+				if (ach[f] < maxach-0.0001 && ach[f] > predmaxach) {
+					predmaxach = ach[f];
+					predmaxampla = f;
+				}
+			}
+			for (size_t partI = 0; partI < 2; partI++) {
+				//scount 1 is always 0, so if we have some signal other than 0 
+				if (scount - scount1 > 0.5 && (ztr[partI] > zobl[1]) && (ztr[partI] < zobl[13])) {
+					for (int a = maxampla; a >= maxampla; a--) {
+						if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (schr[a] > 0.5))
+							histo->Fill(tchr[a]);
+							//histo->Fill(tchr[scount1]);
+					}
+				}
+				// if it for example 0 1 2 0 - second by amplitude signal exists
+				if (scount - scount1 > 1.5 && (ztr[partI] > zobl[1]) && (ztr[partI] < zobl[13])) {
+					for (int a = predmaxampla; a >= predmaxampla; a--) {
+						if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (schr[a] > 0.5))
+							histi->Fill(tchr[a]);
+					}
+				}
+				if ((ztr[partI] > zobl[1]) && (ztr[partI] < zobl[13])) {
+					if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (schr[scount1] < 0.5))
+						histp->Fill(tchr[scount1]);
+				}
+			}
+			scount += 1;
+			scount1 = scount;
+		}
+		
 
 		Count += 1;
-		if (Count == 100000) {
+		if (Count == 1000000) {
 			count1 += 1;
-			cout << Form("processed %d*100k entries", count1) << endl;
+			cout << Form("processed %d*M entries", count1) << endl;
 			Count = 0;
 		}
 	}
@@ -2650,6 +2631,7 @@ void CalibrExp::timespectra() {
 	TFile* MyFile = new TFile((workingDir + "timespectre.root").c_str(), "RECREATE");
 	histo->Write("TspectreMain");
 	histi->Write("TspectreSec");
+	histp->Write("TspectrePed");
 	//MyFile->Write();
 	MyFile->Close();
 }
@@ -2697,6 +2679,14 @@ void CalibrExp::drawtsp() {
 
 	TLine* l1 = new TLine(tCut, 0, tCut, f1->GetParameter(0));
 	l1->Draw("same");
+
+	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+	c->Update();
+	cin.get();
+
+	TH1* hsp = (TH1F*)MyFile->Get("TspectrePed");
+	hsp->Draw();
+	c->Update();
 
 }
 
@@ -3706,6 +3696,13 @@ double scphi(double* x, double* par)
 	f += shifter(x[0], par);
 	return f;
 }
+double scphi2(double* x, double* par)
+{
+	double f = 0;
+	for (size_t i = 0; i < 3; i++)
+		f += aerogel(i, x[0], par);
+	return f;
+}
 //ends here
 
 void linesa() {
@@ -3760,6 +3757,8 @@ void CalibrExp::testforfit(string basefile) {
 	TIter next(f->GetListOfKeys());
 	TKey* key;
 	int counterr = 0, ennn = 0;
+	int oblpred = -1;
+	int coupred = -1;
 	while ((key = (TKey*)next()) && counterr < 500) {
 		counterr += 1; ennn += 1;
 		if (ennn == 5)
@@ -3772,6 +3771,10 @@ void CalibrExp::testforfit(string basefile) {
 			//int enbeam, date;
 			//sscanf(name.Data(), "zobl%d,sensor%d,en%d", &obl, &counter, &enbeam);
 			sscanf(name.Data(), "zobl%d,sensor%d", &obl, &counter);
+			if (oblpred == obl && coupred == counter)
+				continue;
+			oblpred = obl;
+			coupred = counter;
 			//sscanf(name.Data(), "date%d,sensor%d", &date, &counter);
 			TDirectory* dir = f1->mkdir(Form("zobl%d,sensor%d", obl, counter));
 			//counter = 2;
@@ -4035,10 +4038,14 @@ void CalibrExp::testforfit(string basefile) {
 					fna->Draw("same");
 					//
 					dir->cd();
+					cout << "a" << endl;
 					sprintf(titlea, "zobl%d,sensor%d,aerogel%d", obl, counter, cc + 1);
 					//sprintf(titlea, "date%d,sensor%d,aerogel%d", date, counter, c + 1);
+					cout << "b" << endl;
 					fna->Write(titlea);
+					cout << "c" << endl;
 					c->Update();
+					cout << "d" << endl;
 				}
 				c->Update();
 				//
@@ -4075,6 +4082,7 @@ void CalibrExp::testforfit(string basefile) {
 			//cin.get();
 		}
 	}
+	cout << "I am here" << endl;
 	f1->Write();
 	f1->Close();
 	if (basefile == "profiles.root") {
@@ -4362,6 +4370,7 @@ void CalibrExp::bordersplot() {
 
 //find shifter array from pik, stored in gran1 file and also use it, Yfm and truegran to create file with parameters for modeling database
 void CalibrExp::modelfile() {
+	double scal = PI / 180;
 	//shifter fit
 	readGran1();
 	readNcoef();
@@ -4402,18 +4411,30 @@ void CalibrExp::modelfile() {
 	ofstream fout1;
 	std::vector<double> xv(12);
 	std::vector<double> xv1(12);
+	std::vector<double> xvt(12);
 	std::vector<double> xv2(4);
 	std::vector<double> yv2(4);
 	int n = 14; 
-	
 	fout1.open((workingDir + "map.txt").c_str());
 	for (int j = 0; j < 9; j++) {
+		xvt[0] = truegran1[j][0];
+		xvt[3] = truegran1[j][1];
+		xvt[1] = xvt[0] + (xvt[3] - xvt[0]) / 3;
+		xvt[2] = xvt[3] - (xvt[3] - xvt[0]) / 3;
+		xvt[4] = truegran1[j][1];
+		xvt[7] = truegran1[j][2];
+		xvt[5] = xvt[4] + (xvt[7] - xvt[4]) / 3;
+		xvt[6] = xvt[7] - (xvt[7] - xvt[4]) / 3;
+		xvt[8] = truegran1[j][2];
+		xvt[11] = truegran1[j][3];
+		xvt[9] = xvt[8] + (xvt[11] - xvt[8]) / 3;
+		xvt[10] = xvt[11] - (xvt[11] - xvt[8]) / 3;
 		//Yfm calculation
 		xv1[0] = truegran1[j][0];
-		xv1[3] = truegran1[j][1];
+		xv1[3] = truegran1[j][1] - 1.5 / 120.0;
 		xv1[1] = xv1[0] + (xv1[3] - xv1[0]) / 3;
 		xv1[2] = xv1[3] - (xv1[3] - xv1[0]) / 3;
-		xv1[4] = truegran1[j][1];
+		xv1[4] = truegran1[j][1] + 1.5 / 120.0;
 		xv1[7] = truegran1[j][2];
 		xv1[5] = xv1[4] + (xv1[7] - xv1[4]) / 3;
 		xv1[6] = xv1[7] - (xv1[7] - xv1[4]) / 3;
@@ -4446,22 +4467,51 @@ void CalibrExp::modelfile() {
 					double x1 = xv1[i + 4 * n];
 					//just polinoms
 					yfm[j][k][4 * n + i] = pv1[0] + pv1[1] * x1 + pv1[2] * pow(x1, 2) + pv1[3] * pow(x1, 3);
+					cout << yfm[j][k][4 * n + i] / fitPar[j][k][4 * n + i] << endl;
 					//aerogel with exponents (fit f without shifters)
 					//yfm[j][k][4 * n + i] = aerogel(n, x1, fitPar[j][k]);
 					//cout << yfm[counter - 1][obl - 1][4 * n + i] << endl;
 				}
 			}
+			TF1* fn = new TF1("scphi", scphi, fitPar[j][k][12] - 15 * scal, fitPar[j][k][15] + 15 * scal, 20);
+			for (size_t i = 0; i < 20; i++)
+				fn->SetParameter(i, fitPar[j][k][i]);
+			cout << fitPar[j][k][16] << endl;;
+			fn->Draw();
+			TF1* fn1 = new TF1("scphi1", scphi, fitPar[j][k][12] - 15 * scal, fitPar[j][k][15] + 15 * scal, 20);
+			for (size_t i = 0; i < 12; i++)
+				fn1->SetParameter(i, yfm[j][k][i]);
+			for (size_t i = 12; i < 16; i++)
+				fn1->SetParameter(i, truegran1[j][i-12]);
+			for (size_t i = 16; i < 20; i++)
+				fn1->SetParameter(i, fitPar[j][k][i]);
+			fn1->SetLineColor(2);
+			fn1->Draw("same");
+			TLine* line1 = new TLine(fitPar[j][k][12], 0, fitPar[j][k][12], 5);
+			TLine* line2 = new TLine(fitPar[j][k][13], 0, fitPar[j][k][13], 5);
+			TLine* line3 = new TLine(truegran1[j][0], 0, truegran1[j][0], 5);
+			TLine* line4 = new TLine(truegran1[j][1], 0, truegran1[j][1], 5);
+			line3->SetLineColor(2);
+			line4->SetLineColor(2);
+			line1->Draw("same");
+			line2->Draw("same");
+			line3->Draw("same");
+			line4->Draw("same");
+			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+			c->Update();
+			//cin.get();
+
 		}
 		//write in file
 		fout1 << Form("Counter %d", j+1) << endl << Form("Shifter %f %f %f",shift[j][0], shift[j][1], shift[j][2]) << endl << "AmplitudeCorrection 1" << endl << "Aerogel" << endl;
 		for (int k = 0; k < 3; k++) {
-			fout1 << n << " " << xv1[0+4*k]*scal1 << " " << xv1[1+4*k]*scal1 << " " << xv1[2+4*k]*scal1 << " " << xv1[3+4*k]*scal1 << endl;
+			fout1 << n << " " << xvt[0+4*k]*scal1 << " " << xvt[1+4*k]*scal1 << " " << xvt[2+4*k]*scal1 << " " << xvt[3+4*k]*scal1 << endl;
 			for (int i = 0; i < 14; i++) {
 				fout1 << zobl[i]-0.0 << " " << yfm[j][i][0+4*k]/coef[i][j] << " " << yfm[j][i][1+4*k]/ coef[i][j] << " " << yfm[j][i][2+4*k]/ coef[i][j] << " " << yfm[j][i][3+4*k]/ coef[i][j] << endl;
 			}
 		}
 	}
-	//writeMcoef();
+	writeMcoef();
 }
 
 void CalibrExp::checkmod() {
@@ -5330,10 +5380,10 @@ void CalibrExp::compareAmpSpectr() {
 	}
 	for (size_t obl = 0; obl < 14; obl++) {
 		for (size_t counter = 0; counter < 9; counter++) {
-			coef[obl][counter] = (koefnewh[counter][obl] + koefnewp[counter][obl])/2.;
+			coef[obl][counter] = (koefnewp[counter][0] + koefnewp[counter][0])/2.;
 		}
 	}
-	//writeNcoef();
+	writeNcoef();
 }
 
 void CalibrExp::compareEffSpectr() {
@@ -5495,6 +5545,7 @@ void go(){
 	CalibrExp ab;
 	int cicleV = 1;
 	int chooseV = 0;
+	shwidth = 1.5;
 	while (cicleV == 1) {
 		cout << "11 - copy; 12 - findborders; 13 - findruns; 14 - zProf(2); 15- drawZ; 16 - phiProf(2); 17 - fit; 18 - meanBorders; 19 - generateMap" << endl;
 		cout << "1 - to launch full block one (as above) - maybe I will ask someone and make it as job" << endl;

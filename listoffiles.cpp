@@ -52,7 +52,7 @@ int getlist() {
 	//2c4n_ps_nrc, 2etg_wrc, 2kc2p0_wrc, 2kcp0_knkst, 2kcp0_kpkst, 2kcp0_kstk, 4pi_wrc, et2p0g_wrc, etapg_nrc, klknpp_wrc, 
 	//klknppp0_wrc, klkppn_wrc, klkppnp0_wrc, kskl2p0_wrc, kskleta_wrc, ksknpp_ks22p0_wrc, ksknppp0_wrc, kskppn_ks22p0_wrc, kskppnp0_wrc, ompi4_wrc.
 	//important: histcommon_col: условие на кинфиты -, поменять в simreco-neu_wmc.fwk имя папки и создать ее output/ntuples/2etg, fwk/simflist.fwi сюда вставить результат скрипта, выбрать строки в runrecokonct
-	TString str = "a";
+	/*TString str = "a";
 	TString str1 = "b";
 	
 	vector<TString> ans;
@@ -144,9 +144,9 @@ int getlist() {
 		apred = a;
 	}
 	fout << "]" << endl;
-	fout.close();
+	fout.close();*/
 	
-	/*vector<TString> ans;
+	vector<TString> ans;
 	TString basedir = "/work/users/kladov/snd2k/R007-001/2019/*.hbook";
 	//TString basedir = "/online/simulation/MC/R006-004/ee/output/*.mod.gz";
 	TString files = gSystem->GetFromPipe("ls " + basedir);
@@ -188,7 +188,7 @@ int getlist() {
 		
 	}
 	cout << endl;
-	fout.close();*/
+	fout.close();
 
 	return 1;
 }
@@ -283,7 +283,7 @@ void getCalibRuns(string calName, bool read) {
 	}
 }
 
-//pscp D:\programs\listoffiles.cpp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R006-003/maindir/listoffiles.cpp
+//pscp D:\workProgramms\listoffiles.cpp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R006-003/maindir/listoffiles.cpp
 //pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/fwk/simflist.fwi D:\simflist.txt
 
 
