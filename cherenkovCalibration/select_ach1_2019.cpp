@@ -336,7 +336,7 @@ public:
 
 		//basedirExp = "/work/users/konctbel/calibs/R007-001/output/ntuples/MHAD2020/col/*col.root";	//directory with exp col stream files to which apply calibration
 		//basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/*col.root";			//directory with exp col stream files to which apply calibration
-		basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/eecalib/*col.root";			//directory with exp col stream files to which apply calibration
+		basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/eecalib/*col.root";	//directory with exp col stream files to which apply calibration
 		basedirMod = "/work/users/kladov/snd2k/R007-001/2019/";										//directory with mod files after map creation
 
 		workingDir = "/work/users/kladov/snd2k/R006-003/maindir/2019/";								//specify where to store temporary files
