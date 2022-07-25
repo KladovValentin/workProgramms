@@ -792,7 +792,7 @@ public:
 
 bool CalibrExp::TimeIsGood(int signnumb) {
 	//return (((schr[signnumb] < 0.5) || ((schr[signnumb] > 0.5) && ((tchr[signnumb] > 87) && (tchr[signnumb] < 104)))) && (eventtime == 0));
-	return (((schr[signnumb] < 0.5 && tchr[signnumb] > 400 ) || ((schr[signnumb] > 0.5) && (tchr[signnumb] < timeCut) && (tchr[signnumb] > 85))));
+	return (((schr[signnumb] < 0.5 && tchr[signnumb] > 400 ) || ((schr[signnumb] > 0.5) && (tchr[signnumb] < timeCut) && (tchr[signnumb] > 87))));
 	//return (((schr[signnumb] < 0.5) || ((schr[signnumb] > 0.5) && (tchr[signnumb] > timeCut))));
 	//return (tchr[signnumb] < timeCut);
 }
