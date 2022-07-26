@@ -1564,23 +1564,23 @@ void CalibrExp::raspr() {
 					//	maxampla = scount1;
 					//}
 					//ach*sin ot phi 
-				if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && (TimeIsGood(maxampla)) && (TimeIsGood(scount1)) && zoblInd != -1) {
+				if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.)&& (TimeIsGood(scount1)) && zoblInd != -1) {
 					//hprof[zoblInd][j]->Fill(phi[pind], (ach[maxampla] - ped[zoblInd][j]) * sin(theta[pind]));
 
 					double fillAmplitude = recalculateZ(zin[pind], theta[pind], ach[maxampla], ach[scount1]);
-					if (fillAmplitude != -1.0 && ach[maxampla] < achCut) {
+					if (fillAmplitude != -1.0 && ach[maxampla] < achCut && (TimeIsGood(maxampla))) {
 						hprof[zoblInd][j]->Fill(phi[pind], fillAmplitude);
 						hprofMean[j]->Fill(phi[pind], fillAmplitude);
 					}
 
 					//efficiency
 					double effWhatFill = 0.;
-					if (ach[maxampla] - ach[scount1] >= 0.2)
-						//if (schr[scount1+1] >= 0.2)
-						effWhatFill = 1.;
+					if (ach[maxampla] - ach[scount1] >= 0.2 && (TimeIsGood(maxampla)))
+					//if (schr[scount1+1] >= 1)
+						effWhatFill = 1;
 					else if (ach[maxampla] - ach[scount1] < 0.2)
-					//if (schr[scount1+1] < 0.2)
-						effWhatFill = 0.;
+					//if (schr[scount1+1] < 1)
+						effWhatFill = 0;
 					hprofeff[zoblInd][j]->Fill(phi[pind], effWhatFill);
 					hprofEffMean[j]->Fill(phi[pind], effWhatFill);
 				}
@@ -4431,10 +4431,10 @@ void CalibrExp::modelfile() {
 		xvt[10] = xvt[11] - (xvt[11] - xvt[8]) / 3;
 		//Yfm calculation
 		xv1[0] = truegran1[j][0];
-		xv1[3] = truegran1[j][1] - 1.5 / 120.0;
+		xv1[3] = truegran1[j][1] + 1.5 / 120.0;
 		xv1[1] = xv1[0] + (xv1[3] - xv1[0]) / 3;
 		xv1[2] = xv1[3] - (xv1[3] - xv1[0]) / 3;
-		xv1[4] = truegran1[j][1] + 1.5 / 120.0;
+		xv1[4] = truegran1[j][1] - 1.5 / 120.0;
 		xv1[7] = truegran1[j][2];
 		xv1[5] = xv1[4] + (xv1[7] - xv1[4]) / 3;
 		xv1[6] = xv1[7] - (xv1[7] - xv1[4]) / 3;
@@ -4464,7 +4464,7 @@ void CalibrExp::modelfile() {
 				//cout << pv1[0] << "	" << pv1[1] << "	" << pv1[2] << "	" << pv1[3] << endl;
 				//cout << pv1[0] + pv1[1] * x + pv1[2] * pow(x, 2) + pv1[3] * pow(x, 3) << endl;
 				for (int i = 0; i < 4; i++) {
-					double x1 = xv1[i + 4 * n];
+					double x1 = xvt[i + 4 * n];
 					//just polinoms
 					yfm[j][k][4 * n + i] = pv1[0] + pv1[1] * x1 + pv1[2] * pow(x1, 2) + pv1[3] * pow(x1, 3);
 					cout << yfm[j][k][4 * n + i] / fitPar[j][k][4 * n + i] << endl;
@@ -4511,6 +4511,7 @@ void CalibrExp::modelfile() {
 			}
 		}
 	}
+	fout1.close();
 	writeMcoef();
 }
 
@@ -5118,7 +5119,7 @@ void CalibrExp::compare() {
 		gr->SetMarkerColor(1);
 		//gr->GetYaxis()->SetRangeUser(1., 12.);
 		gr->SetTitle("secondary particles contribution;z,sm;percent");
-		gr->Draw("APL");
+		gr->Draw("AP");
 		fn->SetLineColor(kRed);
 		gr->Fit("fn", "", "", -9, 9);
 		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
@@ -5202,8 +5203,8 @@ void CalibrExp::compareAmpSpectr() {
 	readFitPar();
 	double scal = PI / 180;
 	//TFile* f1 = new TFile((workingDir + "profilesmmod.root").c_str());
-	TFile* f1 = new TFile((workingDir + "profilesmmod.root").c_str());
-	TFile* f2 = new TFile((workingDir + "profiles.root").c_str());
+	TFile* f1 = new TFile((workingDir + "profilesEffMod.root").c_str());
+	TFile* f2 = new TFile((workingDir + "profilesEff.root").c_str());
 	TFile* f3 = new TFile((workingDir + "Zaselphi.root").c_str());
 	cin.get();
 	double koefnewp[9][14];
@@ -5350,7 +5351,7 @@ void CalibrExp::compareAmpSpectr() {
 	gro->SetLineColor(1);
 	gro->SetMarkerStyle(21);
 	gro->SetMarkerColor(1);
-	gro->Draw("APL");
+	gro->Draw("AP");
 
 	for (int j = 0; j < 9; j++) {
 		TGraphErrors* gr = new TGraphErrors(14, &oblast[0], &koefnewh[j][0], &noll[0], &koefnewhErr[j][0]);
@@ -5383,7 +5384,7 @@ void CalibrExp::compareAmpSpectr() {
 			coef[obl][counter] = (koefnewp[counter][0] + koefnewp[counter][0])/2.;
 		}
 	}
-	writeNcoef();
+	//writeNcoef();
 }
 
 void CalibrExp::compareEffSpectr() {
@@ -5391,8 +5392,8 @@ void CalibrExp::compareEffSpectr() {
 	TFile* f2 = new TFile((workingDir + "profilesEff.root").c_str());
 	for (size_t zobl = 3; zobl < 4; zobl++) {
 		for (size_t counter = 0; counter < 9; counter++) {
-			TProfile* hprof1 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", zobl + 1, counter + 1));
-			TProfile* hprof2 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", zobl + 1, counter + 1));
+			TProfile* hprof1 = (TProfile*)f1->Get(Form("mean,sensor%d", counter + 1));
+			TProfile* hprof2 = (TProfile*)f2->Get(Form("mean,sensor%d", counter + 1));
 			hprof1->SetLineColor(2);
 			hprof1->SetLineWidth(3);
 			hprof2->SetLineWidth(2);
@@ -5692,7 +5693,7 @@ void go(){
 	// can be done: fit z distribution to better recalculate borders
 	// think about pik amp vs zarea fitting - distribution of events inside is not plain, so maybe point should be shifted from the middle according to event amount
 
-	//pscp D:\workProgramms\select_ach1_2019.cpp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R006-003/maindir/select_ach1_2019.cpp
-	//pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R006-003/maindir/select_ach1_2019.cpp D:\workProgramms\select_ach1_2019.cpp
+	//pscp D:\workProgramms\cherenkovCalibration\select_ach1_2019.cpp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R006-003/maindir/select_ach1_2019.cpp
+	//pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R006-003/maindir/select_ach1_2019.cpp D:\workProgramms\cherenkovCalibration\select_ach1_2019.cpp
 }
 
