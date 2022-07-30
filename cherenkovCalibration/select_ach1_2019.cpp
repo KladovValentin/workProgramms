@@ -290,7 +290,7 @@ public:
 	double truegran1mErr[9][4];
 	double meanshirm[9][3];
 	double shift[9][3];
-	double fitPar[9][14][20];
+	double fitPar[9][14][21];
 	double yfm[9][14][12];
 
 	//expModComparison
@@ -340,7 +340,7 @@ public:
 		basedirMod = "/work/users/kladov/snd2k/R007-001/2019/";										//directory with mod files after map creation
 
 		workingDir = "/work/users/kladov/snd2k/R006-003/maindir/2019/";								//specify where to store temporary files
-		dirSelectedExp = "/work/users/kladov/snd2k/R006-003/selected2019/";							//where to store selected Baba events
+		dirSelectedExp = "/work/users/kladov/snd2k/R006-003/selected2019t/";							//where to store selected Baba events
 		dirSelectedMod = workingDir + "model/selected/";											//where to store selected Baba events for modeling
 		prefixSelectedExp = "true1__";
 		prefixSelectedMod = "true_";
@@ -432,7 +432,7 @@ public:
 		fin1.open((workingDir + "FitPar.dat").c_str());
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 14; j++) {
-				for (int k = 0; k < 20; k++)
+				for (int k = 0; k < 21; k++)
 					fin1 >> fitPar[i][j][k];
 				fin1.get();
 			}
@@ -445,7 +445,7 @@ public:
 		fout1.open((workingDir + "FitPar.dat").c_str());
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 14; j++) {
-				for (int k = 0; k < 20; k++)
+				for (int k = 0; k < 21; k++)
 					fout1 << fitPar[i][j][k] << "	";
 				fout1 << endl;
 			}
@@ -792,7 +792,7 @@ public:
 
 bool CalibrExp::TimeIsGood(int signnumb) {
 	//return (((schr[signnumb] < 0.5) || ((schr[signnumb] > 0.5) && ((tchr[signnumb] > 87) && (tchr[signnumb] < 104)))) && (eventtime == 0));
-	return (((schr[signnumb] < 0.5 && tchr[signnumb] > 400 ) || ((schr[signnumb] > 0.5) && (tchr[signnumb] < timeCut) && (tchr[signnumb] > 87))));
+	return (((schr[signnumb] < 0.5 && tchr[signnumb] > 400 ) || ((schr[signnumb] > 0.5) && (tchr[signnumb] < 10*timeCut) && (tchr[signnumb] > 87))));
 	//return (((schr[signnumb] < 0.5) || ((schr[signnumb] > 0.5) && (tchr[signnumb] > timeCut))));
 	//return (tchr[signnumb] < timeCut);
 }
@@ -1444,7 +1444,7 @@ void CalibrExp::raspr() {
 		for (int i = 0; i < 9; i++) {	
 			sprintf(name, "hprofrp%d", 9*j + i + 1);
 			sprintf(title, "zobl%d,sensor%d;phi;ach", j + 1,i + 1);
-			hprof[j][i] = new TProfile(name,title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
+			hprof[j][i] = new TProfile(name,title, 100, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 			//hprof[j][i] = new TProfile(name,title, 100, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 			//hprof[j][i] = new TProfile(name,title, 4800, 0, 7.0);
 		}
@@ -1564,21 +1564,23 @@ void CalibrExp::raspr() {
 					//	maxampla = scount1;
 					//}
 					//ach*sin ot phi 
-				if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.)&& (TimeIsGood(scount1)) && zoblInd != -1) {
+				if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && (TimeIsGood(maxampla)) && (TimeIsGood(scount1)) && zoblInd != -1) {
 					//hprof[zoblInd][j]->Fill(phi[pind], (ach[maxampla] - ped[zoblInd][j]) * sin(theta[pind]));
 
 					double fillAmplitude = recalculateZ(zin[pind], theta[pind], ach[maxampla], ach[scount1]);
 					if (fillAmplitude != -1.0 && ach[maxampla] < achCut && (TimeIsGood(maxampla))) {
 						hprof[zoblInd][j]->Fill(phi[pind], fillAmplitude);
-						hprofMean[j]->Fill(phi[pind], fillAmplitude);
+						if (zoblInd > 2 && zoblInd < 12)
+							hprofMean[j]->Fill(phi[pind], fillAmplitude);
 					}
 
 					//efficiency
 					double effWhatFill = 0.;
-					if (ach[maxampla] - ach[scount1] >= 0.2 && (TimeIsGood(maxampla)))
+					if ( ach[maxampla] >= 0.2 )
 					//if (schr[scount1+1] >= 1)
 						effWhatFill = 1;
-					else if (ach[maxampla] - ach[scount1] < 0.2)
+					//else if (ach[maxampla] - ach[scount1] < 0.2)
+					else
 					//if (schr[scount1+1] < 1)
 						effWhatFill = 0;
 					hprofeff[zoblInd][j]->Fill(phi[pind], effWhatFill);
@@ -3599,12 +3601,12 @@ double aerogel(size_t n, double x, double* par)
 	switch (n) {
 	case 0:
 		xv[0] = par[12];
-		xv[3] = par[13] - shwidth / 120.0;
+		xv[3] = par[13] - par[20] / 120.0;
 		s1 = par[17];
 		s2 = par[18];
 		break;
 	case 1:
-		xv[0] = par[13] + shwidth / 120.0;
+		xv[0] = par[13] + par[20] / 120.0;
 		xv[3] = par[14];
 		s1 = par[18];
 		s2 = par[18];
@@ -3632,7 +3634,7 @@ double aerogel(size_t n, double x, double* par)
 
 double shifter(double x, double* par)
 {
-	double ds = shwidth / 120.0;
+	double ds = par[20] / 120.0;
 	return par[16] * (erf((x - (par[13] - ds)) / sqrt(2.0) / par[18]) -
 		erf((x - (par[13] + ds)) / sqrt(2.0) / par[18])) / 2;
 }
@@ -3786,7 +3788,7 @@ void CalibrExp::testforfit(string basefile) {
 
 			h_amp_phi->Draw();
 			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			std::vector<double> par(20);
+			std::vector<double> par(21);
 			std::vector<double> parc(20);
 			
 			double xmin = (counter * 40. - 35.) * scal + dphi;
@@ -3872,6 +3874,8 @@ void CalibrExp::testforfit(string basefile) {
 			par[17] = fxl->GetParameter(1)/1.2;
 			par[18] = fxc->GetParameter(2)/1.5;
 			par[19] = fabs(fxr->GetParameter(1))/1.2;
+			//
+			par[20] = 1.5;
 
 			parc[12] = par[12];
 			parc[13] = par[13];
@@ -3895,7 +3899,7 @@ void CalibrExp::testforfit(string basefile) {
 			cout << "ready" << endl;
 			//cin.get();
 
-			TF1* fn = new TF1("scphi", scphi, par[12] - 15 * scal, par[15] + 15 * scal, 20);
+			TF1* fn = new TF1("scphi", scphi, par[12] - 15 * scal, par[15] + 15 * scal, 21);
 			//names
 			for (size_t i = 0; i < 12; i++)
 				fn->SetParName(i, Form("y%d", i));
@@ -3907,6 +3911,7 @@ void CalibrExp::testforfit(string basefile) {
 			fn->SetParName(17, "#sigma_{1}");
 			fn->SetParName(18, "#sigma_{s}");
 			fn->SetParName(19, "#sigma_{2}");
+			fn->SetParName(20, "shifterWidth");
 			fn->SetParameters(par.data());
 			fn->SetLineColor(kRed);
 			fn->SetNpx(1000);
@@ -3925,6 +3930,7 @@ void CalibrExp::testforfit(string basefile) {
 			fn->FixParameter(17, fn->GetParameter(17));
 			fn->FixParameter(18, fn->GetParameter(18));
 			fn->FixParameter(19, fn->GetParameter(19));
+			fn->FixParameter(20, fn->GetParameter(20));
 
 			h_amp_phi->Fit("scphi", "", "", par[12] - 15 * scal, par[15] + 15 * scal);
 			c->Update();
@@ -3948,6 +3954,9 @@ void CalibrExp::testforfit(string basefile) {
 
 			//fn->ReleaseParameter(16);
 			fn->ReleaseParameter(14);
+
+			fn->ReleaseParameter(20);
+			fn->SetParLimits(20, 1.4, 2.0);
 			
 			fn->ReleaseParameter(12);
 			fn->ReleaseParameter(13);
@@ -3979,7 +3988,7 @@ void CalibrExp::testforfit(string basefile) {
 			//___writing__
 
 			fn->GetParameters(&par[0]);
-			for (size_t i = 0; i < 20; i++)
+			for (size_t i = 0; i < 21; i++)
 				fitPar[counter - 1][obl - 1][i] = par[i];
 			
 			shir[counter-1][obl-1][0] = fn->GetParameter(17);
@@ -4025,7 +4034,7 @@ void CalibrExp::testforfit(string basefile) {
 			{
 				//fn->Draw("same");
 				for (size_t cc = 0; cc < 3; cc++) {
-					TF1* fna = new TF1(Form("aerogel%d", cc), scphi, par[12] - 15 * scal, par[15] + 15 * scal, 20);
+					TF1* fna = new TF1(Form("aerogel%d", cc), scphi, par[12] - 15 * scal, par[15] + 15 * scal, 21);
 					fna->SetParameters(fn->GetParameters());
 					for (size_t i = 0; i < 12; i++)
 						fna->SetParameter(i, 0);
@@ -4049,7 +4058,7 @@ void CalibrExp::testforfit(string basefile) {
 				}
 				c->Update();
 				//
-				TF1* fns = new TF1("shifter", scphi, par[12] - 15 * scal, par[15] + 15 * scal, 20);
+				TF1* fns = new TF1("shifter", scphi, par[12] - 15 * scal, par[15] + 15 * scal, 21);
 				fns->SetParameters(fn->GetParameters());
 				for (size_t i = 0; i < 12; i++)
 					fns->SetParameter(i, 0);
@@ -4473,17 +4482,17 @@ void CalibrExp::modelfile() {
 					//cout << yfm[counter - 1][obl - 1][4 * n + i] << endl;
 				}
 			}
-			TF1* fn = new TF1("scphi", scphi, fitPar[j][k][12] - 15 * scal, fitPar[j][k][15] + 15 * scal, 20);
-			for (size_t i = 0; i < 20; i++)
+			TF1* fn = new TF1("scphi", scphi, fitPar[j][k][12] - 15 * scal, fitPar[j][k][15] + 15 * scal, 21);
+			for (size_t i = 0; i < 21; i++)
 				fn->SetParameter(i, fitPar[j][k][i]);
 			cout << fitPar[j][k][16] << endl;;
 			fn->Draw();
-			TF1* fn1 = new TF1("scphi1", scphi, fitPar[j][k][12] - 15 * scal, fitPar[j][k][15] + 15 * scal, 20);
+			TF1* fn1 = new TF1("scphi1", scphi, fitPar[j][k][12] - 15 * scal, fitPar[j][k][15] + 15 * scal, 21);
 			for (size_t i = 0; i < 12; i++)
 				fn1->SetParameter(i, yfm[j][k][i]);
 			for (size_t i = 12; i < 16; i++)
 				fn1->SetParameter(i, truegran1[j][i-12]);
-			for (size_t i = 16; i < 20; i++)
+			for (size_t i = 16; i < 21; i++)
 				fn1->SetParameter(i, fitPar[j][k][i]);
 			fn1->SetLineColor(2);
 			fn1->Draw("same");
@@ -5202,9 +5211,9 @@ void CalibrExp::compareAmpSpectr() {
 	readMcoef();
 	readFitPar();
 	double scal = PI / 180;
-	//TFile* f1 = new TFile((workingDir + "profilesmmod.root").c_str());
-	TFile* f1 = new TFile((workingDir + "profilesEffMod.root").c_str());
-	TFile* f2 = new TFile((workingDir + "profilesEff.root").c_str());
+	TFile* f1 = new TFile((workingDir + "profilesmmod.root").c_str());
+	//TFile* f1 = new TFile((workingDir + "profilesEffMod.root").c_str());
+	TFile* f2 = new TFile((workingDir + "profiles.root").c_str());
 	TFile* f3 = new TFile((workingDir + "Zaselphi.root").c_str());
 	cin.get();
 	double koefnewp[9][14];
@@ -5213,7 +5222,7 @@ void CalibrExp::compareAmpSpectr() {
 	double koefnewpMErr[9];
 	double koefnewh[9][14];
 	double modelGran[9][4] = { 3.96954, 17.4603, 30.8096, 42.9946, 43.6686, 58.0747, 70.5603, 82.8407, 83.7598, 97.8676, 110.007, 122.273, 124.125, 138.028, 150.658, 163.491, 164.016, 178.457, 192.73, 203.046, 203.326, 217.694, 231.488, 242.669, 244.352, 258.508, 271.534, 282.903, 283.639, 298.182, 310.422, 322.809, 323.23, 337.838, 351.363, 362 };
-	for (size_t obl = 0; obl < 1; obl++) {
+	for (size_t obl = 0; obl < 14; obl++) {
 		//TProfile* hprof10 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", zobl + 1, 1));
 		//TProfile* hprof20 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", zobl + 1, 1));
 		//hprof10->SetLineColor(2);
@@ -5221,7 +5230,7 @@ void CalibrExp::compareAmpSpectr() {
 		//hprof20->Draw("same");
 		for (size_t counter = 0; counter < 9; counter++) {
 			TF1* fn = new TF1("scphi", scphi, fitPar[counter][obl][12] - 15 * scal, fitPar[counter][obl][12] + 15 * scal, 20);
-			for (size_t i = 0; i < 20; i++)
+			for (size_t i = 0; i < 21; i++)
 				fn->SetParameter(i, fitPar[counter][obl][i]);
 
 
@@ -5234,9 +5243,10 @@ void CalibrExp::compareAmpSpectr() {
 			cout << "asdasdasd" << endl;
 			//TF1* tf1 = (TF1*)d1->Get(Form("zobl%d,sensor%d,full", 2, 8));
 			//TProfile* hprof1 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
-			TProfile* hprof1 = (TProfile*)f1->Get(Form("mean,sensor%d", counter + 1));
-			//TProfile* hprof2 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
-			TProfile* hprof2 = (TProfile*)f2->Get(Form("mean,sensor%d", counter + 1));
+			//TProfile* hprof1 = (TProfile*)f1->Get(Form("mean,sensor%d", counter + 1));
+			TProfile* hprof1 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			TProfile* hprof2 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			//TProfile* hprof2 = (TProfile*)f2->Get(Form("mean,sensor%d", counter + 1));
 			TProfile* hz = (TProfile*)f3->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
 			/*hprof1->SetLineColor(2);
 			hprof1->GetXaxis()->SetRangeUser(3./4.*hprof1->GetBinCenter(1)+1./4.*hprof1->GetBinCenter(hprof1->GetNbinsX()-1), 1./4.*hprof1->GetBinCenter(1)+3./4.*hprof1->GetBinCenter(hprof1->GetNbinsX()-1));
