@@ -1,18 +1,12 @@
-import sys
-from xml.dom import minicompat
 
+import sys
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.multioutput import MultiOutputRegressor
 from torch.utils.data import Dataset, SubsetRandomSampler
-from sklearn.tree import DecisionTreeRegressor
-import pickle
-import random
-
+import pandas
+import matplotlib.pyplot as plt
 import numpy as np
-import io
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 print(torch.cuda.get_device_name(0))
@@ -23,53 +17,46 @@ print(torch.cuda.memory_reserved(0))
 cuda = torch.device('cuda:0')
 
 
-x_coord = 0
-y_coord = 1
-z_coord = 0
-initial_static = 0
-size_x = 100
-size_y = 100
+def prepareTable(datF):
+    # make datasets equal sizes for each class out of 4
+    lastName = list(datF.columns)[-1]
+    x = [len(datF[(datF[lastName]==i)]) for i in range(4)]
+    minimumCount = np.amin(np.array(x))
+    frames = [datF.loc[datF[lastName] == i].sample(minimumCount) for i in range(4)]
+    return pandas.concat(frames).reset_index(drop=True)
 
 
-def load_dataset(fname,lborder,hborder):
-    x = []
-    y = []
-    local_x = []
-    local_y = 0
-    countLines=0
-    f = io.open(fname, 'r')
-    for i, line in enumerate(f):
-        local_x = []
-        local_y = 0
-        tokens = line.strip().split(' ')
-        if(float(tokens[0])>=0 and float(tokens[3])>=0 and float(tokens[10])>=lborder/750. and float(tokens[10])<hborder/750.):
-            for j in range(8):
-                local_x.append(float(tokens[j]))
-            local_x.append(float(tokens[8])/20.0)
-            local_x.append(float(tokens[8])/20.0-float(tokens[9])/20.0)
-            local_x.append(float(tokens[10]))
-            local_y = int(tokens[11])
+def meanAndStdTable(dataTable):
+    # find mean and std values for each column of the dataset (used for train dataset)
+    df = dataTable
+    dfn = df.to_numpy()
 
-        if local_x != []:
-            x.append(local_x)
-            y.append(local_y)
-    f.close()
-    print("data arrays are filled")
+    x = dfn[:,:-1].astype(np.float32)
+    mean = np.array( [np.mean(x[:,j]) for j in range(x.shape[1])] )
+    std  = np.array( [np.std( x[:,j]) for j in range(x.shape[1])] )
     
-    x = np.array(x)
-    y = np.array(y)
-    print(x)
-    print(y)
-    print("transmuted into np.array")
-    
-    print("i am here")
-    return x.astype(np.float32),  y
+    return mean, std
+
+
+def load_dataset(dataTable, meanValues, stdValues):
+    # transform to numpy, assign types, make dataset has mean = 0 and std = 1
+    df = dataTable
+    dfn = df.to_numpy()
+
+    x = dfn[:,:-1].astype(np.float32)
+    y = dfn[:, -1].astype(np.int)
+    for j in range(x.shape[1]):
+        x[:,j] = (x[:,j]-meanValues[j])/stdValues[j]
+    print('x shape = ' + str(x.shape))
+    print('y shape = ' + str(y.shape))
+
+    return x,  y
 
 
 class DESY_dataset(Dataset):
-    def __init__(self, path,lborder,hborder, transform=None):
+    def __init__(self, dataTable, meanValues, stdValues, transform=None):
         self.transform = transform
-        self.datasetX, self.datasetY = load_dataset(path,lborder,hborder)
+        self.datasetX, self.datasetY = load_dataset(dataTable, meanValues, stdValues)
 
     def __len__(self):
         return len(self.datasetY)
@@ -80,11 +67,24 @@ class DESY_dataset(Dataset):
         return torch.tensor(self.datasetX[index]), torch.tensor(self.datasetY[index])
 
 
-def train_model(model, train_loader, loss, optimizer, num_epochs, scheduler=None):
+def train_model(model, train_loader, loss, optimizer, num_epochs,validationX,validationY, scheduler=None):
     print("start model nn train")
     loss_history = []
     train_history = []
+    validLoss_history = []
     for epoch in range(num_epochs):
+        
+        model.eval()
+        ave_valid_loss = 0
+        with torch.no_grad():
+            x = torch.tensor(validationX).to(device)
+            y = torch.tensor(validationY)
+            y = y.type(torch.LongTensor).to(device)
+            prediction = model(x)
+            ave_valid_loss = loss(prediction, y)
+            #ave_valid_loss = loss_value/len(validationY)
+        model.train() 
+
         model.train()  # Enter train mode
 
         loss_accum = 0
@@ -95,8 +95,7 @@ def train_model(model, train_loader, loss, optimizer, num_epochs, scheduler=None
             x = x.to(device)
             y = y.type(torch.LongTensor)
             y = y.to(device)
-            #print(x)
-            #print(y)
+
             prediction = model(x)    
             loss_value = loss(prediction, y)
             optimizer.zero_grad()
@@ -116,36 +115,51 @@ def train_model(model, train_loader, loss, optimizer, num_epochs, scheduler=None
 
         loss_history.append(float(ave_loss))
         train_history.append(train_accuracy)
+        validLoss_history.append(float(ave_valid_loss))
+        ep = np.arange(1,epoch+2,1)
+        lv = np.array(validLoss_history)
+        lt = np.array(loss_history)
+        plt.clf()
+        plt.plot(ep,lt,"blue",label="train")
+        plt.plot(ep,lv,"orange",label="validation")
+        plt.legend(loc=[0.5,0.6])
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
+        if ((epoch+1)%100 == 0):
+            plt.show()
+        #plt.draw()
 
-        print("Average loss: %f, Train accuracy: %f, epoch: %f" % (ave_loss, train_accuracy, epoch))
-
+        print("Average loss: %f, valid loss: %f, Train accuracy: %f, epoch: %f" % (ave_loss, ave_valid_loss, train_accuracy, epoch+1))
     return loss_history, train_history
 
 
-def train_NN(lborder,hborder,nnname):
+def train_NN(dataTable, nnname, validTable):
     print("start nn training")
-    train_dataset = DESY_dataset("trainSetCorr.txt",lborder,hborder)
+    mean, std = meanAndStdTable(dataTable)
+    train_dataset = DESY_dataset(dataTable, mean, std)
+    validX, validY = load_dataset(validTable, mean, std)
     print("dataset created")
-    batch_size = 50
+    batch_size = 100
 
     data_size = len(train_dataset)
     indices = list(range(data_size))
     np.random.shuffle(indices)
-
     train_indices = indices
-
     train_sampler = SubsetRandomSampler(train_indices)
 
+    dropLast = False
+    if (dataTable.shape[0]%batch_size==1):
+        dropLast = True
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size,
-                                               sampler=train_sampler)
+                                               sampler=train_sampler, drop_last=dropLast)
 
     nn_model = nn.Sequential(
         nn.Linear(train_dataset[0][0].shape[0], 256, bias=True),
-        nn.ReLU(inplace=True),
+        nn.BatchNorm1d(256),
+        nn.LeakyReLU(inplace=True),
         nn.Linear(256, 1024),
-        #nn.ReLU(inplace=True),
-        #nn.Linear(1024, 1024),
-        nn.ReLU(inplace=True),
+        nn.BatchNorm1d(1024),
+        nn.LeakyReLU(inplace=True),
         nn.Linear(1024, 4),
         #nn.Softmax(dim=1),
     )
@@ -157,43 +171,57 @@ def train_NN(lborder,hborder,nnname):
     loss = nn.CrossEntropyLoss().type(torch.cuda.FloatTensor)
 
     #define optimzer like Stochastic gradient descent, which will imptove parameters based on gradient of loss function, lr - learning rate, momentum - some shit (http://www.cs.toronto.edu/~hinton/absps/momentum.pdf)
-    optimizer = optim.SGD(nn_model.parameters(), lr=0.01, momentum=0.9)
+    #optimizer = optim.SGD(nn_model.parameters(), lr=0.01, momentum=0.9)
+    optimizer = optim.Adam(nn_model.parameters(), lr=0.01, weight_decay=0.1)
 
     #adjust learning rate based on the number of epochs. Just aftr "step_size" epochs "lr" will be multiplied by "gamma"
-    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=15, gamma=0.8)
+    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.8)
 
     print("prepared to train nn")
-    train_model(nn_model, train_loader, loss, optimizer, 200, scheduler)
+    train_model(nn_model, train_loader, loss, optimizer, 200, validX, validY, scheduler = scheduler)
     print("trained nn")
     torch.save(nn_model.state_dict(), nnname)
+ 
+
+def writeTrainData(energy,meanArr,stdArr):
+    np.savetxt('energies.txt', energy, delimiter="\n", fmt='%s')
+    np.savetxt('meanValues.txt', meanArr, fmt='%s')
+    np.savetxt('stdValues.txt', stdArr, fmt='%s')
 
 
+def train_All_NNs():
+    df = pandas.read_table("trainSet.txt",sep='	',header=None)
+    dfs = dict(tuple(df.groupby(list(df.columns)[10])))
+    listdf = [dfs[x] for x in dfs]
+    meanArr = []
+    stdArr  = []
+    energy  = []
+    for dft in listdf:
+        dftCorr = prepareTable(dft)
+        if (len(dftCorr)<100):
+            continue
+
+        columnName = list(dftCorr.columns)[10]
+        energyLoc = "{:.3f}".format(dftCorr.loc[0].at[columnName]*750)
+        name = 'networks\\model_'+str(energyLoc)+'.pt'
+        dftCorr.drop(columnName, axis=1, inplace=True)
+        dfCorrTrain = dftCorr.sample(frac=0.9)
+        dfCorrValid = dftCorr.drop(dfCorrTrain.index)
+    
+        mean, std = meanAndStdTable(dfCorrTrain)
+        meanArr.append(mean)
+        stdArr.append(std)
+        energy.append(energyLoc)
+
+        train_NN(dfCorrTrain,name,dfCorrValid)
+
+    writeTrainData(np.array(energy),np.concatenate(list(meanArr),axis=0),np.concatenate(list(stdArr),axis=0))
+    
 
 def train(model):
     if model == "NN":
-        train_NN(150,750,'nnMode750.pt')
-        train_NN(750,825,'nnMode825.pt')
-        train_NN(825,900,'nnMode900.pt')
-        train_NN(900,1100,'nnMode1100.pt')
-
+        train_All_NNs()
 
 
 print("start_train_python")
 train(sys.argv[1])
-
-
-"""
-def forward(self, x):
-    x = self.flatten(x)
-    logits = self.linear_relu_stack(x)
-    return logits
-
-model = NeuralNetwork().to(device)
-print(model)
-
-X = torch.rand(1, 28, 28, device=device)
-logits = model(X)
-pred_probab = nn.Softmax(dim=1)(logits)
-y_pred = pred_probab.argmax(1)
-print(f"Predicted class: {y_pred}")
-"""

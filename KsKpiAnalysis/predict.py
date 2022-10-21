@@ -1,195 +1,79 @@
-import sys
 
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset, SubsetRandomSampler
-from matplotlib import cm
-import pickle
-import random
 import matplotlib.pyplot as plt
-
+import pandas
 import numpy as np
-import io
-#import trainML
-
-x_coord = 0
-y_coord = 1
-z_coord = 0
-initial_static = 0
-size_x = 100
-size_y = 100
 
 
-def get_x_test_and_y_weights(mod):
-    f = io.open("testSet" + mod + ".txt", 'r')
-    x_test = []
-    local_x = []
-    for line in f:
-        local_x = []
-        tokens = line.strip().split('	')
-        for j in range(8):
-            local_x.append(float(tokens[j]))
-        local_x.append(float(tokens[8])/20.0)
-        local_x.append(float(tokens[8])/20.0-float(tokens[9])/20.0)
-        local_x.append(float(tokens[10]))
-        if local_x != [] and float(tokens[10])>=50./750 and float(tokens[10])<1825./750.:
-            x_test.append(local_x)
-    f.close()
-
-    #print(x_test)
-
-    return list(np.array(x_test))
+def constructPredictionFrame(index,nparray,chi2Array):
+    # return new DataFrame with 4 columns corresponding to probabilities of resulting classes and 5th column to chi2 
+    df2 = pandas.DataFrame(index=index)
+    df2['0'] = nparray[:,0].tolist()
+    df2['1'] = nparray[:,1].tolist()
+    df2['2'] = nparray[:,2].tolist()
+    df2['3'] = nparray[:,3].tolist()
+    df2['chi2'] = chi2Array.tolist()
+    return df2
 
 
-def predict_nn(mod):
-    x_test = get_x_test_and_y_weights(mod)
-
+def loadModel(energyForm, nInputParameters):
+    #load nn from file
+    name = 'networks\\model_'+str("{:.3f}".format(energyForm))+'.pt'
     nn_model = nn.Sequential(
-        nn.Linear(x_test[0].shape[0], 256, bias=True),
-        nn.ReLU(inplace=True),
+        nn.Linear(nInputParameters, 256, bias=True),
+        nn.BatchNorm1d(256),
+        nn.LeakyReLU(inplace=True),
         nn.Linear(256, 1024),
-        #nn.ReLU(inplace=True),
-        #nn.Linear(1024, 1024),
-        nn.ReLU(inplace=True),
+        nn.BatchNorm1d(1024),
+        nn.LeakyReLU(inplace=True),
         nn.Linear(1024, 4),
     )
     nn_model.type(torch.FloatTensor)
-    nn_model.load_state_dict(torch.load("nnMode750.pt"))
-    nn_model1 = nn.Sequential(
-        nn.Linear(x_test[0].shape[0], 256, bias=True),
-        nn.ReLU(inplace=True),
-        nn.Linear(256, 1024),
-        #nn.ReLU(inplace=True),
-        #nn.Linear(1024, 1024),
-        nn.ReLU(inplace=True),
-        nn.Linear(1024, 4),
-    )
-    nn_model1.type(torch.FloatTensor)
-    nn_model1.load_state_dict(torch.load("nnMode825.pt"))
-    nn_model2 = nn.Sequential(
-        nn.Linear(x_test[0].shape[0], 256, bias=True),
-        nn.ReLU(inplace=True),
-        nn.Linear(256, 1024),
-        #nn.ReLU(inplace=True),
-        #nn.Linear(1024, 1024),
-        nn.ReLU(inplace=True),
-        nn.Linear(1024, 4),
-    )
-    nn_model2.type(torch.FloatTensor)
-    nn_model2.load_state_dict(torch.load("nnMode900.pt"))
-    nn_model3 = nn.Sequential(
-        nn.Linear(x_test[0].shape[0], 256, bias=True),
-        nn.ReLU(inplace=True),
-        nn.Linear(256, 1024),
-        #nn.ReLU(inplace=True),
-        #nn.Linear(1024, 1024),
-        nn.ReLU(inplace=True),
-        nn.Linear(1024, 4),
-    )
-    nn_model3.type(torch.FloatTensor)
-    nn_model3.load_state_dict(torch.load("nnMode1100.pt"))
-
-    #cross check
-    x_test_cc = []
-    for j in range(int(len(x_test)/2)):
-        if (random.random()>0):
-            x_test_cc.append(x_test[2*j])
-            x_test_cc.append(x_test[2*j+1])
-    x_test_cc = np.array(x_test_cc)
-
-    #predict answer
-    #pred = nn_model(torch.FloatTensor(x_test_cc)).softmax(dim=1)
-
-    #y will be a vector of lines with the lenght of the number of classes
-    y = []
-    #print(pred[10, 0].item())
-    counttempj=0
-    for j in range(len(x_test_cc)):
-        pred = 0
-        counttempj+=1
-        if x_test_cc[j,10]>=150./750 and x_test_cc[j,10]<750./750.:
-            pred = nn_model(torch.FloatTensor(x_test_cc[j])).softmax(dim=0)
-            print(str(counttempj) + " / " + str(len(x_test_cc)))
-        elif x_test_cc[j,10]>=750./750 and x_test_cc[j,10]<825./750.:
-            pred = nn_model1(torch.FloatTensor(x_test_cc[j])).softmax(dim=0)
-            print(str(counttempj) + " / " + str(len(x_test_cc)))
-        elif x_test_cc[j,10]>=825./750 and x_test_cc[j,10]<900./750.:
-            pred = nn_model2(torch.FloatTensor(x_test_cc[j])).softmax(dim=0)
-            print(str(counttempj) + " / " + str(len(x_test_cc)))
-        elif x_test_cc[j,10]>=900./750 and x_test_cc[j,10]<1100./750.:
-            pred = nn_model3(torch.FloatTensor(x_test_cc[j])).softmax(dim=0)
-            print(str(counttempj) + " / " + str(len(x_test_cc)))
-        tempy = [pred[0].item(), pred[1].item(), pred[2].item(), pred[3].item()]
-        #tempy = [pred[j, 0].item(), pred[j, 1].item(), pred[j, 2].item(), pred[j, 3].item()]
-        y.append(tempy)
-    print(y[0])
-    y = list(np.array(y))
-    info = ""
-    f = open("predictOutput.txt", "w")
-
-    #for i in range(len(pred[0])):
-    #    info += str(y[i]) + "\n"
-
-    #calculate_efficiencies(y,x_test_cc)
-    write_output(y,x_test_cc,mod)
-    draw_probabilities_spread(y)
-    #f.write(info)
-    f.close()
+    nn_model.load_state_dict(torch.load(name))
+    return nn_model
 
 
-def draw_NN():
-    x_test = get_x_test_and_y_weights()
+def makePredicionList(mod,meanValues,stdValues,trainEnergies):
+    df = pandas.read_table("testSet" + mod + ".txt",sep='	',header=None)
+    dfs = dict(tuple(df.groupby(list(df.columns)[10])))
+    listdf = [dfs[x] for x in dfs]
+    dat_list = []
 
-    nn_model = nn.Sequential(
-        nn.Linear(x_test[0].shape[0], 256, bias=True),
-        nn.ReLU(inplace=True),
-        nn.Linear(256, 1024),
-        nn.ReLU(inplace=True),
-        nn.Linear(1024, 4),
-    )
-    nn_model.type(torch.FloatTensor)
-    nn_model.load_state_dict(torch.load("nnModel.pt"))
-    draw_train_results("NN", nn_model)
+    for dft in listdf:
+        columnName = list(dft.columns)[10]
+        lastName = list(dft.columns)[11]
+        energyForm = round(dft.reset_index(drop=True).loc[0].at[columnName]*750,3)
 
+        #remove energy column, transform to numpy and assign type
+        dfn = dft.drop([columnName,lastName], axis=1).to_numpy().astype(np.float32)
+        chi2Array = dfn[:,8].copy()
 
-def calculate_efficiencies(outputs, testdata):
-    efficiency = 0
-    for i in range(len(outputs)/2):
-        max = 0
-        predictedClass = 0
-        for j in range(4):
-            if outputs[2*i][j]>max:
-                max = outputs[2*i][j]
-                predictedClass = j
-        max2 = 0
-        predictedClass2 = 0
-        for j in range(4):
-            if outputs[2*i+1][j]>max2:
-                max2 = outputs[2*i+1][j]
-                predictedClass2 = j
+        if not energyForm in trainEnergies:
+            #make prediction probabilities = 0 for example idk
+            dat_list.append(constructPredictionFrame(dft.index.copy(),np.zeros(dfn.shape),chi2Array))
+            continue
         
-        if predictedClass == 0 and (predictedClass2 !=0 or testdata[2*i][8]):
-            efficiency += 1
-    print("efficiency = " + str(100*float(efficiency)/float(len(outputs))))
+        #apply mean and std to this part of dataset
+        energyIndex = np.where(trainEnergies == energyForm)[0][0]
+        for j in range(dfn.shape[1]):
+            dfn[:,j] = (dfn[:,j]-meanValues[energyIndex][j])/stdValues[energyIndex][j]
+
+        #load nn
+        nn_model = loadModel(energyForm, dfn[0].shape[0])
+            
+        #predict for each row
+        resultTArr = nn_model(torch.FloatTensor(dfn)).softmax(dim=1).detach().numpy()
+        dat_list.append(constructPredictionFrame(dft.index.copy(),resultTArr,chi2Array))
+
+    fullPredictionList = pandas.concat(list(dat_list)).sort_index()
+
+    return fullPredictionList
 
 
-def draw_probabilities_spread(outputs):
-    class_hist = []
-    class_hist_selected = []
-    for i in range(len(outputs)):
-        max = 0
-        predictedClass = 0
-        current_probas = []
-        for j in range(4):
-            current_probas.append(outputs[i][j])
-            if outputs[i][j]>max:
-                max = outputs[i][j]
-                predictedClass = j
-        class_hist.append(current_probas)
-        if predictedClass == 0:
-            class_hist_selected.append(current_probas)
-    class_hist = np.array(class_hist)
-    class_hist_selected = np.array(class_hist_selected)
+def draw_probabilities_spread(outputs,selected):
+    class_hist = outputs.to_numpy()
+    class_hist_selected = selected.to_numpy()
 
     bins = np.linspace(0, 1, 20)
 
@@ -208,98 +92,34 @@ def draw_probabilities_spread(outputs):
     plt.show()
 
 
-def write_output(outputs, testdata,mod):
-    efficiency = 0
-    allel = 0
-    bad100 = 0
-    info = ""
-    f = open("testMarks" + mod + ".txt", "w")
-    for i in range(int(len(outputs)/2)):
-        max1 = 0
-        allel+=1
-        predictedClass1 = 0
-        for j in range(4):
-            if outputs[2*i][j]>max1:
-                max1 = outputs[2*i][j]
-                predictedClass1 = j
-        max2 = 0
-        predictedClass2 = 0
-        for j in range(4):
-            if outputs[2*i+1][j]>max2:
-                max2 = outputs[2*i+1][j]
-                predictedClass2 = j
-        if (predictedClass1 == 0 and predictedClass2 != 0 and outputs[2*i][0]-outputs[2*i][1]>0.05 and outputs[2*i][0]-outputs[2*i][2]>0.07 and outputs[2*i][0]-outputs[2*i][3]>0.05 and outputs[2*i][0]>0.08):
-            info += "1  " + "1  " + str(testdata[2*i][8]*20) + "\n"
-            efficiency+=1
-        elif (predictedClass2 == 0 and predictedClass1 != 0 and outputs[2*i+1][0]-outputs[2*i+1][1]>0.05 and outputs[2*i+1][0]-outputs[2*i+1][2]>0.07 and outputs[2*i+1][0]-outputs[2*i+1][3]>0.05 and outputs[2*i+1][0]>0.08):
-            info += "1  " + "2  " + str(testdata[2*i+1][8]*20) + "\n"
-            efficiency+=1
-        elif (predictedClass1 == 0 and predictedClass2 == 0 and outputs[2*i][0]-outputs[2*i][1]>0.05 and outputs[2*i][0]-outputs[2*i][2]>0.07 and outputs[2*i][0]-outputs[2*i][3]>0.05 and outputs[2*i][0]>0.08):
-            info += "1  " + "1  " + str(testdata[2*i][8]*20) + "\n"
-            efficiency+=1
-        elif (predictedClass1 != 0 and predictedClass2 != 0):
-            if (testdata[2*i][8]*20 == 100 or testdata[2*i+1][8]*20 == 100):
-                bad100+=1
-                info += "0  " + "3  " + str(testdata[2*i][8]*20) + "\n"
-            else:
-                info += "0  " + "0  " + str(testdata[2*i][8]*20) + "\n"
-        else:
-            info += "0  " + "0  " + str(testdata[2*i][8]*20) + "\n"
-    print("efficiency = " + str(100*float(efficiency)/float(allel-bad100)))
-    print("100 somewhere 0 0 = " + str(100*float(bad100)/float(allel)))
-    f.write(info)
-    f.close()
+def write_output(outputs, mod):
+
+    # split output table in 3 - good, bad by nn and bad by input (no energy point in train or 100 chi2)
+    badChi2Table = outputs.loc[(outputs['chi2']==100) | ((outputs['0']==0) & (outputs['1']==0))].copy()
+    possGTable = outputs.drop(badChi2Table.index)
+    goodTable = possGTable.loc[(possGTable['0']-possGTable['1']>0.05) & (possGTable['0']-possGTable['2']>0.07) & (possGTable['0']-possGTable['3']>0.05) & (possGTable['0']>0.1)].copy()
+    badEventTable = possGTable.drop(goodTable.index)
+
+    draw_probabilities_spread(outputs,goodTable)
+
+    # assing final marks to each input row
+    goodTable['0'] = 1
+    badEventTable['0'] = 0
+    badChi2Table['0'] = 3
+
+    resultingMarks = pandas.concat([goodTable,badEventTable,badChi2Table]).sort_index().drop(['1','2','3'], axis=1)
+    resultingMarks.to_csv("testMarks" + mod + ".csv",sep='	',header=False,index=False)
 
 
-def draw_train_results(model_name, model, aux_model=None):
-    train_dataset = trainML.DESY_dataset("informationCorrected.txt")
-    X = []
-    Y = []
-    Z = []
-    if np.array(train_dataset[:][0][0, :]).shape[0] > 1:
-        init_params = np.array(train_dataset[initial_static][0])
-        for i in range(len(train_dataset)):
-            count_as_dataset = True
-            for j, val in enumerate(init_params):
-                if j != x_coord and j != y_coord:
-                    if val != train_dataset[i][0][j]:
-                        count_as_dataset = False
-            if count_as_dataset:
-                X.append(train_dataset[i][0][x_coord].item())
-                Y.append(train_dataset[i][0][y_coord].item())
-                Z.append(train_dataset[i][1][z_coord].item())
-        X = np.array(X)
-        Y = np.array(Y)
-        Z = np.array(Z)
-        x_surf, y_surf = np.meshgrid(
-            np.linspace(X.min() - (X.max() - X.min()) / 10, X.max() + (X.max() - X.min()) / 10, size_x),
-            np.linspace(Y.min() - (Y.max() - Y.min()) / 10, Y.max() + (Y.max() - Y.min()) / 10, size_y))
+def predict_nn(mod):
+    energies = np.loadtxt('energies.txt')
+    meanValues = np.loadtxt('meanValues.txt').reshape((len(energies),10))
+    stdValues = np.loadtxt('stdValues.txt').reshape((len(energies),10))
 
-        list_to_model = []
-        for i in range(np.array(train_dataset[:][0][0, :]).shape[0]):
-            if i == x_coord:
-                list_to_model.append(x_surf.flatten())
-            elif i == y_coord:
-                list_to_model.append(y_surf.flatten())
-            else:
-                list_to_model.append(train_dataset[initial_static][0][i].item() * np.ones(size_x * size_y))
-        model_viz = np.expand_dims(np.array(list_to_model).T, 0)
-        if model_name == "NN":
-            z_surf = np.array(model(torch.FloatTensor(model_viz))[0, :, z_coord].tolist())
-        elif aux_model is not None:
-            z_surf = (np.array(model(torch.FloatTensor(model_viz))[0, :, z_coord].tolist()) + aux_model.predict(
-                model_viz)[:, z_coord]) / 2
+    predictionList = makePredicionList(mod,meanValues,stdValues,energies)
+    print(predictionList)
 
-        fig = plt.figure(figsize=(14, 8))
-        ax = fig.add_subplot(111, projection='3d')
-        ax.scatter(X, Y, Z, c='red', marker='o', alpha=0.5)
-        ax.plot_surface(x_surf, y_surf, z_surf.reshape(x_surf.shape), alpha=0.4, cmap=cm.coolwarm, linewidth=0,
-                        antialiased=False)
-        _, _, names, namesX = trainML.load_dataset("informationCorrected.txt")
-        ax.set_xlabel(namesX[0][x_coord])
-        ax.set_ylabel(namesX[0][y_coord])
-        ax.set_zlabel(names[0][z_coord])
-        plt.show()
+    write_output(predictionList,mod)
 
 
 def predict(model):
@@ -310,12 +130,4 @@ def predict(model):
 
 
 print("start python predict")
-#if sys.argv[2]:
-#    x_coord = int(sys.argv[2])
-#if sys.argv[3]:
-#    y_coord = int(sys.argv[3])
-#if sys.argv[4]:
-#    z_coord = int(sys.argv[4])
-#if sys.argv[5]:
-#    initial_static = int(sys.argv[5])
 predict("NN")

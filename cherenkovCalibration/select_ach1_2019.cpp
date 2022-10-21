@@ -52,66 +52,20 @@
 
 using namespace std;
 
-
-float Goodphi[36] = { 0.08, 0.27, 0.33, 0.71,    0.78, 0.98, 1.04, 1.42,    1.48, 1.68, 1.75, 2.12,    2.21, 2.39, 2.45, 2.85,    2.92, 3.11, 3.17, 3.53,    3.61, 3.78, 3.85, 4.23,    \
-	4.32, 4.5, 4.56, 4.92,    4.99, 5.17, 5.24, 5.61,    5.67, 5.87, 5.93, 6.28 };
 float zobl[15] = { -11.7013, -10.0367, -8.47203, -6.90737, -5.34273, -3.77807, -2.21343, -0.648766, 0.9159, 2.48053, 4.0452, 5.60983, 7.1745, 8.73913, 9.6};
-float egran[5] = { 600., 780., 900., 955., 1010. };
-float phi[2], phis[2], mcphi[2], ach[40], achr[40], theta[2], z0[2], schr[40], tch[40], tchr[40], energy[40], beam, eton;
-float d2phi[2], dphirho[2], d2rho[2], d2z0[2], d2cosTh[2], dz0cosTh[2], Dtheta[2], Dphi[2], energyerr[2];
-int klmno[5], nch, run, nc, nn, cosm, eventtime, act, region[40];
-int eventn;
-double shwidth;
-int calibsimple[224] = { 37361	, 37405	,37425	,37444	,38183	,38211	,38212	,38245	,38288	,38359	,
-38422	,38463	,38500	,38518	,38518	,38554	,38601	,38619	,38621	,38639	,38665	,38686	,38729	,38769	,38797	,38800	,
-38804	,38804	,38872	,38896	,38928	,38966	,39027	,39067	,39105	,39224	,39224	,39224	,39225	,39269	,39385	,39471	,
-39527	,39588	,39599	,39635	,39734	,39767	,39816	,39866	,39912	,39934	,39980	,39980	,40023	,40028	,40053	,40091	,
-40112	,40352	,40370	,40384	,40405	,40462	,40480	,40480	,40480	,40502	,40502	,40502	,40503	,40534	,40567	,40567	,
-40567	,40567	,40590	,40590	,40590	,40622	,40655	,40679	,40704	,40716	,40742	,40765	,40765	,40767	,40783	,40808	,
-40827	,40842	,40856	,40885	,40909	,40925	,40951	,40966	,40980	,41009	,41024	,41046	,41068	,41091	,41103	,41125	,
-41150	,41180	,41198	,41220	,41236	,41257	,41279	,41303	,41320	,41346	,41374	,41403	,41425	,41446	,41477	,41499	,
-41508	,41514	,41521	,41541	,41561	,41580	,41595	,41609	,41621	,41658	,41682	,41711	,41728	,41754	,41776	,41810	,
-41836	,41866	,41886	,41911	,41936	,41952	,41976	,42002	,42014	,42034	,42055	,42078	,42143	,42178	,42209	,42238	,
-42245	,42273	,42288	,42311	,42338	,42371	,42396	,42400	,42410	,42438	,42459	,42467	,42496	,42520	,42548	,42579	,
-42602	,42628	,42654	,42669	,42700	,42714	,42752	,42765	,42772	,42789	,42807	,42916	,42932	,42963	,42989	,43013	,
-43028	,43047	,43067	,43080	,43096	,43122	,43160	,43185	,43205	,43220	,43222	,43236	,43254	,43275	,43285	,43297	,
-43314	,43334	,43351	,43383	,43408	,43430	,43452	,43493	,43526	,43563	,43587	,43657	,43692	,43747	,43787	,43814	,
-43836	,43878	,43896	,43921	,43981	,44008 };
+
+float phi[2], phis[2], mcphi[2], ach[40], achr[40], theta[2], z0[2], schr[40], tch[40], tchr[40], energy[40], beam, eton;	/// normal float event parameters
+int nch, run, nc, nn, cosm, eventtime, act, region[40], eventn;																/// normal int   event parameters
+float d2phi[2], dphirho[2], d2rho[2], d2z0[2], d2cosTh[2], dz0cosTh[2], Dtheta[2], Dphi[2], energyerr[2];					/// errors for   event parameters
 
 const char *cond = "(cosm == 0) && (nc == 2) && (nn==0) && (charge[0] == 1) && (charge[1] == 1) && (energy[0]/beam>=0.8) && (energy[1]/beam>=0.7) && (nch >= 9) && (act == 0) &&\
 ((theta[0] + theta[1] - 3.14159) <= 0.12) && ((theta[0] + theta[1] - 3.14159) >= -0.12) && (sin(theta[0]) >= 0.41) && \
 ((((phi[0] - phi[1]) - 3.14159 <= 0.1) && (((phi[0] - phi[1]) - 3.14159) >= -0.1)) || (((phi[0] - phi[1]) + 3.14159 <= 0.1) && (((phi[0] - phi[1]) + 3.14159) >= -0.1))) && \
 ((z0[0] - z0[1]) <= 1.0) && ((z0[0] - z0[1]) >= -1.0) && ((d0[0] - d0[1]) <= 0.5) &&  ((d0[0] - d0[1]) >= -0.5)";
 
-const char* condkaons = "(cosm == 0) && (nc == 2) && (nn==0) && (charge[0] == 1) && (charge[1] == 1) && (energy[0]/beam<0.8) && (energy[1]/beam<0.7) && (nch >= 9) && \
-(energy[0]/beam>0.2) && (energy[1]/beam>0.2)     &&\
-((theta[0] + theta[1] - 3.14159) <= 0.12) && ((theta[0] + theta[1] - 3.14159) >= -0.12) && (sin(theta[0]) >= 0.41) && \
-((((phi[0] - phi[1]) - 3.14159 <= 0.1) && (((phi[0] - phi[1]) - 3.14159) >= -0.1)) || (((phi[0] - phi[1]) + 3.14159 <= 0.1) && (((phi[0] - phi[1]) + 3.14159) >= -0.1))) && \
-((z0[0] - z0[1]) <= 1.0) && ((z0[0] - z0[1]) >= -1.0) && ((d0[0] - d0[1]) <= 0.2) &&  ((d0[0] - d0[1]) >= -0.2)";
-int mybin = 100;
-double bound[5];
-double prob = 0.;
-double probmax = 0.;
-double eff;
-float pedestali1[25][100];
-float ach1[40];
-float ped[14][9];
-float pedz[9];
-float ped1[9][14][9];
-float ped2[9];
-double pede[14][9][4];
-int wichcounter1[10];
+
+float pedestali1[25][100], ped[14][9], pedz[9], ped1[9][14][9], ped2[9], pede[14][9][4];
 float PI = 3.14159;
-
-
-TString str = "a";
-TString elem;
-
-struct EntriesInRun {
-	int run;
-	float energy;
-	int entries;
-};
 
 double p3g0(double x, double xr, double sr, std::vector<double> p);
 double aerogel(size_t n, double x, double* par);
@@ -138,128 +92,6 @@ size_t ftime(size_t run){
 	return (size_t)(std::atoi(gSystem->GetFromPipe(cmd.Data())) - gStyle->GetTimeOffset() - 6 * 3600);
 }
 
-//for fit of amptime with an array of connected lines (probably, not needed, and certainly they shouldn't be connected as changes in amplitude can be caused by abrupt changes in detector)
-double lineotrezok(int n, double x, double* par)
-{
-	double a = par[3 * n + 1];
-	double b = par[3 * n + 2];
-	return a * x + b;
-}
-double linesall(double* x, double* par)
-{
-	double xout = 1;
-	int nmax = 7;
-	//cout << nmax << endl;
-	for (int n = 0; n < nmax; n++) {
-		if ( (x[0] > par[3*n]) && (x[0] <= par[3*(n+1)]) )
-			xout = lineotrezok(n, x[0], par);
-	}
-	return xout;
-}
-
-//drawing EMC deposition of particles in original col stream to determine selection criteria
-void calorimetr() {
-	TChain chain("t1");
-	chain.Add("/work/users/konctbel/calibs/R007-001/output/ntuples/MHAD2017/*.root");
-	const Long64_t entries = chain.GetEntries();
-	cout << entries << endl;
-
-	chain.SetBranchAddress("energy", &energy);
-	chain.SetBranchAddress("beam", &beam);
-	chain.SetBranchAddress("eton", &eton);
-	chain.SetBranchAddress("nc", &nc);
-	chain.SetBranchAddress("cosm", &cosm);
-	chain.SetBranchAddress("nn", &nn);
-
-	
-
-	TH1* histo = new TH1F("histo", "energy0", 100, 0, 1.2);
-	TH1* hist1 = new TH1F("hist1", "energy1", 100, 0, 1.2);
-	TH1* hist2 = new TH1F("hist2", "eton", 100, 0, 1.2);
-	
-	
-	int Count = 0;
-	int count1 = 0;
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		if (beam == 1000 && nc == 2 && cosm == 0 && nn == 0) {
-			histo->Fill(energy[0] / beam);
-			hist2->Fill(eton);
-			hist1->Fill(energy[1] / beam);
-		}
-		Count += 1;
-		if (Count == 100000) {
-			count1 += 1;
-			cout << Form("obrabotano %d00k entries", count1) << endl;
-			Count = 0;
-		}
-	}
-	TFile* MyFile = new TFile("/work/users/kladov/snd2k/R006-003/maindir/calorimeter.root", "RECREATE");
-	histo->Write("energy0");
-	hist1->Write("energy1");
-	hist2->Write("eton");
-	MyFile->Close();
-
-	/*histo->SetFillColor(kRed);
-	histo->SetTitle("Energy deposition;Energy/beam");
-	histo->Draw("LF2");
-	hist1->SetFillColor(kBlue);
-	hist1->SetTitle("Energy deposition;Energy/beam");
-	hist1->Draw("LF2same");*/
-	hist2->Draw();
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	/*TLegend* legend = new TLegend(0.1, 0.83, 0.4, 0.98);
-	//legend->SetHeader("The Legend Title", "C");
-	legend->AddEntry("histo", "first particle", "f");
-	legend->AddEntry("hist1", "second particle", "f");
-	legend->Draw();*/
-	//c->Update();
-	TLine* line11 = new TLine(0.8, 0, 0.8, 1.05*histo->GetMaximum());
-	TLine* line12 = new TLine(0.75, 0, 0.75, 1.05*histo->GetMaximum());
-	line11->SetLineColor(kGreen);
-	line12->SetLineColor(kGreen);
-	//line11->Draw();
-	line12->Draw();
-	c->Update();
-	cin.get();
-
-}
-
-void drawcalorimetr() {
-	TFile* f = new TFile("/work/users/kladov/snd2k/R006-003/maindir/calorimeter.root");
-
-	
-	TH1F* histo = (TH1F*)f->Get("energy0");
-	//TH1F* hist1 = (TH1F*)f->Get("energy1");
-	TH1F* hist2 = (TH1F*)f->Get("eton");
-	histo->SetTitle("Energy deposition;Energy/beam");
-	hist2->SetTitle("Energy deposition;total deposition/2beam");
-	hist2->Draw();
-	/*histo->SetLineColor(kRed);
-	histo->Draw();
-	hist1->SetLineColor(kBlue);
-	hist1->Draw("same");
-	//TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);*/
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->SetFillColor(0);
-	c->SetFrameFillColor(0);
-	c->Update();
-	/*TLegend* legend = new TLegend(0.1, 0.83, 0.4, 0.98);
-	//legend->SetHeader("The Legend Title", "C");
-	legend->AddEntry("histo", "first particle", "f");
-	legend->AddEntry("hist1", "second particle", "f");
-	legend->Draw();
-	c->Update();*/
-
-	TLine* line11 = new TLine(0.8, 0, 0.8, 1.1 * histo->GetMaximum());
-	TLine* line12 = new TLine(0.75, 0, 0.75, 1.05 * histo->GetMaximum());
-	line11->SetLineColor(kGreen);
-	line12->SetLineColor(kGreen);
-	//line11->Draw();
-	line12->Draw();
-	c->Update();
-}
 
 class CalibrExp {
 public:
@@ -311,6 +143,8 @@ public:
 
 	double coef[14][9];
 
+	double shwidth;
+
 	vector<double> bins;
 
 	CalibrExp() {
@@ -336,21 +170,21 @@ public:
 		//finally, profiles can be found in workingDir/profiles.root; the corresponding map with area-regarding coefficients in a certain text form can be found in workingDir/map.txt
 		//maybe, I will write a script to multiply the amplitudes in this map on the amp-time dependence
 
-		//basedirExp = "/work/users/konctbel/calibs/R007-001/output/ntuples/MHAD2019/col/*col.root";	//directory with exp col stream files to which apply calibration
-		//basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/*col.root";			//directory with exp col stream files to which apply calibration
-		basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/eecalibT/*col.root";	//directory with exp col stream files to which apply calibration
-		basedirMod = "/work/users/kladov/snd2k/R007-001/2019/";										//directory with mod files after map creation
+		basedirExp = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2019/eecalibT/*col.root";//directory with exp col stream files to which apply calibration
+		basedirMod = "/work/users/kladov/snd2k/R007-002/2019/";										//directory with mod files after map creation
 
 		workingDir = "/work/users/kladov/snd2k/R006-003/maindir/2019/";								//specify where to store temporary files
-		dirSelectedExp = "/work/users/kladov/snd2k/R006-003/selected2019T/";							//where to store selected Baba events
+		dirSelectedExp = "/work/users/kladov/snd2k/R006-003/selected2019T/";						//where to store selected Baba events
 		dirSelectedMod = workingDir + "model/selected/";											//where to store selected Baba events for modeling
 		prefixSelectedExp = "true1__";
 		prefixSelectedMod = "true_";
 		timeCut = 1100;
 		//timeCut = 88;
-		aerBord[0] = 12.48; //11.8
-		aerBord[1] = 10; //10.9
-		aerBordM[0] = 11.9; //11.7
+		aerBord[0] = 12.39; //11.8
+		aerBord[1] = 10.07; //10.9
+		//aerBord[0] = 11.7; //11.8
+		//aerBord[1] = 10.8; //10.9
+		aerBordM[0] = 11.75; //11.7
 		aerBordM[1] = 10.6; //10.8
 		//
 		aerRLowBord = 10.5;
@@ -360,6 +194,7 @@ public:
 		achCut = 70.;
 		entriesInGoodRun = 2000;
 		effInGoodRun = 0.81;
+		shwidth = 2.5;
 	}
 
 	bool TimeIsGood(int signnumb);
@@ -762,6 +597,7 @@ public:
 	}
 
 	double recalculateZ(double zin, double theta, double ach, double pedz, int state);
+	void copy(TString in, TString out, const char* tname);
 	void copy1();
 	void copymod();
 	void findrunborders();
@@ -775,26 +611,18 @@ public:
 	void ampltime();
 	void bordersplot();
 	void modelfile(bool transformPYN);
-	vector<int> getCalibRuns(string calName, bool read);
 	void drawamptime();
-	void enpoint();
-	void achspec();
 	void zrasprmod();
 	void timespectra();
 	void drawtsp();
-	void nvsphiorig();
-	void phiminusphis();
-	void checkmod();
-	void checkbord();
-	void dopeff();
 	double compare1();
 	double compare2(bool transformPYN);
 	void compare();
 	void compareAmpSpectr();
 	void compareAmpSpectrG();
+	void compareAmpDistributions();
 	void compareEffSpectr();
 	void compareZAmpSpectr();
-	void phiShift();
 	void comparePhiShifts();
 	vector<double> defineLGrans(int j);
 	void shiftPhi2Pi();
@@ -822,10 +650,14 @@ int findMaxAmpInd(int s1, int s, float* a) {
 	return maxampla;
 }
 
+double divisionError(double divident, double divider, double dividentErr, double dividerErr) {
+	//just summing up dispersions 
+	return sqrt(pow(dividentErr / divider, 2) + pow(dividerErr / divider * divident / divider, 2));
+}
 
 bool CalibrExp::TimeIsGood(int signnumb) {
 	//return (((schr[signnumb] < 0.5) || ((schr[signnumb] > 0.5) && ((tchr[signnumb] > 87) && (tchr[signnumb] < 104)))) && (eventtime == 0));
-	return (signnumb == 0 || (schr[signnumb] < 0.5)  ||  ((tchr[signnumb] < 1015) && (tchr[signnumb] > 80)));
+	return (signnumb == 0 || (schr[signnumb] < 0.5) || ((tchr[signnumb] < 1015) && (tchr[signnumb] > 80)));
 	//return (((schr[signnumb] < 0.5) || ((schr[signnumb] > 0.5) && (tchr[signnumb] > timeCut))));
 	//return (tchr[signnumb] < timeCut);
 }
@@ -837,7 +669,9 @@ bool CalibrExp::RunIsGood(int run) {
 	return isrungood;
 }
 
+
 double CalibrExp::recalculateZ(double zin, double theta, double ach, double ped, int state) {
+	//dont take entries with ztr > borders, because it ruin statistics - make big corner influence on first zone
 	double amplitude = -1.0;
 	int aerBordInd = -1;
 	if (zin >= 0)
@@ -874,6 +708,7 @@ vector<double> CalibrExp::defineLGrans(int j) {
 
 bool insideLGrans(double angle, double* lgran) {
 	return ((angle > lgran[0]) && (angle < lgran[1])) || ((angle > lgran[2]) && (angle < lgran[3]));
+	//return ((angle > (lgran[0]+lgran[1])/2) && (angle < lgran[1])) || ((angle > lgran[2]) && (angle < (lgran[3]+lgran[2]*3)/4.));
 	//return ((angle > lgran[2]) && (angle < lgran[3]));
 }
 
@@ -884,33 +719,32 @@ void CalibrExp::shiftPhi2Pi() {
 		phi[1] = phi[1] + 2. * PI;
 }
 
-//copy only e+e- entries (cond above) from col stream, located in "basedir", to a new directory "dir", 
-//corresponding to selected year, in order to not analyse all col entries every time in the following calculations
-void CalibrExp::copy1() {
+
+void CalibrExp::copy(TString in, TString out, const char *tname) {
+	/// copy only e+e- entries (cond above) from col stream, located in "basedir", to a new directory "dir"
 	vector<TString> ans;
-	///base directory for files
-	TString files = gSystem->GetFromPipe("ls " + basedirExp);
+	TString files = gSystem->GetFromPipe("ls " + in); ///base directory for files
 
 	Ssiz_t from = 0;
-	
+	TString elem;
+
 	while (files.Tokenize(elem, from, "\n")) {
 		ans.push_back(elem);
 	}
 	size_t vector_size = ans.size();
 	for (size_t i = 0; i < vector_size; i++) {
-		str = ans[i].Copy();
+		TString str = ans[i].Copy();
 		TString tok;
 		Ssiz_t from1 = 1;
 		vector<TString> tokens;
 		TFile* filecomb = TFile::Open(str);
-		TTree* originalTree = (TTree*)filecomb->Get("t1");
-
+		TTree* originalTree = (TTree*)filecomb->Get(tname);
 		while (str.Tokenize(tok, from1, "/")) {
 			tokens.push_back(tok);
 		}
 		TString fname = tokens.back();
-		cout << fname << endl;
-		TFile* ouput = TFile::Open(dirSelectedExp + prefixSelectedExp + fname, "RECREATE");
+		cout << out + fname << endl;
+		TFile* ouput = TFile::Open(out + fname, "RECREATE");
 		ouput->cd();
 		TTree* selectedTree = originalTree->CopyTree(cond);
 		selectedTree->Print();
@@ -918,64 +752,19 @@ void CalibrExp::copy1() {
 		ouput->Close();
 		filecomb->Close();
 	}
-	/*for (int i = 98; i < vector_size; i++) {
-		str = ans[i].Copy();
-		TString tok;
-		Ssiz_t from1 = 1;
-		vector<TString> tokens;
-		TFile* filecomb = TFile::Open(str);
-		TTree* originalTree = (TTree*)filecomb->Get("t1");
+}
 
-		while (str.Tokenize(tok, from1, "/")) {
-			tokens.push_back(tok);
-		}
-		cout << tokens[8] << endl;
-		TFile* ouput = TFile::Open(dir + "true1__" + tokens[8], "RECREATE");
-		ouput->cd();
-		TTree* selectedTree = originalTree->CopyTree(cond);
-		selectedTree->Print();
-		selectedTree->Write();
-		filecomb->Close();
-		ouput->Close();
-	}*/
+void CalibrExp::copy1() {
+	copy(basedirExp, dirSelectedExp + prefixSelectedExp, "t1");
 }
 
 void CalibrExp::copymod() {
-	vector<TString> ans;
-	TString files = gSystem->GetFromPipe("ls " + basedirMod + "*0.root");
-
-	Ssiz_t from = 0;
-
-	while (files.Tokenize(elem, from, "\n")) {
-		ans.push_back(elem);
-	}
-	size_t vector_size = ans.size();
-	for (size_t i = 0; i < vector_size; i++) {
-		str = ans[i].Copy();
-		TString tok;
-		Ssiz_t from1 = 1;
-		vector<TString> tokens;
-
-		TFile* filecomb = TFile::Open(str);
-		TTree* originalTree = (TTree*)filecomb->Get("h1");
-
-		while (str.Tokenize(tok, from1, "/")) {
-			tokens.push_back(tok);
-		}
-		TString fname = tokens.back();
-		cout << dirSelectedMod + "true_" + fname << endl;
-		TFile* ouput = TFile::Open(dirSelectedMod + prefixSelectedMod + fname, "RECREATE");
-		ouput->cd();
-		TTree* selectedTree = originalTree->CopyTree(cond);
-		selectedTree->Print();
-		selectedTree->Write();
-		ouput->Close();
-		filecomb->Close();
-	}
+	copy(basedirMod + "*0.root", dirSelectedMod + prefixSelectedMod, "h1");
 }
 
-//find min and max run in the data to make distribution in this borders
+
 void CalibrExp::findrunborders() {
+	//find min and max run in the data to make distribution in this borders
 	TChain chain("t1");
 	std::string chadds = dirSelectedExp + prefixSelectedExp + "**exp00**.root";
 	const char* chadd = chadds.c_str();
@@ -1014,8 +803,9 @@ void CalibrExp::findrunborders() {
 	writeMinMaxRun();
 }
 
-//find runs that contain (events > "amount") and (mean efficiency > "effThreshold"), conditions on phi(+shir) and z
+
 void CalibrExp::findruns(int amount, double effThreshold) {
+	//find runs that contain (events > "amount") and (mean efficiency > "effThreshold"), conditions on phi(+shir) and z
 	readMinMaxRun();
 	readTrueGran1();
 	readMeanshir();
@@ -1128,8 +918,9 @@ void CalibrExp::findruns(int amount, double effThreshold) {
 	cout << "amount of good runs	" << countt1 << endl;
 }
 
-//make profile with mean ach vs z on the inner cillinder and medium cillinder with recalculation on borders according to intersection line segment lenght and without
+
 void CalibrExp::zraspr() {
+	//make profile with mean ach vs z on the inner cillinder and medium cillinder with recalculation on borders according to intersection line segment lenght and without
 	readGoodRuns();
 	readMeanshir();
 	readTrueGran1();
@@ -1255,9 +1046,9 @@ void CalibrExp::zraspr() {
 	hprof01[1]->Draw();
 	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
 	c->Update();
-	hprof01[1]->Fit("scphi", "", "", -aerBord[0], -aerBord[0] + aerWidth / 2.);
+	hprof01[1]->Fit("scphi", "", "", -aerBord[0] + 0.2, -aerBord[0] + aerWidth);
 	double newBord = fn->GetParameter(1);
-	hprof01[1]->Fit("scphi", "", "", newBord, newBord + aerWidth / 2.);
+	hprof01[1]->Fit("scphi", "", "", newBord + aerWidth/4., newBord + aerWidth);
 	cout << fn->GetParameter(1) << endl;
 	c->Update();
 	cin.get();
@@ -1297,8 +1088,9 @@ void CalibrExp::zraspr() {
 	MyFile1->Close();	
 }
 
-//same as zraspr but without conditions on run and nch is always 9, need to rewrite or, better, unite it with zraspr
+
 void CalibrExp::zrasprmod() {
+	//same as zraspr but without conditions on run and nch is always 9, need to rewrite or, better, unite it with zraspr
 	readMeanshir();
 	readTrueGran1();
 	readMeanshirm();
@@ -1359,10 +1151,20 @@ void CalibrExp::zrasprmod() {
 
 			for (int prtc = 0; prtc < 2; prtc++) {
 				ztr[prtc] = 12.0 / tan(theta[prtc]) + z0[prtc];
-				double radia = aerRLowBord * (1 - 3.14159 / 180. * 0.370066 * sin(phi[prtc] - 6.19112 * 3.14159 / 180.));
+				//double radia = aerRLowBord * (1 + 4.14159 / 180. * 0.370066 * cos(phi[prtc] - 6.19112 * 3.14159 / 180.) + 3.14159 / 180. * 0.270066 * sin(phi[prtc] - 6.19112 * 3.14159 / 180.));
+				double radia = aerRLowBord * (1 + 3.14159 / 180. * 0.370066 * cos(phi[prtc] - 6.19112 * 3.14159 / 180.));
 				zin[prtc] = aerRLowBord / tan(theta[prtc]) + z0[prtc];
 
-				if (!insideLGrans(phi[prtc], &lgran[0]))
+				double fillPhiWhat = phi[prtc];
+				double newPhi = 0;
+				if (phi[prtc] < truegran1m[j][1])
+					newPhi = truegran1[j][0] + (phi[prtc] - truegran1m[j][0]) * (truegran1[j][1] - truegran1[j][0]) / (truegran1m[j][1] - truegran1m[j][0]);
+				else if (phi[prtc] >= truegran1m[j][1])
+					newPhi = truegran1[j][1] + (phi[prtc] - truegran1m[j][1]) * (truegran1[j][3] - truegran1[j][1]) / (truegran1m[j][3] - truegran1m[j][1]);
+				//fillPhiWhat = newPhi;
+				//fillPhiWhat = fillPhiWhat - 3.14159 / 180. * (0.370066 * cos(fillPhiWhat - 6.19112 * 3.14159 / 180.) - 0.403304);
+
+				if (!insideLGrans(fillPhiWhat, &lgran[0]))
 					continue;
 
 				//fill 0 hists with standart sin
@@ -1391,16 +1193,18 @@ void CalibrExp::zrasprmod() {
 
 	//TF1* fn = new TF1("scphi", "[0]*(1. / (exp( - (x-[1])/[2] + 3) + 1 ) )", -12, -7);
 	TF1* fn = new TF1("scphi", "[0]*(x-[1])", -12, -7);
-	fn->SetParameters(hprof01->GetMaximum() / aerWidth, -aerBord[0]);
-	hprof01->Draw();
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	hprof01->Fit("scphi", "", "", -aerBord[0], -aerBord[0]+aerWidth);
-	double newBord = fn->GetParameter(1);
-	hprof01->Fit("scphi", "", "", newBord+0.2, newBord + aerWidth);
-	cout << fn->GetParameter(1) << endl;
-	c->Update();
-	cin.get();
+	for (size_t i = 0; i < 9; i++) {
+		fn->SetParameters(hprof01->GetMaximum() / aerWidth, -aerBord[0]);
+		hprof0[i]->Draw();
+		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+		c->Update();
+		hprof0[i]->Fit("scphi", "", "", -aerBord[0] + 0.2, -aerBord[0] + aerWidth);
+		double newBord = fn->GetParameter(1);
+		hprof0[i]->Fit("scphi", "", "", newBord + aerWidth / 4., newBord + aerWidth);
+		cout << fn->GetParameter(1) << endl;
+		c->Update();
+		cin.get();
+	}
 	cin.get();
 	
 	//TF1* fn1 = new TF1("scphi1", "([0]+[1]*x)+[2]*exp(-((x-[3])/[4])**2)", 8, 12);
@@ -1409,6 +1213,7 @@ void CalibrExp::zrasprmod() {
 	hprof01->Fit("scphi1", "", "", aerBord[1] - aerWidth / 2., aerBord[1]);
 	hprof01->Fit("scphi1", "", "", fn1->GetParameter(1) - aerWidth / 2., fn1->GetParameter(1));
 	cout << fn1->GetParameter(1) << endl;
+	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
 	c->Update();
 	cin.get();
 
@@ -1426,8 +1231,9 @@ void CalibrExp::zrasprmod() {
 	MyFile1->Close();
 }
 
-//draw z profiles from one file "name" with titles 1 and 2
+
 void CalibrExp::linesforz(std::string name, const char* title1, const char* title2) {
+	//draw z profiles from one file "name" with titles 1 and 2
 	TFile* f = new TFile((workingDir + name).c_str());
 
 	TProfile* hprof = (TProfile*)f->Get(title1);
@@ -1465,12 +1271,10 @@ void CalibrExp::linesforz(std::string name, const char* title1, const char* titl
 	c->Update();
 }
 
-//cleaned, maybe get parameters for recalculation on borders from zraspr fit 
-//dont take entries with ztr > borders, because it ruin statistics - make big corner influence on first zone
+
 void CalibrExp::raspr() {
-	/// <summary>
+	/// cleaned, maybe get parameters for recalculation on borders from zraspr fit 
 	/// ~400 for fit, normal sim statistic - ~100 bins
-	/// </summary>
 	readMeanshir();
 	readTrueGran1();
 	readMeanshirm();
@@ -1503,15 +1307,17 @@ void CalibrExp::raspr() {
 
 	//raspr po phi
 	TProfile* hprof[14][9];
+	TH1* hdist[14][9];
 	char name[20];
 	char title[100];
 	for (int j = 0; j < 14; j++) {
 		for (int i = 0; i < 9; i++) {	
 			sprintf(name, "hprofrp%d", 9*j + i + 1);
 			sprintf(title, "zobl%d,sensor%d;phi;ach", j + 1,i + 1);
-			hprof[j][i] = new TProfile(name,title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
-			//hprof[j][i] = new TProfile(name,title, 100, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
-			//hprof[j][i] = new TProfile(name,title, 4800, 0, 7.0);
+			hprof[j][i] = new TProfile(name,title, 200, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
+			sprintf(name, "hdist%d", 9 * j + i + 1);
+			sprintf(title, "zobl%d,sensor%d;ach", j + 1, i + 1);
+			hdist[j][i] = new TH1F(name, title, 250, -5, 45);
 		}
 	}
 	TProfile* hprofMean[9];
@@ -1533,7 +1339,7 @@ void CalibrExp::raspr() {
 	for (int i = 0; i < 9; i++) {
 		sprintf(name, "hprofeffZm%d", i + 1);
 		sprintf(title, "sensor%d;phi;ach", i + 1);
-		hprofEffMean[i] = new TProfile(name, title, 400, (float)(i - 0.5) * (2. * PI) / 9., (float)(i + 1.5) * (2. * PI) / 9.);
+		hprofEffMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 	}
 
 	//hists for zasel po phi
@@ -1546,8 +1352,8 @@ void CalibrExp::raspr() {
 		}
 	}
 
-	TProfile* hprof0 = new TProfile("tempamp", "tempamp counter 8 ", 800, (float)(7 - 1) * (2. * PI) / 9., (float)(7 + 2) * (2. * PI) / 9.);
-	TProfile* hprofeff0 = new TProfile("tempeff", "tempeff count 8", 100, (float)(7 - 1) * (2. * PI) / 9., (float)(7 + 2) * (2. * PI) / 9.);
+	TH1* htheta0 = new TH1F("theta0","theta;#theta",100,0,180);
+	TH1* htheta = new TH1F("theta","theta;#theta",100,0,180);
 
 	//hists for pedestal integr po phi
 	TH1* h[14][9];
@@ -1581,10 +1387,10 @@ void CalibrExp::raspr() {
 		//cout << beam << endl;
 		schr[nch] = 0.;
 		ach[0] = 0;
-		if ((!RunIsGood(run))/* || eventtime != 0*/) {
+		if ((!RunIsGood(run))) {
 			continue;
 		}
-		scount = 0;     //2017: 4001, 25500, 29501    ; 2018: 6001, 29800, 35801       ; 2019: 38000-43001       ; 2020: 45040-46541
+		scount = 0;   
 		scount1 = 0;
 		for (int j = 0; j < 9; j++) {
 			//wichcounter1[j] = scount1;
@@ -1596,9 +1402,6 @@ void CalibrExp::raspr() {
 			int maxampla = findMaxAmpInd(scount1, scount, &ach[0]);
 			vector<double> lgran = defineLGrans(j);
 			
-			if (maxampla == 0 && !TimeIsGood(maxampla))
-				cout << "ya ebal" << endl;
-			
 			for (size_t pind = 0; pind < 2; pind++) {
 				ztr[pind] = 12.0 / tan(theta[pind]) + z0[pind];
 				zin[pind] = aerRLowBord / tan(theta[pind]) + z0[pind];
@@ -1606,11 +1409,19 @@ void CalibrExp::raspr() {
 
 				if ((phi[pind] >= (float)(j - 1) * (2. * PI) / 9.) && (phi[pind] < (float)(j + 2) * (2. * PI) / 9.) && (TimeIsGood(maxampla)) &&/* (TimeIsGood(scount1)) && */ zoblInd != -1) {
 				//if (insideLGrans(phi[pind], &lgran[0]) && (TimeIsGood(maxampla))/* && (TimeIsGood(scount1)) */ && zoblInd != -1) {
+					htheta->Fill(theta[0]*180./3.14159);
+					htheta->Fill(theta[1]*180./3.14159);
+					if (ach[maxampla] < 0.2) {
+						htheta0->Fill(theta[0]*180./3.14159);
+						htheta0->Fill(theta[1]*180./3.14159);
+					}
 
 					//hprof[zoblInd][j]->Fill(phi[pind], (ach[maxampla] - ped[zoblInd][j]) * sin(theta[pind]));
 					//double fillAmplitude = recalculateZ(zin[pind], theta[pind], ach[maxampla], ach[scount1]);
 					double fillAmplitude = recalculateZ(zin[pind], theta[pind], ach[maxampla], 0, 1);
 					if (fillAmplitude != -1.0 && ach[maxampla] < achCut) {
+						if (insideLGrans(phi[pind], &lgran[0]))
+							hdist[zoblInd][j]->Fill(fillAmplitude);
 						hprof[zoblInd][j]->Fill(phi[pind], fillAmplitude);
 						if (zoblInd > 2 && zoblInd < 12)
 							hprofMean[j]->Fill(phi[pind], fillAmplitude);
@@ -1667,6 +1478,15 @@ void CalibrExp::raspr() {
 	}
 	MyFile->Close();
 
+	TFile* MyFileD = new TFile((workingDir + "distributions.root").c_str(), "RECREATE");
+	for (int m = 0; m < 14; m++) {
+		for (Int_t i = 0; i < 9; i++) {
+			sprintf(title, "zobl%d,sensor%d", m + 1, i + 1);
+			hdist[m][i]->Write(title);
+		}
+	}
+	MyFileD->Close();
+
 	TFile* MyFileEff = new TFile((workingDir + "profilesEff.root").c_str(), "RECREATE");
 	for (int m = 0; m < 14; m++) {
 		for (Int_t i = 0; i < 9; i++) {
@@ -1677,6 +1497,8 @@ void CalibrExp::raspr() {
 	for (Int_t i = 0; i < 9; i++) {
 		sprintf(title, "mean,sensor%d", i + 1);
 		hprofEffMean[i]->Write(title);
+		htheta0->Write("theta0");
+		htheta->Write("theta");
 	}
 	MyFileEff->Close();
 
@@ -1701,9 +1523,10 @@ void CalibrExp::raspr() {
 	cout << "done!" << endl;
 }
 
-//in modeling time and runs are always good, but phi distribution can be shifted, 
-//because of little statistics I only make 9 distributions for counters with mean by z amplitude in z[1]<z<z[13] to determine borders in fit
+
 void CalibrExp::rasprmod(bool transformPYN) {
+	//in modeling time and runs are always good, but phi distribution can be shifted, 
+	//because of little statistics I only make 9 distributions for counters with mean by z amplitude in z[1]<z<z[13] to determine borders in fit
 	readMeanshir();
 	readTrueGran1();
 	readMeanshirm();
@@ -1731,6 +1554,7 @@ void CalibrExp::rasprmod(bool transformPYN) {
 
 	//raspr po phi
 	TProfile* hprof[14][9];
+	TH1* hdist[14][9];
 	char name[20];
 	char title[100];
 	for (int m = 0; m < 14; m++) {
@@ -1738,6 +1562,9 @@ void CalibrExp::rasprmod(bool transformPYN) {
 			sprintf(name, "hprofmod%d", m*9 + j + 1);
 			sprintf(title, "zobl%d,counter%d;phi;ach", m + 1, j + 1);
 			hprof[m][j] = new TProfile(name, title, 200, (float)(j - 1.) * (2. * PI) / 9., (float)(j + 2.) * (2. * PI) / 9.);
+			sprintf(name, "hdist%d", 9 * m + j + 1);
+			sprintf(title, "zobl%d,sensor%d;ach", m + 1, j + 1);
+			hdist[m][j] = new TH1F(name, title, 250, -5, 45);
 		}
 	}
 	TProfile* hprofMean[9];
@@ -1759,8 +1586,11 @@ void CalibrExp::rasprmod(bool transformPYN) {
 	for (int i = 0; i < 9; i++) {
 		sprintf(name, "hprofeffZm%d", i + 1);
 		sprintf(title, "sensor%d;phi;ach", i + 1);
-		hprofEffMean[i] = new TProfile(name, title, 200, (float)(i - 0.5) * (2. * PI) / 9., (float)(i + 1.5) * (2. * PI) / 9.);
+		hprofEffMean[i] = new TProfile(name, title, 400, (float)(i - 1) * (2. * PI) / 9., (float)(i + 2) * (2. * PI) / 9.);
 	}
+
+	TH1* htheta0 = new TH1F("theta0", "theta;#theta", 100, 0, 180);
+	TH1* htheta = new TH1F("theta", "theta;#theta", 100, 0, 180);
 
 	int Count = 0, count1 = 0;
 	float ztr[2] = { 0.,0. };
@@ -1795,6 +1625,12 @@ void CalibrExp::rasprmod(bool transformPYN) {
 					//hprof[zoblInd][j]->Fill(phi[pind], ach[j] * sin(theta[pind]));
 					// 
 					//transform angle
+					htheta->Fill(theta[0]*180./3.14159);
+					htheta->Fill(theta[1]*180./3.14159);
+					if (ach[j] < 0.2) {
+						htheta0->Fill(theta[0]*180./3.14159);
+						htheta0->Fill(theta[1]*180./3.14159);
+					}
 
 					double fillPhiWhat = phi[pind];
 					double newPhi = 0;
@@ -1809,6 +1645,8 @@ void CalibrExp::rasprmod(bool transformPYN) {
 
 					double fillAmplitude = recalculateZ(zin[pind], theta[pind], ach[j], 0, 2);
 					if (fillAmplitude != -1.0 && ach[j] < achCut) {
+						if (insideLGrans(phi[pind], &lgran[0]))
+							hdist[zoblInd][j]->Fill(fillAmplitude);
 						hprof[zoblInd][j]->Fill(fillPhiWhat, fillAmplitude);
 						if (zoblInd > 2 && zoblInd < 12) {
 							hprofMean[j]->Fill(fillPhiWhat, fillAmplitude);
@@ -1856,6 +1694,15 @@ void CalibrExp::rasprmod(bool transformPYN) {
 	}
 	MyFile->Close();
 
+	TFile* MyFileD = new TFile((workingDir + "distributionsmod.root").c_str(), "RECREATE");
+	for (int m = 0; m < 14; m++) {
+		for (Int_t i = 0; i < 9; i++) {
+			sprintf(title, "zobl%d,sensor%d", m + 1, i + 1);
+			hdist[m][i]->Write(title);
+		}
+	}
+	MyFileD->Close();
+
 	TFile* MyFileEff = new TFile((workingDir + "profilesEffMod.root").c_str(), "RECREATE");
 	for (int m = 0; m < 14; m++) {
 		for (Int_t i = 0; i < 9; i++) {
@@ -1866,109 +1713,20 @@ void CalibrExp::rasprmod(bool transformPYN) {
 	for (Int_t i = 0; i < 9; i++) {
 		sprintf(title, "mean,sensor%d", i + 1);
 		hprofEffMean[i]->Write(title);
+		htheta0->Write("theta0");
+		htheta->Write("theta");
 	}
 	MyFileEff->Close();
 }
 
-//attempts to test registration efficiency of kaons
-void CalibrExp::dopeff() {
-	readGoodRuns();
-	TChain chain("t1");
-	chain.Add("/work/users/kladov/snd2k/R006-003/selected1/truekaons_**.root");
-	chain.SetBranchAddress("phi", &phi);
-	chain.SetBranchAddress("phis", &phis);
-	chain.SetBranchAddress("ach", &ach);
-	chain.SetBranchAddress("theta", &theta);
-	chain.SetBranchAddress("z0", &z0);
-	chain.SetBranchAddress("nch", &nch);
-	chain.SetBranchAddress("schr", &schr);
-	chain.SetBranchAddress("run", &run);
-	chain.SetBranchAddress("tchr", &tchr);
-	chain.SetBranchAddress("energy", &energy);
-	chain.SetBranchAddress("beam", &beam);
-	int scount = 0;
-	int scount1 = 0;
-
-	const Long64_t entries = chain.GetEntries();
-	cout << entries << endl;
-
-
-	TH1* histdpek = new TH1I("histdpek", "do_por_eff_kaon_exp;eff", 100, -1., 2.);
-
-	int Count = 0, count1 = 0;
-	float ztr = 0.;
-	float ztr1 = 0.;
-	int ph0 = 0;
-	int ph1 = 0;
-	int aka0 = 0;
-	int aka1 = 0;
-	/*&& \
-		(energy[0] / beam < 0.9) && (energy[1] / beam < 0.9)*/
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		ztr = 12.25 / tan(theta[0]) + z0[0];
-		ztr1 = 12.25 / tan(theta[1]) + z0[1];
-		if ((ztr > zobl[0]) && (ztr < zobl[14]) && (ztr1 > zobl[0]) && (ztr1 < zobl[14]) && (run > 27225) && RunIsGood(run) && (energy[0]/beam > 0.3) && (energy[1]/beam > 0.3) && (energy[0]/beam < 0.7) && (energy[1]/beam < 0.6)) {
-			scount = 0;
-			scount1 = 0;
-			aka0 = 10;
-			aka1 = 10;
-			schr[nch] = 0.;
-			for (int j = 0; j < 9; j++) {
-				if (j == 8) {
-					if (phi[0] < 1.)
-						phi[0] = phi[0] + 2. * PI;
-					if (phi[1] < 1.)
-						phi[1] = phi[1] + 2. * PI;
-					while (1 + scount < nch) { scount += 1; }
-				}
-				else
-					while (schr[1 + scount] > 0.5) { scount += 1; }
-				wichcounter1[j] = scount;
-
-				if ((((phi[0] > truegran1[j][0] + 0.03) && (phi[0] < truegran1[j][1] - 0.045)) || ((phi[0] > truegran1[j][1] + 0.045) && (phi[0] < truegran1[j][3] - 0.03))) && (sin(theta[0])>0.9)) {
-					ph0 = scount;
-					/*if ((schr[scount] < 0.5))
-						aka0 = 0;
-					else
-						aka0 = 1;*/
-					aka0 = (int)schr[1 + scount1];
-					//if (1+scount1>=nch)
-					//	cout << schr[1+scount1] << endl;
-				}
-				if ((((phi[1] > truegran1[j][0] + 0.03) && (phi[1] < truegran1[j][1] - 0.045)) || ((phi[1] > truegran1[j][1] + 0.045) && (phi[1] < truegran1[j][3] - 0.03))) && (sin(theta[1])>0.9)) {
-					ph1 = scount;
-					/*if ((schr[scount] < 0.5))
-						aka1 = 0;
-					else
-						aka1 = 1;*/
-					aka1 = (int)schr[1 + scount1];
-				}
-				scount += 1;
-				scount1 = scount;
-			}
-			//cout << aka0 << endl;
-			if (aka0 == 0 && aka1 == 0)
-				histdpek->Fill(0);
-			else if ((aka0 == 0 && aka1 == 1) || (aka1 == 0 && aka0 == 1))
-				histdpek->Fill(1);
-		}
-		Count += 1;
-		if (Count == 100000) {
-			count1 += 1;
-			cout << Form("obrabotano %d*100k entries", count1) << endl;
-			//cout << Form("obrabotano %d*10k entries	or %d%", count1, (count1*1000000)/entries) << endl;
-			Count = 0;
-		}
-	}
-	histdpek->Draw();
-	cout << "eff =	" << histdpek->GetMean(1) << endl;
-}
 
 void CalibrExp::ampltime() {
+	/// get profiles of eff and ach vs run, conditions as in raspr except "insideGrans" - region condition
 	readGoodRuns();
-	readTrueGran1();
 	readMeanshir();
+	readTrueGran1();
+	readMeanshirm();
+	readTruegran1m();
 	TChain chain("t1");
 
 	std::string chadds = dirSelectedExp + prefixSelectedExp + "**exp00**.root";
@@ -2005,7 +1763,7 @@ void CalibrExp::ampltime() {
 		if (bins.size() > 10)
 			ha[i] = new TProfile(name,title, bins.size()-2, &bins[0]); 
 		else
-			ha[i] = new TProfile(name,title, (MaximRun - MinimRun) / 10, MinimRun, MaximRun);  //2017: 4001, 25500, 29501    ; 2018: 6001, 29800, 35801       ; 2019: 38000-43001       ; 2020: 45040-46541
+			ha[i] = new TProfile(name,title, (MaximRun - MinimRun) / 10, MinimRun, MaximRun); 
 	}
 	TProfile* he[10];
 	for (int i = 0; i < 10; i++) {
@@ -2024,42 +1782,6 @@ void CalibrExp::ampltime() {
 		ampCounter[j] = new TH1F(name, title, 5000, -1, 499);
 	}
 
-	
-	TH1* phidistrgood = new TH1F("phidistrgood","phidistrgood", 100, (float)(7 - 1) * (2. * PI) / 9., (float)(7 + 2) * (2. * PI) / 9.);
-	TH1* phidistrzero = new TH1F("phidistrzero","phidistrzero", 100, (float)(7 - 1) * (2. * PI) / 9., (float)(7 + 2) * (2. * PI) / 9.);
-	TH1* thetadistrgood = new TH1F("thetadistrgood","thetadistrgood", 300, -15, 15);	
-	TH1* phidistrgood1 = new TH1F("phidistrgood1", "phidistrgood", 100, (float)(7 - 1) * (2. * PI) / 9., (float)(7 + 2) * (2. * PI) / 9.);
-	TH1* phidistrzero1 = new TH1F("phidistrzero1", "phidistrzero", 100, (float)(7 - 1) * (2. * PI) / 9., (float)(7 + 2) * (2. * PI) / 9.);
-	TH1* thetadistrgood1 = new TH1F("thetadistrgood1", "thetadistrgood", 300, -15, 15);
-
-	TH1* achsp = new TH1F("achsp","achsp",5000,-1,499);
-	TH1* achspGood = new TH1F("achspGood","achspGood",5000,-1,499);
-	TH1* achsp1 = new TH1F("achsp1", "achsp", 5000, -1, 499);
-	TH1* achspGood1 = new TH1F("achspGood1", "achspGood", 5000, -1, 499);
-	TH1* achsp2 = new TH1F("achsp2", "achsp", 5000, -1, 499);
-	TH1* achspGood2 = new TH1F("achspGood2", "achspGood", 5000, -1, 499);
-
-	TH1* tchrdistr = new TH1F("tchrdistr","tchrdistr", 3000, -1000, 2000);
-	TH1* tchrdistr1 = new TH1F("tchrdistr1","tchrdistr", 3000, -1000, 2000);
-	TH1* tchrdistr2 = new TH1F("tchrdistr2","tchrdistr", 3000, -1000, 2000);
-
-	TH1* thetadistrzero = new TH1F("thetadistrzero","thetadistrzero", 300, -15, 15);
-	TH1* thetadistrzero1 = new TH1F("thetadistrzero1", "thetadistrzero", 300, -15, 15);
-	TH1* thetadistrzero2 = new TH1F("thetadistrzero2", "thetadistrzero", 300, -15, 15);
-
-	TH1* achspZero = new TH1F("achspZero","achspGood",20000,-100,100);
-	TH1* achspZero1 = new TH1F("achspZero1","achspGood",20000,-100,100);
-	TH1* achspZero2 = new TH1F("achspZero2","achspGood",20000,-100,100);
-
-	TH1* ampspectre[9][14];
-	for (int j = 0; j < 9; j++) {
-		for (int i = 0; i < 14; i++) {
-			sprintf(name, "hist%d", 14 * j + i + 1);
-			sprintf(title, "amplitude spectrum, sensor%d, run range %d;ach", j + 1, i + 1);
-			ampspectre[j][i] = new TH1F(name, title, 5000, -1, 499);
-		}
-	}
-
 	//info ab ped integrated phi
 	TFile* MFileIP = new TFile((workingDir + "phintegr_pedest.root").c_str());
 	for (int j = 0; j < 14; j++) {
@@ -2073,115 +1795,52 @@ void CalibrExp::ampltime() {
 		TH1* hped1 = (TH1F*)MFileP->Get(Form("ped_forz,sensor%d", i + 1));
 		pedz[i] = hped1->GetMean(1);
 	}
+
 	vector<float> rench;
 	vector<float> eench;
 	float beamlast = 0.;
-	double lgran[4];
 	int Count = 0, count1 = 0;
 	float ztr[2] = { 0., 0.};
-	int maxampla = 0;
-	double maxach = 0.;
-	int runrange = 0;
 	for (int e = 0; e < entries; e++) {
 		chain.GetEntry(e);
-		ztr[0] = 12. / tan(theta[0]) + z0[0];
-		ztr[1] = 12. / tan(theta[1]) + z0[1];
-		schr[nch] = 0;
+
 		if (fabs(beam - beamlast) > 1.7) {  //when energy change
 			rench.push_back((float)run);
 			eench.push_back(beam);
 		}
 		beamlast = beam;
-		if (!RunIsGood(run)/* || (eventtime != 0)*/) {
+
+		schr[nch] = 0.;
+		ach[0] = 0;
+		if ((!RunIsGood(run))) {
 			continue;
 		}
 			
-		scount = 0;     //2017: 4001, 25500, 29501    ; 2018: 6001, 29800, 35801       ; 2019: 38000-43001       ; 2020: 45040-46541
+		scount = 0;
 		scount1 = 0;
 
 		for (int j = 0; j < 9; j++) {
-			//wichcounter1[j] = scount1;
-			if (j == 8) {
-				if (phi[0] < 1.)
-					phi[0] = phi[0] + 2. * PI;
-				if (phi[1] < 1.)
-					phi[1] = phi[1] + 2. * PI;
-			}
-			//else
+			if (j == 8) { shiftPhi2Pi(); }
 			while (schr[1 + scount] > 0.5) { scount += 1; }
 
-			lgran[0] = truegran1[j][0] + 3. * meanshir[j][0];// +0.03;
-			lgran[1] = truegran1[j][1] - 3. * meanshir[j][1];// -0.045;
-			lgran[2] = truegran1[j][1] + 3. * meanshir[j][1];// +0.045;
-			lgran[3] = truegran1[j][3] - 3. * meanshir[j][2];// -0.03;
+			int maxampla = findMaxAmpInd(scount1, scount, &ach[0]);
+			vector<double> lgran = defineLGrans(j);
 
-
-			maxach = 0.;
-			//find maxach and its index in amp signal array for this counter
-			for (int f = scount1; f <= scount; f++) {
-				if (ach[f] > maxach) {
-					maxach = ach[f];
-					maxampla = f;
-				}
-			}
-			//split into run ranges to check amplitude distributions
-			for (int i = 0; i < 14; i++) {
-				if ((run > MinimRun + i*(MaximRun-MinimRun)/14) && (run < MinimRun + (i+1)*(MaximRun - MinimRun) / 14))
-					runrange = i;
-			}
 			for (size_t pind = 0; pind < 2; pind++) {
-				int zoblInd = -1;
-				for (int k = 1; k < 13; k++) {
-					if ((ztr[pind] > zobl[k]) && (ztr[pind] < zobl[k + 1])) {
-						zoblInd = k;
-					}
-				}
-				if ((((phi[pind] > lgran[0]) && (phi[pind] < lgran[1])) || ((phi[pind] > lgran[2]) && (phi[pind] < lgran[3]))) && (TimeIsGood(maxampla)) && (TimeIsGood(scount1)) && zoblInd != -1 && ach[maxampla] < achCut) {
-					ach1[maxampla] = ach[maxampla]*sin(theta[pind]) - ach[scount1];
-					bool eff = (bool)schr[scount1 + 1] && ach1[maxampla]>0.2;
+				ztr[pind] = 12.0 / tan(theta[pind]) + z0[pind];
+				int zoblInd = findZOblInd(ztr[pind]);
+				if (insideLGrans(phi[pind], &lgran[0])  && (TimeIsGood(maxampla)) && zoblInd >= 2 && zoblInd <= 11 && ach[maxampla] < achCut ) {
+					
+					double ach1 = ach[maxampla]*sin(theta[pind]);
+					bool eff = (bool)schr[scount1 + 1] && ach1>0.2;
 					he[0]->Fill(run, (int)eff);
 					he[j + 1]->Fill(run, (int)eff);
-					ampspectre[j][runrange]->Fill(ach1[scount]);
-					if((schr[maxampla] > 0.5)) {
-						ha[0]->Fill(run, ach1[maxampla]);
-						ha[j + 1]->Fill(run, ach1[maxampla]);
 
-						/*if (run > 39420 && run < 39580 && j == 7) {
-								achsp->Fill(ach1[maxampla]);
-								tchrdistr->Fill(tchr[maxampla]);//scount1 for efficiency
-								if(schr[scount1+1]==0){
-									thetadistrzero->Fill(ztr[pind]);
-									achspZero->Fill(ach[scount1]);
-								}
-								if (ach1[maxampla] > 0.2)
-									achspGood->Fill(ach1[maxampla]);
-							}
-						if (run > 39000 && run < 39350 && j == 7){
-								achsp1->Fill(ach1[maxampla]);
-								tchrdistr1->Fill(tchr[maxampla]);
-								if(schr[scount1+1]==0){
-									thetadistrzero1->Fill(ztr[pind]);
-									achspZero1->Fill(ach[scount1]);
-								}
-								if (ach1[maxampla] > 0.2)
-									achspGood1->Fill(ach1[maxampla]);
-							}
-						if (run > 39650 && run < 39850 && j == 7) {
-								achsp2->Fill(ach1[maxampla]);
-								tchrdistr2->Fill(tchr[maxampla]);
-								if(schr[scount1+1]==0){
-									thetadistrzero2->Fill(ztr[pind]);
-									achspZero2->Fill(ach[scount1]);
-								}
-								if (ach1[maxampla] > 0.2)
-									achspGood2->Fill(ach1[maxampla]);
-							}*/
-						ampCounter[j]->Fill(ach1[maxampla] * sin(theta[pind]));
-					}
+					ha[0]->Fill(run, ach1);
+					ha[j + 1]->Fill(run, ach1);
+					ampCounter[j]->Fill(ach1);
 				}
 			}
-
-
 
 			scount += 1;
 			scount1 = scount;
@@ -2208,62 +1867,12 @@ void CalibrExp::ampltime() {
 	he[0]->Write("effvsrun");
 	MyFile->Close();
 
-	TFile* MyFile1 = new TFile((workingDir + "achspectrum.root").c_str(), "RECREATE");
-	for (int j = 0; j < 9; j++) {
-		for (int i = 0; i < 14; i++) {
-			sprintf(title, "aspecs%dr%d", j + 1, i + 1);
-			ampspectre[j][i]->Write(title);
-		}
-	}
-	MyFile1->Close();
-
-	/*TFile* MyFileT = new TFile("/work/users/kladov/snd2k/R007-002/tempSpectra.root", "RECREATE");
-	achsp->Write("achsp");
-	achspGood->Write("achspGood");
-	phidistrgood->Write("phidistrgood");
-	phidistrzero->Write("phidistrzero");
-	thetadistrgood->Write("thetadistrgood");
-	thetadistrzero->Write("thetadistrzero");
-	achsp1->Write("achsp1");
-	achspGood1->Write("achspGood1");
-	phidistrgood1->Write("phidistrgood1");
-	phidistrzero1->Write("phidistrzero1");
-	thetadistrgood1->Write("thetadistrgood1");
-	thetadistrzero1->Write("thetadistrzero1");
-	MyFileT->Close();*/
-	/*TFile* MyFileT = new TFile("/work/users/kladov/snd2k/R007-002/tempSpectra1.root", "RECREATE");
-	achsp->Write("achsp");
-	achspGood->Write("achspGood");
-	achsp1->Write("achsp1");
-	achspGood1->Write("achspGood1");
-	achsp2->Write("achsp2");
-	achspGood2->Write("achspGood2");*/
-	TFile* MyFileT = new TFile("/work/users/kladov/snd2k/R007-002/tempSpectra2.root", "RECREATE");
-	/*tchrdistr->Write("tchrdistr");
-	tchrdistr1->Write("tchrdistr1");
-	tchrdistr2->Write("tchrdistr2");
-	thetadistrzero->Write("thetadistrzero");
-	thetadistrzero1->Write("thetadistrzero1");
-	thetadistrzero2->Write("thetadistrzero2");
-	achspZero->Write("achspZero");
-	achspZero1->Write("achspZero1");
-	achspZero2->Write("achspZero2");*/
-	MyFileT->Close();
-
 	TFile* MyFile2 = new TFile((workingDir + "achSpectCount.root").c_str(), "RECREATE");
 	for (int j = 0; j < 9; j++) {
 		sprintf(title, "aspecs%d", j + 1);
 		ampCounter[j]->Write(title);
 	}
 	MyFile2->Close();
-	/*TF1* fn = new TF1("scphi", "[0]+[1]*x", 27225, 29500);
-	gr->Fit("scphi");
-	cout << "0:" << fn->GetParameter(0) << endl;
-	cout << "1:" << fn->GetParameter(1) << endl;
-	double a = fn->GetParameter(1);
-	double b = fn->GetParameter(0);
-	cout << a*29500+b << endl;
-	cout << "done!" << endl;*/
 
 	ofstream fout;
 	fout.open((workingDir + "ench.cpp").c_str());
@@ -2276,77 +1885,9 @@ void CalibrExp::ampltime() {
 	fout.close();
 }
 
-void achspectresravn(){
-	TFile* Myf = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2019/achspectrum.root");
-	TH1* he0 = (TH1F*)Myf->Get(Form("aspecs%dr%d", 5, 0 + 1));
-	he0->SetLineColor(1);
-	he0->DrawNormalized("", 1);
-	cout << he0->GetMean(1) << endl;
-	for (int i = 1; i < 6; i++) {
-		TH1* he = (TH1F*)Myf->Get(Form("aspecs%dr%d", 5, i + 1));
-		he->SetLineColor(i+1);
-		he->DrawNormalized("same", 1);
-		cout << he->GetMean(1) << endl;
-		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-		c->Update();
-		cin.get();
-	}
-}
-
-vector<int> CalibrExp::getCalibRuns(string calName, bool read) {
-	readMinMaxRun();
-	TString cmd;
-	cmd = "clbixlist " + calName + " CURRENT > " + calName + ".list";
-	if (read) gSystem->Exec(cmd.Data());
-	//cmd = "cat /work/users/kladov/snd2k/R007-002/" + calName + ".list | sed '/^-/ d' | sed 's#^.*\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\).*$#\\1#'";
-	cmd = "cat /work/users/kladov/snd2k/R007-002/" + calName + ".list | sed '/^-/ d' ";
-	TString s = gSystem->GetFromPipe(cmd.Data());
-
-	vector<TString> ans;
-	TString elem;
-	Ssiz_t from0 = 0;
-	while (s.Tokenize(elem, from0, "\n")) {
-		ans.push_back(elem);
-	}
-	TString str = "a";
-	TString str1 = "b";
-	vector<int> output;
-	unsigned int vector_size = ans.size();
-	if (vector_size != 0) {
-		for (int i = 1; i < vector_size - 1; i++) {
-			//cout << ans[i] << endl;
-			str = ans[i].Copy();
-			str1 = ans[i].Copy();
-			TString tok;
-			TString tok1;
-			Ssiz_t from = 0;
-			Ssiz_t from1 = 0;
-			vector<TString> tokens;
-			vector<TString> tokens1;
-			//while (str.Tokenize(tok, from, "[_-]")) {
-			while (str.Tokenize(tok, from, "[ ]")) {
-				//cout << tok << endl;
-				tokens.push_back(tok);
-			}
-			while (str1.Tokenize(tok1, from1, "[	]")) {
-				//cout << tok1 << endl;
-				tokens1.push_back(tok1);
-			}
-			const char* a0 = (const char*)tokens[0];
-			int a = atoi(a0);
-			const char* b0 = (const char*)tokens[1];
-			int b = atoi(b0);
-			//cout << a << endl;
-			if (a < MaximRun && a > MinimRun)
-				output.push_back(a);
-		}
-	}
-	else
-		output.clear();
-	return output;
-}
 
 void CalibrExp::drawamptime() {
+	/// derive new bin sequence from mean ach vs run, draw, write coeffs in .dat and profiles in .root
 	readMinMaxRun();
 	double re, ee;
 	vector<float> rench;
@@ -2355,18 +1896,18 @@ void CalibrExp::drawamptime() {
 	fin.open((workingDir + "ench.cpp").c_str());
 	{
 		int j = 0;
-		while (fin >> re >> ee){
+		while (fin >> re >> ee) {
 			rench.push_back(re);
 			cout << re << "	";
-			eench.push_back(ee/100);
+			eench.push_back(ee / 100);
 			cout << ee / 100 << endl;
 			j++;
 		}
 	}
 	fin.close();
 
-	TFile* MyFile = new TFile((workingDir + "achvsrun.root").c_str());
-	TFile* MyFile2 = new TFile((workingDir + "achSpectCount.root").c_str());
+	TFile* MyFile = new TFile((workingDir + "achvsrun.root").c_str());       // profiles vs run
+	TFile* MyFile2 = new TFile((workingDir + "achSpectCount.root").c_str()); // hists for mean
 
 	//new bins finding with usage of average (by counters) ampl-time graph + filling file runAmp with amplitudes vs run
 	TProfile* ha0 = (TProfile*)MyFile->Get("amplitudevsrun");
@@ -2397,86 +1938,6 @@ void CalibrExp::drawamptime() {
 	}
 	foutra0.close();
 
-	//calculate consistency with drops of amplitude
-	//naimvg, 
-	/*vector<string> calibnames;
-	ifstream in1;
-	in1.open("caliblist.dat");
-	string calname;
-	while (in1 >> calname)
-		calibnames.push_back(calname);
-	in1.close();
-	vector< vector<int> > calibsBorders;
-	vector<int> allcalibruns;
-	vector< vector<double> > allcalibrunslist;
-	vector<int> dropCoincidense;
-	vector<int> dropCoincidenseE;
-	//calibsBorders.push_back(getCalibRuns("naimvg",false));
-	//calibsBorders.push_back(getCalibRuns("dcpagen",false));
-	for (size_t k = 0; k < calibnames.size(); k++) {
-		TString temptstr = "ls " + calibnames[k] + ".list";
-		TString s = gSystem->GetFromPipe(temptstr.Data());
-		cout << s << endl;
-		cout << calibnames[k] + ".list" << endl;
-		if (s == calibnames[k] + ".list") {
-			calibsBorders.push_back(getCalibRuns(calibnames[k], false));
-			cout << "a" << endl;
-		}
-		else
-			calibsBorders.push_back(getCalibRuns(calibnames[k], true));
-		allcalibruns.push_back(calibsBorders[k].size());
-		dropCoincidense.push_back(0);
-		dropCoincidenseE.push_back(0);
-		vector<double> tempvd;
-		tempvd.push_back(2);
-		allcalibrunslist.push_back(tempvd);
-		allcalibrunslist[k].clear();
-		for (size_t j = 0; j < calibsBorders[k].size(); j++) {
-			for (int i = 1; i < Nbins + 1; i++)
-				if (ha0->GetBinCenter(i - 1) < calibsBorders[k][j] && ha0->GetBinCenter(i) >= calibsBorders[k][j])
-					if ((1.5 * (ha0->GetBinError(i - 1) + ha0->GetBinError(i)) < fabs(ha0->GetBinContent(i) - ha0->GetBinContent(i - 1))) && (ha0->GetBinContent(i - 1) > 2 && ha0->GetBinContent(i) > 2))
-						dropCoincidense[k] += 1;
-			for (int i = 1; i < Nbinse + 1; i++)
-				if (he0->GetBinCenter(i - 1) < calibsBorders[k][j] && he0->GetBinCenter(i) >= calibsBorders[k][j])
-					//if ((2 * (he0->GetBinError(i - 1) + he0->GetBinError(i)) < fabs(he0->GetBinContent(i) - he0->GetBinContent(i - 1))) && (he0->GetBinContent(i - 1) > 0.5 && he0->GetBinContent(i) > 0.5)) {
-					if ((0.003 < fabs(he0->GetBinContent(i) - he0->GetBinContent(i - 1))) && (he0->GetBinContent(i - 1) > 0.9 && he0->GetBinContent(i) > 0.9)) {
-						dropCoincidenseE[k] += 1;
-						allcalibrunslist[k].push_back(calibsBorders[k][j]);
-					}
-		}
-	}
-	int alldrops = 0;
-	int alldropsE = 0;
-	for (int i = 1; i < Nbins + 1; i++)
-		if ((1.5*(ha0->GetBinError(i - 1) + ha0->GetBinError(i)) < fabs(ha0->GetBinContent(i) - ha0->GetBinContent(i - 1))) && (ha0->GetBinContent(i - 1) > 2 && ha0->GetBinContent(i) > 2))
-			alldrops += 1;
-	for (int i = 1; i < Nbinse + 1; i++)
-		//if ((2 * (he0->GetBinError(i - 1) + he0->GetBinError(i)) < fabs(he0->GetBinContent(i) - he0->GetBinContent(i - 1))) && (he0->GetBinContent(i - 1) > 0.5 && he0->GetBinContent(i) > 0.5))
-		if ((0.003 < fabs(he0->GetBinContent(i) - he0->GetBinContent(i - 1))) && (he0->GetBinContent(i - 1) > 0.9 && he0->GetBinContent(i) > 0.9))
-			alldropsE += 1;
-	cout << "all drops	" << alldrops << endl;
-	for (size_t k = 0; k < calibnames.size(); k++)
-		cout << calibnames[k] << "		" << allcalibruns[k] << "	" << dropCoincidense[k] << endl;
-	cout << endl << endl;
-	cout << "all dropsE	" << alldropsE << endl;
-	for (size_t k = 0; k < calibnames.size(); k++)
-		cout << calibnames[k] << "		" << allcalibruns[k] << "	" << dropCoincidenseE[k] << endl;
-
-	he0->Draw();
-	he0->GetYaxis()->SetRangeUser(0.9,1.0);
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	vector<TLine*> line1;
-	for (size_t k = 0; k < calibnames.size(); k++) {
-		for (size_t i = 0; i < allcalibrunslist[k].size(); i++) {
-			line1.push_back(new TLine(allcalibrunslist[k][i], 0, allcalibrunslist[k][i], 1.1 * he0->GetMaximum()));
-			line1.back()->SetLineColor((2+k)%5);
-			line1.back()->Draw();
-			c->Update();
-		}
-	}*/
-
-
 	//get profiles (1-9) and hists from files
 	TProfile* ha[9];
 	TProfile* he[9];
@@ -2495,18 +1956,17 @@ void CalibrExp::drawamptime() {
 		foutra << Form("	count%d", k);
 	}
 	foutra << endl;
-	for (size_t j = 1; j < Nbins + 1; j++) {
+	for (size_t j = 2; j < Nbins + 1; j++) {
 		//cout << ha[0]->GetBinCenter(j) << "	" << ha[0]->GetBinWidth(j);
 		foutra << ha[0]->GetBinCenter(j) << "	" << ha[0]->GetBinWidth(j);
 		for (int k = 0; k < 9; k++) {
-			//cout << "	" << ha[k]->GetBinContent(j) / meanAmp[k];
 			foutra << "	" << ha[k]->GetBinContent(j) / meanAmp[k];
 		}
 		foutra << endl;
 	}
 	foutra.close();
 
-
+	TFile* MyFile1 = new TFile((workingDir + "amptime.root").c_str(), "RECREATE");
 
 	//drawing
 	for (int k = 0; k < 9; k++) {
@@ -2515,11 +1975,11 @@ void CalibrExp::drawamptime() {
 		bigE = 0;
 		for (size_t i = 1; i < Nbins + 1; i++) {
 			ampl.push_back(ha[k]->GetBinContent(i));
-			effic.push_back(100*he[k]->GetBinContent(i));
+			effic.push_back(100 * he[k]->GetBinContent(i));
 			date.push_back(ha[k]->GetBinCenter(i));
 			dampl.push_back(ha[k]->GetBinError(i));
-			deffic.push_back(100*he[k]->GetBinError(i));
-			ddate.push_back(ha[k]->GetBinWidth(i)/2.);
+			deffic.push_back(100 * he[k]->GetBinError(i));
+			ddate.push_back(ha[k]->GetBinWidth(i) / 2.);
 		}
 		int numbb = ampl.size();
 		//ha[k]->Draw();
@@ -2536,12 +1996,15 @@ void CalibrExp::drawamptime() {
 		gr1->SetMarkerSize(0.5);
 		gr2->SetMarkerStyle(21);
 		gr1->SetMarkerStyle(21);
-		gr1->GetYaxis()->SetRangeUser(85,100);
-		gr->GetYaxis()->SetRangeUser(0.0,7);
+		gr1->GetYaxis()->SetRangeUser(85, 100);
+		gr->GetYaxis()->SetRangeUser(0.0, 7);
 		gr->SetLineColor(3);
 		gr2->SetLineColor(4);
 		gr1->SetLineColor(2);
 		gr->Draw("AP");
+
+		gr->Write(Form("amp profile sensor%d", k + 1));
+		
 		//gr2->Draw("same");
 		//gr1->Draw("same");
 		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
@@ -2552,11 +2015,14 @@ void CalibrExp::drawamptime() {
 		cout << "done!" << endl;
 		cin.get();
 	}
-	MyFile->Close();
+	MyFile1->Close();
 
+	MyFile->Close();
 }
 
+
 void CalibrExp::timespectra() {
+	/// get time distributions for maximum ach, for pre-max and 0-s, with conditions as in raspr
 	readGoodRuns();
 	readMeanshir();
 	readTrueGran1();
@@ -2591,63 +2057,46 @@ void CalibrExp::timespectra() {
 	int predmaxampla = 0;
 	double maxach = 0.;
 	double predmaxach = 0.;
-	double lgran[4];
 	for (int e = 0; e < entries; e++) {
 		chain.GetEntry(e);
-		ztr[0] = 12.0 / tan(theta[0]) + z0[0];
-		ztr[1] = 12.0 / tan(theta[1]) + z0[1];
 		schr[nch] = 0.;
+		ach[0] = 0;
 		if (!RunIsGood(run)) {
 			continue;
 		}
 		scount = 0;
 		scount1 = 0;
 		for (int j = 0; j < 9; j++) {
-			if (j == 8) {
-				if (phi[0] < 1.)
-					phi[0] = phi[0] + 2. * PI;
-				if (phi[1] < 1.)
-					phi[1] = phi[1] + 2. * PI;
-			}
+			if (j == 8) { shiftPhi2Pi(); }
 			while (schr[1 + scount] > 0.5) { scount += 1; }
 
-			lgran[0] = truegran1[j][0] + 3. * meanshir[j][0];
-			lgran[1] = truegran1[j][1] - 3. * meanshir[j][1];// -0.045;
-			lgran[2] = truegran1[j][1] + 3. * meanshir[j][1];// +0.045;
-			lgran[3] = truegran1[j][3] - 3. * meanshir[j][2];// -0.03;
+			int maxampla = findMaxAmpInd(scount1, scount, &ach[0]);
+			vector<double> lgran = defineLGrans(j);
 
 			predmaxach = -1.;
-			maxach = -100.;
 			predmaxampla = scount1;
 			for (int f = scount1; f <= scount; f++) {
-				if (ach[f] > maxach) {
-					maxach = ach[f];
-					maxampla = f;
-				}
-				if (ach[f] < maxach-0.0001 && ach[f] > predmaxach) {
+				if (ach[f] < ach[maxampla] - 0.0001 && ach[f] > predmaxach) {
 					predmaxach = ach[f];
 					predmaxampla = f;
 				}
 			}
+
 			for (size_t partI = 0; partI < 2; partI++) {
+				ztr[partI] = 12.0 / tan(theta[partI]) + z0[partI];
+				int zoblInd = findZOblInd(ztr[partI]);
 				//scount 1 is always 0, so if we have some signal other than 0 
-				if (scount - scount1 > 0.5 && (ztr[partI] > zobl[1]) && (ztr[partI] < zobl[13])) {
-					for (int a = maxampla; a >= maxampla; a--) {
-						if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (schr[a] > 0.5))
-							histo->Fill(tchr[a]);
-							//histo->Fill(tchr[scount1]);
-					}
+				if (scount - scount1 > 0.5 && (zoblInd > 1) && (zoblInd < 12)) {
+					if (insideLGrans(phi[partI], &lgran[0]) && (schr[maxampla] > 0.5))
+						histo->Fill(tchr[maxampla]);
 				}
 				// if it for example 0 1 2 0 - second by amplitude signal exists
 				if (scount - scount1 > 1.5 && (ztr[partI] > zobl[1]) && (ztr[partI] < zobl[13])) {
-					for (int a = predmaxampla; a >= predmaxampla; a--) {
-						if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (schr[a] > 0.5))
-							histi->Fill(tchr[a]);
-					}
+					if (insideLGrans(phi[partI], &lgran[0]) && (schr[predmaxampla] > 0.5))
+						histi->Fill(tchr[predmaxampla]);
 				}
 				if ((ztr[partI] > zobl[1]) && (ztr[partI] < zobl[13])) {
-					//if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (ach[scount1] > 0.2) && maxampla == scount1)
-					if ((((phi[partI] > lgran[0]) && (phi[partI] < lgran[1])) || ((phi[partI] > lgran[2]) && (phi[partI] < lgran[3]))) && (ach[maxampla] < 2000))
+					if (insideLGrans(phi[partI], &lgran[0]) && (ach[maxampla] < 2000))
 						histp->Fill(tchr[scount1]);
 				}
 			}
@@ -2681,6 +2130,7 @@ void CalibrExp::timespectra() {
 	//MyFile->Write();
 	MyFile->Close();
 }
+
 
 void CalibrExp::drawtsp() {
 
@@ -2738,852 +2188,6 @@ void CalibrExp::drawtsp() {
 	hsp->Draw();
 	c->Update();
 
-}
-
-void CalibrExp::enpoint() {
-	readGoodRuns();
-	TChain chain("t1");
-
-	std::string chadds = dirSelectedExp + "/true1__**exp00**.root";
-	chain.Add(chadds.c_str());
-
-	//chain.Add("/work/users/kladov/snd2k/R006-003/selected2018/true1__**exp00**.root");
-	const Long64_t entries = chain.GetEntries();
-	chain.SetBranchAddress("run", &run);
-	chain.SetBranchAddress("beam", &beam);
-	TH1* histenpo = new TH1F("enpo", "enpo", 800, 300, 1100);
-
-	EntriesInRun mass1[MaximRun - MinimRun];
-	for (int i = 0; i < MaximRun - MinimRun; i++) {
-		mass1[i].run = i+ MinimRun;
-		mass1[i].energy = 0;
-		mass1[i].entries = 0;
-	}
-	int entrall = 0;
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		//histo->Fill(run);
-		if ((run > 26814)/* && RunIsGood(run)*/) {
-			histenpo->Fill(beam);
-			mass1[run - MinimRun].run = run;
-			if (mass1[run - MinimRun].energy > 1 && ((mass1[run - MinimRun].energy < beam-0.5) || (mass1[run - MinimRun].energy > beam+0.5)))
-				cout << "energy is not the same in run " << run << endl;
-			mass1[run - MinimRun].energy = beam;
-			mass1[run - MinimRun].entries += 1;
-			entrall += 1;
-		}
-	}
-	vector<double> enpoint[2];
-	for (int i = 0; i < 800; i++) {
-		if (histenpo->GetBinContent(i) > 0) {
-			enpoint[0].push_back(i + 299);
-			enpoint[1].push_back(histenpo->GetBinContent(i));
-		}
-	}
-	for (size_t i = 0; i < enpoint[0].size(); i++)
-		cout << enpoint[0][i] << "	" << (((int)(enpoint[1][i] * (6000000.0 / entrall)))/10000)*10000 << endl;
-	ofstream fout;
-	fout.open("/work/users/kladov/snd2k/R006-003/maindir/2018/entriesinrune.txt");
-	int SumEntrForMod = 0;
-	for (int i = 0; i < MaximRun - MinimRun; i++) {
-		if ((mass1[i].entries * (2000000.0 / entrall)) >= 1) {
-			fout << mass1[i].run << "	";
-			fout << mass1[i].energy << "	";
-			fout << (int)(mass1[i].entries * (2000000.0 / entrall)) << endl;
-			SumEntrForMod += (int)(mass1[i].entries * (2000000.0 / entrall));
-		}
-	}
-	cout << SumEntrForMod << endl;
-	fout.close();
-}
-
-void CalibrExp::nvsphiorig() {
-	TChain chain("t1");
-	//chain.Add("/work/users/kladov/snd2k/R006-003/selected1/true1_**exp00**.root");
-	chain.Add("/work/users/kladov/snd2k/R006-003/selected2018/true1__**exp00**.root");
-
-	chain.SetBranchAddress("phi", &phi);
-	chain.SetBranchAddress("phis", &phis);
-	chain.SetBranchAddress("run", &run);
-	chain.SetBranchAddress("ach", &ach);
-	chain.SetBranchAddress("theta", &theta);
-	chain.SetBranchAddress("z0", &z0);
-	chain.SetBranchAddress("nch", &nch);
-	chain.SetBranchAddress("schr", &schr);
-	chain.SetBranchAddress("tchr", &tchr);
-	chain.SetBranchAddress("event", &eventn);
-	chain.SetBranchAddress("region", &region);
-	chain.SetBranchAddress("eventtime", &eventtime);
-	const Long64_t entries = chain.GetEntries();
-	cout << entries << endl;
-
-	char name[20];
-	char title[100];
-	TH1* hii[9][4];
-
-	for (int l = 0; l < 4; l++) {
-		for (int i = 0; i < 9; i++) {
-			sprintf(name, "histog%d", 9 * l + i + 1);
-			sprintf(title, "#phi,sensor%d,gran%d;#phi", i + 1,l+1);
-			hii[i][l] = new TH1F(name, title, 1200, truegran1[i][l] - 1.3, truegran1[i][l] + 1.3);
-		}
-	}
-	TH1* hii1 = new TH1F("profile1", "zasel;#phi", 6300, 0. - 0.01, 2. * PI + 0.01);
-	ofstream fout3;
-	fout3.open((workingDir + "bad_entries_87_104.txt").c_str());
-	fout3 << "run" << "	" << "event" << endl;
-	float ztr = 0.;
-	float ztr1 = 0.;
-	double lgran[4];
-	int maxampla = 0;
-	double maxach = 0.;
-	int scount = 0;
-	int scount1 = 0;
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		ztr = 12.0 / tan(theta[0]) + z0[0];
-		ztr1 = 12.0 / tan(theta[1]) + z0[1];
-		schr[nch] = 0.;
-		scount = 0;
-		scount1 = 0;
-		for (int i = 0; i < 9; i++) {
-			if (i == 8) {
-				if (phi[0] < 1.)
-					phi[0] = phi[0] + 2. * PI;
-				if (phi[1] < 1.)
-					phi[1] = phi[1] + 2. * PI;
-				while (1 + scount < nch) { scount += 1; }
-			}
-			else
-				while (schr[1 + scount] > 0.5) { scount += 1; }
-			maxach = 0.;
-			for (int f = scount1; f <= scount; f++) {
-				if (ach[f] > maxach) {
-					maxach = ach[f];
-					maxampla = f;
-				}
-			}
-			lgran[0] = truegran1[i][0]-0.05;// +0.03;
-			lgran[1] = truegran1[i][1];// -0.045;
-			lgran[2] = truegran1[i][1];// +0.045;
-			lgran[3] = truegran1[i][3]+0.05;// -0.03;
-			if (((phi[0] > lgran[0]) && (phi[0] < lgran[3]))){
-				if ((ztr > zobl[0] && ztr < zobl[14]) && ((schr[maxampla] < 0.5) /*|| ((schr[maxampla] > 0.5)*/ && /*(tchr[maxampla] > 87) && *//*(tchr[maxampla] < 110) &&*/ (eventtime == 0) && (run>33000) && (run < 34000))) {
-					for (int l = 0; l < 4; l++) {
-						hii[i][l]->Fill(phi[0]);
-					}
-					hii1->Fill(phi[0]);
-					//fout3 << run << "	" << eventn << endl;
-				}
-			}
-			if (((phi[1] > lgran[0]) && (phi[1] < lgran[3]))) {
-				if ((ztr1 > zobl[0] && ztr1 < zobl[14]) && ((schr[maxampla] < 0.5)/* || ((schr[maxampla] > 0.5)*/ &&/*(tchr[maxampla] > 87) && *//*(tchr[maxampla] < 110) && */(eventtime == 0) && (run > 33000) && (run < 34000))) {
-					for (int l = 0; l < 4; l++) {
-						hii[i][l]->Fill(phi[1]);
-					}
-					hii1->Fill(phi[1]);
-					//fout3 << run << "	" << eventn << endl;
-				}
-			}
-			scount += 1;
-			scount1 = scount;
-		}
-	}
-	fout3.close();
-	TFile* MyFile = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2018/nvsphio.root", "RECREATE");
-	for (int l = 0; l < 4; l++) {
-		for (int a = 0; a < 9; a++) {
-			sprintf(title, "sensor%d,gran%d", a + 1, l+1);
-			hii[a][l]->Write(title);
-		}
-	}
-	hii1->Write("zasel");
-	MyFile->Close();
-	cout << "done!" << endl;
-}
-
-void drawnvsphi() {
-	//TFile* f = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2018/fittedprofiles.root");
-	//TFile* MyFile = new TFile("/work/users/kladov/snd2k/R006-003/maindir/nvsphi.root");
-	TFile* MyFile = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2018/nvsphio.root");
-
-
-	for (int i = 0; i < 1; i++) {
-		//TH1* h = (TH1*)MyFile->Get(Form("zobl%d,sensor%d", i + 1, 6));
-		TH1* h = (TH1*)MyFile->Get(Form("zasel"));
-		//TH1* h = (TH1*)MyFile->Get(Form("sensor%d", 6));
-		//h->GetYaxis()->SetRangeUser(0., 5.);
-		h->SetLineColor(i + 1);
-		h->Draw();
-		//h->DrawNormalized("", 2500);
-		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-		c->Update();
-		cin.get();
-	}
-
-	/*TDirectory* d1 = (TDirectory*)f->Get(Form("zobl%d,sensor8", 2));
-	TF1* tf1 = (TF1*)d1->Get(Form("zobl%d,sensor%d,full", 2, 8));
-	//TProfile *tf1 = (TProfile*)f->Get(Form("zobl%d,sensor%d", 2, 8));
-	tf1->SetLineColor(2);
-	tf1->Draw("same");
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();*/
-
-}
-
-void CalibrExp::phiminusphis() {
-	TChain chain("t1");
-	//chain.Add("/work/users/kladov/snd2k/R006-003/selected1/true1_**exp00**.root");
-	chain.Add("/work/users/kladov/snd2k/R006-003/selected2020/true1__**exp00**.root");
-
-	chain.SetBranchAddress("phi", &phi);
-	chain.SetBranchAddress("phis", &phis);
-	chain.SetBranchAddress("run", &run);
-	chain.SetBranchAddress("tchr", &tchr);
-	chain.SetBranchAddress("ach", &ach);
-	chain.SetBranchAddress("schr", &schr);
-	chain.SetBranchAddress("theta", &theta);
-	chain.SetBranchAddress("z0", &z0);
-	chain.SetBranchAddress("nch", &nch);
-	chain.SetBranchAddress("eventtime", &eventtime);
-
-	chain.SetBranchAddress("d2phi", &d2phi);
-	chain.SetBranchAddress("dphirho", &dphirho);
-	chain.SetBranchAddress("d2rho", &d2rho);
-	chain.SetBranchAddress("d2z0", &d2z0);
-	chain.SetBranchAddress("d2cosTh", &d2cosTh);
-	chain.SetBranchAddress("dz0cosTh", &dz0cosTh);
-
-	chain.SetBranchAddress("Dtheta", &Dtheta);
-	chain.SetBranchAddress("Dphi", &Dphi);
-	chain.SetBranchAddress("energyerr", &energyerr);
-
-	const Long64_t entries = chain.GetEntries();
-	cout << entries << endl;
-
-	char name[20];
-	char title[100];
-
-	sprintf(name, "profile");
-	sprintf(title, "#phi-phis;#phi");
-	TProfile* hii = new TProfile(name, title, 6300, 0.-0.01, 2.*PI+0.01);
-	TProfile* hii1 = new TProfile("profile1", "#phi-phis1;#phi", 6300, 0.-0.01, 2.*PI+0.01);
-
-	//info ab phi-phis
-	/*TFile* f11 = new TFile((workingDir + "phiminphis.root").c_str());
-	TProfile* pphi = (TProfile*)f11->Get("phi-phis_vs_phis");*/
-
-	/*TFile* f12 = new TFile((workingDir + "phiminphisphi0.root").c_str());
-	TProfile* pphi0 = (TProfile*)f12->Get("phi-phis_vs_phi");*/
-	int scount = 0;
-	int scount1 = 0;
-	int smplc = 1;
-	float ztr = 0.;
-	float ztr1 = 0.;
-	int maxampla = 0;
-	double maxach = 0.;
-	double lgran[4];
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		ztr = 12.0 / tan(theta[0]) + z0[0];
-		ztr1 = 12.0 / tan(theta[1]) + z0[1];
-		scount = 0;
-		scount1 = 0;
-		schr[nch] = 0.;
-		for (int j = 0; j < 9; j++) {
-			if (j == 8) {
-				if (phi[0] < 1.)
-					phi[0] = phi[0] + 2. * PI;
-				if (phi[1] < 1.)
-					phi[1] = phi[1] + 2. * PI;
-				while (1 + scount < nch) { scount += 1; }
-			}
-			else
-				while (schr[1 + scount] > 0.5) { scount += 1; }
-			maxach = 0.;
-			for (int f = scount1; f <= scount; f++) {
-				if (ach[f] > maxach) {
-					maxach = ach[f];
-					maxampla = f;
-				}
-			}
-			lgran[0] = truegran1[j][0] - 0.05;// +0.03;
-			lgran[1] = truegran1[j][1];// -0.045;
-			lgran[2] = truegran1[j][1];// +0.045;
-			lgran[3] = truegran1[j][3] + 0.05;// -0.03;
-			if (((phi[0] > lgran[0]) && (phi[0] < lgran[3]))) {
-				//if (fabs((phi[0] - phis[0]) - (pphi->GetBinContent(pphi->FindBin(phis[0])))) < 0.01)
-				//if ((d2phi[0] < 0.00003) && (dphirho[0] < 0.00012) && (d2rho[0] < 0.0007) && (d2z0[0] < 0.1) && (d2cosTh[0] < 0.015) && (dz0cosTh[0] > -0.01) && (energyerr[0] > 31.3 && energyerr[0] < 32.9) && (Dphi[0] < 0.02)) {
-				if (ztr > zobl[0] && ztr < zobl[14]) {
-					if (/*(schr[maxampla] < 0.5) || ((schr[maxampla] > 0.5) && */(/*(tchr[maxampla] > 87) && (tchr[maxampla] < 104) && */(eventtime == 0))) {
-						hii->Fill(phi[0], phi[0] - phis[0]);
-						smplc += 1;
-					}
-				}
-				//}
-			}
-			hii1->Fill(phi[0], phi[0] - phis[0]);
-			if (((phi[1] > lgran[0]) && (phi[1] < lgran[3]))) {
-				//if (fabs((phi[1] - phis[1]) - (pphi->GetBinContent(pphi->FindBin(phis[1])))) < 0.01)
-				//if ((d2phi[1] < 0.00003) && (dphirho[1] < 0.00012) && (d2rho[1] < 0.0007) && (d2z0[1] < 0.1) && (d2cosTh[1] < 0.015) && (dz0cosTh[1] > -0.01) && (energyerr[1] > 31.3 && energyerr[1] < 32.9) && (Dphi[1] < 0.02)){
-				if ((ztr1 > zobl[0] && ztr1 < zobl[14]) && (/*(schr[maxampla] < 0.5) || ((schr[maxampla] > 0.5) && */(/*(tchr[maxampla] > 87) && (tchr[maxampla] < 104) && */(eventtime == 0)))) {
-					hii->Fill(phi[1], phi[1] - phis[1]);
-				}
-				//}
-			}
-			hii1->Fill(phi[1], phi[1] - phis[1]);
-			//if (smplc / 100000 == 0)
-				//cout << smplc << endl;
-			scount += 1;
-			scount1 = scount;
-		}
-	}
-
-	/*double binnu[6300];
-	double phimphis[6300];
-	for (int i = 0; i < 6300; i++) {
-		binnu[i] = pphi0->GetBinCenter(i+1);
-		phimphis[i] = pphi0->GetBinContent(i+1);
-	}
-	for (int j = 0; j < 100; j++) {
-		for (int i = 1; i < 6299; i++) {
-			if (fabs(phimphis[i - 1] - phimphis[i + 1]) > 0.002)
-				phimphis[i] = (phimphis[i + 1] + phimphis[i - 1]) / 2.;
-		}
-	}
-	phimphis[0] = 0.;
-	phimphis[6299] = 0.;
-	TGraph* gr1 = new TGraph(6300, binnu, phimphis);
-	gr1->SetLineColor(2);*/
-
-	hii->Draw();
-	hii1->SetLineColor(2);
-	hii1->Draw("same");
-	TFile* MyFile = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2020/phiminphisphi0.root", "RECREATE");
-	sprintf(title, "phi-phis_vs_phi");
-	hii->Write(title);
-	//pphi0->Draw();
-	//gr1->Draw("same");
-	MyFile->Close();
-	cout << "done!" << endl;
-}
-
-void draweffspectre() {
-	TFile* f = new TFile("/work/users/kladov/snd2k/R006-003/maindir/runsi.root");
-	TIter next(f->GetListOfKeys());
-	TKey* key;
-	int counterr = 0;
-	while ((key = (TKey*)next()) && counterr< 1) {
-		TString name(key->GetName());
-		TString type = "sensor";
-		if (name.Contains("spec")) {
-			counterr +=1;
-			//cin.get();
-			int counter;
-			sscanf(name.Data(), "sens%d_eff_spec", &counter);
-
-			TH1F* h_amp_phi = (TH1F*)f->Get(Form("sens%d_eff_spec", counter));
-			h_amp_phi->SetTitle(Form("sens%d_eff_spec;eff", counter));
-			//h_amp_phi->Rebin(10);
-			h_amp_phi->Draw();
-			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			c->SetFillColor(0);
-			c->SetFrameFillColor(0);
-			c->Update();
-			TLine* line11 = new TLine(0.8, 0, 0.8, 1.1 * h_amp_phi->GetMaximum());
-			line11->SetLineColor(kGreen);
-			line11->Draw();
-			c->Update();
-			cin.get();
-		}
-	}
-}
-
-void raspramp() {
-	/*TChain chain("t1");
-	chain.Add("/work/users/kladov/snd2k/R006-003/selected2019/true1_**exp00**.root");
-
-	chain.SetBranchAddress("phi", &phi);
-	chain.SetBranchAddress("phis", &phis);
-	chain.SetBranchAddress("ach", &ach);
-	chain.SetBranchAddress("theta", &theta);
-	chain.SetBranchAddress("z0", &z0);
-	chain.SetBranchAddress("nch", &nch);
-	chain.SetBranchAddress("schr", &schr);
-	chain.SetBranchAddress("run", &run);
-	chain.SetBranchAddress("tchr", &tchr);
-	chain.SetBranchAddress("region", &region);
-
-	const Long64_t entries = chain.GetEntries();
-	cout << entries << endl;
-
-	int scount = 0;
-	int scount1 = 0;
-
-	//hists for ach or eff
-	TH1* ha[9][14][9];
-	TH1* hn[9][14][9];
-	char namea[40];
-	char namen[40];
-	char title[200];
-	for (int j = 0; j < 9; j++) {
-		for (int k = 0; k < 14; k++) {
-			for (int i = 0; i < 9; i++) {
-				sprintf(namea, "hprofa%d", 14 * 9 * j + 9 * k + i);
-				sprintf(namen, "hprofn%d", 14 * 9 * j + 9 * k + i);
-				sprintf(title, "sens%d,z%d,phi%d;eff;run", i + 1, k + 1, j + 1);
-				ha[j][k][i] = new TH1F(namea, title, 550, -5, 50);
-				hn[j][k][i] = new TH1F(namen, title, 100, -0.1, 2.);
-			}
-		}
-	}
-
-
-	//info ab ped 
-	TFile* f0 = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2019/phintegr_pedest.root");
-	for (int j = 0; j < 14; j++) {
-		for (int i = 0; i < 9; i++) {
-			TH1* hped = (TH1F*)f0->Get(Form("ped_phintegr_zobl%d,sensor%d", j + 1, i + 1));
-			ped[j][i] = hped->GetMean(1);
-		}
-	}
-
-	int Count = 0, count1 = 0;
-	float ant;
-	float ztr = 0.;
-	float ztr1 = 0.;
-	double lgran[4];
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		ztr = 12.25 / tan(theta[0]) + z0[0];
-		ztr1 = 12.25 / tan(theta[1]) + z0[1];
-		schr[nch] = 0.;
-		if ((run < 40100) && (goodrnumb[run - 38001] == 1) && (goodreff[run - 38001] == 1)) {
-			scount = 0;
-			scount1 = 0;
-			for (int j = 0; j < 9; j++) {
-				//wichcounter1[j] = scount1;
-				if (j == 8) {
-					if (phi[0] < 1.)
-						phi[0] = phi[0] + 2. * PI;
-					while (1 + scount < nch) { scount += 1; }
-				}
-				else
-					while (schr[1 + scount] > 0.5) { scount += 1; }
-				lgran[0] = truegran1[j][0];// +0.03;
-				lgran[1] = truegran1[j][1];// -0.045;
-				lgran[2] = truegran1[j][1];// +0.045;
-				lgran[3] = truegran1[j][3];// -0.03;
-				
-				//ach izm i eff izm 9X14X9
-				for (int k = 0; k < 14; k++) {
-					if ((ztr > zobl[k]) && (ztr < zobl[k + 1]) && (region[0] == 1)) {
-						int it = 9;
-						for (int i = 0; i < 3; i++) {
-							if ((phi[0] >= (lgran[0] + i * (lgran[1] - lgran[0]) / 3.)) && (phi[0] < (lgran[0] + (i + 1) * (lgran[1] - lgran[0]) / 3.)))
-								it = i;
-							if ((phi[0] >= (lgran[2] + i * (lgran[3] - lgran[2]) / 6.)) && (phi[0] < (lgran[2] + (i + 1) * (lgran[3] - lgran[2]) / 6.)))
-								it = i + 3;
-							if ((phi[0] >= (lgran[2] + (i + 3) * (lgran[3] - lgran[2]) / 6.)) && (phi[0] < (lgran[2] + (i + 4) * (lgran[3] - lgran[2]) / 6.)))
-								it = i + 6;
-						}
-						if (it < 9) {
-							if((schr[1+scount1] < 0.5) || ((schr[1+scount1] > 0.5) && (tchr[1+scount1] < 110)))
-								hn[it][k][j]->Fill(schr[1 + scount1]); //it
-							if ((schr[scount] < 0.5) || ((schr[scount] > 0.5) && (tchr[scount] < 110))) {
-								ach1[scount] = ach[scount] - ped[k][j];
-								ha[it][k][j]->Fill(ach1[scount]); //it
-							}
-						}
-					}
-					if ((ztr1 > zobl[k]) && (ztr1 < zobl[k + 1]) && (region[1] == 1)) {
-						int it = 9;
-						for (int i = 0; i < 3; i++) {
-							if ((phi[1] >= (lgran[0] + i * (lgran[1] - lgran[0]) / 3.)) && (phi[1] < (lgran[0] + (i + 1) * (lgran[1] - lgran[0]) / 3.)))
-								it = i;
-							if ((phi[1] >= (lgran[2] + i * (lgran[3] - lgran[2]) / 6.)) && (phi[1] < (lgran[2] + (i + 1) * (lgran[3] - lgran[2]) / 6.)))
-								it = i + 3;
-							if ((phi[1] >= (lgran[2] + (i + 3) * (lgran[3] - lgran[2]) / 6.)) && (phi[1] < (lgran[2] + (i + 4) * (lgran[3] - lgran[2]) / 6.)))
-								it = i + 6;
-						}
-						if (it < 9) {
-							if ((schr[1 + scount1] < 0.5) || ((schr[1 + scount1] > 0.5) && (tchr[1 + scount1] < 110)))
-								hn[it][k][j]->Fill(schr[1 + scount1]); //it
-							if ((schr[scount] < 0.5) || ((schr[scount] > 0.5) && (tchr[scount] < 110))) {
-								ach1[scount] = ach[scount] - ped[k][j];
-								ha[it][k][j]->Fill(ach1[scount]); //it
-							}
-						}
-					}
-				}
-				scount += 1;
-				scount1 = scount;
-			}
-		}
-
-		Count += 1;
-		if (Count == 100000) {
-			count1 += 1;
-			cout << Form("obrabotano %d*100k entries", count1) << endl;
-			//cout << Form("obrabotano %d*10k entries	or %d%", count1, (count1*1000000)/entries) << endl;
-			Count = 0;
-		}
-	}
-
-	
-	//effotach
-
-	char titlea[200];
-	char titlen[200];
-	TFile* MyFile = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2019/random.root", "RECREATE");
-	for (int j = 0; j < 9; j++) {
-		for (int k = 0; k < 14; k++) {
-			for (int i = 0; i < 9; i++) {
-				sprintf(titlea, "ach_sens%d,z%d,phi%d", i + 1, k + 1, j + 1);
-				sprintf(titlen, "eff_sens%d,z%d,phi%d", i + 1, k + 1, j + 1);
-				//cout << h[j][k][i]->GetMean(1) << endl;
-				hn[j][k][i]->Write(titlen);
-				ha[j][k][i]->Write(titlea);
-			}
-		}
-	}
-	MyFile->Close();*/
-	
-	vector<float> errx[9], effect[9], erry[9], ampl[9];
-	TFile* ff = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2019/random.root");
-	int schit = 0;
-	for (int j = 0; j < 9; j++) {
-		for (int k = 0; k < 14; k++) {
-			for (int i = 0; i < 9; i++) {
-				TH1F* ha = (TH1F*)ff->Get(Form("ach_sens%d,z%d,phi%d", i + 1, k + 1, j + 1));
-				TH1F* hn = (TH1F*)ff->Get(Form("eff_sens%d,z%d,phi%d", i + 1, k + 1, j + 1));
-				if (hn->GetMean(1) > 0.2) {
-					schit = schit + 1;
-					ampl[i].push_back(ha->GetMean(1));
-					effect[i].push_back(hn->GetMean(1));
-					errx[i].push_back(1. * ha->GetMeanError(1));
-					erry[i].push_back(1. * hn->GetMeanError(1));
-				}
-			}
-		}
-	}
-	cout << "col_tochek" << schit << endl;
-	ff->Close();
-	int numbrr = 0;
-	double parametr1[9];
-	double counter1[9];
-	double parametr1Err[9];
-	double nolliki[9];
-	double chisquare1[9];
-	double chisquare2[9];
-	double degrof1[9];
-	double degrof2[9];
-	double erre[9];
-	//TGraphErrors* gr[9];
-	//TFile* MyFile = new TFile("/work/users/kladov/snd2k/R006-003/maindir/effotach.root", "RECREATE");
-	//TFile* MyFile = new TFile("/work/users/kladov/snd2k/R006-003/maindir/effotach.root");
-	TFile* MyFile1 = new TFile("/work/users/kladov/snd2k/R006-003/maindir/effotachfitted.root", "RECREATE");
-	for (int i = 0; i < 9; i++) {
-		counter1[i] = (double)i + 1;
-		nolliki[i] = 0.;
-		numbrr = ampl[i].size();
-		TGraphErrors* gr = new TGraphErrors(numbrr, &ampl[i][0], &effect[i][0], &errx[i][0], &erry[i][0]);
-		gr->SetTitle(";ach,pe;eff");
-		gr->GetYaxis()->SetRangeUser(0.8,1.01);
-		gr->GetXaxis()->SetRangeUser(1., gr->GetXaxis()->GetXmax());
-		gr->Draw("A*");
-		TF1* func = new TF1("func", "[1]-[0]/(2.*[2]*x)*(exp(-x*(1.-[2])/[0])-exp(-x*(1.+[2])/[0]))", 2., gr->GetXaxis()->GetXmax());
-		TF1* funcx = new TF1("funcx", "[1]-[0]/(2.*[2]*x)*(exp(-x*(1.-[2])/[0])-exp(-x*(1.+[2])/[0]))", 2., gr->GetXaxis()->GetXmax());
-		func->SetLineColor(kRed);
-		funcx->SetLineColor(kGreen);
-		func->SetParameter(0, 1.);
-		func->SetParameter(1, 1.);
-		func->SetParameter(2, 0.2);
-		func->SetParLimits(0, 1, 1);
-		func->SetParLimits(1, 1, 1.0);
-		func->SetParLimits(2, 0.01, 1.);
-		funcx->SetParameter(0, 1.);
-		funcx->FixParameter(1, 1.);
-		funcx->SetParLimits(0, 1, 1);
-		funcx->SetParameter(2, 0.2);
-		funcx->SetParLimits(2, 0.01, 1.);
-		gStyle->SetOptFit(1111);
-
-		gr->Fit(funcx, "", "", 2., gr->GetXaxis()->GetXmax());
-		TF1* f1 = gr->GetFunction("funcx");
-		cout << Form("1-counter%d", i + 1) << endl << "Chisquare= " << f1->GetChisquare() << "	" << "NDF= " << f1->GetNDF() << endl << endl << endl;
-		chisquare2[i] = f1->GetChisquare();
-		degrof2[i] = 2 * f1->GetNDF();
-
-		gr->Fit(func, "", "", 2., gr->GetXaxis()->GetXmax());
-		TF1* f = gr->GetFunction("func");
-		parametr1[i] = func->GetParameter(1);
-		erre[i] = func->GetParError(1);
-		parametr1Err[i] = func->GetParError(1);
-		cout << parametr1[i] << endl << endl;
-		cout << Form("[1]-counter%d", i + 1) << endl << "Chisquare= " << f->GetChisquare() << "	" << "NDF= " << f->GetNDF() << endl;
-		chisquare1[i] = f->GetChisquare();
-		degrof1[i] = 2 * f->GetNDF();
-
-
-		TF1* func1 = new TF1("func1", "[1]-[0]/(2.*[2]*x)*(exp(-x*(1.-[2])/[0])-exp(-x*(1.+[2])/[0]))", 2., gr->GetXaxis()->GetXmax());
-		//Double_t par[2];
-		//func->GetParameters(par);
-		func1->SetParameters(func->GetParameters());
-		func1->SetLineColor(kRed);
-		func1->Draw("same");
-
-		TF1* funcx1 = new TF1("funcx1", "[1]-[0]/(2.*[2]*x)*(exp(-x*(1.-[2])/[0])-exp(-x*(1.+[2])/[0]))", 2., gr->GetXaxis()->GetXmax());
-		//Double_t par1[1];
-		//funcx->GetParameters(par1);
-		funcx1->SetParameters(funcx->GetParameters());
-		funcx1->SetLineColor(kGreen);
-		funcx1->Draw("same");
-
-		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-		c->SetFillColor(0);
-		c->Update();
-		TLegend* legend = new TLegend(0.1, 0.83, 0.4, 0.98);
-		//legend->SetHeader("The Legend Title", "C");
-		legend->AddEntry("func1", "fit function a-exp(-#frac{x}{b})", "l");
-		//legend->AddEntry("func0", "function 1-exp(-x)", "l");
-		legend->AddEntry("funcx1", "fit function 1-exp(-#frac{x}{b})", "l");
-		legend->Draw();
-		c->Update();
-		MyFile1->cd();
-		c->Write(Form("effotachfit&d", i + 1));
-		cin.get();
-		//c->Close();
-		//canv->Close();
-	}
-	/*MyFile1->Close();
-	TGraphErrors* gr = new TGraphErrors(9, counter1, parametr1, nolliki, erre);
-	gr->SetMarkerStyle(21);
-	gr->SetMarkerSize(2.0);
-	gr->SetTitle(";counter;max efficiency");
-	gr->Draw("ap");
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	cin.get();*/
-
-	cout << "done!" << endl;
-}
-
-void CalibrExp::achspec() {
-	readGoodRuns();
-	TChain chain("t1");
-
-	std::string chadds = dirSelectedExp + "/true1__**exp00**.root";
-	chain.Add(chadds.c_str());
-
-	const Long64_t entries = chain.GetEntries();
-	cout << entries << endl;
-
-	chain.SetBranchAddress("phi", &phi);
-	chain.SetBranchAddress("phis", &phis);
-	chain.SetBranchAddress("ach", &ach);
-	chain.SetBranchAddress("theta", &theta);
-	chain.SetBranchAddress("z0", &z0);
-	chain.SetBranchAddress("nch", &nch);
-	chain.SetBranchAddress("schr", &schr);
-	chain.SetBranchAddress("run", &run);
-	chain.SetBranchAddress("tchr", &tchr);
-	chain.SetBranchAddress("region", &region);
-
-	int scount = 0;
-	int scount1 = 0;
-	char name[20];
-	char title[100];
-	TH1* h[10];	//ach spectra, 9 counters + 10 for average
-	for (int i = 0; i < 10; i++) {
-		sprintf(name, "hprofped%d", i + 1);
-		sprintf(title, "ped,sensor%d;ach", i + 1);
-		h[i] = new TH1F(name, title, 5000, -1, 499);
-	}
-	TH1* hg[10]; //amount of all events to map and ach spectra
-	for (int i = 0; i < 10; i++) {
-		sprintf(name, "hprofgped%d", i + 1);
-		sprintf(title, "ped,sensor%d;ach", i + 1);
-		hg[i] = new TH1F(name, title, 5000, -1, 499);
-	}
-	TH1* hig[10]; //time spectra, 9 counters + 10 for average
-	for (int i = 0; i < 10; i++) {
-		sprintf(name, "hprofgt%d", i + 1);
-		sprintf(title, "tchr,sensor%d;tds chanals", i + 1);
-		hig[i] = new TH1F(name, title, 500, -1, 499);
-	}
-	TH1* hi[10][30];	//time spectra divided into 30 run ranges, 9 counters + 10 for average
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 30; j++) {
-			sprintf(name, "hproft%d", 30*(i)+j+1);
-			sprintf(title, "tchr,sensor%d,runr%d;tchr", i + 1, j+1);
-			hi[i][j] = new TH1F(name, title, 500, -1, 499);
-		}
-	}
-	TH1* hiz[30];	//where zero counts are sitting vs ztr(12)
-	for (int i = 0; i < 30; i++) {
-		sprintf(name, "hprofz%d", i + 1);
-		sprintf(title, "zasel0,runr%d;z", i + 1);
-		hiz[i] = new TH1F(name, title, 300, -15, 15);
-	}
-	//TH1* hii1 = new TH1F("profile1", "zasel;#phi", 6300, 0. - 0.01, 2. * PI + 0.01);
-	TH1* hii2 = new TH1F("profile2", "zasel;#phi", 6300, 0. - 0.01, 2. * PI + 0.01);
-
-	float ztr[2];
-	ztr[0] = 0.; ztr[1] = 0.;
-	double lgran[4];
-	int maxampla = 0;
-	double maxach = 0.;
-	int Count = 0;
-	int count1 = 0;
-	int runrange = 0;
-	int countentr[30];
-	for (int i = 0; i < 30; i++)
-		countentr[i] = 0;
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		ztr[0] = 12.0 / tan(theta[0]) + z0[0];
-		ztr[1] = 12.0 / tan(theta[1]) + z0[1];
-		schr[nch] = 0.;
-		if ((run > 27250) && RunIsGood(run)) { 
-			scount = 0;
-			scount1 = 0;
-			for (int j = 0; j < 9; j++) {
-				if (j == 8) {
-					if (phi[0] < 1.)
-						phi[0] = phi[0] + 2. * PI;
-					if (phi[1] < 1.)
-						phi[1] = phi[1] + 2. * PI;
-					//while (1 + scount < nch) { scount += 1; }
-				}
-				//else
-					while (schr[1 + scount] > 0.5) { scount += 1; }
-
-
-				lgran[0] = truegran1[j][0] + 3. * meanshir[j][0];// +0.03;
-				lgran[1] = truegran1[j][1] - 3. * meanshir[j][1];// -0.045;
-				lgran[2] = truegran1[j][1] + 3. * meanshir[j][1];// +0.045;
-				lgran[3] = truegran1[j][3] - 3. * meanshir[j][2];// -0.03;
-
-				maxach = -1000.;
-				for (int f = scount1; f <= scount; f++) {
-					if (ach[f] > maxach) {
-						maxach = ach[f];
-						maxampla = f;
-					}
-				}
-				for (int i = 0; i < 30; i++) {
-					if ((run > MinimRun + i * (MaximRun - MinimRun) / 30.) && (run < MinimRun + (i + 1) * (MaximRun - MinimRun) / 30.))
-						runrange = i;
-				}
-
-				for (int prtc = 0; prtc < 2; prtc++) {
-					if ((((phi[prtc] > lgran[0]) && (phi[prtc] < lgran[1])) || ((phi[prtc] > lgran[2]) && (phi[prtc] < lgran[3]))) && (ztr[prtc] > zobl[1] && ztr[prtc] < zobl[13])) {
-						//bool rng = (rand() % 100) < 4;
-						//if (rng == 1)
-							//schr[maxampla] = 0;
-						if (((schr[maxampla] > 0.5))) {
-							hi[j][runrange]->Fill(tchr[maxampla]);
-							hi[9][runrange]->Fill(tchr[maxampla]);
-							hig[j]->Fill(tchr[maxampla]);
-							hig[9]->Fill(tchr[maxampla]);
-						}
-						if ((schr[maxampla] < 0.5) || ((schr[maxampla] > 0.5) && (tchr[maxampla] < 110))) {
-							hg[j]->Fill(ach[maxampla]);
-							hg[9]->Fill(ach[maxampla]);
-							countentr[runrange] += 1;
-						}
-						if (schr[maxampla] < 0.5) {
-							hii2->Fill(phi[prtc]);
-							hiz[runrange]->Fill(ztr[prtc]);
-						}
-					}
-				}
-
-				scount += 1;
-				scount1 = scount;
-			}
-		}
-		Count += 1;
-		if (Count == 1000000) {
-			count1 += 1;
-			cout << Form("obrabotano %d*M entries", count1) << endl;
-			//cout << Form("obrabotano %d*10k entries	or %d%", count1, (count1*1000000)/entries) << endl;
-			Count = 0;
-		}
-	}
-	/*cout << (double)(hiz1->GetEntries()) << endl;
-	cout << (double)(h[9]->GetEntries()) << endl;
-	cout << (double)(hiz2->GetEntries()) << endl;
-	cout << (double)(hg[9]->GetEntries()) << endl;
-
-	cout << "countentr 2,3,4,5,6" << endl;
-	cout << countentr2 << endl;
-	cout << countentr3 << endl;
-	cout << countentr4 << endl;
-	cout << countentr5 << endl;
-	cout << countentr6 << endl;
-
-	cout << "norms 2,3,4,5,6" << endl;
-	cout << ((double)(hiz2->GetEntries())) / countentr2 << endl;
-	cout << ((double)(hiz3->GetEntries())) / countentr3 << endl;
-	cout << ((double)(hiz4->GetEntries())) / countentr4 << endl;
-	cout << ((double)(hiz5->GetEntries())) / countentr5 << endl;
-	cout << ((double)(hiz6->GetEntries())) / countentr6 << endl;
-
-	double norm1 = ((double)(hiz1->GetEntries()))/ ((double)(h[9]->GetEntries()));
-	double norm2 = ((double)(hiz2->GetEntries()))/ ((double)(hg[9]->GetEntries()));
-	hiz1->SetLineColor(2);
-	hiz1->DrawNormalized("",norm1);
-	hiz2->DrawNormalized("same",norm2);
-	hiz2->DrawNormalized("", ((double)(hiz2->GetEntries())) / countentr2);
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	hiz3->DrawNormalized("", ((double)(hiz3->GetEntries())) / countentr3);
-	c->Update();
-	hiz4->DrawNormalized("", ((double)(hiz4->GetEntries())) / countentr4);
-	c->Update();
-	hiz5->DrawNormalized("", ((double)(hiz5->GetEntries())) / countentr5);
-	c->Update();
-	hiz6->DrawNormalized("", ((double)(hiz6->GetEntries())) / countentr6);
-	c->Update();*/
-
-	cout << countentr[0] << endl;
-	hiz[0]->DrawNormalized("", ((double)(hiz[0]->GetEntries())) / countentr[0]);
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	for (int i = 1; i < 30; i++) {
-		cout << countentr[i] << endl;
-		hiz[i]->DrawNormalized("", ((double)(hiz[i]->GetEntries())) / countentr[i]);
-		c->Update();
-		cin.get();
-	}
-
-	cout << "done" << endl;
-	TFile* MyFile = new TFile((workingDir + "tchranom.root").c_str(), "RECREATE");
-
-	for (int j = 0; j < 10; j++) {
-		//sprintf(title, "ach_anom,sensor%d", j + 1);
-		//h[j]->Write(title);
-		sprintf(title, "ach_norm,sensor%d", j + 1);
-		hg[j]->Write(title);
-		for (int i = 0; i < 30; i++) {
-			sprintf(title, "t,sensor%d,runr%d", j + 1, i + 1);
-			hi[j][i]->Write(title);
-		}
-		sprintf(title, "tch_norm,sensor%d", j + 1);
-		hig[j]->Write(title);
-	}
-	sprintf(title, "zasp_norm,sensor%d", 9 + 1);
-	hii2->Write(title);
-	for (int i = 0; i < 30; i++) {
-		sprintf(title, "zasel0,runr%d", i + 1);
-		hiz[i]->Write(title);
-	}
-	MyFile->Close();
-	//h[9]->Draw();
-	//hg[4]->SetLineColor(2);
-	//hg[4]->Draw("same");
 }
 
 //for fit, starts here
@@ -3755,45 +2359,6 @@ double scphi2(double* x, double* par)
 }
 //ends here
 
-void linesa() {
-	//char title[100], titlea[100], titles[100], titlep[100], titlef[100];
-	//double scal = PI / 180;
-	//double dphi = 2.4 * scal;
-	TFile* f = new TFile("/work/users/kladov/snd2k/R006-003/maindir/profiles1.root");
-	TIter next(f->GetListOfKeys());
-	TKey* key;
-	while ((key = (TKey*)next())) {
-		TString name(key->GetName());
-		TString type = "sensor";
-		if (name.BeginsWith(type) && name.Contains("sensor8")) {
-			//cin.get();
-			int counter;
-			sscanf(name.Data(), "sensor%d", &counter);
-
-			TProfile* h_amp_phi = (TProfile*)f->Get(Form("sensor%d", counter));
-
-			h_amp_phi->Draw();
-
-			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			c->Update();
-			int j = counter - 1;
-			TLine* line11 = new TLine(Goodphi[4*j], 0, Goodphi[4*j], gPad->GetUymax());
-			TLine* line12 = new TLine(Goodphi[4*j+1], 0, Goodphi[4*j+1], gPad->GetUymax());
-			TLine* line13 = new TLine(Goodphi[4*j+2], 0, Goodphi[4*j+2], gPad->GetUymax());
-			TLine* line14 = new TLine(Goodphi[4*j+3], 0, Goodphi[4*j+3], gPad->GetUymax());
-			line11->SetLineColor(kRed);
-			line12->SetLineColor(kRed);
-			line13->SetLineColor(kRed);
-			line14->SetLineColor(kRed);
-			line11->Draw();
-			line12->Draw();
-			line13->Draw();
-			line14->Draw();
-			c->Update();
-			cin.get();
-		}
-	}
-}
 
 void CalibrExp::testforfit(string basefile, string pName ) {
 	readTrueGran1();
@@ -4170,7 +2735,7 @@ void CalibrExp::testforfit(string basefile, string pName ) {
 		for (size_t i = 0; i < 9; i++) {
 			for (size_t j = 0; j < 4; j++) {
 				truegran1m[i][j] = gran1[j][i][0];
-				truegran1mErr[i][j] = gran1Err[j][i][0]/2.;//(shir[i][0][0]+shir[i][0][1]+shir[i][0][2])/3.;
+				truegran1mErr[i][j] = gran1Err[j][i][0];//(shir[i][0][0]+shir[i][0][1]+shir[i][0][2])/3.;
 				/*TGraphErrors* graph = new TGraphErrors(14, oblast, gran1[j][i], oblastErr, gran1Err[j][i]);
 				TF1* fn = new TF1("fn", "[0]", 1, 14);
 				graph->Fit(fn);
@@ -4229,8 +2794,9 @@ void CalibrExp::testforfit(string basefile, string pName ) {
 
 }
 
-//find mean by z borders of aerogel parts truegran1 from obtained in fit gran1.
+
 void CalibrExp::bordersplot() {
+	//find mean by z borders of aerogel parts truegran1 from obtained in fit gran1.
 	readGran1();
 	readFitPar();
 	char title[100];
@@ -4429,8 +2995,9 @@ void CalibrExp::bordersplot() {
 	}*/
 }
 
-//find shifter array from pik, stored in gran1 file and also use it, Yfm and truegran to create file with parameters for modeling database
+
 void CalibrExp::modelfile(bool transformPYN) {
+	//find shifter array from pik, stored in gran1 file and also use it, Yfm and truegran to create file with parameters for modeling database
 	readTrueGran1();
 	readTruegran1m();
 	double scal = PI / 180;
@@ -4574,7 +3141,7 @@ void CalibrExp::modelfile(bool transformPYN) {
 		for (int k = 0; k < 3; k++) {
 			fout1 << n << " " << xvt[0+4*k]*scal1 << " " << xvt[1+4*k]*scal1 << " " << xvt[2+4*k]*scal1 << " " << xvt[3+4*k]*scal1 << endl;
 			for (int i = 0; i < 14; i++) {
-				fout1 << zobl[i]-0.0 << " " << yfm[j][i][0+4*k]/coef[i][j] << " " << yfm[j][i][1+4*k]/ coef[i][j] << " " << yfm[j][i][2+4*k]/ coef[i][j] << " " << yfm[j][i][3+4*k]/ coef[i][j] << endl;
+				fout1 << zobl[i]-0.0 << " " << yfm[j][i][0+4*k]/coef[i][j] << " " << yfm[j][i][1+4*k]/coef[i][j] << " " << yfm[j][i][2+4*k]/coef[i][j] << " " << yfm[j][i][3+4*k]/coef[i][j] << endl;
 			}
 		}
 	}
@@ -4582,122 +3149,9 @@ void CalibrExp::modelfile(bool transformPYN) {
 	writeMcoef();
 }
 
-void CalibrExp::checkmod() {
-	//char title[100], titlea[100], titles[100], titlep[100], titlef[100];
-	std::vector<double> xv1(12);
-	double scal = PI / 180;
-	//double dphi = 2.4 * scal;
-	TFile* f = new TFile("/work/users/kladov/snd2k/R006-003/maindir/profiles.root");
-	TIter next(f->GetListOfKeys());
-	TKey* key;
-	int counterr = 0, ennn = 0;
-	while ((key = (TKey*)next()) && counterr < 14) {
-		counterr += 1; ennn += 1;
-		if (ennn == 5)
-			ennn = 1;
-		TString name(key->GetName());
-		TString type = "zobl";
-		if (name.BeginsWith(type) && name.Contains("sensor")) {
-			//cin.get();
-			int obl, counter, enbeam;
-			//sscanf(name.Data(), "zobl%d,sensor%d,en%d", &obl, &counter, &enbeam);
-			sscanf(name.Data(), "zobl%d,sensor%d", &obl, &counter);
-			counter = 7;
-			obl = counterr;
-			enbeam = ennn;
-			TProfile* h_amp_phi = (TProfile*)f->Get(Form("zobl%d,sensor%d", obl, counter));
-
-			h_amp_phi->Draw();
-			std::vector<double> par(20);
-			for (int i = 0; i < 12; i++)
-				par[i] = yfm[counter - 1][obl - 1][i];
-			for (int i = 0; i < 4; i++)
-				par[i+12] = truegran1[counter-1][i];
-			par[16] = shift[counter - 1][0] * exp(-obl/shift[counter - 1][2]) + shift[counter - 1][1] * exp(obl/shift[counter - 1][2]);
-			par[17] = (0.5) * scal;
-			par[18] = (0.4) * scal;
-			par[19] = (0.4) * scal;
-			for (int i = 0; i < 20; i++)
-				cout << Form("par[%d] = %f", i, par[i]) << endl;
-			TF1* fn = new TF1("scphi", scphi, par[12] - 15 * scal, par[15] + 15 * scal, 20);
-			//names
-			for (size_t i = 0; i < 12; i++)
-				fn->SetParName(i, Form("y%d", i));
-			fn->SetParName(12, "x1");
-			fn->SetParName(13, "x2");
-			fn->SetParName(14, "x3");
-			fn->SetParName(15, "x4");
-			fn->SetParName(16, "ys");
-			fn->SetParName(17, "#sigma_{1}");
-			fn->SetParName(18, "#sigma_{s}");
-			fn->SetParName(19, "#sigma_{2}");
-			fn->SetParameters(par.data());
-			fn->SetLineColor(kRed);
-			fn->SetNpx(1000);
-			fn->Draw("same");
-			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			c->Update(); 
-			cin.get();
-		}
-	}
-}
-
-void CalibrExp::checkbord() {
-	readTrueGran1();
-	//char title[100], titlea[100], titles[100], titlep[100], titlef[100];
-	std::vector<double> xv1(12);
-	//double scal = PI / 180;
-	//double dphi = 2.4 * scal;
-	TFile* f = new TFile("/work/users/kladov/snd2k/R006-003/maindir/profilesmean.root");
-	TIter next(f->GetListOfKeys());
-	TKey* key;
-	int counterr = 0;
-	while ((key = (TKey*)next())) {
-		counterr += 1;
-		TString name(key->GetName());
-		TString type = "sensor";
-		if (name.BeginsWith(type) && name.Contains("sensor")) {
-			//cin.get();
-			int counter;
-			//sscanf(name.Data(), "zobl%d,sensor%d,en%d", &obl, &counter, &enbeam);
-			sscanf(name.Data(), "sensor%d",&counter);
-			//counter = 7;
-			//obl = counterr;
-			TProfile* h_amp_phi = (TProfile*)f->Get(Form("sensor%d",counter));
-
-			h_amp_phi->Draw();
-			TLine* line1 = new TLine(truegran1m[counter - 1][0], 0, truegran1m[counter - 1][0], gPad->GetUymax());
-			TLine* line2 = new TLine(truegran1m[counter - 1][1], 0, truegran1m[counter - 1][1], gPad->GetUymax());
-			TLine* line3 = new TLine(truegran1m[counter - 1][2], 0, truegran1m[counter - 1][2], gPad->GetUymax());
-			TLine* line4 = new TLine(truegran1m[counter - 1][3], 0, truegran1m[counter - 1][3], gPad->GetUymax());
-			TLine* line21 = new TLine(truegran1[counter - 1][0], 0, truegran1[counter - 1][0], gPad->GetUymax());
-			TLine* line22 = new TLine(truegran1[counter - 1][1], 0, truegran1[counter - 1][1], gPad->GetUymax());
-			TLine* line23 = new TLine(truegran1[counter - 1][2], 0, truegran1[counter - 1][2], gPad->GetUymax());
-			TLine* line24 = new TLine(truegran1[counter - 1][3], 0, truegran1[counter - 1][3], gPad->GetUymax());
-			line1->SetLineColor(kGreen);
-			line2->SetLineColor(kGreen);
-			line3->SetLineColor(kGreen);
-			line4->SetLineColor(kGreen);
-			line21->SetLineColor(kBlue);
-			line22->SetLineColor(kBlue);
-			line23->SetLineColor(kBlue);
-			line24->SetLineColor(kBlue);
-			line1->Draw();
-			line2->Draw();
-			line3->Draw();
-			line4->Draw();
-			line21->Draw();
-			line22->Draw();
-			line23->Draw();
-			line24->Draw();
-			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			c->Update();
-			cin.get();
-		}
-	}
-}
 
 double CalibrExp::compare1() {
+	/// Functions to yield coefficients for the map by comparing mean values of amplitude for 1 counter and 1 z area
 	readGoodRuns();
 	readMeanshir();
 	readTrueGran1();
@@ -4798,8 +3252,7 @@ double CalibrExp::compare1() {
 
 				if ( insideLGrans(phi[pind], &lgran[0]) && (TimeIsGood(maxampla)) && zoblInd != -1) {
 
-					ach1[maxampla] = ach[maxampla] - ped[zoblInd][j];
-					//ach1[maxampla] = ach[maxampla] - ach[scount1];
+					double ach1 = ach[maxampla];
 					meancampl[zoblInd]->Fill(ach[maxampla]);
 					if (zoblInd > 2 && zoblInd < 12)
 						meanzampl[j]->Fill(ach[maxampla]);
@@ -4986,7 +3439,9 @@ double CalibrExp::compare1() {
 	return 3;*/
 }
 
+
 double CalibrExp::compare2(bool transformPYN) {
+	/// same as previous, just extracting mean values for modeling
 	readMeanshir();
 	readTrueGran1();
 	readMeanshirm();
@@ -5149,7 +3604,9 @@ double CalibrExp::compare2(bool transformPYN) {
 	return 2;
 }
 
+
 void CalibrExp::compare() {
+	/// comparing these mean values
 	//read counts for efficiency
 	//compare1();
 	//compare2();
@@ -5330,7 +3787,17 @@ void CalibrExp::compare() {
 	writeNcoef();
 }
 
+
+TDirectory* createDir(const char* name, TFile* file) {
+	/// function to delete and create dir
+	if (file->FindKey(name))
+		file->rmdir(name);
+	return file->mkdir(name);
+}
+
+
 void CalibrExp::compareAmpSpectr() {
+	/// a function to extract map coefficients by dividing phi profiles and fitting resulting dependence with a line, lying around 1
 	readMeanshir();
 	readTrueGran1();
 	readMeanshirm();
@@ -5350,7 +3817,17 @@ void CalibrExp::compareAmpSpectr() {
 	double koefnewpMErr[9];
 	double koefnewh[9][14];
 	double modelGran[9][4] = { 3.96954, 17.4603, 30.8096, 42.9946, 43.6686, 58.0747, 70.5603, 82.8407, 83.7598, 97.8676, 110.007, 122.273, 124.125, 138.028, 150.658, 163.491, 164.016, 178.457, 192.73, 203.046, 203.326, 217.694, 231.488, 242.669, 244.352, 258.508, 271.534, 282.903, 283.639, 298.182, 310.422, 322.809, 323.23, 337.838, 351.363, 362 };
-	for (size_t obl = 0; obl < 1; obl++) {
+	
+	TFile* MyFile = new TFile((workingDir + "resultingComparisons.root").c_str(), "UPDATE");
+	TDirectory* dir = createDir("amplitude phi profiles ratio fit", MyFile);
+	dir->cd();
+
+	TCanvas* c = new TCanvas("c", "c", 1200, 800);
+	c->SetFillColor(0);
+	c->SetBorderMode(0);
+	TPad* pad1 = new TPad("pad1", "", 0, 0, 1, 1, 0, 4, 0);
+
+	for (size_t obl = 0; obl < 14; obl++) {
 		//TProfile* hprof10 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", zobl + 1, 1));
 		//TProfile* hprof20 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", zobl + 1, 1));
 		//hprof10->SetLineColor(2);
@@ -5363,13 +3840,12 @@ void CalibrExp::compareAmpSpectr() {
 
 
 			vector<double> lgran = defineLGrans(counter);
-			cout << "asdasdasd" << endl;
 			//TF1* tf1 = (TF1*)d1->Get(Form("zobl%d,sensor%d,full", 2, 8));
 			//TProfile* hprof1 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
-			TProfile* hprof1 = (TProfile*)f1->Get(Form("mean,sensor%d", counter + 1));
-			//TProfile* hprof1 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
-			//TProfile* hprof2 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
-			TProfile* hprof2 = (TProfile*)f2->Get(Form("mean,sensor%d", counter + 1));
+			//TProfile* hprof1 = (TProfile*)f1->Get(Form("mean,sensor%d", counter + 1));
+			TProfile* hprof1 = (TProfile*)f1->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			TProfile* hprof2 = (TProfile*)f2->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			//TProfile* hprof2 = (TProfile*)f2->Get(Form("mean,sensor%d", counter + 1));
 			TH1* hz = (TH1F*)f3->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
 			/*hprof1->SetLineColor(2);
 			hprof1->GetXaxis()->SetRangeUser(3./4.*hprof1->GetBinCenter(1)+1./4.*hprof1->GetBinCenter(hprof1->GetNbinsX()-1), 1./4.*hprof1->GetBinCenter(1)+3./4.*hprof1->GetBinCenter(hprof1->GetNbinsX()-1));
@@ -5414,6 +3890,7 @@ void CalibrExp::compareAmpSpectr() {
 			for(size_t i = 2; i < hprof2->GetNbinsX()-1; i++){
 				if( hprof2->GetBinEntries(i)>0 && insideLGrans(hprof2->GetBinLowEdge(i), &lgran[0]) && insideLGrans(hprof2->GetBinLowEdge(i)+hprof2->GetBinWidth(i), &lgran[0])){
 					x.push_back(hprof2->GetBinCenter(i));
+					cout << "asdasd" << endl;
 					dx.push_back(hprof2->GetBinWidth(i));
 
 					size_t modBin = hprof1->FindBin(x.back());
@@ -5460,9 +3937,11 @@ void CalibrExp::compareAmpSpectr() {
 			TF1* f1 = new TF1("f1", "[0]", lgran[0], lgran[3]);
 			f1->SetParameter(0,1.0);
 			graph->Fit("f1", "", "", lgran[0], lgran[3]);
-			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
 			c->Update();
 			//cin.get();
+
+			graph->Write(Form("ratio zarea%d sensor%d", obl + 1, counter + 1));
+
 			koefnewp[counter][obl] = coef[obl][counter] * f1->GetParameter(0);
 			koefnewpErr[counter][obl] = f1->GetParError(0);
 			koefnewpM[counter] = coef[obl][counter] * f1->GetParameter(0);
@@ -5489,6 +3968,9 @@ void CalibrExp::compareAmpSpectr() {
 	gro->SetMarkerColor(1);
 	gro->Draw("AP");
 
+
+	TDirectory* dir1 = createDir("map coefficients", MyFile);
+	dir1->cd();
 	for (int j = 0; j < 9; j++) {
 		TGraphErrors* gr = new TGraphErrors(14, &oblast[0], &koefnewh[j][0], &noll[0], &koefnewhErr[j][0]);
 		TGraphErrors* gr1 = new TGraphErrors(14, &oblast[0], &koefnewp[j][0], &noll[0], &koefnewpErr[j][0]);
@@ -5506,25 +3988,166 @@ void CalibrExp::compareAmpSpectr() {
 		gr->SetTitle("secondary particles contribution;z,sm;percent");
 		
 		//gr->Draw("AP");
-		//gr1->Draw("AP");
+		gr1->Draw("AP");
+
+		gr1->Write(Form("coefficients sensor%d", j + 1));
 
 		fn->SetLineColor(kRed);
 		//gr->Fit("fn", "", "", -9, 9);
-		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
 		c->Update();
-		cin.get();
+		//cin.get();
 		//cout << fn->GetParameter(0) << endl;
 	}
+	MyFile->Close();
 	for (size_t obl = 0; obl < 14; obl++) {
 		for (size_t counter = 0; counter < 9; counter++) {
-			//coef[obl][counter] = (koefnewp[counter][0] + koefnewp[counter][0])/2.;
-			coef[obl][counter] = 1.1;
+			coef[obl][counter] = (koefnewp[counter][obl] + koefnewp[counter][obl])/2.;
+			//coef[obl][counter] = 1.1;
 		}
 	}
 	writeNcoef();
 }
 
+/// 
+void CalibrExp::compareEffSpectr() {
+	TFile* f1 = new TFile((workingDir + "profilesEffMod.root").c_str());
+	TFile* f2 = new TFile((workingDir + "profilesEff.root").c_str());
+
+	TFile* fa1 = new TFile((workingDir + "profilesmmod.root").c_str());
+	TFile* fa2 = new TFile((workingDir + "profiles.root").c_str());
+
+	TFile* MyFile = new TFile((workingDir + "resultingComparisons.root").c_str(), "UPDATE");
+	TDirectory* dir = createDir("efficiency and amp phi profiles ratios", MyFile);
+	TDirectory* dir1 = createDir("efficiency profiles on top of one another", MyFile);
+	dir->cd();
+
+	for (size_t zobl = 3; zobl < 4; zobl++) {
+		for (size_t counter = 0; counter < 9; counter++) {
+			TProfile* hprof1 = (TProfile*)f1->Get(Form("mean,sensor%d", counter + 1));
+			TProfile* hprof2 = (TProfile*)f2->Get(Form("mean,sensor%d", counter + 1));
+			TProfile* hprof3 = (TProfile*)fa1->Get(Form("mean,sensor%d", counter + 1));
+			TProfile* hprof4 = (TProfile*)fa2->Get(Form("mean,sensor%d", counter + 1));
+			hprof1->SetLineColor(2);
+			hprof1->SetLineWidth(3);
+			hprof2->SetLineWidth(2);
+			//hprof1->Rebin(3);
+			//hprof2->Rebin(2);
+			//hprof1->Divide(hprof2);
+
+			vector<double> xa, xae, a, ae, xe, xee, e, ee;
+			for (size_t i = 2; i < hprof3->GetNbinsX() - 1; i++) {
+				if (hprof4->GetBinContent(i) < 0.1)
+					continue;
+
+				xa.push_back(hprof3->GetBinCenter(i));
+				xae.push_back(hprof3->GetBinWidth(i));
+
+				a.push_back(hprof3->GetBinContent(i) / hprof4->GetBinContent(i));
+				ae.push_back(divisionError(hprof3->GetBinContent(i), hprof4->GetBinContent(i), hprof3->GetBinError(i), hprof4->GetBinError(i)));
+			}
+			for (size_t i = 2; i < hprof1->GetNbinsX() - 1; i++) {
+				if (hprof2->GetBinContent(i) < 0.5)
+					continue;
+
+				xe.push_back(hprof1->GetBinCenter(i));
+				xee.push_back(hprof1->GetBinWidth(i));
+
+				e.push_back(hprof1->GetBinContent(i) / hprof2->GetBinContent(i));
+				ee.push_back(divisionError(hprof1->GetBinContent(i), hprof2->GetBinContent(i), hprof1->GetBinError(i), hprof2->GetBinError(i)));
+			}
+			TGraphErrors* gra = new TGraphErrors(xa.size(), &xa[0], &a[0], &xae[0], &ae[0]);
+			TGraphErrors* gre = new TGraphErrors(xe.size(), &xe[0], &e[0], &xee[0], &ee[0]);
+
+			gra->SetMarkerStyle(22);
+			gra->SetMarkerColor(2);
+			gre->SetMarkerStyle(22);
+
+			gre->Draw("AP");
+			//gre->GetYaxis()->SetRangeUser(0.2, 1.5);
+			gra->Draw("Psame");
+
+			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+			c->Update();
+			//cin.get();
+
+			dir->cd();
+			c->Write(Form("ratio zarea%d sensor%d", zobl + 1, counter + 1));
+
+			hprof1->Draw();
+			hprof1->GetYaxis()->SetRangeUser(0.8, 1.1);
+			hprof2->Draw("same");
+			c->Update();
+			dir1->cd();
+			c->Write(Form("profiles sensor%d", counter + 1));
+
+		}
+	}
+	MyFile->Close();
+}
+
+/// 
+void CalibrExp::compareZAmpSpectr() {
+	TFile* f1 = new TFile((workingDir + "zprofilesmod.root").c_str());
+	TFile* f2 = new TFile((workingDir + "zprofiles.root").c_str());
+
+	TFile* MyFile = new TFile((workingDir + "resultingComparisons.root").c_str(), "UPDATE");
+	TDirectory* dir = createDir("amplitude z profiles ratio", MyFile);
+	dir->cd();
+
+	for (size_t counter = 0; counter < 9; counter++) {
+		TProfile* hprof1 = (TProfile*)f1->Get(Form("sensor%d", counter + 1));
+		TProfile* hprof2 = (TProfile*)f2->Get(Form("sensor%d", counter + 1));
+		hprof1->SetLineColor(2);
+		hprof1->Draw();
+		hprof2->Draw("same");
+		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+		c->Update();
+		//cin.get();
+
+		c->Write(Form("ratio sensor%d", counter + 1));
+	}
+	MyFile->Close();
+}
+
+/// 
+void CalibrExp::compareAmpDistributions() {
+	TFile* f1 = new TFile((workingDir + "distributionsmod.root").c_str());
+	TFile* f2 = new TFile((workingDir + "distributions.root").c_str());
+
+	TFile* MyFile = new TFile((workingDir + "resultingComparisons.root").c_str(), "UPDATE");
+	TDirectory* dir = createDir("amplitude distribution comparison", MyFile);
+	dir->cd();
+
+	for (size_t obl = 0; obl < 14; obl++) {
+		for (size_t counter = 0; counter < 9; counter++) {
+			TH1* hm = (TProfile*)f1->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			TH1* he = (TProfile*)f2->Get(Form("zobl%d,sensor%d", obl + 1, counter + 1));
+			hm->SetLineColor(2);
+			he->DrawNormalized("",hm->GetEntries());
+			hm->DrawNormalized("same", hm->GetEntries());
+
+			float meanMValue = hm->GetMean();
+			float meanEValue = he->GetMean();
+			TLine* lm = new TLine(meanMValue,0,meanMValue, gPad->GetUymax());
+			TLine* le = new TLine(meanEValue,0,meanEValue, gPad->GetUymax());
+			lm->SetLineColor(2);
+			lm->Draw();
+			le->Draw();
+
+			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+			//gPad->SetLogy();
+			c->Update();
+			//cin.get();
+
+			c->Write(Form("distrs zarea%d sensor%d", obl + 1, counter + 1));
+		}
+	}
+	MyFile->Close();
+}
+
+
 void CalibrExp::compareAmpSpectrG() {
+	/// draw images of amplitude phi profiles on top of one another to give a clear understanding of how close modeling is to exp
 	readMeanshir();
 	readTrueGran1();
 	readMeanshirm();
@@ -5552,6 +4175,11 @@ void CalibrExp::compareAmpSpectrG() {
 	hm0->Draw();
 	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
 	c->Update();
+
+	TFile* MyFile = new TFile((workingDir + "resultingComparisons.root").c_str(), "UPDATE");
+	TDirectory* dir = createDir("amplitude profiles on top of one another", MyFile);
+	dir->cd();
+
 	for (size_t obl = 0; obl < 1; obl++) {
 		for (size_t cc = 0; cc < 9; cc++) {
 			double scal = PI / 180;
@@ -5593,9 +4221,12 @@ void CalibrExp::compareAmpSpectrG() {
 			lineg8->Draw("same");
 			c->Update();
 
-			cin.get();
+			c->Write(Form("canvas mean sensor%d", cc + 1));
+
+			//cin.get();
 		}
 	}
+	MyFile->Close();
 	/*TLine* lineg1 = new TLine(truegran1[4][0], 0, truegran1[4][0], 5.0);
 	TLine* lineg2 = new TLine(truegran1m[4][0], 0, truegran1m[4][0], 5.0);
 	TLine* lineg3 = new TLine(xvt[0], 0, xvt[0], 5.0);
@@ -5612,7 +4243,9 @@ void CalibrExp::compareAmpSpectrG() {
 	c->Update();
 }
 
+
 void CalibrExp::comparePhiShifts() {
+	/// draws distance between borders for exp and modeling, so we can check how severe or not systematics of angle are 
 	readMeanshir();
 	readTrueGran1();
 	readMeanshirm();
@@ -5628,6 +4261,11 @@ void CalibrExp::comparePhiShifts() {
 	double phiSEE[27];
 	double shift[27];
 	double shiftE[27];
+
+	TFile* MyFile = new TFile((workingDir + "resultingComparisons.root").c_str(), "UPDATE");
+	TDirectory* dir = createDir("phi shifts", MyFile);
+	dir->cd();
+
 	for (size_t i = 0; i < 9; i++) {
 		phiBE[i] = truegran1[i][2] * 180. / 3.14159;
 		phiBEE[i] = truegran1mErr[i][2] * 180. / 3.14159 / 2.;
@@ -5656,6 +4294,10 @@ void CalibrExp::comparePhiShifts() {
 		shift[3 * i+2] = (truegran1m[i][3] - truegran1[i][3]) * 180. / 3.14159;
 		phiSEE[3 * i+2] = truegran1Err[i][3] * 180. / 3.14159 / 2.;
 		shiftE[3 * i+2] = max(truegran1mErr[i][3], truegran1Err[i][3]) * 180. / 3.14159 / 2.;
+
+		phiSEE[3 * i] = 0.4;
+		phiSEE[3 * i+1] = 0.4;
+		phiSEE[3 * i+2] = 0.4;
 	}
 	TGraphErrors* gro = new TGraphErrors(27, &phiSE[0], &shift[0], &phiSEE[0], &shiftE[0]);
 	TGraphErrors* grbm = new TGraphErrors(9, &phiBE[0], &shiftBM[0], &phiBEE[0], &shiftBME[0]);
@@ -5672,177 +4314,74 @@ void CalibrExp::comparePhiShifts() {
 	grbm->Draw("AP");
 	//grbe->Draw("Psame");
 
-	//TF1* f1 = new TF1("f1", "[0]*cos((x-[1])*3.14159/180.)+[2]", 0, 360);
-	//f1->SetParameters(0.5,0,-0.5);
-	//gro->Fit("f1");
-}
-
-void CalibrExp::compareEffSpectr() {
-	TFile* f1 = new TFile((workingDir + "profilesEffMod.root").c_str());
-	TFile* f2 = new TFile((workingDir + "profilesEff.root").c_str());
-	for (size_t zobl = 3; zobl < 4; zobl++) {
-		for (size_t counter = 0; counter < 9; counter++) {
-			TProfile* hprof1 = (TProfile*)f1->Get(Form("mean,sensor%d", counter + 1));
-			TProfile* hprof2 = (TProfile*)f2->Get(Form("mean,sensor%d", counter + 1));
-			hprof1->SetLineColor(2);
-			hprof1->SetLineWidth(3);
-			hprof2->SetLineWidth(2);
-			//hprof1->Rebin(3);
-			//hprof2->Rebin(2);
-			//hprof1->Divide(hprof2);
-			hprof1->Draw();
-			hprof1->GetYaxis()->SetRangeUser(0.8, 1.1);
-			hprof2->Draw("same");
-			TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			c->Update();
-			cin.get();
-		}
-	}
-}
-
-void CalibrExp::compareZAmpSpectr() {
-	TFile* f1 = new TFile((workingDir + "zprofilesmod.root").c_str());
-	TFile* f2 = new TFile((workingDir + "zprofiles.root").c_str());
-	for (size_t counter = 0; counter < 9; counter++) {
-		TProfile* hprof1 = (TProfile*)f1->Get(Form("sensor%d", counter + 1));
-		TProfile* hprof2 = (TProfile*)f2->Get(Form("sensor%d", counter + 1));
-		hprof1->SetLineColor(2);
-		hprof1->Draw();
-		hprof2->Draw("same");
-		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-		c->Update();
-		cin.get();
-	}
+	grbm->Write("between borders modeling");
+	grbe->Write("between borders experiment");
 	
+
+	TF1* f1 = new TF1("f1", "[0]*cos((x-[1])*3.14159/180.)+[2]", 0, 360);
+	f1->SetParameters(0.5,0,-0.5);
+	gro->Fit("f1");
+	cout << "fit function is: " << f1->GetParameter(0) << " * cos(x-" << f1->GetParameter(1) << ")+" << f1->GetParameter(2) << endl;
+
+	gro->Write("between mod and exp");
+
+	MyFile->Close();
 }
 
-void CalibrExp::phiShift() {
-	ifstream ifile1("/work/users/kladov/snd2k/R007-002/mapdb.dat");
-	double xfromdb[9][4][3];
-	for(size_t j = 0; j < 9; j++){
-		for(size_t i = 0; i < 4; i++){
-			for(size_t k = 0; k < 3; k++){
-				ifile1 >> xfromdb[j][i][k];
-			}
-		}
-	}
-	ifile1.close();
 
-	readTrueGran1();
-	readTruegran1m();
-	readMeanshir();
-	readMeanshirm();
-	double dbord[4][9];
-	double dbord1[4][9];
-	double dbordErr[4][9];
-	double dbord1Err[4][9];
-	double modelGran[9][4] = { 3.96954, 17.4603, 30.8096, 42.9946, 43.6686, 58.0747, 70.5603, 82.8407, 83.7598, 97.8676, 110.007, 122.273, 124.125, 138.028, 150.658, 163.491, 164.016, 178.457, 192.73, 203.046, 203.326, 217.694, 231.488, 242.669, 244.352, 258.508, 271.534, 282.903, 283.639, 298.182, 310.422, 322.809, 323.23, 337.838, 351.363, 362 };
-	for (size_t j = 0; j < 4; j++) {
-		for (size_t i = 0; i < 9; i++) {
-			//cout << truegran1[i][j] - truegran1m[i][j] << endl;
-			dbord[j][i] = (truegran1[i][j]- truegran1m[i][j]) * 180. / PI;
-			dbord1[j][i] = modelGran[i][j]- truegran1m[i][j] * 180. / PI;
-			//dbordErr[j][i] = sqrt(pow(truegran1Err[i][j],2) + pow(truegran1mErr[i][j], 2));
-			dbordErr[j][i] = 180. / PI * sqrt(pow(meanshir[i][(int)(j/1.5)]/2.,2) + pow(meanshirm[i][(int)(j/1.5)]/2., 2));
-			dbord1Err[j][i] = 180. / PI * meanshirm[i][(int)(j/1.5)]/2.;
-			cout << dbord[j][i] << "	" << dbordErr[j][i] << endl;
-		}
-		cout << endl;
+void compareShitRandTemp() {
+	/// compare theta distributions for exp and modeling
+	TFile* f1 = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2019/profilesEffMod.root");
+	TFile* f2 = new TFile("/work/users/kladov/snd2k/R006-003/maindir/2019/profilesEff.root");
+	TH1* hm0 = (TH1F*)f1->Get("theta0");
+	TH1* he0 = (TH1F*)f2->Get("theta0");
+	TH1* hm = (TH1F*)f1->Get("theta");
+	TH1* he = (TH1F*)f2->Get("theta");
+
+	vector<double> xa, xae, a, ae, xe, xee, e, ee;
+	for (size_t i = 2; i < hm0->GetNbinsX() - 1; i++) {
+		if (he0->GetBinContent(i) == 0)
+			continue;
+
+		xa.push_back(hm0->GetBinCenter(i));
+		xae.push_back(hm0->GetBinWidth(i));
+		
+		a.push_back(hm0->GetBinContent(i) / he0->GetBinContent(i));
+		ae.push_back(divisionError(hm0->GetBinContent(i), he0->GetBinContent(i), hm0->GetBinError(i), he0->GetBinError(i)));
 	}
-	
-	for (size_t i = 0; i < 9; i++) {
-		for (size_t j = 0; j < 4; j++) {
-			cout << truegran1m[i][j]* 180. / PI << endl;
-		}
-		cout << endl;
+	for (size_t i = 2; i < hm->GetNbinsX() - 1; i++) {
+		if (he->GetBinContent(i) == 0)
+			continue;
+
+		xe.push_back(hm->GetBinCenter(i));
+		xee.push_back(hm->GetBinWidth(i));
+
+		e.push_back(hm->GetBinContent(i) / he->GetBinContent(i));
+		ee.push_back(divisionError(hm->GetBinContent(i), he->GetBinContent(i), hm->GetBinError(i), he->GetBinError(i)));
 	}
-	double counters[9] = { 1.,2.,3.,4.,5.,6.,7.,8.,9. };
-	double countersErr[9] = { 0.,0.,0.,0.,0.,0.,0.,0.,0. };
-	for (size_t j = 0; j < 4; j++) {
-		TGraphErrors* gr = new TGraphErrors(9, counters, dbord[j], countersErr, dbordErr[j]);
-		gr->SetMarkerSize(0.9);
-		gr->SetMarkerStyle(20);
-		gr->SetLineColor(2);
-		//gr->Draw("AP");
-		TGraphErrors* gr1 = new TGraphErrors(9, counters, dbord1[j], countersErr, dbord1Err[j]);
-		gr1->SetMarkerSize(0.9);
-		gr1->SetMarkerStyle(20);
-		gr1->SetLineColor(3);
-		gr1->Draw("AP");
-		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-		c->Update();
-		cin.get();
-	}
+	TGraphErrors* gra = new TGraphErrors(xa.size(), &xa[0], &a[0], &xae[0], &ae[0]);
+	TGraphErrors* gre = new TGraphErrors(xe.size(), &xe[0], &e[0], &xee[0], &ee[0]);
+	gra->SetMarkerStyle(22);
+	gra->SetMarkerColor(2);
+	gre->SetMarkerStyle(22);
+
+	gre->Draw("AP");
+	//gre->GetYaxis()->SetRangeUser(0.2, 1.5);
+	gra->Draw("Psame");
 }
 
-void phisravn() {
-	CalibrExp a9;
-	CalibrExp a7;
-	a7.basedirExp = "/work/users/konctbel/calibs/R007-001/output/ntuples/MHAD2017/col/*col.root";	//directory with exp col stream files to which apply calibration
-	a7.basedirMod = "/work/users/kladov/snd2k/R007-001/2017/";										//directory with mod files after map creation
-	a7.workingDir = "/work/users/kladov/snd2k/R006-003/maindir/2017/";								//specify where to store temporary files
-	a7.dirSelectedExp = "/work/users/kladov/snd2k/R006-003/selected2017/";							//where to store selected Baba events
-	a7.dirSelectedMod = a7.workingDir + "model/selected/";											//where to store selected Baba events for modeling
-	a9.readTrueGran1();
-	a9.readTruegran1m();
-	a9.readMeanshir();
-	a9.readMeanshirm();
-	a7.readTrueGran1();
-	a7.readTruegran1m();
-	a7.readMeanshir();
-	a7.readMeanshirm();
 
-	double dbord[4][9];
-	double dbord1[4][9];
-	double dbordErr[4][9];
-	double dbord1Err[4][9];
-	double modelGran[9][4] = { 3.96954, 17.4603, 30.8096, 42.9946, 43.6686, 58.0747, 70.5603, 82.8407, 83.7598, 97.8676, 110.007, 122.273, 124.125, 138.028, 150.658, 163.491, 164.016, 178.457, 192.73, 203.046, 203.326, 217.694, 231.488, 242.669, 244.352, 258.508, 271.534, 282.903, 283.639, 298.182, 310.422, 322.809, 323.23, 337.838, 351.363, 362 };
-	for (size_t j = 0; j < 4; j++) {
-		for (size_t i = 0; i < 9; i++) {
-			//cout << truegran1[i][j] - truegran1m[i][j] << endl;
-			dbord[j][i] = (a9.truegran1[i][j] - a7.truegran1[i][j]) * 180. / PI;
-			//dbord1[j][i] = modelGran[i][j] - truegran1m[i][j] * 180. / PI;
-			dbord1[j][i] = (a9.truegran1m[i][j] - a7.truegran1m[i][j]) * 180. / PI;
-			//dbordErr[j][i] = sqrt(pow(truegran1Err[i][j],2) + pow(truegran1mErr[i][j], 2));
-			dbordErr[j][i] = 180. / PI * sqrt(pow(a9.meanshir[i][(int)(j / 1.5)] / 2., 2) + pow(a7.meanshir[i][(int)(j / 1.5)] / 2., 2));
-			dbord1Err[j][i] = 180. / PI * sqrt(pow(a9.meanshirm[i][(int)(j / 1.5)] / 2., 2) + pow(a7.meanshirm[i][(int)(j / 1.5)] / 2., 2));
-			//dbord1Err[j][i] = 180. / PI * meanshirm[i][(int)(j / 1.5)] / 2.;
-			cout << dbord[j][i] << "	" << dbordErr[j][i] << endl;
-		}
-		cout << endl;
-	}
-
-	double counters[9] = { 1.,2.,3.,4.,5.,6.,7.,8.,9. };
-	double countersErr[9] = { 0.,0.,0.,0.,0.,0.,0.,0.,0. };
-	for (size_t j = 0; j < 4; j++) {
-		TGraphErrors* gr = new TGraphErrors(9, counters, dbord[j], countersErr, dbordErr[j]);
-		gr->SetMarkerSize(0.9);
-		gr->SetMarkerStyle(20);
-		gr->SetLineColor(2);
-		gr->Draw("AP");
-		TGraphErrors* gr1 = new TGraphErrors(9, counters, dbord1[j], countersErr, dbord1Err[j]);
-		gr1->SetMarkerSize(0.9);
-		gr1->SetMarkerStyle(20);
-		gr1->SetLineColor(3);
-		gr1->Draw("same");
-		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-		c->Update();
-		cin.get();
-	}
-
-}
 
 void go(){ 
 	CalibrExp ab;
 	int cicleV = 1;
 	int chooseV = 0;
-	shwidth = 1.5;
 	while (cicleV == 1) {
 		cout << "11 - copy; 12 - findborders; 13 - findruns; 14 - zProf(2); 15- drawZ; 16 - phiProf(2); 17 - fit; 18 - meanBorders; 19 - generateMap (191 - without shifts)" << endl;
 		cout << "1 - to launch full block one (as above) - maybe I will ask someone and make it as job" << endl;
 		cout << "21 - copyMod; 22 - phiProfMod (221 - with shifts); 23 - fitMod; 24 - zProfMod; 25 - drawZ; 26 - compareExp; 27 - compareMod (271 - with shifts); 28 - compare" << endl;
 		cout << "2 to launch full modeling analisys block" << endl;
-		cout << "31 - getTspectre; 32- draw it; 33 - one iteration of amptime; 34 (48) - compareAmpSp; 35 - EffSp; 36 - zAmpSp; 37 - phiShift, 48 - borders and profiles comparison" << endl;
+		cout << "31 - getTspectre; 32- draw it; 33 - one iteration of amptime; 34 - get profile coefficients; 35 - compare EffSp; 36 - compare zAmpSp; 37 - borders and profiles comparison; 38 - phi shifts; 39 - amp distr" << endl;
 
 		cin >> chooseV;
 		cout << endl;
@@ -5852,7 +4391,7 @@ void go(){
 			cicleV = 0;
 			break;
 		case 1: {
-			shwidth = 1.5;
+			ab.shwidth = 1.5;
 			ab.copy1();
 			ab.findrunborders();
 			ab.findruns(ab.entriesInGoodRun, ab.effInGoodRun);
@@ -5878,17 +4417,15 @@ void go(){
 			break;
 		case 14:
 			ab.zraspr();
-			//ab.zraspr();
 			break;
 		case 15:
 			ab.linesforz("zprofiles.root", "allsensorsl", "allsensors0r");
 			break;
 		case 16:
-			//ab.raspr();
 			ab.raspr();
 			break;
 		case 17:
-			shwidth=1.5;
+			ab.shwidth = 1.5;
 			ab.testforfit("profiles.root","zobl");
 			break;
 		case 18:
@@ -5901,15 +4438,12 @@ void go(){
 			ab.modelfile(false);
 			break;
 		case 2: {
-			shwidth = 1.5;
+			ab.shwidth = 1.5;
 			ab.copymod();
 			ab.rasprmod(false);
 			ab.testforfit("profilesmmod.root","mean");
 			ab.zrasprmod(); 
 			ab.linesforz("zprofilesmod.root","allsensors","allsensors0");
-			ab.compare1();
-			ab.compare2(false);
-			ab.compare();
 			break;
 		}
 		case 21:
@@ -5922,7 +4456,7 @@ void go(){
 			ab.rasprmod(true);
 			break;
 		case 23:
-			shwidth = 1.5;
+			ab.shwidth = 1.5;
 			ab.testforfit("profilesmmod.root","mean");
 			break;
 		case 24: {
@@ -5966,13 +4500,13 @@ void go(){
 			ab.compareZAmpSpectr();
 			break;
 		case 37:
-			ab.phiShift();
-			break;
-		case 48:
 			ab.compareAmpSpectrG();
 			break;
-		case 50:
+		case 38:
 			ab.comparePhiShifts();
+			break;
+		case 39:
+			ab.compareAmpDistributions();
 			break;
 		default:
 			break;

@@ -147,18 +147,19 @@ int getlist() {
 	fout.close();*/
 	
 	vector<TString> ans;
-	TString basedir = "/work/users/kladov/snd2k/R007-001/2019/*.hbook";
+	TString basedir = "/work/users/kladov/snd2k/R007-002/2019/*.hbook";
 	//TString basedir = "/online/simulation/MC/R006-004/ee/output/*.mod.gz";
 	TString files = gSystem->GetFromPipe("ls " + basedir);
 	TString elem;
 	Ssiz_t from = 0;
 	while (files.Tokenize(elem, from, "\n")) {
 		ans.push_back(elem);
+		//cout << elem << endl;
 	}
 	int vector_size = ans.size();
 	TString str = "a";
 	TString str1 = "b";
-	fout << "source /work/snd2000/root/setup2k.sh i386-SL5-debug" << endl << "source/etc/sysconfig/gridengine_nsu" << endl << endl;
+	fout << "source /work/snd2000/root/setup2k.sh i386-SL5-opt-debug" << endl << "source/etc/sysconfig/gridengine_nsu" << endl << endl;
 	for (int i = 0; i < vector_size; i++) {
 		str = ans[i].Copy();
 		str1 = ans[i].Copy();
@@ -173,17 +174,18 @@ int getlist() {
 			tokens.push_back(tok);
 		}
 		while (str1.Tokenize(tok1, from1, "[/.]")) {
-			//cout << tok << endl;
+			//cout << tok1 << endl;
 			tokens1.push_back(tok1);
 		}
 
 		//cout << tokens1[6] << endl;
 
-		const char* a0 = (const char*)tokens[9];
+		const char* a0 = (const char*)tokens[10];
 		int a = atoi(a0);
+		//cout << a << endl;
 		if (a > 27250 && a > 37919 && a < 42827) {
-			fout << ".mainrelease/Offline/submit.sh -q clusters,1440 FAKERUN=" << a << " MODFILENAME=" << tokens1[6] << "     MODFILEDIR=/online/simulation/MC/R006-004/ee/output/ HBOOKDIR=./2019/  SimRecApp fwk/simreco_col_point.fwk" << endl;
-			cout << "h2root " << "2019/" << tokens1[6] << ".hbook " << "2019/" << tokens1[6] << ".root" << (char)59 << " ";
+			fout << ".mainrelease/Offline/submit.sh -q clusters,1440 FAKERUN=" << a << " MODFILENAME=" << tokens1[7] << "     MODFILEDIR=/online/simulation/MC/R006-004/ee/output/ HBOOKDIR=./2019/  SimRecApp fwk/simreco_col_point.fwk" << endl;
+			cout << "h2root " << "2019/" << tokens1[7] << ".hbook " << "2019/" << tokens1[7] << ".root" << (char)59 << " ";
 		}
 		
 	}
@@ -283,7 +285,7 @@ void getCalibRuns(string calName, bool read) {
 	}
 }
 
-//pscp D:\workProgramms\listoffiles.cpp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R006-003/maindir/listoffiles.cpp
+//pscp D:\workProgramms\cherenkovCalibration\listoffiles.cpp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R006-003/maindir/listoffiles.cpp
 //pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/fwk/simflist.fwi D:\simflist.txt
 
 
