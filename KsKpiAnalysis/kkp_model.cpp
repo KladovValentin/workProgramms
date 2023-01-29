@@ -54,35 +54,6 @@
 #include "TAxis.h"
 
 
-double temparrayE2011[41] = {510.5, 525, 537.5, 550, 562.5, 575, 587.5, 600, 612.5, 625, 637.5, 650, 662.5, 675, 687.5, 700, 712.5, 725, 737.5, 750, 762.5, 775, 787.5, 800, 812.5, 825, 837.5, 850, 862.5, 875, 887.5, 900, 912.5, 925, 935, 945, 950, 962.5, 975, 987.5, 1000};
-//double temparrayE2011[25] = {712.5, 725, 737.5, 750, 762.5, 775, 787.5, 800, 812.5, 825, 837.5, 850, 862.5, 875, 887.5, 900, 912.5, 925, 935, 945, 950, 962.5, 975, 987.5, 1000};
-double temparraydE2011[41] = { 454.382, 478.319, 541.344, 524.745, 529.335, 522.558, 524.538, 534.044, 531.015, 532.518, 534.64, 505.007, 527.997, 505.063, 526.018, 496.186, 552.671, 519.782, 534.653, 1074.09, 527.142, 540.323, 541.752, 525.711, 538.466, 512.586, 537.793, 526.935, 547.567, 522.779, 542.942, 492.381, 558.21, 526.207, 543.09, 534.995, 474.281, 494.361, 481.722, 500.974, 480.053 };
-//double temparraydE2011[41] = {667.491, 676.499, 673.06, 667.055, 672.703, 669.067, 668.95, 671.122, 669.824, 668.622, 674.237, 658.593, 672.157, 659.678, 667.867, 653.578, 681.1, 667.45, 674.208, 662.667, 668.973, 671.764, 676.031, 673.469, 672.878, 664.36, 675.005, 666.756, 676.974, 670.569, 679.697, 671.171, 681.507, 676.257, 683.036, 676.602, 669.235, 669.884, 668.304, 676.59, 668.943};
-//double temparraydE2011[25] = {681.1, 667.45, 674.208, 662.667, 668.973, 671.764, 676.031, 673.469, 672.878, 664.36, 675.005, 666.756, 676.974, 670.569, 679.697, 671.171, 681.507, 676.257, 683.036, 676.602, 669.235, 669.884, 668.304, 676.59, 668.943};
-
-//double temparrayE2011[25] = {712.5, 725, 737.5, 750, 762.5, 775, 787.5, 800, 812.5, 825, 837.5, 850, 862.5, 875, 887.5, 900, 912.5, 925, 935, 945, 950, 962.5, 975, 987.5, 1000};
-//double temparraydE2011[25] = {628.104, 612.092, 621.343, 614.365, 616.937, 619.699, 623.654, 618.042, 620.558, 606.827, 621.242, 612.074, 622.695, 612.71, 624.236, 628.149, 625.437, 615.705, 624.96, 617.568, 597.489, 606.168, 599.665, 603.833, 598.85};
-//double temparraydE2011[25] = {658.211, 643, 652.637, 644.916, 647.679, 650.025, 653.886, 649.248, 651.457, 637.787, 651.793, 641.716, 652.657, 642.615, 654.763, 664.697, 654.299, 646.084, 656.114, 648.224, 633.268, 639.662, 634.477, 637.33, 633.334};
-
-double temparrayE2012[25] = {505.3, 508, 509, 509.16, 510, 511, 512, 512.299, 513, 640, 680, 720, 760, 800, 840, 860, 880, 900, 920, 936, 950, 960, 970, 980, 990};
-double temparraydE2012[25] = { 271.106, 256.058, 246.169, 223.335, 209.316, 278.774, 199.951, 553.503, 194.777, 499.562, 546.499, 534.244, 537.816, 537.936, 539.296, 532.78, 517.295, 531.966, 506.613, 526.644, 523.712, 521.012, 509.934, 491.007, 457.576 };
-//double temparraydE2012[25] = {663.131, 661.548, 661.114, 661.348, 660.537, 657.828, 657.256, 657.551, 656.726, 659.901, 674.224, 675.999, 679.889, 680.174, 679.888, 679.717, 680.06, 681.697, 682.396, 682.911, 682.312, 687.014, 682.002, 678.519, 678.87};
-		
-double temparrayE2017[25] = {641, 650, 675, 700, 725, 750, 775, 800, 825, 840, 937.5, 938.299, 938.899, 939.6, 940.2, 940.799, 942, 950, 960, 970, 980, 990, 1000, 1003, 1003.5};
-double temparraydE2017[25] = { 479.5, 469.341, 567.696, 645.29, 520.767, 565.233, 567.633, 606.596, 597.607, 454.387, 517.799, 429.772, 442.747, 428.076, 447.762, 585.478, 451.692, 504.218, 405.881, 388.087, 476.957, 483.759, 451.058, 489.836, 504.781 };
-//double temparraydE2017[25] = {678.093, 678.551, 685.889, 690.533, 685.975, 687.116, 688.196, 689.187, 690.504, 683.958, 689.022, 683.551, 685.126, 683.597, 687.259, 693.601, 687.821, 689.2, 684.379, 682.569, 687.17, 689.363, 686.795, 626.044, 669.004};
-
-//double energiesMod2011[24] = {712.5, 725, 737.5, 750, 762.5, 775, 787.5, 800, 812.5, 825, 837.5, 850, 862.5, 875, 887.5, 900, 912.5, 925, 935, 945, 950, 962.5, 975, 987.5};
-double energiesMod2011[34] = { 600, 612.5, 625, 637.5, 650, 662.5, 675, 687.5, 700, 712.5, 725, 737.5, 750, 762.5, 775, 787.5, 800, 812.5, 825, 837.5, 850, 862.5, 875, 887.5, 900, 912.5, 925, 935, 945, 950, 962.5, 975, 987.5 , 1000 };
-double efficienciesMod2011[34] = {0.0606788, 0.105458, 0.129497, 0.157937, 0.168477, 0.172677, 0.177356, 0.168957, 0.148457, 0.135577, 0.136217, 0.139097, 0.138489, 0.127017, 0.118818, 0.116038, 0.106218, 0.105838, 0.102558, 0.101218, 0.0952781, 0.0938381, 0.0887582, 0.0814184, 0.0754585, 0.0739385, 0.0680186, 0.0670987, 0.0641987, 0.0593588, 0.0591588, 0.0555389, 0.0572189 , 0.0540989 };
-//double efficienciesMod2011[24] = {0.124595, 0.116131, 0.112509, 0.102764, 0.0982206, 0.0951253, 0.0899502, 0.0836739, 0.0862153, 0.0787446, 0.078604, 0.0773094, 0.0783167, 0.0760487, 0.0705346, 0.0717419, 0.0723049, 0.0695546, 0.0701623, 0.0700201, 0.0677261, 0.0651169, 0.0628661, 0.0631473};
-
-double energiesMod2012[16] = {640, 680, 720, 760, 800, 840, 860, 880, 900, 920, 936, 950, 960, 970, 980, 990};
-double efficienciesMod2012[16] = {0.130117, 0.159937, 0.150717, 0.111978, 0.0890582, 0.0874383, 0.0833983, 0.0711786, 0.0732185, 0.0685786, 0.0625187, 0.0628987, 0.0564589, 0.0588788, 0.0589788, 0.0579988};
-
-double energiesMod2017[24] = {641, 650, 675, 700, 725, 750, 775, 800, 825, 840, 936, 937.5, 938.899, 938.299, 939.6, 940.2, 940.799, 942, 950, 960, 970, 980, 990, 1000};
-double efficienciesMod2017[24] = {0.0591988, 0.0709986, 0.100398, 0.0965981, 0.136377, 0.131317, 0.121538, 0.115758, 0.113598, 0.112478, 0.0817184, 0.0800392, 0.0807384, 0.0785984, 0.0810784, 0.0793584, 0.0818784, 0.0800784, 0.0806184, 0.0773185, 0.0774985, 0.0759185, 0.0752185, 0.0752185, };
-
 struct Entryvar {  //parameters of entry
 	float phi[40], phis[40], ach[40], achr[40], theta[40], z0[40], schr[40], tch[40], tchr[40], energy[40], beam, eton, x0[40], y0[40], d0[40], dExs[40], dExnC[40], dExn[40];  //kinematic, counters parameters float
 	float d2phi[40], dphirho[40], d2rho[40], d2z0[40], d2cosTh[40], dz0cosTh[40], Dtheta[40], Dphi[40], energyerr[40];  //errors afrer reconstruction
@@ -95,53 +66,51 @@ struct Entryvar {  //parameters of entry
 	float mctheta[40], mcphi[40], mcpx[40], mcpy[40], mcpz[40], mce[40];	//montecarlo modeling
 	int mcpdg[40], nmc;	//montecarlo modeling
 };
-//Entryvar sEntr;
-
-//"(x2ikf1 < 50 && ((((ppkf1[0] < 350 && dExs[ipkf1[0]-1] > 600. * (ppkf1[0]*ppkf1[0] + 320.*320.)/(ppkf1[0]*ppkf1[0]) * (log((ppkf1[0]*ppkf1[0])/(320.*320.)) - (ppkf1[0]*ppkf1[0])/(ppkf1[0]*ppkf1[0] + 320.*320.) + 6.5)) || ((ppkf1[0] >= 350) && (amplitude[ipkf1[0]-1] > 500 || amplitude[ipkf1[0]-1] < 0.22) && region[ipkf1[0]-1] == 1)) && ((ppkf1[1] < 350 && dExs[ipkf1[1]-1] < 600. * (ppkf1[1]*ppkf1[1] + 320.*320.)/(ppkf1[1]*ppkf1[1]) * (log((ppkf1[1]*ppkf1[1])/(320.*320.)) - (ppkf1[1]*ppkf1[1])/(ppkf1[1]*ppkf1[1] + 320.*320.) + 6.5)) || ((ppkf1[1] >= 350) && (amplitude[ipkf1[1]-1] < 500 && amplitude[ipkf1[1]-1] > 0.22) && region[ipkf1[1]-1] == 1))) ||  (((ppkf1[0] < 350 && dExs[ipkf1[0]-1] < 600. * (ppkf1[0]*ppkf1[0] + 320.*320.)/(ppkf1[0]*ppkf1[0]) * (log((ppkf1[0]*ppkf1[0])/(320.*320.)) - (ppkf1[0]*ppkf1[0])/(ppkf1[0]*ppkf1[0] + 320.*320.) + 6.5)) || ((ppkf1[0] >= 350) && (amplitude[ipkf1[0]-1] < 500 && amplitude[ipkf1[0]-1] > 0.22) && region[ipkf1[0]-1] == 1)) && ((ppkf1[1] < 350 && dExs[ipkf1[1]-1] > 600. * (ppkf1[1]*ppkf1[1] + 320.*320.)/(ppkf1[1]*ppkf1[1]) * (log((ppkf1[1]*ppkf1[1])/(320.*320.)) - (ppkf1[1]*ppkf1[1])/(ppkf1[1]*ppkf1[1] + 320.*320.) + 6.5)) || ((ppkf1[1] >= 350) && (amplitude[ipkf1[1]-1] > 500 || amplitude[ipkf1[1]-1] < 0.22) && region[ipkf1[1]-1] == 1)))) && eton>0.3 && eton < 0.8 && (d0[ipkf1[0] - 1] > -0.5) && (d0[ipkf1[0] - 1] < 0.5) && (z0[ipkf1[0] - 1] > -10) && (z0[ipkf1[0] - 1] < 10) && (d0[ipkf1[1] - 1] > -0.5) && (d0[ipkf1[1] - 1] < 0.5) && (z0[ipkf1[1] - 1] > -10) && (z0[ipkf1[1] - 1] < 10) && (z0[ipkf1[0] - 1] - z0[ipkf1[1] - 1]) < 1.5 && (z0[ipkf1[0] - 1] - z0[ipkf1[1] - 1]) > -1.5 && (theta[ipkf1[0] - 1] > 30 * 3.14159 / 180. && theta[ipkf1[0] - 1] < 150 * 3.14159 / 180.) && (theta[ipkf1[1] - 1] > 30 * 3.14159 / 180. && theta[ipkf1[1] - 1] < 150 * 3.14159 / 180.))"
 
 using namespace std;
 double PI = 3.14159;
 double scalrad = 180. / PI;
-double normcoeff = 671.395;
 
-//_________section of ee analisys for luminosity
+char* baseDataFile = "a";
+
+double divisionError(double divident, double divider, double dividentErr, double dividerErr) {
+	//just summing up dispersions 
+	return sqrt(pow(dividentErr / divider, 2) + pow(dividerErr / divider * divident / divider, 2));
+}
+
+// return for arrays like temparrayE2011, temparraydE2012
+vector<double> readColumnInDataFile(size_t columnIndex) {
+	ifstream ifile(baseDataFile);
+	vector<double> outVector;
+	double inLine[3];
+	while (ifile.get() != EOF) {
+		for (size_t i = 0; i < 3; i++)
+			ifile >> inLine[i];
+		cout << inLine[columnIndex] << endl;
+		outVector.push_back(inLine[columnIndex]);
+	}
+	ifile.close();
+	return outVector;
+}
+vector<double> getExpPoints() {
+	return readColumnInDataFile(0);
+}
+vector<double> getdEdxInfo() {
+	return readColumnInDataFile(1);
+}
 
 
+//_________section of ee analisys for luminosity__________________
+
+/// ordinary lum calculation -> energy points for bhabha (m,exp), luminosity, systematics/systematic graphs
+/// dedx - > list of points, dedx coefficients
+/// ideally all points should be as for the experiment 
 
 class luminCalculation {
-public:
-	Entryvar sEntr;
-	float phi[40], phis[40], ach[40], achr[40], theta[40], z0[40], schr[40], tch[40], tchr[40], energy[40], beam, eton, x0[40], y0[40], d0[40], dExs[40], dExnC[40], dExn[40];  //kinematic, counters parameters float
-	float d2phi[40], dphirho[40], d2rho[40], d2z0[40], d2cosTh[40], dz0cosTh[40], Dtheta[40], Dphi[40], energyerr[40];  //errors afrer reconstruction
-	int nch, run, nc, nn, cosm, eventtime, act, cact , region[40], col;     //parameters int
-	float amplitude[40], amplitudeE[40]; //cherenkov general amplitude
-	float x2ikf1, ppkf1[11], thetakf1[11], phikf1[11];  //kinfit
-	int npkf1[11], ipkf1[11];   //kinfit 
-	float x2ikf2, ppkf2[11], thetakf2[11], phikf2[11];  //kinfit
-	int npkf2[11], ipkf2[11];   //kinfit 
-	float mctheta[40], mcphi[40], mcpx[40], mcpy[40], mcpz[40], mce[40];	//montecarlo modeling
-	int mcpdg[40], nmc;	//montecarlo modeling
-	float dEx1C[10], dEx2C[10], dEx3C[10], dEx4C[10], dEx5C[10], dEx6C[10], dEx7C[10], dEx8C[10], dEx9C[10];
-
-	double thetacut;
-	double energycutl;
-	double energycutr;
-	double dphicut;
-	double dthetacut;
-	double d0cut;
-	double z0cut;
-	TProfile* dedxm;
-	TProfile* dedxe;
+private:
 
 	vector<double> energyPoints;
 	vector<int> countModEventsEE;
-
-	vector<double> meandExn;
-	vector<double> meandExnErr;
-	vector<double> meandExnC;
-	vector<double> meandExnCErr;
-	vector<double> dExnpopr;
-	vector<double> dExnpoprErr;
 
 	vector<double> effem;
 	vector<double> efftm;
@@ -208,17 +177,24 @@ public:
 	vector<double> varwidths;
 	vector< vector<double> > parameters[8];
 
-	luminCalculation(){
+public:
+	Entryvar sEntr;
+	float phi[40], phis[40], ach[40], achr[40], theta[40], z0[40], schr[40], tch[40], tchr[40], energy[40], beam, eton, x0[40], y0[40], d0[40], dExs[40], dExnC[40], dExn[40];  //kinematic, counters parameters float
+	float d2phi[40], dphirho[40], d2rho[40], d2z0[40], d2cosTh[40], dz0cosTh[40], Dtheta[40], Dphi[40], energyerr[40];  //errors afrer reconstruction
+	int nch, run, nc, nn, cosm, eventtime, act, cact, region[40], col;     //parameters int
+	float amplitude[40], amplitudeE[40]; //cherenkov general amplitude
+	float x2ikf1, ppkf1[11], thetakf1[11], phikf1[11];  //kinfit
+	int npkf1[11], ipkf1[11];   //kinfit 
+	float x2ikf2, ppkf2[11], thetakf2[11], phikf2[11];  //kinfit
+	int npkf2[11], ipkf2[11];   //kinfit 
+	float mctheta[40], mcphi[40], mcpx[40], mcpy[40], mcpz[40], mce[40];	//montecarlo modeling
+	int mcpdg[40], nmc;	//montecarlo modeling
+	float dEx1C[10], dEx2C[10], dEx3C[10], dEx4C[10], dEx5C[10], dEx6C[10], dEx7C[10], dEx8C[10], dEx9C[10];
+
+	const double thetacut, energycutl, energycutr, dphicut, dthetacut, d0cut, z0cut;
+
+	luminCalculation() : thetacut(45.), energycutl(0.25), energycutr(0.25), dphicut(0.16), dthetacut(0.25), d0cut(1.0), z0cut(3.0) {
 		col = 0;
-		thetacut = 45.;
-		energycutl = 0.25; //!!! 0.25
-		energycutr = 0.25; //0.2 - strong cuts for systematic analysis
-		dphicut = 0.16;
-		dthetacut = 0.25;
-		d0cut = 1.0;   //wide cuts to ignore discrepancies in mod with exp
-		z0cut = 3.0;
-		//dedxm = new TProfile("dedxm","mod dExn vs energy", 100,400,1400);
-		//dedxe = new TProfile("dedxe","exp dExnC vs energy", 100,400,1400);
 		vector<double> vtd;
 		vector<int> vti;
 		for(size_t i = 0; i < 7; i++)
@@ -308,6 +284,9 @@ public:
 		int indET2 = abs(indET-1);
 		return (col == 1) && partnumb() && energy0cut(cutvector[0],cutvector[1],indET) && energy1cut(cutvector[0],cutvector[1],indET2) && actb((int)cutvector[7]) && dtheta(cutvector[2]) && thetag(cutvector[3]) && dphi(cutvector[4]) && dd0cut(cutvector[5]) && dz0cut(cutvector[6]);
 	}
+	bool isItEE() {
+		return isItEE(&baseparam[0]);
+	}
 	bool isItEEEn0() {
 		int indET = 0;//rand() % 2;
 		int indET2 = abs(indET-1);
@@ -319,9 +298,9 @@ public:
 		return (col == 1) && partnumb() && energy1cut(baseparam[0],baseparam[1],indET2) && actb((int)baseparam[7]) && dtheta(baseparam[2]) && thetag(baseparam[3]) && dphi(baseparam[4]) && dd0cut(baseparam[5]) && dz0cut(baseparam[6]);
 	}
 	bool isItEETheta() {
-		int indET = rand() % 2;
-		int indET2 = abs(indET-1);
-		return (col == 1) && partnumb() &&  energy0cut(baseparam[0],baseparam[1],indET) && energy1cut(baseparam[0],baseparam[1],indET2)  && actb((int)baseparam[7]) && dtheta(baseparam[2]) && dphi(baseparam[4]) && dd0cut(baseparam[5]) && dz0cut(baseparam[6]);
+		vector<double> tempPar = baseparam;
+		tempPar[3] = 90.;
+		return isItEE(&tempPar[0]);
 	}
 	bool isItEESTheta() {
 		int indET = rand() % 2;
@@ -347,6 +326,48 @@ public:
 		int indET = rand() % 2;
 		int indET2 = abs(indET-1);
 		return (col == 1) && partnumb() &&  energy0cut(baseparam[0],baseparam[1],indET) && energy1cut(baseparam[0],baseparam[1],indET2)  && dtheta(baseparam[2]) && thetag(baseparam[3]) && dphi(baseparam[4]) && dd0cut(baseparam[5]) && dz0cut(baseparam[6]);
+	}
+
+	pair<bool, size_t> isItNewPoint(vector<double> points, double point) {
+		bool newEnPoint = true;
+		size_t pointIndex = points.size();
+		for (size_t i = 0; i < points.size(); i++) {
+			if (points[i] != (double)point)
+				continue;
+			newEnPoint = false;
+			pointIndex = (int)i;
+		}
+		return std::make_pair(newEnPoint, pointIndex);
+	}
+	int findClosestIndToArr(vector<double> expPoints, double point) {
+		int closestPind = -1;
+		double mindist = 100000;
+		for (size_t i = 0; i < expPoints.size(); i++) {
+			if (fabs(point - expPoints[i]) > mindist)
+				continue;
+			mindist = fabs(point - expPoints[i]);
+			closestPind = (int)i;
+		}
+		return closestPind;
+	}
+	vector<double> sortByAnotherArray(vector<double> arrToSort, vector<double> arrByWhichToSort) {
+		vector<double> arrByWhichToSortCopy(arrByWhichToSort);
+		double tp = 0;
+		for (size_t i = 0; i < arrByWhichToSortCopy.size(); i++) {
+			for (size_t j = 0; j < arrByWhichToSortCopy.size() - i - 1; j++) {
+				if (arrByWhichToSortCopy[j] < arrByWhichToSortCopy[j + 1])
+					continue;
+
+				tp = arrByWhichToSortCopy[j];
+				arrByWhichToSortCopy[j] = arrByWhichToSortCopy[j + 1];
+				arrByWhichToSortCopy[j + 1] = tp;
+
+				tp = arrToSort[j];
+				arrToSort[j] = arrToSort[j + 1];
+				arrToSort[j + 1] = tp;
+			}
+		}
+		return arrToSort;
 	}
 
 	void effEeEnergy(char* name, char* add, char* file);
@@ -399,7 +420,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 	map<double, TH1*> hPhim;
 	map<double, TH1*> hDd0m;
 	map<double, TH1*> hDz0m;
-	TProfile* dedxT = new TProfile("dedxm","mod dExn vs energy", 100,400,1400);
 
 	vector<double> alle;
 	vector<double> allt;
@@ -415,8 +435,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 	vector<double> passd;
 	vector<double> passz;
 	vector<double> passc;
-	
-	vector<int> ndExncount;
 
 	vector<TH1*> hE0;// = new TH1F("hE0", "energy0/beam", 100, 0, 2);
 	vector<TH1*> hE1;// = new TH1F("hE1", "energy1/beam", 100, 0, 2);
@@ -427,22 +445,13 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 	vector<TH1*> hDz0;// = new TH1F("hDz0", "z01 - z02", 100, -15, 15);
 	vector<TH1*> hdExn;// = new TH1F("hDz0", "z01 - z02", 100, -15, 15);
 
-	vector<TH1*> dEdxMod1;
-	vector<TH1*> dEdxExp1;
-
 	TFile* MyFile = new TFile(file, "RECREATE");
 	
 	for (int e = 0; e < entries; e++) {
 		chain.GetEntry(e);
-		bool newEnPoint = true;
-		size_t pointIndex = energyPoints.size();
-		for (size_t i = 0; i < energyPoints.size(); i++) {
-			if (energyPoints[i] == (double)beam) {
-				newEnPoint = false;
-				pointIndex = (int)i;
-			}
-		}
-		if (newEnPoint) {
+		pair<bool, size_t> newEnPoint = isItNewPoint(energyPoints, (double)beam);
+		size_t pointIndex = newEnPoint.second;
+		if (newEnPoint.first) {
 			energyPoints.push_back((double)beam);
 			countModEventsEE.push_back(1);
 			for(size_t i = 0; i < 8; i++){
@@ -458,7 +467,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 			hPhi.push_back(new TH1F(Form("hPhi%f", energyPoints.back()), "phi1 - phi2 - pi", 100, -0.5, 0.5));
 			hDd0.push_back(new TH1F(Form("hDd0%f", energyPoints.back()), "d01 - d02", 100, -1.5, 1.5));
 			hDz0.push_back(new TH1F(Form("hDz0%f", energyPoints.back()), "z01 - z02", 100, -10, 10));
-			hdExn.push_back(new TH1F(Form("hdExn%f", energyPoints.back()), ";dE/dx", 100, 0, 10000));
 
 			alle.push_back(0.);
 			allt.push_back(0.);
@@ -474,16 +482,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 			passd.push_back(0);
 			passz.push_back(0);
 			passc.push_back(0);
-			ndExncount.push_back(0);
-			if (b.Contains("eemod")) {
-				meandExn.push_back(0);
-				cout << Form("histbad%d", (int)pointIndex) << endl;
-				dEdxMod1.push_back(new TH1F(Form("histbad%d", (int)pointIndex), ";dE/dx", 1000, 0, 5000));
-			}
-			if (b.Contains("MHAD")) {
-				meandExnC.push_back(0);
-				dEdxExp1.push_back(new TH1F(Form("dEdxExp1%d", (int)pointIndex), ";dE/dx", 1000, 0, 10));
-			}
 		}
 		else
 			countModEventsEE[pointIndex] += 1;
@@ -535,63 +533,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 			if (isItEE(&parameters[0][0][0]))
 				passc[pointIndex]+=1;
 		}
-
-		
-		if (isItEE(&parameters[0][0][0])) {
-			//cout << b << endl;
-			if (b.Contains("eemod")){
-				int closestPind = -1;
-				double mindist = 1000;
-				for (size_t i = 0; i < 41; i++) {
-			
-					if (fabs(beam - temparrayE2011[i]) < mindist) {
-						mindist = fabs(beam - temparrayE2011[i]);
-						closestPind = i;
-					}
-				}
-				hdExn[pointIndex]->Fill(dExn[0]/temparraydE2011[closestPind]);
-				hdExn[pointIndex]->Fill(dExn[1]/temparraydE2011[closestPind]);
-				//hdExn[pointIndex]->Fill(dExn[0]);
-				//hdExn[pointIndex]->Fill(dExn[1]);
-				dEdxMod1[pointIndex]->Fill(dExn[0]);
-				dEdxMod1[pointIndex]->Fill(dExn[1]);
-				//if(dExn[0]/680. < 3.5 && dExn[1]/680. < 3.5){
-					//cout << energy[0] << "	" << dExn[0] << endl;
-					dedxT->Fill(beam, dExn[0]);
-					dedxT->Fill(beam, dExn[1]);
-					ndExncount[pointIndex]+=1;
-					meandExn[pointIndex] = meandExn[pointIndex] + ((dExn[0]+dExn[1])/2. - meandExn[pointIndex])/(ndExncount[pointIndex]);
-				//}
-			}
-			if (b.Contains("MHAD")){
-				double partialded[2][9] = {dEx1C[0], dEx2C[0], dEx3C[0], dEx4C[0], dEx5C[0], dEx6C[0], dEx7C[0], dEx8C[0], dEx9C[0], \
-										   dEx1C[1], dEx2C[1], dEx3C[1], dEx4C[1], dEx5C[1], dEx6C[1], dEx7C[1], dEx8C[1], dEx9C[1]};
-				double dExnTrue[2] = { 0., 0. };
-				double maxValue[2] = { -1, -1 };
-				size_t maxIndex[2] = { 0, 0 };
-				for (size_t j = 0; j < 2; j++) {
-					for (size_t i = 0; i < 9; i++) {
-						dExnTrue[j] += partialded[j][i];
-						if (partialded[j][i] > maxValue[j]) { maxValue[j] = partialded[j][i];  maxIndex[j] = i; } //find maximum
-					}
-					dExnTrue[j] = (dExnTrue[j] - partialded[j][maxIndex[j]])/8.; //subtract maximum value
-				}
-
-				hdExn[pointIndex]->Fill(dExnTrue[0]);
-				hdExn[pointIndex]->Fill(dExnTrue[1]);
-				dEdxExp1[pointIndex]->Fill(dExnTrue[0]);
-				dEdxExp1[pointIndex]->Fill(dExnTrue[1]);
-				//cout << energy[0] << "	" << dExnC[0] << endl;
-				//dedxT->Fill(beam, dExnC[0]);
-				//dedxT->Fill(beam, dExnC[1]);
-				//if(dExnTrue[0] > 0.01 && dExnTrue[1] > 0.01){
-					dedxT->Fill(beam, dExnTrue[0]);
-					dedxT->Fill(beam, dExnTrue[1]);
-					ndExncount[pointIndex]+=1;
-					meandExnC[pointIndex] = meandExnC[pointIndex] + ((dExnTrue[0] + dExnTrue[1]) / 2. - meandExnC[pointIndex]) / (ndExncount[pointIndex]);
-				//}
-			}
-		}
 		
 		for(size_t i = 0; i < 8; i++){
 			//cout << parameters[i][0][i] << endl;
@@ -617,11 +558,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 		hPhi[i]->Write(Form("hPhi_%.3f", energyPoints[i]));
 		hDd0[i]->Write(Form("hDd0_%.3f", energyPoints[i]));
 		hDz0[i]->Write(Form("hDz0_%.3f", energyPoints[i]));
-		hdExn[i]->Write(Form("hdExn_%.3f", energyPoints[i]));
-		if (b.Contains("eemod"))
-			dEdxMod1[i]->Write(Form("histbad%d", (int)i));
-		else if (b.Contains("MHAD"))
-			dEdxExp1[i]->Write(Form("histbad%d", (int)i));
 	}
 	MyFile->Close();
 
@@ -662,37 +598,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 		}
 	}
 
-	char* fileToSaveDeh = "";
-	if (b.Contains("eemod")) {
-		fileToSaveDeh = "/work/users/kladov/snd2k/R007-001/hDexnMod.root";
-	}
-	else if (b.Contains("MHAD")) {
-		fileToSaveDeh = "/work/users/kladov/snd2k/R007-001/hDexnExp.root";
-	}
-	TFile* MyFile1 = new TFile(fileToSaveDeh, "RECREATE");
-	for (size_t i = 0; i < energyPoints.size(); i++) {
-		if (b.Contains("eemod")) {
-			meandExnErr.push_back(200. / sqrt(ndExncount[i]));   //taken from histogramm for modeling
-			cout << energyPoints[i] << endl;
-			cout << dEdxMod1[i] << endl;
-			//hdExn[i]->Write(Form("histbad%d", (int)i));
-			//hdExn[i]->Draw();
-			//cout << dEdxMod1[i]->GetEntries() << "	" << i << endl;
-			//dEdxMod1[i]->Draw();
-			//TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			//c->Update();
-			//cin.get();
-		}
-		else if (b.Contains("MHAD")) {
-			meandExnCErr.push_back(0.4 / sqrt(ndExncount[i]));
-			//dEdxExp1[i]->Write(Form("histbad%d", (int)i));
-			//dEdxExp1[i]->Draw();
-			//TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-			//c->Update();
-		}
-	}
-	MyFile1->Close();
-
 	/*for (size_t i = 0; i < energyPoints.size(); i++) {
                 energyMod.push_back(energyPoints[i]);
                 efficiency.push_back((double)countSelectedEventsEE[i] / (double)countModEventsEE[i]);
@@ -716,7 +621,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 	cin.get();*/
 	cout << "b" << endl;
 	if (b.Contains("eemod")){
-		dedxm = dedxT;
 
 		for (size_t i = 0; i < energyPoints.size(); i++) {
 			if(alle[i]<1)
@@ -751,7 +655,6 @@ void luminCalculation::effEeEnergy(char *name, char *add, char *file) {
 		}
 	}
 	if (b.Contains("MHAD")){
-		dedxe = dedxT;
 
 		for (size_t i = 0; i < energyPoints.size(); i++) {
 
@@ -886,7 +789,6 @@ double crossSectNb(double en) {
 	//return 465.251 / e3 / e3 * (1 + 0.0132513 * e3);
 	//return 610.251 / e3 / e3 * (1 + 0.0522513 * e3);
 }
-
 
 //calculate luminosity using copied arrays from effEeEnergy output
 void luminCalculation::pointComparisonAndSort() {
@@ -1043,16 +945,6 @@ void luminCalculation::pointComparisonAndSort() {
 				dtp = dpoprc[j];
 				dpoprc[j] = dpoprc[j + 1];
 				dpoprc[j + 1] = dtp;
-
-
-				//dExn
-				tp = dExnpopr[j];
-				dExnpopr[j] = dExnpopr[j + 1];
-				dExnpopr[j + 1] = tp;
-				dtp = dExnpoprErr[j];
-				dExnpoprErr[j] = dExnpoprErr[j + 1];
-				dExnpoprErr[j + 1] = dtp;
-
 			}
 	
 		}
@@ -1160,7 +1052,6 @@ void luminCalculation::luminosityCalc() {
 	//effEeEnergy("h1", "/work/users/kladov/snd2k/R007-001/2019/*0.root", "/work/users/kladov/snd2k/R007-001/2019/lumdistrMod.root");
 	
 	//effEeEnergy("t1", "/work/users/kladov/snd2k/R007-002/output/ntuples/eemod/2017n/*odch*x.root", "/work/users/kladov/snd2k/R007-001/2017/lumdistrMod.root");
-	effEeEnergy("t1", "/work/users/kladov/snd2k/R007-002/output/ntuples/eemod/2012n/dEdx/*x.root", "/work/users/kladov/snd2k/R007-001/2012/lumdistrMod.root");
 	//effEeEnergy("t1", "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2017/*col.root", "/work/users/kladov/snd2k/R007-001/2017/lumdistrMod.root");
 	
 	//effEeEnergy("t1", "/work/users/kladov/snd2k/R007-002/output/ntuples/eemod/2017/*x.root", "/work/users/kladov/snd2k/R007-001/2017/lumdistrMod.root");
@@ -1209,161 +1100,8 @@ void luminCalculation::luminosityCalc() {
 	}
 	cout << "expProcessed" << endl;
 
-	vector<TH1> dEdxMod1;
-	vector<TH1> dEdxExp1;
-	TFile* MyFileM = new TFile("/work/users/kladov/snd2k/R007-001/2012/lumdistrMod.root");
-	TFile* MyFileE = new TFile("/work/users/kladov/snd2k/R007-001/2012/lumdistrExp.root");
-	//for (size_t i = 0; i < energyMod.size(); i++) {
-	//	dEdxMod1.push_back((TH1F)MyFileM->Get(Form("histbad%d", (int)i)));
-	//}
-	//for (size_t i = 0; i < energyExp.size(); i++) {
-	//	dEdxExp1.push_back((TH1F)MyFileE->Get(Form("histbad%d", (int)i)));
-	//}
-
-	vector<double> enparticle;
-	vector<double> enparticleErr;
-	vector<double> coeff;
-	vector<double> coeffErr;
-	dedxm->Draw();
-	c->Update();
 	//cin.get();
-	dedxe->Draw();
-	c->Update();
-	
-	vector<double> nolls;
-	vector<double> koefFit;
-	vector<double> koefFitErr;
-	for (size_t i = 0; i < energyExp.size(); i++) {
-		cout << "a" << endl;
-		size_t closestPInd;
-		double mindist = 1000;
-		for (size_t j = 0; j < energyMod.size(); j++) {
-			if (fabs(energyMod[j] - energyExp[i]) < mindist) {
-				mindist = fabs(energyMod[j] - energyExp[i]);
-				closestPInd = j;
-			}
-		}
-		cout << "b" << endl;
-		cout << dEdxMod1.size() << endl;
-		cout << closestPInd << endl;
-		TH1F* hm = (TH1F*)MyFileM->Get(Form("histbad%d", closestPInd));
-		hm->SetLineColor(2);
-		hm->Draw();
-		cout << "b0" << endl;
-		double maximumCenter = hm->GetBinCenter(hm->GetMaximumBin());
-		double rMS = hm->GetRMS();
-		cout << "ba" << endl;
-		TF1* f1 = new TF1("f1", "[0]*exp(-(x-[1])*(x-[1]) / (x<[1]?[2]*[2]:[3]*[3]))", maximumCenter-2.5*rMS, maximumCenter + 2.5*rMS);
-		f1->SetParameters(hm->GetMaximum(), maximumCenter, rMS, rMS);
-		hm->Fit("f1", "", "", maximumCenter - 0.5 * rMS, maximumCenter + rMS);
-		hm->Fit("f1", "", "", maximumCenter - 0.5 * f1->GetParameter(2), maximumCenter + 0.5 * f1->GetParameter(2));
-		double modMean = f1->GetParameter(1);
-		
-		//TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-		c->Update();
-		cin.get();
-		cout << "c" << endl;
-		TH1F* he = (TH1F*)MyFileE->Get(Form("histbad%d", i));
-		he->SetLineColor(2);
-		he->Draw();
-		maximumCenter = he->GetBinCenter(he->GetMaximumBin());
-		rMS = he->GetRMS();
-		TF1* f2 = new TF1("f2", "[0]*exp(-(x-[1])*(x-[1]) / (x<[1]?[2]*[2]:[3]*[3]))", maximumCenter - 2.5 * rMS, maximumCenter + 2.5 * rMS);
-		f2->SetParameters(he->GetMaximum(), maximumCenter, rMS, rMS);
-		he->Fit("f2", "", "", maximumCenter - 0.5 * rMS, maximumCenter + rMS);
-		hm->Fit("f2", "", "", maximumCenter - 0.5 * f2->GetParameter(2), maximumCenter + 0.5 * f2->GetParameter(2));
-		double expMean = f2->GetParameter(1);
-		c->Update();
-		cin.get();
-
-		cout << "<<<<<<<<<<<<<<<<<" << modMean / expMean << ">>>>>>>>>>>>>>>>>>" << endl;
-		koefFit.push_back(modMean / expMean);
-		koefFitErr.push_back(sqrt(pow(f1->GetParError(1)/expMean,2) + pow(f2->GetParError(1)*modMean/expMean/expMean,2)));
-		nolls.push_back(0);
-	}
-	MyFileM->Close();
-	MyFileE->Close();
-	TGraphErrors* grd = new TGraphErrors(energyExp.size(), &energyExp[0], &koefFit[0], &nolls[0], &koefFitErr[0]);
-	grd->SetMarkerColor(4);
-	grd->SetTitle("dedx correction");
-	grd->SetMarkerStyle(21);
-	grd->Draw("AP");
-	c->Update();
-
-	//dEx for beam dependence 
-	vector<double> nulvector;
-	for (size_t i = 0; i < energyExp.size(); i++) {
-		size_t closestPInd;
-		double mindist = 1000;
-		for (size_t j = 0; j < energyMod.size(); j++) {
-			if (fabs(energyMod[j] - energyExp[i]) < mindist) {
-				mindist = fabs(energyMod[j] - energyExp[i]);
-				closestPInd = j;
-			}
-		}
-		dExnpopr.push_back(meandExn[closestPInd]/meandExnC[i]);
-		dExnpoprErr.push_back(meandExnErr[closestPInd]/meandExnC[i] + dExnpopr.back()*meandExnCErr[i]/meandExnC[i]);
-		nulvector.push_back(0.);
-	}
-	//pointComparisonAndSort();
-	//dEx for energy dependence
-	for(size_t i = 2; i < dedxm->GetNbinsX()-1; i++){
-		if(dedxe->GetBinEntries(i)>0){
-			enparticle.push_back(dedxm->GetBinCenter(i));
-			enparticleErr.push_back(1000./100.);
-			coeff.push_back(dedxm->GetBinContent(i)/dedxe->GetBinContent(i));
-			coeffErr.push_back(sqrt(pow(dedxm->GetBinError(i)/dedxe->GetBinContent(i),2) + pow(dedxm->GetBinContent(i)/dedxe->GetBinContent(i)*dedxe->GetBinError(i)/dedxe->GetBinContent(i),2)));
-			cout << enparticle.back() << "	" << coeff.back() << "	+-	" << coeffErr.back() << endl;
-		}
-	}
-
-
-	//resulting correction output
-	vector<double> tempEnSorted;
-	for(size_t i = 0; i < energyExp.size(); i++)
-		tempEnSorted.push_back(energyExp[i]);
-	//sort by energy
-	double tp = 0;
-	for (size_t i = 0; i < tempEnSorted.size(); i++) {
-		for (size_t j = 0; j < tempEnSorted.size() - i - 1; j++) {
-			if (tempEnSorted[j] > tempEnSorted[j + 1]) {
-				tp = tempEnSorted[j];
-				tempEnSorted[j] = tempEnSorted[j + 1];
-				tempEnSorted[j + 1] = tp;
-
-				tp = dExnpopr[j];
-				dExnpopr[j] = dExnpopr[j + 1];
-				dExnpopr[j + 1] = tp;
-
-				tp = dExnpoprErr[j];
-				dExnpoprErr[j] = dExnpoprErr[j + 1];
-				dExnpoprErr[j + 1] = tp;
-			}
-		}
-	}
-	//TGraphErrors* gr1 = new TGraphErrors(enparticle.size(), &enparticle[0], &coeff[0], &enparticleErr[0], &coeffErr[0]);
-	TGraphErrors* gr1 = new TGraphErrors(tempEnSorted.size()-1, &tempEnSorted[1], &dExnpopr[1], &nulvector[1], &dExnpoprErr[1]);
-	gr1->SetMarkerColor(4);
-	gr1->SetTitle("dedx correction");
-	gr1->SetMarkerStyle(21);
-	//gr1->Draw("AP");
-	TF1* f1 = new TF1("f1", "[0]", 500, 1100);
-	f1->SetParameter(0,950);
-	//gr1->Fit("f1", "", "", 500, 1100);
-	c->Update();
-	//cout << f1->GetParameter(0) << "	" << f1->GetParError(0) << endl;
-	//cout
-	for(size_t i = 0; i < tempEnSorted.size(); i++){
-		cout << tempEnSorted[i] << ", ";
-	}
-	cout << endl;
-	for(size_t i = 0; i < tempEnSorted.size(); i++){
-		cout << dExnpopr[i] << ", ";
-	}
-	cout << endl;
-
-	//cin.get();
-	//pointComparisonAndSort();
+	pointComparisonAndSort();
 }
 
 double pep2lumt(double m, double L, double t, double dm){
@@ -1513,8 +1251,6 @@ void drawLum() {
 	TF1* f2 = new TF1("f2","babarLum(x,232.,0.025)",0,2);
 	f2->Draw("same");
 }
-
-
 
 void sumpoints(){
 	ifstream ifile("/work/users/kladov/snd2k/R007-001/2019/luminosity.dat");
@@ -1803,72 +1539,305 @@ void luminCalculation::drawdEdxspectrum(){
 }
 
 
+//_________section of dEdx correction calculation___________________
+
+class managedEdxCorrection: public luminCalculation{
+	/// class for getting dE/dx coefficients for modeling to coincide with experiment 
+private:
+	vector<double> energyPoints;
+	vector<double> energyMod;
+	vector<double> energyExp;
+
+	vector<double> meandExn;
+	vector<double> meandExnErr;
+	vector<double> meandExnC;
+	vector<double> meandExnCErr;
+	vector<double> dExnpopr;
+	vector<double> dExnpoprErr;
+public:
+	managedEdxCorrection() {
+	}
+	void getParameters(char* name, char* add, char* fileForDistributions);
+	void calculatedEdxCorrections();
+};
+
+void managedEdxCorrection::getParameters(char* chaiName, char* filesToAdd, char* fileForDistributions) {
+	///  get dEdX distributions, energy points, calculate mean dEdx 
+
+	TChain chain(chaiName);
+	chain.Add(filesToAdd);
+	const Long64_t entries = chain.GetEntries();
+	TString b = filesToAdd;
+	{
+		chain.SetBranchAddress("beam", &beam);
+		chain.SetBranchAddress("energy", &energy);
+		chain.SetBranchAddress("nc", &nc);
+		chain.SetBranchAddress("nn", &nn);
+		chain.SetBranchAddress("z0", &z0);
+		chain.SetBranchAddress("d0", &d0);
+		chain.SetBranchAddress("phi", &phi);
+		chain.SetBranchAddress("theta", &theta);
+		chain.SetBranchAddress("col", &col);
+		chain.SetBranchAddress("cosm", &cosm);
+		chain.SetBranchAddress("act", &act);
+		chain.SetBranchAddress("cact", &cact);
+		chain.SetBranchAddress("dExn", &dExn);
+		chain.SetBranchAddress("dExnC", &dExnC);
+		if (b.Contains("MHAD")) {
+			chain.SetBranchAddress("dEx1C", &dEx1C);
+			chain.SetBranchAddress("dEx2C", &dEx2C);
+			chain.SetBranchAddress("dEx3C", &dEx3C);
+			chain.SetBranchAddress("dEx4C", &dEx4C);
+			chain.SetBranchAddress("dEx5C", &dEx5C);
+			chain.SetBranchAddress("dEx6C", &dEx6C);
+			chain.SetBranchAddress("dEx7C", &dEx7C);
+			chain.SetBranchAddress("dEx8C", &dEx8C);
+			chain.SetBranchAddress("dEx9C", &dEx9C);
+		}
+
+	}
+	vector<TH1*> dEdx1;
+	vector<TProfile*> dEdxVsTheta;
+	vector<int> ndExncount;
+
+	for (int e = 0; e < entries; e++) {
+		chain.GetEntry(e);
+		pair<bool,size_t> newEnPoint = isItNewPoint(energyPoints,(double)beam);
+		if (newEnPoint.first) {
+			energyPoints.push_back((double)beam);
+			dEdxVsTheta.push_back(new TProfile(Form("dEdxVsTheta%d", (int)newEnPoint.second), ";dE/dx", 1000, 0, 180));
+			ndExncount.push_back(0);
+			if (b.Contains("eemod")) {
+				meandExn.push_back(0);
+				dEdx1.push_back(new TH1F(Form("dEdxMod1%d", (int)newEnPoint.second), ";dE/dx", 1000, 0, 5000));
+			}
+			if (b.Contains("MHAD")) {
+				meandExnC.push_back(0);
+				dEdx1.push_back(new TH1F(Form("dEdxExp1%d", (int)newEnPoint.second), ";dE/dx", 1000, 0, 10));
+			}
+		}
+
+		size_t pointIndex = newEnPoint.second;
+		if (isItEE()) {
+			if (b.Contains("eemod")) {
+				dEdx1[pointIndex]->Fill(dExn[0]);
+				dEdx1[pointIndex]->Fill(dExn[1]);
+				ndExncount[pointIndex] += 1;
+				meandExn[pointIndex] = meandExn[pointIndex] + ((dExn[0] + dExn[1]) / 2. - meandExn[pointIndex]) / (ndExncount[pointIndex]);
+
+				dEdxVsTheta[pointIndex]->Fill(theta[0] * 180. / 3.14159, dExn[0]);
+				dEdxVsTheta[pointIndex]->Fill(theta[1] * 180. / 3.14159, dExn[1]);
+			}
+			if (b.Contains("MHAD")) {
+				double partialded[2][9] = { dEx1C[0], dEx2C[0], dEx3C[0], dEx4C[0], dEx5C[0], dEx6C[0], dEx7C[0], dEx8C[0], dEx9C[0], \
+										   dEx1C[1], dEx2C[1], dEx3C[1], dEx4C[1], dEx5C[1], dEx6C[1], dEx7C[1], dEx8C[1], dEx9C[1] };
+				double dExnTrue[2] = { 0., 0. };
+				double maxValue[2] = { -1, -1 };
+				for (size_t j = 0; j < 2; j++) {
+					for (size_t i = 0; i < 9; i++) {
+						dExnTrue[j] += partialded[j][i];
+						if (partialded[j][i] > maxValue[j]) { maxValue[j] = partialded[j][i]; } //find maximum value
+					}
+					//dExnTrue[j] = (dExnTrue[j] - maxValue[j]) / 7.;
+					dExnTrue[j] = (dExnC[j]);
+				}
+				dEdx1[pointIndex]->Fill(dExnTrue[0]);
+				dEdx1[pointIndex]->Fill(dExnTrue[1]);
+				ndExncount[pointIndex] += 1;
+				meandExnC[pointIndex] = meandExnC[pointIndex] + ((dExnTrue[0] + dExnTrue[1]) / 2. - meandExnC[pointIndex]) / (ndExncount[pointIndex]);
+				//if ((int)(dEdx1[pointIndex]->GetEntries()) % 100 == 0)
+					//cout << meandExnC[pointIndex] << endl;
+
+				dEdxVsTheta[pointIndex]->Fill(theta[0] * 180. / 3.14159, dExnTrue[0]);
+				dEdxVsTheta[pointIndex]->Fill(theta[1] * 180. / 3.14159, dExnTrue[1]);
+			}
+		}
+		if (e % 1000000 == 0)
+			cout << e / 1000000 << " M" << endl;
+	}
+
+	TFile* MyFile1 = new TFile(fileForDistributions, "RECREATE");
+	vector<double> beamPV, beamPErrV, dEdxV, dEdxErrV;
+	for (size_t i = 0; i < energyPoints.size(); i++) {
+		dEdx1[i]->Write(Form("hdEdx%d", i));
+		dEdxVsTheta[i]->Write(Form("hdEdxVsTheta%d", i));
+		cout << dEdx1[i]->GetMean() << endl;
+		if (b.Contains("eemod")) {
+			meandExnErr.push_back(200. / sqrt(ndExncount[i]));
+		}
+		else if (b.Contains("MHAD")) {
+			meandExnCErr.push_back(0.4 / sqrt(ndExncount[i]));
+		}
+		beamPV.push_back(energyPoints[i]);
+		beamPErrV.push_back(0.5);
+		dEdxV.push_back(dEdx1[i]->GetMean());
+		dEdxErrV.push_back(dEdx1[i]->GetMeanError());
+	}
+	TGraphErrors* gr = new TGraphErrors(beamPV.size(), &beamPV[0], &dEdxV[0], &beamPErrV[0], &dEdxErrV[0]);
+	gr->Draw("AP");
+	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+	c->Update();
+	cin.get();
+	c->Write("dEdxVsBeamGraph");
+	MyFile1->Close();
+	
+}
+
+void managedEdxCorrection::calculatedEdxCorrections() {
+	char* hDexnModFile = "/online/users2/kladov/R007-002/dEdx/hDexnMod2011.root";
+	char* hDexnExpFile = "/online/users2/kladov/R007-002/dEdx/hDexnExp2011.root";
+	char* dexnCoefFile = "/online/users2/kladov/R007-002/dEdx/dEdxCoeff2011.dat";
+	getParameters("t1", "/work/users/kladov/snd2k/R007-002/output/ntuples/eemod/2011n/dEdx/*x.root", hDexnModFile);
+	for (size_t i = 0; i < energyPoints.size(); i++)
+		energyMod.push_back(energyPoints[i]);
+	energyPoints.clear();
+	getParameters("t1", "/online/users2/kladov/R007-002/output/ntuples/MHAD2011/*col.root", hDexnExpFile);
+	for (size_t i = 0; i < energyPoints.size(); i++)
+		energyExp.push_back(energyPoints[i]);
+
+
+	// calculating coefficients from fitting dEdx distributions (by pik)
+	vector<double> nolls;
+	vector<double> koefFit;
+	vector<double> koefFitErr;
+	TFile* MyFileM = new TFile(hDexnModFile);
+	TFile* MyFileE = new TFile(hDexnExpFile);
+	for (size_t i = 0; i < energyExp.size(); i++) {
+		size_t closestPInd = findClosestIndToArr(energyMod, energyExp[i]);
+		TH1F* hm = (TH1F*)MyFileM->Get(Form("hdEdx%d", closestPInd));
+		hm->Draw();
+		double maximumCenter = hm->GetBinCenter(hm->GetMaximumBin());
+		double rMS = hm->GetRMS();
+		TF1* f1 = new TF1("f1", "[0]*exp(-(x-[1])*(x-[1]) / (x<[1]?[2]*[2]:[3]*[3]))", maximumCenter - rMS, maximumCenter + rMS);
+		f1->SetParameters(hm->GetMaximum(), maximumCenter, rMS, rMS);
+		hm->Fit("f1", "", "", maximumCenter - 0.5 * rMS, maximumCenter + rMS);
+		hm->Fit("f1", "", "", maximumCenter - 0.5 * f1->GetParameter(2), maximumCenter + 0.5 * f1->GetParameter(2));
+		double modMean = f1->GetParameter(1);
+		double modMeanError = f1->GetParError(1);
+		TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+		c->Update();
+		cin.get();
+
+		TH1F* he = (TH1F*)MyFileE->Get(Form("hdEdx%d", i));
+		he->Draw();
+		maximumCenter = he->GetBinCenter(he->GetMaximumBin());
+		rMS = he->GetRMS();
+		f1->SetParameters(he->GetMaximum(), maximumCenter, rMS, rMS);
+		he->Fit("f1", "", "", maximumCenter - 0.5 * rMS, maximumCenter + rMS);
+		he->Fit("f1", "", "", maximumCenter - 0.5 * f1->GetParameter(2), maximumCenter + 0.5 * f1->GetParameter(2));
+		double expMean = f1->GetParameter(1);
+		double expMeanError = f1->GetParError(1);
+		c->Update();
+		cin.get();
+
+		cout << "<<<<<<<<<<<<<<<<<" << modMean / expMean << ">>>>>>>>>>>>>>>>>>" << endl;
+		koefFit.push_back(modMean / expMean);
+		koefFitErr.push_back(divisionError(modMean, expMean, modMeanError, expMeanError));
+		nolls.push_back(0);
+	}
+	MyFileM->Close();
+	MyFileE->Close();
+	TGraphErrors* grd = new TGraphErrors(energyExp.size(), &energyExp[0], &koefFit[0], &nolls[0], &koefFitErr[0]);
+	grd->SetMarkerColor(4);
+	grd->SetTitle("dedx correction");
+	grd->SetMarkerStyle(21);
+	grd->Draw("AP");
+
+	//  calculating coefficients from mean values 
+	vector<double> nulvector;
+	for (size_t i = 0; i < energyExp.size(); i++) {
+		size_t closestPInd = findClosestIndToArr(energyMod, energyExp[i]);
+		dExnpopr.push_back(meandExn[closestPInd] / meandExnC[i]);
+		dExnpoprErr.push_back(divisionError(meandExn[closestPInd], meandExnC[i], meandExnErr[closestPInd], meandExnCErr[i]));
+		nulvector.push_back(0.);
+	}
+	cout << "I am here" << endl;
+	dExnpopr = sortByAnotherArray(dExnpopr, energyExp);
+	dExnpoprErr = sortByAnotherArray(dExnpoprErr, energyExp);
+	koefFit = sortByAnotherArray(koefFit, energyExp);
+	energyExp = sortByAnotherArray(energyExp, energyExp);
+	cout << "I am here 2" << endl;
+
+	TGraphErrors* gr1 = new TGraphErrors(energyExp.size() - 1, &energyExp[1], &dExnpopr[1], &nulvector[1], &dExnpoprErr[1]);
+	gr1->SetMarkerColor(4);
+	gr1->SetTitle("dedx correction");
+	gr1->SetMarkerStyle(21);
+	gr1->Draw("AP");
+	cout << "I am here 3" << endl;
+
+	//write coefficients in file
+	ofstream ofile;
+	ofile.open(dexnCoefFile);
+	for (size_t i = 0; i < energyExp.size(); i++) {
+		ofile << energyExp[i] << "	" << dExnpopr[i] << "	" << koefFit[i] << endl;
+	}
+}
+
+
+
+//usefull function for pion-kaon separation in track chamber
+double betaBloch(double p, double m) {
+	return 0.045 * (p * p + m * m) / (p * p) * (log((p * p) / (m * m)) - (p * p) / (p * p + m * m) + 4.8); //5.3 f.e. to cut pi, 600
+}
+double pionLine(double p) {
+	return 600. * (p * p + 139.6 * 139.6) / (p * p) * (log((p * p) / (139.6 * 139.6)) - (p * p) / (p * p + 139.6 * 139.6) + 6.5);
+}
+double sigmapion(double p) {
+	return p; // have to find sigma dependence on momentum by fitting in some ranges with mc data usage
+}
+double kaonLine(double p) {
+	return 600. * (p * p + 493.7 * 493.7) / (p * p) * (log((p * p) / (493.7 * 493.7)) - (p * p) / (p * p + 493.7 * 493.7) + 6.5);
+}
+double sigmakaon(double p) {
+	return p; // have to find sigma dependence on momentum by fitting in some ranges with mc data usage
+}
+double meanLine(double p) {
+	return betaBloch(p, 955); //375 to cut pi
+}
+
+//_________section of Ks K pi analysis___________________
 
 class kkpDistr {
 public:
 	Entryvar sEntr;
-	float phi[40], phis[40], ach[40], achr[40], theta[40], z0[40], schr[40], tch[40], tchr[40], energy[40], beam, eton, x0[40], y0[40], d0[40], dExs[40], dExnC[40], dExn[40];  //kinematic, counters parameters float
-	float d2phi[40], dphirho[40], d2rho[40], d2z0[40], d2cosTh[40], dz0cosTh[40], Dtheta[40], Dphi[40], energyerr[40];  //errors afrer reconstruction
-	int nch, run, nc, nn, cosm, eventtime, act, region[40], charge[40];     //parameters int
-	float amplitude[40], amplitudeE[40]; //cherenkov general amplitude
+	float phi[40], theta[40], z0[40], schr[40], energy[40], beam, eton, d0[40], dExs[40], dExnC[40], dExn[40];  //parameters float
+	int nch, run, nc, nn, cosm, eventtime, act, region[40], charge[40];											//parameters int
+	float amplitude[40], amplitudeE[40];																		//cherenkov general amplitude
 	float x2ikf1, x2kf1, ppkf1[11], thetakf1[11], phikf1[11];  //kinfit
 	int npkf1[11], ipkf1[11];   //kinfit 
 	float x2ikf2, x2kf2, ppkf2[11], thetakf2[11], phikf2[11];  //kinfit
 	int npkf2[11], ipkf2[11];   //kinfit 
 	float x2ikf3, x2kf3, ppkf3[11], thetakf3[11], phikf3[11];  //kinfit
 	int npkf3[11], ipkf3[11];   //kinfit 
-	float mctheta[40], mcphi[40], mcpx[40], mcpy[40], mcpz[40], mce[40];	//montecarlo modeling
-	int mcpdg[40], nmc;	//montecarlo modeling
-	float dEx1C[10], dEx2C[10], dEx3C[10], dEx4C[10], dEx5C[10], dEx6C[10], dEx7C[10], dEx8C[10], dEx9C[10];
+	float mctheta[40], mcphi[40], mcpx[40], mcpy[40], mcpz[40], mce[40];										//montecarlo modeling
+	int mcpdg[40], nmc;																							//montecarlo modeling
+	float dEx1C[10], dEx2C[10], dEx3C[10], dEx4C[10], dEx5C[10], dEx6C[10], dEx7C[10], dEx8C[10], dEx9C[10];	//corrected dEdx
 	vector<int> countModEvents;
 	vector<int> countExpEvents;
-	bool kf10, kf11, kf20, kf21;
 
 	int hetonInd;
 	int beamInd;
 	int closestPind;
 
+	double normcoeff;
 	double tempdExn[4];
 	double tempamp[4];
 	double tempampE[4];
 
 	vector<double> energiesEXP;
 	vector<double> dEdxpopr;
-	int year;
 	vector<double> energiesMod;
 	vector<double> efficienciesModBeam;
 	vector<double> countModEventsBeam;
 
-
 	vector<double> pareffmce[5];
 	vector<double> pareffmceErr[5];
 
-	vector<bool> conditions;
+	kkpDistr() {}
 
-	kkpDistr() {
-		year = 2011;
-	}
-	void definededpopr(){
-		switch (year){
-			case 2011:
-				for(size_t i =0; i<41; i++){
-					energiesEXP.push_back(temparrayE2011[i]);
-					dEdxpopr.push_back(temparraydE2011[i]);
-				}
-				break;
-			case 2012:
-				for(size_t i =0; i<25; i++){
-					energiesEXP.push_back(temparrayE2012[i]);
-					dEdxpopr.push_back(temparraydE2012[i]);
-				}
-				break;
-			case 2017:
-				for(size_t i =0; i<25; i++){
-					energiesEXP.push_back(temparrayE2017[i]);
-					dEdxpopr.push_back(temparraydE2017[i]);
-				}
-				break;
-		}
+	void defineEnAndDEDX() {
+		energiesEXP = getExpPoints();
+		dEdxpopr = getdEdxInfo();
 	}
 
 	void findhetonInd(double entemp, vector<pair<double, double> > eranges){
@@ -1884,18 +1853,15 @@ public:
 				beamInd = i;
 	}
 	void findclosestPind(double entemp){
-		
 		closestPind = -1;
 		double mindist = 1000;
 		for (size_t i = 0; i < energiesEXP.size(); i++) {
-			
-			if (fabs(entemp - energiesEXP[i]) < mindist) {
-				mindist = fabs(entemp - energiesEXP[i]);
-				closestPind = i;
-			}
+			if (fabs(entemp - energiesEXP[i]) > mindist)
+				continue;
+			mindist = fabs(entemp - energiesEXP[i]);
+			closestPind = i;
 		}
 	}
-
 	bool indexCheck(string regime){
 		return ((mce[1] < 1000 && regime == "mod" && closestPind != -1) || (regime == "exp" && beamInd !=-1)) && hetonInd!=-1;
 	}
@@ -1904,7 +1870,7 @@ public:
 		normcoeff = dEdxpopr[beamInd];
 		if(regime == "mod")
 			normcoeff = dEdxpopr[closestPind];
-
+		//cout << closestPind << endl;
 		tempdExn[0] = dExn[ipkf1[0] - 1] / normcoeff;
 		tempdExn[1] = dExn[ipkf1[1] - 1] / normcoeff;
 		tempdExn[2] = dExn[ipkf2[0] - 1] / normcoeff;
@@ -1914,101 +1880,40 @@ public:
 			double partialded[4][9] = {dEx1C[ipkf1[0]-1], dEx2C[ipkf1[0]-1], dEx3C[ipkf1[0]-1], dEx4C[ipkf1[0]-1], dEx5C[ipkf1[0]-1], dEx6C[ipkf1[0]-1], dEx7C[ipkf1[0]-1], dEx8C[ipkf1[0]-1], dEx9C[ipkf1[0]-1] , \
 									   dEx1C[ipkf1[1]-1], dEx2C[ipkf1[1]-1], dEx3C[ipkf1[1]-1], dEx4C[ipkf1[1]-1], dEx5C[ipkf1[1]-1], dEx6C[ipkf1[1]-1], dEx7C[ipkf1[1]-1], dEx8C[ipkf1[1]-1], dEx9C[ipkf1[1]-1] , \
 									   dEx1C[ipkf2[0]-1], dEx2C[ipkf2[0]-1], dEx3C[ipkf2[0]-1], dEx4C[ipkf2[0]-1], dEx5C[ipkf2[0]-1], dEx6C[ipkf2[0]-1], dEx7C[ipkf2[0]-1], dEx8C[ipkf2[0]-1], dEx9C[ipkf2[0]-1] , \
-									   dEx1C[ipkf2[1]-1], dEx2C[ipkf2[1]-1], dEx3C[ipkf2[1]-1], dEx4C[ipkf2[1]-1], dEx5C[ipkf2[1]-1], dEx6C[ipkf2[1]-1], dEx7C[ipkf2[1]-1], dEx8C[ipkf2[1]-1], dEx9C[ipkf2[1]-1]};
+									   dEx1C[ipkf2[1]-1], dEx2C[ipkf2[1]-1], dEx3C[ipkf2[1]-1], dEx4C[ipkf2[1]-1], dEx5C[ipkf2[1]-1], dEx6C[ipkf2[1]-1], dEx7C[ipkf2[1]-1], dEx8C[ipkf2[1]-1], dEx9C[ipkf2[1]-1] };
 			double dExnTrue[4] = { 0, 0, 0, 0 };
-			int normcount10 = 0;
-			int normcount11 = 0;
-			int normcount20 = 0;
-			int normcount21 = 0;
-			/*for (size_t i = 0; i<9; i++) {
-				if(partialded10[i] < 15. && partialded10[i] > 0.001){
-					normcount10 += 1;
-					dExnTrue10 += partialded10[i];
-				}
-				if(partialded11[i] < 15. && partialded11[i] > 0.001){
-					normcount11+=1;
-					dExnTrue11+=partialded11[i];
-				}
-				if(partialded20[i] < 15. && partialded20[i] > 0.001){
-					normcount20+=1;
-					dExnTrue20+=partialded20[i];
-				}
-				if(partialded21[i] < 15. && partialded21[i] > 0.001){
-					normcount21+=1;
-					dExnTrue21+=partialded21[i];
-				}
-			}*/
 			double maxValue[4] = { 0, 0, 0, 0 };
-			size_t maxIndex[4] = { 0, 0, 0, 0 };
 			for (size_t j = 0; j < 4; j++) {
 				for (size_t i = 0; i < 9; i++) {
 					dExnTrue[j] += partialded[j][i];
-					if (partialded[j][i] > maxValue[j]) { maxValue[j] = partialded[j][i];  maxIndex[j] = i; } //find maximum
+					if (partialded[j][i] > maxValue[j]) { maxValue[j] = partialded[j][i]; } //find maximum
 				}
-				dExnTrue[j] -= partialded[j][maxIndex[j]]; //subtract maximum value
-				tempdExn[j] = dExnTrue[j];
+				tempdExn[j] = dExnTrue[j] - maxValue[j];
 			}
 
-			/*if (normcount10 > 0)
-				dExnTrue10 = dExnTrue10/(double)normcount10;
-			else
-				dExnTrue10 = 0;
-			if(normcount11 > 0)
-				dExnTrue11 = dExnTrue11/(double)normcount11;
-			else
-				dExnTrue11 = 0;
-			if(normcount20 > 0)
-				dExnTrue20 = dExnTrue20/(double)normcount20;
-			else
-				dExnTrue20 = 0;
-			if(normcount21 > 0)
-				dExnTrue21 = dExnTrue21/(double)normcount21;
-			else
-				dExnTrue21 = 0;
-			*/
-
-			//tempdExn[ipkf1[0] - 1] = dExnC[ipkf1[0] - 1];
-			//tempdExn[ipkf1[1] - 1] = dExnC[ipkf1[1] - 1];
-			//tempdExn[ipkf2[0] - 1] = dExnC[ipkf2[0] - 1];
-			//tempdExn[ipkf2[1] - 1] = dExnC[ipkf2[1] - 1];
+			tempdExn[0] = dExnC[ipkf1[0] - 1];
+			tempdExn[1] = dExnC[ipkf1[1] - 1];
+			tempdExn[2] = dExnC[ipkf2[0] - 1];
+			tempdExn[3] = dExnC[ipkf2[1] - 1];
 		}
 	}
 	void normalizeAch(){
-		tempamp[0] = amplitude[ipkf1[0] - 1]/amplitudeE[ipkf1[0] - 1];
-		tempamp[1] = amplitude[ipkf1[1] - 1]/amplitudeE[ipkf1[1] - 1];
-		tempamp[2] = amplitude[ipkf2[0] - 1]/amplitudeE[ipkf2[0] - 1]; 
-		tempamp[3] = amplitude[ipkf2[1] - 1]/amplitudeE[ipkf2[1] - 1];
-
-		tempampE[0] = fabs(amplitude[ipkf1[0] - 1] - amplitudeE[ipkf1[0] - 1]) / sqrt(amplitudeE[ipkf1[0] - 1]);
-		tempampE[1] = fabs(amplitude[ipkf1[1] - 1] - amplitudeE[ipkf1[1] - 1]) / sqrt(amplitudeE[ipkf1[1] - 1]);
-		tempampE[2] = fabs(amplitude[ipkf2[0] - 1] - amplitudeE[ipkf2[0] - 1]) / sqrt(amplitudeE[ipkf2[0] - 1]);
-		tempampE[3] = fabs(amplitude[ipkf2[1] - 1] - amplitudeE[ipkf2[1] - 1]) / sqrt(amplitudeE[ipkf2[1] - 1]);
-		/*tempampE[0] = amplitudeE[ipkf1[0] - 1];
-		tempampE[1] = amplitudeE[ipkf1[1] - 1];
-		tempampE[2] = amplitudeE[ipkf2[0] - 1]; 
-		tempampE[3] = amplitudeE[ipkf2[1] - 1];*/
-		if (ppkf1[0] < 300){
-			tempamp[0] = 0.0;
-			tempampE[0] = 1.0;
+		int ikf[4] = { ipkf1[0]-1, ipkf1[1]-1, ipkf2[0]- 1, ipkf2[1] - 1 };
+		double p[4]   = { ppkf1[0] ,  ppkf1[1] ,  ppkf2[0] ,   ppkf2[1] };
+		for (size_t i = 0; i < 4; i++) {
+			tempamp[i] = amplitude[ikf[i]] / amplitudeE[ikf[i]];
+			//tempampE[i] = fabs(amplitude[ikf[i]] - amplitudeE[ikf[i]]) / (amplitudeE[ikf[i]]);
+			tempampE[i] = amplitudeE[ikf[i]];
+			if (p[i] < 300) {
+				tempamp[i] = -1.0;
+				tempampE[i] = -1.0;
+			}
 		}
-		if (ppkf1[1] < 300){
-			tempamp[1] = 0.0;
-			tempampE[1] = 1.0;
-		}
-		if (ppkf2[0] < 300){
-			tempamp[2] = 0.0;
-			tempampE[2] = 1.0;
-		}
-		if (ppkf2[1] < 300){
-			tempamp[3] = 0.0;
-			tempampE[3] = 1.0;
-		}
-		if(x2kf3>99)
-			x2kf3=100;
+		if (x2kf3 > 99)
+			x2kf3 = 100;
 	}
 
-
-	//
+	//__________________________RECALCULATE WEIGHT PART_________________________
 	double kpiInvMassMod(){
 		double pxp = mcpx[0];
 		double pyp = mcpy[0];
@@ -2031,7 +1936,6 @@ public:
 
 		return kpiInvMass;
 	}
-	//same
 	double kspiInvMassMod(){
 		double pxg[4], pyg[4], pzg[4], eg[4];
 		double pG[4], thetaG[4], phiG[4];
@@ -2068,7 +1972,6 @@ public:
 
 		return kspiInvMass;
 	}
-
 	pair<double,double> bwKstar(double s){
 		s = s/1000./1000.;
 		double msPi = 0.13957;
@@ -2127,9 +2030,10 @@ public:
 		bwRho.second = -bwRhoD.second / (pow(bwRhoD.first,2) + pow(bwRhoD.second,2));
 		return bwRho;
 	}
-
-
 	double recalculateWeight(){
+		/// calculate weight(amp squared) of event from its mc parameters by formulae used in modeling
+		/// then caklculate new weight by another formulae and return their relation
+
 		double previousWweight = 0;
 		double currentWeight = 0;
 
@@ -2204,60 +2108,9 @@ public:
 	}
 
 
-	//ks0 inv mass calculation based on kinfit parameters
-	double ks0InvMass(int kfvers) {
-		double pxg[4], pyg[4], pzg[4], eg[4];
-		double pG[4], thetaG[4], phiG[4];
-		for (size_t i = 0; i < 4; i++) {
-			pG[i] = kfvers < 1.5 ? ppkf1[i + 2] : ppkf2[i + 2];
-			thetaG[i] = kfvers < 1.5 ? thetakf1[i + 2] : thetakf2[i + 2];
-			phiG[i] = kfvers < 1.5 ? phikf1[i + 2] : phikf2[i + 2];
-
-			pxg[i] = pG[i] * sin(thetaG[i]) * cos(phiG[i]);
-			pyg[i] = pG[i] * sin(thetaG[i]) * sin(phiG[i]);
-			pzg[i] = pG[i] * cos(thetaG[i]);
-			eg[i] = pG[i];
-		}
-
-		double p0px1 = pxg[0] + pxg[1];
-		double p0py1 = pyg[0] + pyg[1];
-		double p0pz1 = pzg[0] + pzg[1];
-		//double p0p1 = sqrt(pow(p0px1, 2) + pow(p0py1, 2) + pow(p0pz1, 2));
-
-		double p0px2 = pxg[2] + pxg[3];
-		double p0py2 = pyg[2] + pyg[3];
-		double p0pz2 = pzg[2] + pzg[3];
-		//double p0p2 = sqrt(pow(p0px2, 2) + pow(p0py2, 2) + pow(p0pz2, 2));
-
-		double k0px = p0px1 + p0px2;
-		double k0py = p0py1 + p0py2;
-		double k0pz = p0pz1 + p0pz2;
-		double k0p = sqrt(pow(k0px, 2) + pow(k0py, 2) + pow(k0pz, 2));
-		double ks0invmass = sqrt(pow(eg[0] + eg[1] + eg[2] + eg[3], 2) - pow(k0p, 2));
-
-		return ks0invmass;
-	}
-	//energy deposition of all detected particles except 6 defined by kinFit, used to exclude multi pion final states
-	double eGammas(int kfvers) {
-		double egammas = 0;
-		double ip[4];
-		for (size_t j = 0; j < 4; j++){
-			ip[j] = kfvers < 1.5 ? ipkf1[2+j] - 1 : ipkf2[2+j] - 1;
-		}
-		for (size_t i = 0; i < (nn + nc); i++){
-			if (charge[i]==0 && i != ip[0] && i != ip[1] && i != ip[2] && i != ip[3] )
-				egammas += energy[i];
-		}
-		egammas = egammas / (2. * beam);
-		return egammas;
-	}
-	//energy deposition of charged kaon and pion (indicies from kinfit), used to exclude processes like eta gamma
-	double eKPi(int kfvers) {
-		double energyK  = kfvers < 1.5 ? energy[ipkf1[0] - 1] : energy[ipkf2[0] - 1];
-		double energyPi = kfvers < 1.5 ? energy[ipkf1[1] - 1] : energy[ipkf2[1] - 1];
-		return (energyK + energyPi) / (2. * beam);
-	}
-
+	//__________________________SELECTION PART_________________________
+	
+	// functions for an attempt to additionally suppress not Ks initials (angleKspi), rest - KsKpi(pi0)
 	double anglekspi(int kfvers, int p0ind) {
 		double pxg[4], pyg[4], pzg[4], eg[4];
 		double pG[4], thetaG[4], phiG[4];
@@ -2345,7 +2198,6 @@ public:
 		if(p0ind == 2)
 			return angle2;
 	}
-
 	double gammagammaInvMasskf(int kfvers) {
 		double pxg[2], pyg[2], pzg[2], eg[2];
 		double pG[2], thetaG[2], phiG[2];
@@ -2367,7 +2219,6 @@ public:
 		
 		return sqrt(pow(ep0, 2) - pow(p0px, 2) - pow(p0py, 2) - pow(p0pz, 2));
 	}
-	
 	double gammagammaInvMass(pair<int, int> ind) {
 		double pxg[2], pyg[2], pzg[2], eg[2];
 		double pG[2], thetaG[2], phiG[2];
@@ -2390,15 +2241,14 @@ public:
 
 		return sqrt(pow(ep0, 2) - pow(p0px, 2) - pow(p0py, 2) - pow(p0pz, 2));
 	}
-
 	double extraPartInvMass(){
 		vector< pair<int, int> > gammasInd;
 		vector<int> excessiveGInd;
-		for(size_t i = 0; i < nc+nn; i++){
+		for(size_t i = 0; i < (size_t)(nc+nn); i++){
 			if(charge[i]==0 && x2kf1<20 && ipkf1[2]-1 != i && ipkf1[3]-1 != i && ipkf1[4]-1 != i && ipkf1[5]-1 != i){
 				excessiveGInd.push_back((int)i);
 			}
-			else if(charge[i]==0 && x2kf2<20 && ipkf2[2]-1 != i && ipkf2[3]-1 != i && ipkf2[4]-1 != i && ipkf2[5]-1 != i){
+			else if(charge[i]==0 && x2kf2<20 && (size_t)ipkf2[2]-1 != i && (size_t)ipkf2[3]-1 != i && (size_t)ipkf2[4]-1 != i && (size_t)ipkf2[5]-1 != i){
 				excessiveGInd.push_back((int)i);
 			}
 		}
@@ -2418,11 +2268,57 @@ public:
 		return 0;
 	}
 
-	int mixFix();
-	bool isITKaonOrPion(int ipkf, int kfx, int dyn);
-	double itIsKaon(int ipkf, int kfx);
-	double itIsPion(int ipkf, int kfx);
+	//ks0 inv mass calculation based on kinfit parameters
+	double ks0InvMass(int kfvers) {
+		double pxg[4], pyg[4], pzg[4], eg[4];
+		double pG[4], thetaG[4], phiG[4];
+		for (size_t i = 0; i < 4; i++) {
+			pG[i] = kfvers < 1.5 ? ppkf1[i + 2] : ppkf2[i + 2];
+			thetaG[i] = kfvers < 1.5 ? thetakf1[i + 2] : thetakf2[i + 2];
+			phiG[i] = kfvers < 1.5 ? phikf1[i + 2] : phikf2[i + 2];
 
+			pxg[i] = pG[i] * sin(thetaG[i]) * cos(phiG[i]);
+			pyg[i] = pG[i] * sin(thetaG[i]) * sin(phiG[i]);
+			pzg[i] = pG[i] * cos(thetaG[i]);
+			eg[i] = pG[i];
+		}
+
+		double p0px1 = pxg[0] + pxg[1];
+		double p0py1 = pyg[0] + pyg[1];
+		double p0pz1 = pzg[0] + pzg[1];
+		//double p0p1 = sqrt(pow(p0px1, 2) + pow(p0py1, 2) + pow(p0pz1, 2));
+
+		double p0px2 = pxg[2] + pxg[3];
+		double p0py2 = pyg[2] + pyg[3];
+		double p0pz2 = pzg[2] + pzg[3];
+		//double p0p2 = sqrt(pow(p0px2, 2) + pow(p0py2, 2) + pow(p0pz2, 2));
+
+		double k0px = p0px1 + p0px2;
+		double k0py = p0py1 + p0py2;
+		double k0pz = p0pz1 + p0pz2;
+		double k0p = sqrt(pow(k0px, 2) + pow(k0py, 2) + pow(k0pz, 2));
+		double ks0invmass = sqrt(pow(eg[0] + eg[1] + eg[2] + eg[3], 2) - pow(k0p, 2));
+
+		return ks0invmass;
+	}
+	//energy deposition of all detected particles except 6 defined by kinFit, used to exclude multi pion final states
+	double eGammas(int kfvers) {
+		double egammas = 0;
+		double ip[4];
+		for (size_t j = 0; j < 4; j++)
+			ip[j] = kfvers < 1.5 ? ipkf1[2 + j] - 1 : ipkf2[2 + j] - 1;
+		for (size_t i = 0; i < (nn + nc); i++)
+			if (charge[i] == 0 && i != ip[0] && i != ip[1] && i != ip[2] && i != ip[3])
+				egammas += energy[i];
+		egammas = egammas / (2. * beam);
+		return egammas;
+	}
+	//energy deposition of charged kaon and pion (indicies from kinfit), used to exclude processes like eta gamma
+	double eKPi(int kfvers) {
+		double energyK = kfvers < 1.5 ? energy[ipkf1[0] - 1] : energy[ipkf2[0] - 1];
+		double energyPi = kfvers < 1.5 ? energy[ipkf1[1] - 1] : energy[ipkf2[1] - 1];
+		return (energyK + energyPi) / (2. * beam);
+	}
 	//some conditions on event parameters, standing "before" kinfit
 	bool central(int kfid, int kfvers) {
 		double d = kfvers < 1.5 ? d0[ipkf1[kfid] - 1] : d0[ipkf2[kfid] - 1];
@@ -2438,15 +2334,94 @@ public:
 		double thetaI = kfvers < 1.5 ? theta[ipkf1[ind] - 1] : theta[ipkf2[ind] - 1];
 		return (thetaI > theta1 * 3.14159 / 180. && thetaI < theta2 * 3.14159 / 180.);
 	}
-	bool egmtht(int kfvers){
-		double eg[4];
-		for (size_t i = 0; i < 4; i++)
-			eg[i] = kfvers < 1.5 ? ppkf1[i + 2] : ppkf2[i + 2];
-		return eg[0]>40 && eg[1]>40 && eg[2]>40 && eg[3]>40;
+
+	bool formConditions(int model, vector<size_t> ommit){
+		vector<bool> temp;
+		double x2 = model < 2 ? x2kf1 : x2kf2;
+		double pK = model < 2 ? ppkf1[0] : ppkf2[0];
+		double pP = model < 2 ? ppkf1[1] : ppkf2[1];
+
+		temp.push_back(x2 < 20 && x2 < x2kf3+3);
+		temp.push_back(central(0, model));
+		temp.push_back(central(1, model));
+		temp.push_back(unionVertex(0, 1, model) );
+		//temp.push_back(thetaxBetween(0, 45, 135, model) && thetaxBetween(1, 45, 135, model));
+		temp.push_back(eGammas(model) < 0.6 * pow(500./beam,3));
+		//temp.push_back(eKPi(model) > 0.1);
+		temp.push_back(pK > 0 && pP > 0);
+		temp.push_back(nn <=7 && nc <=3);
+
+		//temp.push_back(tempdExn[(model-1)*2]>=0.001 && tempdExn[(model-1)*2+1]>=0.001 && tempdExn[(model-1)*2]<15.0 && tempdExn[(model-1)*2+1]<15.0);
+		//temp.push_back(tempdExn[(model-1)*2]<=3.5 && tempdExn[(model-1)*2]<=3.5);
+		//temp.push_back(extraPartInvMass() < 110 || extraPartInvMass() > 160);
+		for(size_t i = 0; i<ommit.size();i++){
+			temp[ommit[i]] = true;
+		}
+		bool result = true;
+		for (size_t i = 0; i < temp.size(); i++)
+			result = result && temp[i];
+		return result;
+	}
+	bool formConditions(int model){
+		vector<size_t> abcd;
+		abcd.clear();
+		return formConditions(model, abcd);
+	}
+	bool goodKkpEntry1Cut(int ind){
+		vector<size_t> temp;
+		temp.push_back((int)ind);
+		return formConditions(1, temp);
+	}
+	bool goodKkpEntry2Cut(int ind){
+		vector<size_t> temp;
+		temp.push_back((int)ind);
+		return formConditions(2, temp);
 	}
 
-	void changeOn4pi(){
-		for(size_t i = 0; i < 6; i++){
+	bool goodEventCheck(int kfModel) {
+		int p1 = kfModel < 2 ? ppkf1[0] : ppkf2[0];
+		int p2 = kfModel < 2 ? ppkf1[1] : ppkf2[1];
+		int ikf1 = kfModel < 2 ? ipkf1[0] - 1 : ipkf2[0] - 1;
+		int ikf2 = kfModel < 2 ? ipkf1[1] - 1 : ipkf2[1] - 1;
+		bool kf1 = p1 < 300 ||  region[ikf1] == 1 && tempamp[(kfModel - 1) * 2 + 0] < 30 && amplitudeE[ikf1] < 1000 && amplitudeE[ikf1] > 0.01;//&& amplitude[ikf1] > 0.01;
+		bool kf2 = p2 < 300 ||  region[ikf2] == 1 && tempamp[(kfModel - 1) * 2 + 1] < 30 && amplitudeE[ikf2] < 1000 && amplitudeE[ikf2] > 0.01;//&& amplitude[ikf1] > 0.01;
+		return (formConditions(kfModel) && kf1 && kf2 );
+	}
+
+	//__________________________SELECTION PART END___________________________
+
+	//__________________________neural network PART___________________________
+
+	bool kfCoincideWithMC(int kfModel, string mode) {
+		double thetaK = kfModel < 2 ? thetakf1[0] : thetakf2[0];
+		double thetaP = kfModel < 2 ? thetakf1[1] : thetakf2[1];
+		double phiK = kfModel < 2 ? phikf1[0] : phikf2[0];
+		double phiP = kfModel < 2 ? phikf1[1] : phikf2[1];
+		double pP = kfModel < 2 ? ppkf1[1] : ppkf2[1];
+		bool result = fabs(mctheta[0] - thetaP) < 0.03 && fabs(mctheta[3] - thetaK) < 0.03 && fabs(mcphi[0] - phiP) < 0.01 && fabs(mcphi[3] - phiK) < 0.01 &&
+			fabs(sqrt(pow(mcpx[0], 2) + pow(mcpy[0], 2) + pow(mcpz[0], 2)) - pP) < 20;
+		if (mode == "K-p,p-K")
+			result = fabs(mctheta[0] - thetaK) < 0.05 && fabs(mctheta[3] - thetaP) < 0.05 && fabs(mcphi[0] - phiK) < 0.01 && fabs(mcphi[3] - phiP) < 0.01;
+		return result;
+	}
+	void writeTestLine(int kfModel, ofstream& off) {
+		pair<double, double> p = kfModel < 2 ? make_pair(ppkf1[0], ppkf1[1]) : make_pair(ppkf2[0], ppkf2[1]);
+		double x2 = kfModel < 2 ? x2kf1 : x2kf2;
+		off << p.first / 1000. << "	" << tempdExn[(kfModel - 1) * 2 + 0] << "	" << tempamp[(kfModel - 1) * 2 + 0] << "	" << tempampE[(kfModel - 1) * 2 + 0] << "	";
+		off << p.second / 1000. << "	" << tempdExn[(kfModel - 1) * 2 + 1] << "	" << tempamp[(kfModel - 1) * 2 + 1] << "	" << tempampE[(kfModel - 1) * 2 + 1] << "	";
+		off << x2 << "	" << x2kf3 << "	" << beam;
+	}
+	void writeLine(int kfModel, ofstream& off, int tag) {
+		writeTestLine(kfModel, off);
+		off << "	" << tag << endl;
+	}
+	void writeLine(int kfModel, ofstream& off) {
+		writeTestLine(kfModel, off);
+		off << endl;
+	}
+
+	void changeOn4pi() {
+		for (size_t i = 0; i < 6; i++) {
 			ipkf1[i] = ipkf3[i];
 			ipkf2[i] = ipkf3[i];
 			ppkf1[i] = ppkf3[i];
@@ -2462,103 +2437,25 @@ public:
 		x2ikf2 = x2kf3;
 	}
 
-	vector<bool> formConditions(int model, vector<size_t> ommit){
-		vector<bool> temp;
-		switch(model){
-			case 1:
-				temp.push_back(x2kf1 < 20 && x2kf1 < x2kf3+3);
-				temp.push_back(central(0, 1));
-				temp.push_back(central(1, 1));
-				temp.push_back(unionVertex(0, 1, 1) );
-				//temp.push_back(thetaxBetween(0, 45, 135, 1) && thetaxBetween(1, 45, 135, 1));
-				temp.push_back(eGammas(1) < 0.6 * pow(500./beam,3));
-				//temp.push_back(eKPi(1) > 0.1);
-				temp.push_back(ppkf1[0] > 0 && ppkf1[1] > 0);
-				temp.push_back(nn <=7 && nc <=3);
-				//temp.push_back(tempdExn[0]>=0.001 && tempdExn[1]>=0.001 && tempdExn[0]<15.0 && tempdExn[1]<15.0);
-				//temp.push_back(extraPartInvMass() < 110 || extraPartInvMass() > 160);
-				//temp.push_back(tempdExn[0]<=3.5 && tempdExn[1]<=3.5);
-			break;
-			case 2:
-				temp.push_back(x2kf2 < 20 && x2kf2 < x2kf3 + 3);
-				temp.push_back(central(0, 2));
-				temp.push_back(central(1, 2));
-				temp.push_back(unionVertex(0, 1, 2) );
-				//temp.push_back(thetaxBetween(0, 45, 135, 2) && thetaxBetween(1, 45, 135, 2));
-				temp.push_back(eGammas(2) < 0.6 * pow(500./beam,3));
-				//temp.push_back(eKPi(2) > 0.1);
-				temp.push_back(ppkf2[0] > 0 && ppkf2[1] > 0);
-				temp.push_back(nn <=7 && nc <=3);
-				//temp.push_back(tempdExn[2]>=0.001 && tempdExn[3]>=0.001 && tempdExn[2]<15.0 && tempdExn[3]<15.0);
-				//temp.push_back(extraPartInvMass() < 110 || extraPartInvMass() > 160);
-				//temp.push_back(tempdExn[2]<=3.5 && tempdExn[3]<=3.5);
-			break;
-		}
-		for(size_t i = 0; i<ommit.size();i++){
-			temp[ommit[i]] = true;
-		}
-		return temp;
-	}
-
-	vector<bool> formConditions(int model){
-		vector<size_t> abcd;
-		abcd.clear();
-		return formConditions(model, abcd);
-	}
-
-	bool goodEventReturnResult(){
-		bool result = true;
-		for(size_t i = 0; i < conditions.size(); i++)
-			result = result && conditions[i];
-		return result;
-	}
-	bool goodKkpEntry1Cut(int ind){
-		vector<size_t> temp;
-		temp.push_back((int)ind);
-		conditions = formConditions(1,temp);
-		return goodEventReturnResult();
-	}
-	bool goodKkpEntry2Cut(int ind){
-		vector<size_t> temp;
-		temp.push_back((int)ind);
-		conditions = formConditions(2,temp);
-		return goodEventReturnResult();
-	}
-
-	bool goodKkpEntry1(){
-		conditions = formConditions(1);
-		//return goodKkpEntry1Cut(0);
-		return goodEventReturnResult();
-	}
-	bool goodKkpEntry2(){
-		conditions = formConditions(2);
-		//goodKkpEntry2Cut(0);
-		return goodEventReturnResult();
-	}
-	
-	bool goodEventCheck(string regime){
-		//normalizing aach and dedx
-		kf10 = ppkf1[0] < 300 || region[ipkf1[0] - 1] == 1 && tempamp[0] < 30 && amplitudeE[ipkf1[0] - 1] < 1000 && amplitudeE[ipkf1[0] - 1] > 0.01;//&& amplitude[ipkf1[0] - 1] > 0.01;
-		kf11 = ppkf1[1] < 300 || region[ipkf1[1] - 1] == 1 && tempamp[1] < 30 && amplitudeE[ipkf1[1] - 1] < 1000 && amplitudeE[ipkf1[1] - 1] > 0.01;//&& amplitude[ipkf1[1] - 1] > 0.01;
-		kf20 = ppkf2[0] < 300 || region[ipkf2[0] - 1] == 1 && tempamp[2] < 30 && amplitudeE[ipkf2[0] - 1] < 1000 && amplitudeE[ipkf2[0] - 1] > 0.01;//&& amplitude[ipkf2[0] - 1] > 0.01;
-		kf21 = ppkf2[1] < 300 || region[ipkf2[1] - 1] == 1 && tempamp[3] < 30 && amplitudeE[ipkf2[1] - 1] < 1000 && amplitudeE[ipkf2[1] - 1] > 0.01;//&& amplitude[ipkf2[1] - 1] > 0.01;
-		return ((goodKkpEntry1() && kf10 && kf11) || (goodKkpEntry2() && kf20 && kf21)) /*&& eton > 0.4 && eton < 0.85*/;
-	}
-
-
 	void someAnalisis();
 	void effEnergy();
-	void birdfix();
 	void drawdEvsp(vector<pair<double, double> > eranges);
-	void landaufit();
 	void genTableML(char *add, char *outputFile, int appYN);
 	void genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, vector<pair<double, double> > eranges, string regime);
 	vector<TH1*> imvmass(char* add, char* name, char* title, int nbins, double lb, double hb, vector<pair<double, double> > eranges, string regime);
-	void calculateEffAndNoE();
+	void calculateEffAndNoE(char* expFiles, char* modFiles, vector<pair<double, double> > eranges);
 	void invmass2part();
+
+
+	/// old functions for simple differentiating
+	int mixFix();
+	bool isITKaonOrPion(int ipkf, int kfx, int dyn);
+	double itIsKaon(int ipkf, int kfx);
+	double itIsPion(int ipkf, int kfx);
 };
 
 pair<size_t,size_t> findclosest(double en1, vector<double> en2){
+	/// closest from the left and from the right
 	double mindistl = 100000;
 	double mindistr = 100000;
 	size_t mindistIndl = 500;
@@ -2580,41 +2477,16 @@ pair<size_t,size_t> findclosest(double en1, vector<double> en2){
 	return make_pair(mindistIndl,mindistIndr);
 }
 
-double energygaps[13] = {1200, 1395, 1499, 1523, 1590, 1655, 1690, 1755, 1795, 1805, 1875, 1945, 2005};//1499 1523
-//double energygaps[11] = {1200, 1355, 1495, 1605, 1705, 1745, 1795, 1820, 1865, 1882, 2007};
-
-//usefull function for pion-kaon separation in track chamber
-double betaBloch(double p, double m) {
-	return 0.1* (p * p + m * m) / (p * p) * (log((p * p) / (m * m)) - (p * p) / (p * p + m * m) + 4.8); //5.3 f.e. to cut pi, 600
-}
-double pionLine(double p) {
-	return 600. * (p*p + 139.6*139.6)/(p*p) * (log((p*p)/(139.6*139.6)) - (p*p)/(p*p + 139.6*139.6) + 6.5);
-}
-double sigmapion(double p) {
-	return p; // have to find sigma dependence on momentum by fitting in some ranges with mc data usage
-}
-double kaonLine(double p) {
-	return 600. * (p*p + 493.7*493.7)/(p*p) * (log((p*p)/(493.7*493.7)) - (p*p)/(p*p + 493.7*493.7) + 6.5);
-}
-double sigmakaon(double p) {
-	return p; // have to find sigma dependence on momentum by fitting in some ranges with mc data usage
-}
-double meanLine(double p) {
-	return betaBloch(p,355); //375 to cut pi
-}
 
 double sigma(float p, float mean, float width) {
 	return 1./(1.+exp(-(p-mean)/width));
 }
-
 double eff(int pcode, float p, float ampE) {  //pcode - 0 if kaon hypithesis (poisson distribution), 1 if pion
 	if (pcode == 0)
 		return 1. * (0.2+0.1*ampE);
 	if (pcode == 1)
 		return sigma(p, 350., 100.) * (0.2 + 0.1 * ampE);
 }
-
-
 //First try to fix mixing charged particles of kinfit, is not used now, because I have 2 models and separation function,which is described right below
 int kkpDistr::mixFix() {
 	if (x2ikf1 < 100)
@@ -2634,9 +2506,7 @@ int kkpDistr::mixFix() {
 	}
 	return 0;
 }
-
-//differenciate charged particles, ipkf - particle index (kinfit), kfx - kinfit model
-//если каон (выше линии в дедх или плохой сигнал счетчика), то True, если пион то False
+//differenciate charged particles, ipkf - particle index (kinfit), kfx - kinfit mode
 bool kkpDistr::isITKaonOrPion(int ipkf, int kfx, int dyn) {
 	int ip = ipkf1[ipkf] - 1;
 	float p= ppkf1[ipkf];
@@ -2654,49 +2524,6 @@ bool kkpDistr::isITKaonOrPion(int ipkf, int kfx, int dyn) {
 	return (p < 350 && dE > meanLine(p)) ||
 		((p >= 350) && (amp > 500 || amp < 0.25) && reg==1);
 }
-
-//functions for probability estimations of particle being kaon or pion (first try), have to read some papers to do it correctly.
-/*int itIsKaon(int ipkf, int kfx) {
-	int ip = ipkf1[ipkf] - 1;
-	float amplitudeE;
-	float p = ppkf1[ipkf];
-	if (kfx == 2) {
-		ip = ipkf2[ipkf] - 1;
-		p = ppkf2[ipkf];
-	}
-	float amp; amp = amplitude[ip];
-	float dE; dE = dExs[ip];
-	int reg; reg = region[ip];
-
-	int probab = (kaonLine(p) - meanLine(p) - fabs(dE - kaonLine(p)))/(kaonLine(p) - meanLine(p));
-	if (p >= 350) {
-		probab = pow(amplitudeE, amp) * exp(-amplitudeE);
-		float amptemp = amp;
-		while (amptemp >= 1)
-			probab = probab / amptemp;
-		probab 
-	}
-	if (probab >= 0)
-		return probab;
-	return 0;
-}*/
-/*int itIsPion(int ipkf, int kfx) {
-	int ip = ipkf1[ipkf] - 1;
-	float p = ppkf1[ipkf];
-	if (kfx == 2) {
-		ip = ipkf2[ipkf] - 1;
-		p = ppkf2[ipkf];
-	}
-	float amp; amp = amplitude[ip];
-	float dE; dE = dExs[ip];
-	int reg; reg = region[ip];
-
-	int probab = (meanLine(p) - pionLine(p) - fabs(dE - pionLine(p))) / (meanLine(p) - pionLine(p));
-	if (probab >= 0)
-		return probab;
-	return 0;
-}*/
-
 //functions for probability estimations of particle being kaon or pion (second try), have to read some papers to do it correctly.
 double kkpDistr::itIsKaon(int ipkf, int kfx) {   // index from kinfit and version of kinfit, returns ratio of probabilities in two hypotheses
 	int ip = ipkf1[ipkf] - 1;
@@ -2753,96 +2580,10 @@ double kkpDistr::itIsPion(int ipkf, int kfx) {
 	return 0;
 }
 
-//trying to create a class, that holds vector of histograms and can fill them with some cuts from some data, 
-//but it returns segmentation violation depending on certain amount of branches used
-/*class hwf {
-	//const int n;
-	//object = array of hists/profiles (or vector better?) пока 1 гистограмма
-public:
-	TH1F* hist;
-	//object 2 = fuctions to fill (пока не буду делать этого)
 
-	//some constructor
-	hwf(const char* name, const char* title, Int_t nbins, Double_t xlow, Double_t xup) {
-		*hist = TH1F(name, title, nbins, xlow, xup);
-	}
 
-	//filling function
-	void fillhists(char* data) {
-
-		TChain* chain = new TChain("t1");
-		chain->Add(data);
-		const Long64_t entries = chain->GetEntries();
-		cout << entries << endl;
-
-		chain->SetBranchAddress("beam", &beam);
-		chain->SetBranchAddress("eton", &eton);
-		chain->SetBranchAddress("nc", &nc);
-		chain->SetBranchAddress("z0", &z0);
-		chain->SetBranchAddress("d0", &d0);
-		chain->SetBranchAddress("phi", &phi);
-		chain->SetBranchAddress("phis", &phis);
-		chain->SetBranchAddress("theta", &theta);
-		chain->SetBranchAddress("region", &region);
-
-		chain->SetBranchAddress("x2ikf1", &x2ikf1);
-		chain->SetBranchAddress("ipkf1", &ipkf1);
-		chain->SetBranchAddress("ppkf1", &ppkf1);
-		chain->SetBranchAddress("phikf1", &phikf1);
-		chain->SetBranchAddress("thetakf1", &thetakf1);
-
-		chain->SetBranchAddress("amplitude", &amplitude);
-		chain->SetBranchAddress("dExs", &dExs);
-
-		chain->SetBranchAddress("x2ikf2", &x2ikf2);
-		chain->SetBranchAddress("ipkf2", &ipkf2);
-		chain->SetBranchAddress("ppkf2", &ppkf2);
-		chain->SetBranchAddress("phikf2", &phikf2);
-		chain->SetBranchAddress("thetakf2", &thetakf2);
-
-	}
-
-};*/
-
-//function to select kkp events, maybe will be usefull for experiment of 2017-2020, but probably not, and it should be updatad seriously
-void copy() {
-	TString str = "a";
-	TString elem;
-	vector<TString> ans;
-	TString basedir("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp/*.root");
-	TString dir("/work/users/kladov/snd2k/R007-001/kkpi/selectedkkpiCharged/");
-	TString files = gSystem->GetFromPipe("ls " + basedir);
-
-	Ssiz_t from = 0;
-
-	while (files.Tokenize(elem, from, "\n")) {
-		ans.push_back(elem);
-	}
-	int vector_size = ans.size();
-	for (int i = 0; i < vector_size; i++) {
-		str = ans[i].Copy();
-		TString tok;
-		Ssiz_t from1 = 1;
-		vector<TString> tokens;
-		TFile* filecomb = TFile::Open(str);
-		TTree* originalTree = (TTree*)filecomb->Get("t1");
-
-		while (str.Tokenize(tok, from1, "/")) {
-			tokens.push_back(tok);
-		}
-		cout << tokens[8] << endl;
-		TFile* ouput = TFile::Open(dir + "true__" + tokens[8], "RECREATE");
-		ouput->cd();
-		TTree* selectedTree = originalTree->CopyTree("(cosm == 0) && (nc == 4) && (nn==0)");
-		selectedTree->Print();
-		selectedTree->Write();
-		ouput->Close();
-		filecomb->Close();
-	}
-}
-
-//scan all processes (listed in directory), use selection criteria and store some histogramm in a file (for example, inv mass distributions)
 void kkpDistr::someAnalisis() {
+	//scan all processes (listed in directory), use selection criteria and store some histogramm in a file (for example, inv mass distributions)
 	vector<TString> ans;
 	//what directory
 	TString files = gSystem->GetFromPipe("ls /work/users/kladov/snd2k/R007-001/output/ntuples/all_KsNF/*");
@@ -2874,10 +2615,7 @@ void kkpDistr::someAnalisis() {
 			chain.SetBranchAddress("nn", &nn);
 			chain.SetBranchAddress("z0", &z0);
 			chain.SetBranchAddress("d0", &d0);
-			chain.SetBranchAddress("x0", &x0);
-			chain.SetBranchAddress("y0", &y0);
 			chain.SetBranchAddress("phi", &phi);
-			chain.SetBranchAddress("phis", &phis);
 			chain.SetBranchAddress("theta", &theta);
 			chain.SetBranchAddress("region", &region);
 			chain.SetBranchAddress("amplitude", &amplitude);
@@ -2943,8 +2681,8 @@ void kkpDistr::someAnalisis() {
 	MyFile1->Close();
 }
 
-//diferent manipulations with efficiency, in main loop it has only selection criteria and filling efficiency profile with different x values
 void kkpDistr::effEnergy() {
+	//diferent manipulations with efficiency, in main loop it has only selection criteria and filling efficiency profile with different x values, not needed now I believe
 	TChain chain("t1");
 	chain.Add("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp_KsNF/*.root");
 	//chain.Add("/work/users/kladov/snd2k/R007-001/output/ntuples/2etg/*.root");
@@ -2957,10 +2695,7 @@ void kkpDistr::effEnergy() {
 		chain.SetBranchAddress("nn", &nn);
 		chain.SetBranchAddress("z0", &z0);
 		chain.SetBranchAddress("d0", &d0);
-		chain.SetBranchAddress("x0", &x0);
-		chain.SetBranchAddress("y0", &y0);
 		chain.SetBranchAddress("phi", &phi);
-		chain.SetBranchAddress("phis", &phis);
 		chain.SetBranchAddress("theta", &theta);
 		chain.SetBranchAddress("region", &region);
 		chain.SetBranchAddress("amplitude", &amplitude);
@@ -3006,11 +2741,6 @@ void kkpDistr::effEnergy() {
 		chain.GetEntry(e);
 		//if ((2 * beam >= energygaps[4] && 2 * beam < energygaps[5])) {
 		size_t erangel = 0;
-		for (size_t i = 0; i < sizeof(energygaps) / sizeof(energygaps[0]); i++) {
-			if ((2 * beam >= energygaps[i] && 2 * beam < energygaps[i + 1])) {
-				erangel = i;
-			}
-		}
 			countall += 1;
 			choice = 0;
 			if (x2ikf1 < 50 && isITKaonOrPion(0, 1, 1) && !isITKaonOrPion(1, 1, 1))
@@ -3176,28 +2906,12 @@ void kkpDistr::effEnergy() {
 	//h1->Draw();
 }
 
-//now it only draws the theta distribution of dEdxs for some root files
-void kkpDistr::birdfix() {
-	TChain chain("t1");
-	chain.Add("/work/users/kladov/snd2k/R007-001/output/ntuples/selected2011/*.root");
-	const Long64_t entries = chain.GetEntries();
-	cout << entries << endl;
-	TProfile* p0 = new TProfile("devstheta","devstheta",50,0,3.1416);
-	chain.SetBranchAddress("dExs", &dExs);
-	chain.SetBranchAddress("theta", &theta);
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		p0->Fill(theta[0], dExs[0]);
-		p0->Fill(theta[1], dExs[1]);
-	}
-	p0->Draw();
-}
-
 double invmass2p(double e1, double e2, double p1x, double p2x, double p1y, double p2y, double p1z, double p2z){
 	return sqrt(pow(e1+e2,2) - pow(p1x+p2x,2) - pow(p1y+p2y,2) - pow(p1z+p2z,2) ); 
 }
 
 void kkpDistr::invmass2part(){
+	// randomly draw invariant distribution and don't even store it?
 	TChain chain("t1");
 	//chain.Add("/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2017/kkp_KsNF/*.root");
 	//chain.Add("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2017/*.root");
@@ -3210,10 +2924,7 @@ void kkpDistr::invmass2part(){
 		chain.SetBranchAddress("nn", &nn);
 		chain.SetBranchAddress("z0", &z0);
 		chain.SetBranchAddress("d0", &d0);
-		chain.SetBranchAddress("x0", &x0);
-		chain.SetBranchAddress("y0", &y0);
 		chain.SetBranchAddress("phi", &phi);
-		chain.SetBranchAddress("phis", &phis);
 		chain.SetBranchAddress("theta", &theta);
 		chain.SetBranchAddress("region", &region);
 		chain.SetBranchAddress("amplitude", &amplitude);
@@ -3262,7 +2973,7 @@ void kkpDistr::invmass2part(){
 		bool kf20 = region[ipkf2[0] - 1] == 1 && amplitude[ipkf2[0] - 1] < 1000 && amplitudeE[ipkf2[0] - 1] < 1000 && amplitudeE[ipkf2[0] - 1] > 0.01;//&& amplitude[ipkf2[0] - 1] > 0.01;
 		bool kf21 = region[ipkf2[1] - 1] == 1 && amplitude[ipkf2[1] - 1] < 1000 && amplitudeE[ipkf2[1] - 1] < 1000 && amplitudeE[ipkf2[1] - 1] > 0.01;//&& amplitude[ipkf2[1] - 1] > 0.01;
 		h01->Fill(invmass2p( mce[0], mce[3] + mce[4] , mcpx[0] , mcpx[3]+mcpx[4] , mcpy[0], mcpy[3] + mcpy[4] , mcpz[0] , mcpz[3] + mcpz[4] ) );
-		if ((goodKkpEntry1() && ((kf10 || ppkf1[0] < 300) && (kf11 || ppkf1[1] < 300))) && eton > 0.4 && eton < 0.85 && choice==1 && ks0InvMass(1)>440 && ks0InvMass(1)<530) {
+		if (goodEventCheck(1) && eton > 0.4 && eton < 0.85 && choice==1 && ks0InvMass(1)>440 && ks0InvMass(1)<530) {
 			//if (fabs(mctheta[0] - thetakf1[1]) < 0.05 && fabs(mctheta[3] - thetakf1[0]) < 0.05) { //0,1
 				//double p1x = ppkf1[1]*sin(thetakf1[1])*sin(phikf1[1]) + ppkf1[0]*sin(thetakf1[0])*sin(phikf1[0]);
 				//double p1y = ppkf1[1]*sin(thetakf1[1])*cos(phikf1[1]) + ppkf1[0]*sin(thetakf1[0])*cos(phikf1[0]);
@@ -3280,7 +2991,7 @@ void kkpDistr::invmass2part(){
 				//h0->Fill( sqrt(pow(e2,2) - pow(p2x,2) - pow(p2y,2) - pow(p2z,2) ) );
 			//}
 		}
-		if ((goodKkpEntry2() && ((kf20 || ppkf2[0] < 300) && (kf21 || ppkf2[1] < 300))) && eton > 0.4 && eton < 0.85 && choice==2 && ks0InvMass(2)>440 && ks0InvMass(2)<530) {
+		if (goodEventCheck(2) && eton > 0.4 && eton < 0.85 && choice==2 && ks0InvMass(2)>440 && ks0InvMass(2)<530) {
 			//if (fabs(mctheta[0] - thetakf2[1]) < 0.05 && fabs(mctheta[3] - thetakf2[0]) < 0.05) { //0,1
 				double p1x = ppkf2[1]*sin(thetakf2[1])*sin(phikf2[1]) + ppkf2[0]*sin(thetakf2[0])*sin(phikf2[0]);
 				double p1y = ppkf2[1]*sin(thetakf2[1])*cos(phikf2[1]) + ppkf2[0]*sin(thetakf2[0])*cos(phikf2[0]);
@@ -3304,8 +3015,8 @@ void kkpDistr::invmass2part(){
 	//h2->Draw();
 }
 
-//drawing different tipes of dE vs P distributions (with compare of mc and kfi, for example).
 void kkpDistr::drawdEvsp(vector<pair<double, double> > eranges) {
+	//drawing different tipes of dE vs P distributions (with compare of mc and kfi, for example).
 	cout << eranges.size() << endl;
 	TChain chain("t1");
 	//chain.Add("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp/kskp*");
@@ -3329,10 +3040,7 @@ void kkpDistr::drawdEvsp(vector<pair<double, double> > eranges) {
 		chain.SetBranchAddress("nn", &nn);
 		chain.SetBranchAddress("z0", &z0);
 		chain.SetBranchAddress("d0", &d0);
-		chain.SetBranchAddress("x0", &x0);
-		chain.SetBranchAddress("y0", &y0);
 		chain.SetBranchAddress("phi", &phi);
-		chain.SetBranchAddress("phis", &phis);
 		chain.SetBranchAddress("theta", &theta);
 		chain.SetBranchAddress("region", &region);
 		chain.SetBranchAddress("amplitude", &amplitude);
@@ -3408,7 +3116,7 @@ void kkpDistr::drawdEvsp(vector<pair<double, double> > eranges) {
 		if(indexCheck(regime)){
 			normalizedExn(regime);
 			normalizeAch();
-			if(goodEventCheck(regime)){
+			if(goodEventCheck(1)){
 				linecount+=1;
 				int goodEv = 0;
 				int whatKF = 0;
@@ -3420,7 +3128,7 @@ void kkpDistr::drawdEvsp(vector<pair<double, double> > eranges) {
 						if(charge[i]==0 && energy[i] > 20)
 							nntrue+=1;
 					}
-					if (whatKF == 1 && (goodKkpEntry1() && kf10 && kf11)/* && (ppkf1[0]>200 || tempdExn[0] > meanLine(ppkf1[0]))*/ /*&& (ppkf1[0]<300 || tempamp[0]< min(0.4,0.3/(double)amplitudeE[ipkf1[0] - 1])) && (ppkf1[1]<350 || tempamp[1]> 0.1)*/ && nntrue<7) {
+					if (whatKF == 1 && goodEventCheck(1)/* && (ppkf1[0]>200 || tempdExn[0] > meanLine(ppkf1[0]))*/ /*&& (ppkf1[0]<300 || tempamp[0]< min(0.4,0.3/(double)amplitudeE[ipkf1[0] - 1])) && (ppkf1[1]<350 || tempamp[1]> 0.1)*/ && nntrue<7) {
 					//if ((goodKkpEntry1() && (kf10 || ppkf1[0] < 300) && (kf11 || ppkf1[1] < 300)) && (ppkf1[0]>200 || dExn[ipkf1[0] - 1]/605.>meanLine(ppkf1[0])) && ppkf1[0]>50) {
 						h0->Fill(ppkf1[0], tempdExn[0]);
 						h01->Fill(ppkf1[1], tempdExn[1]);
@@ -3431,7 +3139,7 @@ void kkpDistr::drawdEvsp(vector<pair<double, double> > eranges) {
 						if (fabs(x2kf1 - x2ikfML) > 0.01)
 							cout << x2ikfML << "	" << linecount << endl;
 					}
-					if (whatKF == 2 && (goodKkpEntry2() && kf20 && kf21) /*&& (ppkf2[0]>200 || tempdExn[2] > meanLine(ppkf2[0])) *//*&& (ppkf2[0]<300 || tempamp[2]< min(0.4,0.3/(double)amplitudeE[ipkf2[0] - 1])) && (ppkf2[1]<350 || tempamp[3]> 0.1)*/ && nntrue<7) {
+					if (whatKF == 2 && goodEventCheck(2) /*&& (ppkf2[0]>200 || tempdExn[2] > meanLine(ppkf2[0])) *//*&& (ppkf2[0]<300 || tempamp[2]< min(0.4,0.3/(double)amplitudeE[ipkf2[0] - 1])) && (ppkf2[1]<350 || tempamp[3]> 0.1)*/ && nntrue<7) {
 					//if ((goodKkpEntry2() && (kf20 || ppkf2[0] < 300) && (kf21 || ppkf2[1] < 300)) && (ppkf2[0]>200 || dExn[ipkf2[0] - 1]/605.>meanLine(ppkf2[0])) && ppkf2[0]>50) {
 						h0->Fill(ppkf2[0], tempdExn[2]);
 						h01->Fill(ppkf2[1], tempdExn[3]);
@@ -3444,8 +3152,8 @@ void kkpDistr::drawdEvsp(vector<pair<double, double> > eranges) {
 					}
 				}
 			}
-			/*if ((goodKkpEntry1() && ((kf10 || ppkf1[0] < 300) && (kf11 || ppkf1[1] < 300))) && eton > 0.4 && eton < 0.85 && ks0InvMass(1)>440 && ks0InvMass(1)<530) {
-			//if ((goodKkpEntry1() && ((kf10 && kf11))) && eton > 0.4 && eton < 0.85 && ks0InvMass(1)>440 && ks0InvMass(1)<530) {
+			/*if (goodEventCheck(1) && eton > 0.4 && eton < 0.85 && ks0InvMass(1)>440 && ks0InvMass(1)<530) {
+			//if (goodEventCheck(1) && eton > 0.4 && eton < 0.85 && ks0InvMass(1)>440 && ks0InvMass(1)<530) {
 				//if (fabs(mctheta[0] - thetakf1[1]) < 0.05 && fabs(mctheta[3] - thetakf1[0]) < 0.05) { //0,1
 					//h1->Fill(x2ikf1,x2ikf3);
 					prof->Fill(x2ikf1,x2ikf3);
@@ -3523,125 +3231,43 @@ void kkpDistr::drawdEvsp(vector<pair<double, double> > eranges) {
 	MyFile1->Close();*/
 }
 
-//fit for dEdx histogramm distribution with p in certain range, writen long ago, have to change it later when decide to do this properly (after radcorrections)
-void kkpDistr::landaufit() {
-	TChain chain("t1");
-	chain.Add("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp/kskp*");
-	{
-		chain.SetBranchAddress("eton", &eton);
-		chain.SetBranchAddress("phi", &phi);
-		chain.SetBranchAddress("phis", &phis);
-		chain.SetBranchAddress("theta", &theta);
-		chain.SetBranchAddress("region", &region);
-		chain.SetBranchAddress("amplitude", &amplitude);
-		chain.SetBranchAddress("amplitudeE", &amplitudeE);
-		chain.SetBranchAddress("dExs", &dExs);
-		chain.SetBranchAddress("x2ikf1", &x2ikf1);
-		chain.SetBranchAddress("ipkf1", &ipkf1);
-		chain.SetBranchAddress("ppkf1", &ppkf1);
-		chain.SetBranchAddress("phikf1", &phikf1);
-		chain.SetBranchAddress("thetakf1", &thetakf1);
-		chain.SetBranchAddress("mctheta", &mctheta);
-	}
-	const Long64_t entries = chain.GetEntries();
-	cout << entries << endl;
+void drawDeDxFromFile(char* fileName = "/online/users2/kladov/R007-002/kkpi/2011/SelIDistrKsKPiM.root") {
+	TFile* MyFile = new TFile(fileName);
+	TH2* h0 = (TH2F*)MyFile->Get("kaonsDEdx");
+	TH2* h01 = (TH2F*)MyFile->Get("pionsDEdx");
+	TH2* h1 = (TH2F*)MyFile->Get("kaonsAch");
+	TH2* h2 = (TH2F*)MyFile->Get("pionsAch");
 
-	TH1* h5 = new TH1F("de30", "dEdx, p 300-350", 50, 0, 30000);
-	TH1* h4 = new TH1F("de25", "dEdx, p 250-300", 50, 0, 30000);
-	TH1* h3 = new TH1F("de20", "dEdx, p 200-250", 50, 0, 30000);
-	TH1* h2 = new TH1F("de15", "dEdx, p 150-200", 50, 0, 30000);
-	TH1* h1 = new TH1F("de10", "dEdx, p 100-150", 50, 0, 30000);
-	TH2* h = new TH2D("devspk", "dEdx vs p", 100, 0, 600, 100, 0, 30000);
-	TProfile* pr = new TProfile("pr","pi_eff_vs_p",100,0,1000);
-	TProfile* pr1 = new TProfile("pr1","pi_eff_vs_aE",100,0,10);
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
-		//int fwt = 0; //fill what?
-		if (mctheta[2] - thetakf1[0] < 0.07 && mctheta[2] - thetakf1[0] > -0.07 && x2ikf1 < 50) {
-			h->Fill(ppkf1[0], dExs[ipkf1[0] - 1]);
-			if (ppkf1[0] > 300 && ppkf1[0] < 350)
-				h5->Fill(dExs[ipkf1[0] - 1]);
-			if (ppkf1[0] > 250 && ppkf1[0] < 300)
-				h4->Fill(dExs[ipkf1[0] - 1]);
-			if (ppkf1[0] > 200 && ppkf1[0] < 250)
-				h3->Fill(dExs[ipkf1[0] - 1]);
-			if (ppkf1[0] > 150 && ppkf1[0] < 200)
-				h2->Fill(dExs[ipkf1[0] - 1]);
-			if (ppkf1[0] > 100 && ppkf1[0] < 150)
-				h1->Fill(dExs[ipkf1[0] - 1]);
-		}
-		if (mctheta[0] - thetakf1[1] < 0.07 && mctheta[0] - thetakf1[1] > -0.07 && x2ikf1 < 50 && region[ipkf1[1]-1] == 1) {
-			if (amplitude[ipkf1[1] - 1] > 0.2)
-				pr->Fill(ppkf1[1], 1);
-			else
-				pr->Fill(ppkf1[1], 0);
-			if (ppkf1[1] > 380) {
-				if (amplitude[ipkf1[1] - 1] > 0.2)
-					pr1->Fill(amplitudeE[ipkf1[1] - 1], 1);
-				else
-					pr1->Fill(amplitudeE[ipkf1[1] - 1], 0);
-			}
-		}
-	}
-	/*TF1* f1 = new TF1("f1", "[0]*exp(-0.5*((x-[1])/[2])^2)", 0, 30000);
-	h1->Draw();
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	f1->SetParameter(1, kaonLine(125));
-	f1->SetParameter(2, 0.5*kaonLine(125));
-	f1->SetParLimits(2, 0.1*kaonLine(125), 1.0*kaonLine(125));
-	h1->Fit(f1,"","",0,30000);
-	c->Update();
-	cin.get();
+	//dedx
+	h01->SetMarkerStyle(8);
+	h01->SetMarkerSize(0.4);
+	h01->SetMarkerColor(4);
+	h0->SetMarkerStyle(8);
+	h0->SetMarkerSize(0.4);
+	h0->SetMarkerColor(2);
+	h0->SetTitle("dE/dx vs p; P (MeV/c)");
+
+	h0->Draw();
+	h01->Draw("same");
+
+	//ach
+	/*h1->SetMarkerStyle(8);
+	h1->SetMarkerSize(0.4);
+	h1->SetMarkerColor(4);
+	h2->SetMarkerStyle(8);
+	h2->SetMarkerSize(0.4);
+	h2->SetMarkerColor(2);
 	h2->Draw();
-	f1->SetParameter(1, kaonLine(175));
-	f1->SetParameter(2, 0.5 * kaonLine(175));
-	f1->SetParLimits(2, 0.1 * kaonLine(125), 1.0 * kaonLine(125));
-	h2->Fit(f1, "", "", 0, 30000);
-	c->Update();
-	cin.get();
-	h3->Draw();
-	f1->SetParameter(1, kaonLine(225));
-	f1->SetParameter(2, 0.5 * kaonLine(225));
-	f1->SetParLimits(2, 0.1 * kaonLine(125), 1.0 * kaonLine(125));
-	h3->Fit(f1, "", "", 0, 30000);
-	c->Update();
-	cin.get();
-	h4->Draw();
-	f1->SetParameter(1, kaonLine(275));
-	f1->SetParameter(2, 0.5 * kaonLine(275));
-	f1->SetParLimits(2, 0.05 * kaonLine(125), 1.5 * kaonLine(125));
-	h4->Fit(f1, "", "", 0, 30000);
-	c->Update();
-	cin.get();
-	h5->Draw();
-	f1->SetParameter(1, kaonLine(325));
-	f1->SetParameter(2, 0.5 * kaonLine(325));
-	f1->SetParLimits(2, 0.05 * kaonLine(125), 1.5 * kaonLine(125));
-	h5->Fit(f1, "", "", 0, 30000);
-	c->Update();*/
-	/*TF1* f1 = new TF1("f1", "[0] * (x*x + [1]*[1])/(x*x) * (log((x*x)/([1]*[1])) - (x*x)/(x*x + [1]*[1]) + [2])", 0, 30000);
-	h->Draw();
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	f1->SetParameter(0, 600);
-	f1->SetParameter(1, 493);
-	f1->SetParLimits(1, 480, 520);
-	f1->SetParameter(2, 6.5);
-	f1->SetParLimits(2, 6, 7);
-	h->Fit(f1, "", "", 125, 600);*/
-	/*pr->Draw();
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	c->Update();
-	TF1* f1 = new TF1("f1", "[0]+[1]/(1.+exp(-(x-[2])/[3]))", 0, 30000);
-	f1->SetParameter(0, 0.03);
-	f1->SetParameter(1, 0.9);
-	f1->SetParLimits(1, 0.5, 1.);
-	f1->SetParameter(2, 285);
-	f1->SetParLimits(2, 250, 310);
-	f1->SetParameter(3, 30);
-	pr->Fit(f1, "", "", 140, 500);*/
-	pr1->Draw();
+	h1->Draw("same");*/
+
+	//TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
+	//c->SetFillColor(0);
+	//c->SetFrameFillColor(0);
+	//c->SetBorderMode(0);
+	//c->SetFrameBorderMode(0);
+	//c->Update();
+	MyFile->Close();
+
 }
 
 double fitEffMcE(double *x, double *par) {
@@ -3667,10 +3293,7 @@ vector<TH1*> kkpDistr::imvmass(char *add, char* name, char* title,int nbins,doub
 		chain.SetBranchAddress("nn", &nn);
 		chain.SetBranchAddress("z0", &z0);
 		chain.SetBranchAddress("d0", &d0);
-		chain.SetBranchAddress("x0", &x0);
-		chain.SetBranchAddress("y0", &y0);
 		chain.SetBranchAddress("phi", &phi);
-		chain.SetBranchAddress("phis", &phis);
 		chain.SetBranchAddress("theta", &theta);
 		chain.SetBranchAddress("region", &region);
 		chain.SetBranchAddress("amplitude", &amplitude);
@@ -3730,16 +3353,13 @@ vector<TH1*> kkpDistr::imvmass(char *add, char* name, char* title,int nbins,doub
 	TH1* h2 = new TH1F("invks0", "ks0 inv mass distr", 20, 497.611-65, 497.611+65);
 	TH2F* hDeDx = new TH2F("hDeDx","dEdxn / 605",500,0,500,100,0,25);
 	vector<TH1*> heton;
-	if(regime == "mod")
-		countModEvents.clear();
-	if(regime == "exp")
-		countExpEvents.clear();
+	countModEvents.clear();
+	countExpEvents.clear();
 	vector<TProfile*> effvsmce;
 	double xEdges[26];
 	for(size_t j = 0; j <26; j++)
 		xEdges[j] = 0 + ((double)(j*j));
 
-	//cout << (int)eranges.size() << endl;
 	for (size_t i = 0; i < eranges.size(); i++) {
 		heton.push_back(new TH1F(Form("invmassks%d",i), title, nbins, lb, hb));
 		countModEvents.push_back(0);
@@ -3755,6 +3375,11 @@ vector<TH1*> kkpDistr::imvmass(char *add, char* name, char* title,int nbins,doub
 	TH1* hdedxlocp = new TH1F("hdedxlocp", "distribution;dE/dx", 200, 0, 10);
 	TH1* hTrueEton = new TH1F("hTrueEton", "distribution;dE/dx", 100, 0, 2);
 
+	TH2* hdEdx0 = new TH2F("devspk", "dEdx vs p,", 800, 0, 800, 300, 0, 10);
+	TH2* hdEdx1 = new TH2F("devspk1", "dEdx vs p,", 800, 0, 800, 300, 0, 10);
+	TH2* hAch0 = new TH2F("ach1vspp", "ach vs p,", 250, 300, 800, 20000, 0, 10);
+	TH2* hAch1 = new TH2F("ach0vspp", "ach vs p,", 250, 300, 800, 20000, 0, 10);
+
 	TH1* hthetakp = new TH1F("theta", "theta between K and p0 in K0 system distr", 180, 0, 180);
 	TH1* hthetakpmc = new TH1F("thetamc", "theta between K and p0 in K0 system distr mc", 180, 0, 180);
 
@@ -3769,26 +3394,33 @@ vector<TH1*> kkpDistr::imvmass(char *add, char* name, char* title,int nbins,doub
 	TH1* hcru = new TH1F("hcru", "cru distribution", 100, 0, 10);
 	int choice = 0;
 	int linecount = 0;
-	ifstream ifile("/work/users/kladov/snd2k/R007-001/2011/testMarksExp.txt");
-	ifstream ifilem("/work/users/kladov/snd2k/R007-001/2011/testMarksMod.txt");
+	char* ifileName = "/sweet/home/kladov/testMarksMod.txt";
+	if (regime == "exp") ifileName = "/sweet/home/kladov/testMarksExp.txt";
+	ifstream ifile(ifileName);
+
 	vector<double> energyPoints;
 	vector<double> countEventsBeam;
 	vector<double> countSelectedEventsBeam;
+	vector<double> badEnergies;
+
 	for (int e = 0; e < entries; e++) {
 		chain.GetEntry(e);
-		double cru = 1;
-		if (regime == "mod")
-			cru = recalculateWeight();
+		double cru = (regime == "mod") ? recalculateWeight() : 1;
+		cru = 1;
 		
 		//changeOn4pi();
 
 		//find where energy is
 		findhetonInd(beam,eranges);
 		findbeamInd(beam);
-		if(regime == "exp" && beamInd == -1){
-			cout << beam << endl;
-		}
 		findclosestPind(beam);
+		if (beamInd < 0 && regime == "exp") {
+			if (find(badEnergies.begin(), badEnergies.end(), beam) == badEnergies.end()) {
+				badEnergies.push_back(beam);
+				cout << "bad beam energy detected (no such energy in energy list)" << beam << endl;
+			}
+		}
+
 		if(indexCheck(regime)){
 			
 			//__________________________________//
@@ -3814,110 +3446,99 @@ vector<TH1*> kkpDistr::imvmass(char *add, char* name, char* title,int nbins,doub
 			int fillyn = 0;
 			//__________________________________//
 			countEventsBeam[pointIndex]+=cru;
+			bool goodEventOrNot = false;
+			bool checkEventOrNot = false;
 			hcru->Fill(cru);
+
 			normalizedExn(regime);
 			normalizeAch();
-
-			/*if(x2kf1<20){
-				//countEventsBeam[pointIndex]+=1;
-				//if(eGammas(1) < 0.6 * pow(500./beam,3)){
-				//if( goodEventCheck(regime) && goodKkpEntry1() ){
-					countSelectedEventsBeam[pointIndex]+=1;
-				//}
-			}
-			else if(x2kf2<20){
-				//countEventsBeam[pointIndex]+=1;
-				//if(eGammas(2) < 0.6 * pow(500./beam,3)){
-				//if( goodEventCheck(regime) && goodKkpEntry2() ){
-					countSelectedEventsBeam[pointIndex]+=1;
-				//}
-			}*/
-
-			if(goodEventCheck(regime)){
+			if(goodEventCheck(1)){
+				checkEventOrNot = true;
 				linecount++;
-				
-				//if (cru > 0.01 && cru < 100)
-				//countEventsBeam[pointIndex]+=1;
-				
 				int goodEv = 0;
-				int whatKF = 0;
 				double x2ikfML = 0;
-				if (regime == "exp")
-					ifile >> goodEv >> whatKF >> x2ikfML;
-				if (regime == "mod")
-					ifilem >> goodEv >> whatKF >> x2ikfML;
+				ifile >> goodEv >> x2ikfML;
+				if (goodEv == 1 && (ppkf1[0] < 300 || tempamp[0] < min(0.4, 0.3 / (double)amplitudeE[ipkf1[0] - 1]))) {
+					heton[hetonInd]->Fill(ks0InvMass(1), cru);
 
-				//if (whatKF == 3)
-				//	countEventsBeam[pointIndex]-=1;
-				if (goodEv == 1) {
+					if (regime == "mod")
+						effvsmce[pointIndex]->Fill(mce[1], cru);
+					goodEventOrNot = true;
+					if (fabs(x2kf1 - x2ikfML) > 0.01)
+						cout << "something went wrong" << endl;
 					
 					//if (whatKF == 1 && (goodKkpEntry1() && kf10 && kf11)/* && (ppkf1[0]>200 || tempdExn[0] > meanLine(ppkf1[0]))*/ /*&& (ppkf1[0]<300 || tempamp[0]< min(0.4,0.3/(double)amplitudeE[ipkf1[0] - 1])) && (ppkf1[1]<350 || tempamp[1]> 0.1)*/)
 					//	countSelectedEventsBeam[pointIndex]+=1;
 					//if (whatKF == 2 && (goodKkpEntry2() && kf20 && kf21)/* && (ppkf2[0]>200 || tempdExn[2] > meanLine(ppkf2[0]))*/ /*&& (ppkf2[0]<300 || tempamp[2]< min(0.4,0.3/(double)amplitudeE[ipkf2[0]-1])) && (ppkf2[1]<350 || tempamp[1]> 0.1)*/)
 					//	countSelectedEventsBeam[pointIndex]+=1;
-					int nntrue =0;
-					for(size_t i = 0; i<nn+nc;i++){
-						if(charge[i]==0 && energy[i] > 20)
-							nntrue+=1;
+						
+					hx2kf->Fill(x2kf1);
+					if(ks0InvMass(1)>440 && ks0InvMass(1)<560)
+						hTrueEton->Fill(eton);
+					if (ppkf1[0]>250 && ppkf1[0]<300){
+						hdedxloc->Fill(tempdExn[0]);
+						hdedxlock->Fill(tempdExn[0]);
 					}
-					if (whatKF == 1 && (goodKkpEntry1() && kf10 && kf11) && (ppkf1[0]<300 || tempamp[0]< min(0.4,0.3/(double)amplitudeE[ipkf1[0] - 1])) /*&& (ppkf1[1]<350 || tempamp[1]> 0.1)*/) {
-						hx2kf->Fill(x2kf1);
-						if(ks0InvMass(1)>440 && ks0InvMass(1)<560)
-							hTrueEton->Fill(eton);
-						if (ppkf1[0]>250 && ppkf1[0]<300){
-							hdedxloc->Fill(tempdExn[0]);
-							hdedxlock->Fill(tempdExn[0]);
-						}
-						if (ppkf1[1]>250 && ppkf1[1]<300){
-							hdedxloc->Fill(tempdExn[1]);
-							hdedxlocp->Fill(tempdExn[1]);
-						}
-
-						if (regime == "mod")
-							effvsmce[pointIndex]->Fill(mce[1],1);
-						effvsp->Fill(ppkf1[0],1);
-						fillyn = 1;
-						//if (cru > 0.01 && cru < 100){
-						countSelectedEventsBeam[pointIndex]+=cru;
-						heton[hetonInd]->Fill(ks0InvMass(1),cru);
-						//}
-						if (fabs(x2kf1 - x2ikfML) > 0.01)
-							cout << "something went wrong" << endl;
+					if (ppkf1[1]>250 && ppkf1[1]<300){
+						hdedxloc->Fill(tempdExn[1]);
+						hdedxlocp->Fill(tempdExn[1]);
 					}
-					if (whatKF == 2 && (goodKkpEntry2() && kf20 && kf21) && (ppkf2[0]<300 || tempamp[2]< min(0.4,0.3/(double)amplitudeE[ipkf2[0]-1])) /*&& (ppkf2[1]<350 || tempamp[1]> 0.1)*/) {
-						hx2kf->Fill(x2kf2);
-						if(ks0InvMass(2)>440 && ks0InvMass(2)<560)
-							hTrueEton->Fill(eton);
-						if (ppkf2[0]>250 && ppkf2[0]<300){
-							hdedxloc->Fill(tempdExn[2]);
-							hdedxlock->Fill(tempdExn[2]);
-						}
-						if (ppkf2[1]>250 && ppkf2[1]<300){
-							hdedxloc->Fill(tempdExn[3]);
-							hdedxlocp->Fill(tempdExn[3]);
-						}
+					fillyn = 1;
+					effvsp->Fill(ppkf1[0], cru);
 
-						if (regime == "mod")
-							effvsmce[pointIndex]->Fill(mce[1],1);
-						effvsp->Fill(ppkf2[0],1);
-						fillyn = 1;
-						//if (cru > 0.01 && cru < 100){
-						countSelectedEventsBeam[pointIndex]+=cru;
-						heton[hetonInd]->Fill(ks0InvMass(2),cru);
-						//}
-						if (fabs(x2kf2 - x2ikfML) > 0.01)
-							cout << "something went wrong" << endl;
+					hdEdx0->Fill(ppkf1[0], tempdExn[0]);
+					hdEdx1->Fill(ppkf1[1], tempdExn[1]);
+					hAch0->Fill(ppkf1[0], tempamp[0]);
+					hAch1->Fill(ppkf1[1], tempamp[1]);
+				}
+			}
+			if (goodEventCheck(2)) {
+				checkEventOrNot = true;
+				linecount++;
+				int goodEv = 0;
+				double x2ikfML = 0;
+				ifile >> goodEv >> x2ikfML;
+				if (goodEv == 1 && (ppkf2[1] < 300 || tempamp[2] < min(0.4, 0.3 / (double)amplitudeE[ipkf2[1] - 1]))) {
+					heton[hetonInd]->Fill(ks0InvMass(2), cru);
+
+					if (regime == "mod")
+						effvsmce[pointIndex]->Fill(mce[1], cru);
+					//if (cru > 0.01 && cru < 100){
+					goodEventOrNot = true;
+					//}
+					if (fabs(x2kf2 - x2ikfML) > 0.01)
+						cout << "something went wrong" << endl;
+						
+					hx2kf->Fill(x2kf2);
+					if (ks0InvMass(2) > 440 && ks0InvMass(2) < 560)
+						hTrueEton->Fill(eton);
+					if (ppkf2[0] > 250 && ppkf2[0] < 300) {
+						hdedxloc->Fill(tempdExn[2]);
+						hdedxlock->Fill(tempdExn[2]);
 					}
-				}
+					if (ppkf2[1] > 250 && ppkf2[1] < 300) {
+						hdedxloc->Fill(tempdExn[3]);
+						hdedxlocp->Fill(tempdExn[3]);
+					}
+					fillyn = 1;
+					effvsp->Fill(ppkf2[0], cru);
 
+					hdEdx0->Fill(ppkf2[0], tempdExn[2]);
+					hdEdx1->Fill(ppkf2[1], tempdExn[3]);
+					hAch0->Fill(ppkf2[0], tempamp[2]);
+					hAch1->Fill(ppkf2[1], tempamp[3]);
+				}
+			}
 
-				if (fillyn == 0 && (goodKkpEntry1() && kf10 && kf11)){
-					effvsp->Fill(ppkf1[0],0);
-				}
-				else if (fillyn == 0 && (goodKkpEntry2() && kf20 && kf21)){
-					effvsp->Fill(ppkf2[0],0);
-				}
-				
+			//countEventsBeam[pointIndex] += cru * (int)checkEventOrNot;
+			countSelectedEventsBeam[pointIndex] += cru*(int)goodEventOrNot;
+			//countModEvents[hetonInd] += (int)goodEventOrNot;
+
+			if (fillyn == 0 && goodEventCheck(1)) {
+				effvsp->Fill(ppkf1[0], 0);
+			}
+			else if (fillyn == 0 && goodEventCheck(2)) {
+				effvsp->Fill(ppkf2[0], 0);
 			}
 			
 			if (fillyn == 0 ){
@@ -3926,139 +3547,15 @@ vector<TH1*> kkpDistr::imvmass(char *add, char* name, char* title,int nbins,doub
 			}
 		}
 
-
-		if(indexCheck(regime)){
-			normalizedExn(regime);
-			normalizeAch();
-			if(goodEventCheck(regime)){
-				//cout << 2.*beam << "	" << eranges[0].second << endl;
-				choice = 0;
-				//_! and < for process, !_ and > for background
-				int modechoice = 0;
-				if (regime=="mod")
-					modechoice = 1;
-				if (x2ikf1 < 40 && isITKaonOrPion(0, 1, modechoice) && !isITKaonOrPion(1, 1, modechoice) /*&& ( ((x2ikf3 > x2ikf1-15 && x2ikf1<30) || x2ikf3>15))*/) 
-					choice = 1;
-				if (x2ikf2 < 40 && isITKaonOrPion(0, 2, modechoice) && !isITKaonOrPion(1, 2, modechoice) && (choice == 0 || x2ikf2 < x2ikf1) /*&& ( ((x2ikf3 > x2ikf2-15 && x2ikf2<30) || x2ikf3>15))*/) 
-					choice = 2;
-				/*if (choice != 0){
-					if(choice == 1 && (goodKkpEntry1() && (kf10 || ppkf1[0] < 300) && (kf11 || ppkf1[1] < 300))){
-						//cout << hetonInd << endl;
-						heton[hetonInd]->Fill(ks0InvMass(1));
-						//cout << hetonInd << endl;
-						//if(hetonInd==0){
-						//	cout << ks0InvMass(1) << endl;
-						//}
-						//cout << heton[hetonInd]->GetEntries() << endl;
-					}
-					else if(choice == 2 && goodKkpEntry2() && (kf20 || ppkf2[0] < 300) && (kf21 || ppkf2[1] < 300)){
-						heton[hetonInd]->Fill(ks0InvMass(2));
-					}
-				}*/
-
-				/*double pxk = ppkf1[0] * sin(thetakf1[0]) * cos(phikf1[0]);
-					double pxp = ppkf1[1] * sin(thetakf1[1]) * cos(phikf1[1]);
-					double pyk = ppkf1[0] * sin(thetakf1[0]) * sin(phikf1[0]);
-					double pyp = ppkf1[1] * sin(thetakf1[1]) * sin(phikf1[1]);
-					double pzk = ppkf1[0] * cos(thetakf1[0]);
-					double pzp = ppkf1[1] * cos(thetakf1[1]);
-					double ek = sqrt(ppkf1[0] * ppkf1[0] + 493.7 * 493.7);
-					double ep = sqrt(ppkf1[1] * ppkf1[1] + 139.6 * 139.6);
-
-
-
-					double invMasskp = sqrt(pow(ek + ep, 2) - pow(pxk + pxp, 2) - pow(pyk + pyp, 2) - pow(pzk + pzp, 2));
-					//double invMassksp = sqrt(pow(eg1 + eg2 + eg3 + eg4 + ep, 2) - pow(pxg1 + pxg2 + pxg3 + pxg4 + pxp, 2) - pow(pyg1 + pyg2 + pyg3 + pyg4 + pyp, 2) - pow(pzg1 + pzg2 + pzg3 + pzg4 + pzp, 2));
-					h1->Fill(2. * beam);
-					h->Fill(invMasskp);*/
-
-				//psum
-				/*{
-						double psumr = 0;
-						double psumx = 0;
-						double psumy = 0;
-						double psumz = 0;
-						double psum = 0;
-						for (int i = 0; i < 6; i++) {
-							psumx += ppkf1[i] * sin(thetakf1[i]) * cos(phikf1[i]);
-							psumy += ppkf1[i] * sin(thetakf1[i]) * sin(phikf1[i]);
-							psumz += ppkf1[i] * cos(thetakf1[i]);
-						}
-						psumr = sqrt(pow(psumx, 2) + pow(psumy, 2));
-						hpsumr->Fill(psumr);
-						hpsumz->Fill(psumz);
-						hpsum->Fill(sqrt(pow(psumz, 2) + pow(psumr, 2)));
-						if (sqrt(pow(psumz, 2) + pow(psumr, 2)) > 5)
-							chi2->Fill(x2ikf1);
-					}*/
-					//angle kspi
-				//{
-					/*double cospk = (p0px1 * k0px + p0py1 * k0py + p0pz1 * k0pz) / (p0p1 * k0p);
-						double sinpk = sqrt(1. - pow(cospk, 2));
-
-						double cospk2 = (p0px2 * k0px + p0py2 * k0py + p0pz2 * k0pz) / (p0p2 * k0p);
-						double sinpk2 = sqrt(1. - pow(cospk2, 2));
-
-						double p0pcoll = p0p1 * cospk;
-						double p0ppe = p0p1 * sinpk;
-
-						double p0pcoll2 = p0p2 * cospk2;
-						double p0ppe2 = p0p2 * sinpk2;
-
-						double k0beta = 1. / sqrt(1. + 497.611 * 497.611 / (k0p * k0p));
-						double k0gamma = k0p / 497.611 / k0beta;
-
-						double p0pcolldash = k0gamma * (p0pcoll - k0beta * (eg1 + eg2));
-						double p0pcolldash2 = k0gamma * (p0pcoll2 - k0beta * (eg3 + eg4));
-
-						double thetadash = p0pcolldash / sqrt(pow(p0pcolldash, 2) + pow(p0ppe, 2));
-						double thetadash2 = p0pcolldash2 / sqrt(pow(p0pcolldash2, 2) + pow(p0ppe2, 2));*/
-
-					//heton->Fill(thetadash);
-						//heton->Fill(thetadash2);
-						// ks0 inv mass
-
-					//if(thetadash<5 || thetadash2 <5)
-						//	chi2->Fill(x2ikf1);
-					
-					// for modeling angle (kkpi only)
-					/*double p0p1mc = sqrt(pow(mcpx[3], 2) + pow(mcpy[3], 2) + pow(mcpz[3], 2));
-						double p0p1mc = sqrt(pow(mce[3], 2) - pow(139., 2));
-						double p0p2mc = sqrt(pow(mcpx[4], 2) + pow(mcpy[4], 2) + pow(mcpz[4], 2));
-						double p0p2mc = sqrt(pow(mce[4], 2) - pow(139., 2));
-						double k0pmc = sqrt(pow(mcpx[1], 2) + pow(mcpy[1], 2) + pow(mcpz[1], 2));
-						double k0pmc = sqrt(pow(mce[1], 2) - pow(497.6, 2));
-						double cospkmc = (mcpx[1] * mcpx[3] + mcpy[1] * mcpy[3] + mcpz[1] * mcpz[3]) / (p0p1mc * k0pmc);
-						double sinpkmc = sqrt(1. - pow(cospkmc, 2));
-						double cospk2mc = (mcpx[1] * mcpx[4] + mcpy[1] * mcpy[4] + mcpz[1] * mcpz[4]) / (p0p2mc * k0pmc);
-						double sinpk2mc = sqrt(1. - pow(cospk2mc, 2));
-						double p0pcollmc = p0p1mc * cospkmc;
-						double p0ppemc = p0p1mc * sinpkmc;
-						double p0pcoll2mc = p0p2mc * cospk2mc;
-						double p0ppe2mc = p0p2mc * sinpk2mc;
-						double k0betamc = 1. / sqrt(1. + 497.611 * 497.611 / (k0pmc * k0pmc));
-						double k0gammamc = k0pmc / 497.611 / k0betamc;
-						double p0pcolldashmc = k0gammamc * (p0pcollmc - k0betamc * (mce[3]));
-						double p0pcolldash2mc = k0gammamc * (p0pcoll2mc - k0betamc * (mce[4]));
-						double thetadashmc = acos(p0pcolldashmc / sqrt(pow(p0pcolldashmc, 2) + pow(p0ppemc, 2))) * 180. / 3.14159;
-						double thetadash2mc = acos(p0pcolldash2mc / sqrt(pow(p0pcolldash2mc, 2) + pow(p0ppe2mc, 2))) * 180. / 3.14159;
-						hthetakpmc->Fill(thetadashmc);
-						hthetakpmc->Fill(thetadash2mc);*/
-					
-
-				//}
-			}
-		}
 	}
 
 
 	cout << heton[0]->GetEntries() << endl;
 	cout << "linecount	" << linecount << endl;
 	ifile.close();
-	ifilem.close();
-	char* infoOname = "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelIDistrKsKPiE.root";
+	char* infoOname = "/online/users2/kladov/R007-002/kkpi/2011/SelIDistrKsKPiE.root";
 	if (regime == "mod") {
-		infoOname = "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelIDistrKsKPiM.root";
+		infoOname = "/online/users2/kladov/R007-002/kkpi/2011/SelIDistrKsKPiM.root";
 	}
 	TFile* MyFile = new TFile(infoOname, "RECREATE");
 	//hDeDx->Write("dedxn0");
@@ -4067,6 +3564,10 @@ vector<TH1*> kkpDistr::imvmass(char *add, char* name, char* title,int nbins,doub
 	hdedxlocp->Write("hdedxlocp");
 	hdedxlock->Write("hdedxlock");
 	hTrueEton->Write("hTrueEton");
+	hAch0->Write("kaonsAch");
+	hAch1->Write("pionsAch");
+	hdEdx0->Write("kaonsDEdx");
+	hdEdx1->Write("pionsDEdx");
 	MyFile->Close();
 	//hpsumz->Draw();
 	/*hpsumr->SetLineColor(4);
@@ -4087,14 +3588,14 @@ vector<TH1*> kkpDistr::imvmass(char *add, char* name, char* title,int nbins,doub
 	cout << heton[0]->GetEntries() << endl;
 	if (regime == "mod"){
 		for(size_t i = 0; i<energyPoints.size();i++){
-			if(energyPoints[i]>0){
-				energiesMod.push_back(energyPoints[i]);
-				if(countEventsBeam[i]>0)
-					efficienciesModBeam.push_back(countSelectedEventsBeam[i]/countEventsBeam[i]);
-				else
-					efficienciesModBeam.push_back(0);
-				countModEventsBeam.push_back(countEventsBeam[i]);
-			}
+			if(energyPoints[i]<0)
+				continue;
+			energiesMod.push_back(energyPoints[i]);
+			if(countEventsBeam[i]>0)
+				efficienciesModBeam.push_back(countSelectedEventsBeam[i]/countEventsBeam[i]);
+			else
+				efficienciesModBeam.push_back(0);
+			countModEventsBeam.push_back(countEventsBeam[i]);
 		}
 	}
 	cout << "here" << endl;
@@ -4182,10 +3683,7 @@ void kkpDistr::genTableML(char *add, char *outputFile, int appYN) {
 		chain.SetBranchAddress("nn", &nn);
 		chain.SetBranchAddress("z0", &z0);
 		chain.SetBranchAddress("d0", &d0);
-		chain.SetBranchAddress("x0", &x0);
-		chain.SetBranchAddress("y0", &y0);
 		chain.SetBranchAddress("phi", &phi);
-		chain.SetBranchAddress("phis", &phis);
 		chain.SetBranchAddress("theta", &theta);
 		chain.SetBranchAddress("region", &region);
 		chain.SetBranchAddress("amplitude", &amplitude);
@@ -4226,8 +3724,13 @@ void kkpDistr::genTableML(char *add, char *outputFile, int appYN) {
 	}
 	const Long64_t entries = chain.GetEntries();
 	cout << entries << endl;
-	int good = 0;
 	int all = 0;
+
+	int pionTag = appYN!=2 ? 1:0;
+	int kaonTag = appYN!=2 ? appYN:0;
+	int tag  = appYN==0 ? 0:appYN+1;
+	int tag2 = appYN==0 ? 1:appYN+1;
+
 	ofstream ofile;
 	if(appYN == 0)
 		ofile.open(outputFile);
@@ -4254,148 +3757,104 @@ void kkpDistr::genTableML(char *add, char *outputFile, int appYN) {
 	TProfile* pdEdxP = new TProfile("pdEdxP",";P, MeV/c;dE/dx",100,0,1000);
 	TProfile* pdEdxK = new TProfile("pdEdxK",";P, MeV/c;dE/dx",88,120,1000);
 	srand (time(NULL));
-	for (int e = 0; e < entries; e++) {
-		chain.GetEntry(e);
+	int e = 0;
+	while(chain.GetEntry(e)) {
+		e++;
 		//changeOn4pi();
-		bool p1 = !isITKaonOrPion(1, 1, 1);
-		bool k1 = isITKaonOrPion(0, 1, 1);
-		bool p2 = !isITKaonOrPion(1, 2, 1);
-		bool k2 = isITKaonOrPion(0, 2, 1);
 
 		findclosestPind(beam);
-		if (mce[1] < 1000 && closestPind != -1){
-			normalizedExn("mod");
-			normalizeAch();
-			if(goodEventCheck("mod")){
-				int pionTag = 1; 
-				if(appYN == 2)
-					pionTag = 0;
-				int kaonTag = appYN; 
-				if(appYN == 2)
-					kaonTag = 0;
-				int tag = 0;
-				int tag2 = 1;
-				if (appYN == 1){
-					tag = 2;
-					tag2 = 2;
+		normalizedExn("mod");
+		normalizeAch();
+		if (goodEventCheck(1) && mce[1] < 1000) {
+			// writing section
+			if ((appYN == 1) || (appYN == 2) || (appYN == 0 && kfCoincideWithMC(1, "K-K,p-p")))
+				writeLine(1, ofile, tag);
+			if ((appYN == 0 && kfCoincideWithMC(1, "K-p,p-K")))  //determined incorrectly
+				writeLine(1, ofile, tag2);
+			// filling section
+			if ((appYN == 1) || (appYN == 2) || (appYN == 0 && kfCoincideWithMC(1, "K-K,p-p"))) {
+				//if (tempamp[0]<0.5)
+				pAchPK->Fill(ppkf1[0], tempamp[0]);
+				pAchPP->Fill(ppkf1[1], tempamp[1]);
+				hp0invmass->Fill(gammagammaInvMasskf(1));
+
+				pdEdxK->Fill(ppkf1[0], tempdExn[0]);
+				pdEdxP->Fill(ppkf1[1], tempdExn[1]);
+
+
+				if (ppkf1[0] > 300 && ppkf1[0] < 350) {
+					hdedxloc->Fill(tempdExn[0]);
+					hdedxlock->Fill(tempdExn[0]);
+					hachloc->Fill(tempamp[0]);
+					hachlock->Fill(tempamp[0]);
 				}
-				if (appYN == 2){
-					tag = 3;
-					tag2 = 3;
+				if (ppkf1[1] > 300 && ppkf1[1] < 350) {
+					hdedxloc->Fill(tempdExn[1]);
+					hdedxlocp->Fill(tempdExn[1]);
+					hachloc->Fill(tempamp[1]);
+					hachlocp->Fill(tempamp[1]);
 				}
 
-				if (goodKkpEntry1() && kf10 && kf11) {
-					if ((appYN == 1) || (appYN == 2) || (appYN == 0 && fabs(mctheta[0] - thetakf1[1]) < 0.03 && fabs(mctheta[3] - thetakf1[0]) < 0.03 && fabs(mcphi[0] - phikf1[1]) < 0.01 && fabs(mcphi[3] - phikf1[0]) < 0.01 && fabs(sqrt(pow(mcpx[0],2)+pow(mcpy[0],2)+pow(mcpz[0],2))-ppkf1[1]) < 20)) {
-						//ofile << ppkf1[1] / 1000. << "	" << tempdExn[1] << "	" << tempamp[1] << "	" << pionTag << endl;
-						//ofile << ppkf1[0] / 1000. << "	" << tempdExn[0] << "	" << tempamp[0] << "	" << kaonTag << endl;
-						ofile << ppkf1[0] / 1000. << "	" << tempdExn[0] << "	" << tempamp[0] <<  "	" << tempampE[0] << "	" << ppkf1[1] / 1000. << "	" << tempdExn[1] << "	" << tempamp[1] <<  "	" << tempampE[1] <<  "	" << x2kf1 << "	" << x2kf3 << "	" << beam/750. << "	" << tag << endl;
-						//if (x2kf2<1000)
-						//	ofile << ppkf2[0] / 1000. << "	" << tempdExn[2] << "	" << tempamp[2] << "	" << ppkf2[1] / 1000. << "	" << tempdExn[3] << "	" << tempamp[3] <<  "	" << x2kf2 << "	" << tag2 << endl;
-						
-						//if (tempamp[0]<0.5)
-						pAchPK->Fill(ppkf1[0],tempamp[0]);
-						pAchPP->Fill(ppkf1[1],tempamp[1]);
-						hp0invmass->Fill(gammagammaInvMasskf(1));
-
-						pdEdxK->Fill(ppkf1[0],tempdExn[0]);
-						pdEdxP->Fill(ppkf1[1],tempdExn[1]);
-
-
-						if (ppkf1[0]>300 && ppkf1[0]<350){
-							hdedxloc->Fill(tempdExn[0]);
-							hdedxlock->Fill(tempdExn[0]);
-							hachloc->Fill(tempamp[0]);
-							hachlock->Fill(tempamp[0]);
-						}
-						if (ppkf1[1]>300 && ppkf1[1]<350){
-							hdedxloc->Fill(tempdExn[1]);
-							hdedxlocp->Fill(tempdExn[1]);
-							hachloc->Fill(tempamp[1]);
-							hachlocp->Fill(tempamp[1]);
-						}
-						
-						int iSecret = rand() % 100;
-						if(iSecret >= 80){
-							h2->Fill(ppkf1[0],tempamp[0]);
-							h1->Fill(ppkf1[1],tempamp[1]);
-						}
-						all += 1;
-						if (!k1)
-							good += 1;
-						//if this particle which is good pion by mc angles comparison is ok by my separation criteria - +1 to efficiency
-						//but I am more interested in possibility that pion will be marked as kaon
-						//all += 1;
-						//if (!p1)
-						//	good += 1;
-						if(x2kf1<x2kf3)
-							pEffChi2->Fill(ppkf1[0],1);
-						else
-							pEffChi2->Fill(ppkf1[0],0);
-					}
-					if ((appYN == 0 && fabs(mctheta[0] - thetakf1[0]) < 0.05 && fabs(mctheta[3] - thetakf1[1]) < 0.05 && fabs(mcphi[0] - phikf1[0]) < 0.01 && fabs(mcphi[3] - phikf1[1]) < 0.01)) {
-						ofile << ppkf1[0] / 1000. << "	" << tempdExn[0] << "	" << tempamp[0] <<  "	" << tempampE[0] << "	" << ppkf1[1] / 1000. << "	" << tempdExn[1] << "	" << tempamp[1] <<  "	" << tempampE[1] << "	" << x2kf1 << "	" << x2kf3 << "	" << beam/750. << "	" << tag2 << endl;
-					}
+				int iSecret = rand() % 100;
+				if (iSecret >= 80) {
+					h2->Fill(ppkf1[0], tempamp[0]);
+					h1->Fill(ppkf1[1], tempamp[1]);
 				}
-				if (goodKkpEntry2() && kf20 && kf21) {
-					if ((appYN == 1) || (appYN == 2) || (appYN == 0 && fabs(mctheta[0] - thetakf2[1]) < 0.03 && fabs(mctheta[3] - thetakf2[0]) < 0.03 && fabs(mcphi[0] - phikf2[1]) < 0.01 && fabs(mcphi[3] - phikf2[0]) < 0.01 && fabs(sqrt(pow(mcpx[0],2)+pow(mcpy[0],2)+pow(mcpz[0],2))-ppkf2[1]) < 20)) {
-						//ofile << ppkf2[1] / 1000. << "	" << tempdExn[3] << "	" << tempamp[3] << "	" << pionTag << endl;
-						//ofile << ppkf2[0] / 1000. << "	" << tempdExn[2] << "	" << tempamp[2] << "	" << kaonTag << endl;
-						ofile << ppkf2[0] / 1000. << "	" << tempdExn[2] << "	" << tempamp[2] <<  "	" << tempampE[2] << "	" << ppkf2[1] / 1000. << "	" << tempdExn[3] << "	" << tempamp[3]<<  "	" << tempampE[3] << "	" << x2kf2 << "	" << x2kf3 << "	" << beam/750. << "	" << tag << endl;
-						//if (x2kf1<1000)
-						//	ofile << ppkf1[0] / 1000. << "	" << tempdExn[0] << "	" << tempamp[0] << "	" << ppkf1[1] / 1000. << "	" << tempdExn[1] << "	" << tempamp[1] << "	" << x2kf1 << "	" << tag2 << endl;
-						
-						//if (tempamp[2]<0.5)
-						pAchPK->Fill(ppkf2[0],tempamp[2]);
-						pAchPP->Fill(ppkf2[1],tempamp[3]);
-						hp0invmass->Fill(gammagammaInvMasskf(2));
 
-						pdEdxK->Fill(ppkf2[0],tempdExn[2]);
-						pdEdxP->Fill(ppkf2[1],tempdExn[3]);
+				if (x2kf1 < x2kf3)
+					pEffChi2->Fill(ppkf1[0], 1);
+				else
+					pEffChi2->Fill(ppkf1[0], 0);
+			}
+		}
+		
+		if (goodEventCheck(2) && mce[1] < 1000) {
+			// writing section
+			if ((appYN == 1) || (appYN == 2) || (appYN == 0 && kfCoincideWithMC(2, "K-K,p-p")))
+				writeLine(2, ofile, tag);
+			if ((appYN == 0 && kfCoincideWithMC(2, "K-p,p-K")))
+				writeLine(2, ofile, tag2);
+			// filling section
+			if ((appYN == 1) || (appYN == 2) || (appYN == 0 && kfCoincideWithMC(2, "K-K,p-p"))) {
+				//if (tempamp[2]<0.5)
+				pAchPK->Fill(ppkf2[0],tempamp[2]);
+				pAchPP->Fill(ppkf2[1],tempamp[3]);
+				hp0invmass->Fill(gammagammaInvMasskf(2));
+
+				pdEdxK->Fill(ppkf2[0],tempdExn[2]);
+				pdEdxP->Fill(ppkf2[1],tempdExn[3]);
 
 						
-						if (ppkf2[0]>300 && ppkf2[0]<350){
-							hdedxloc->Fill(tempdExn[2]);
-							hdedxlock->Fill(tempdExn[2]);
-							hachloc->Fill(tempamp[2]);
-							hachlock->Fill(tempamp[2]);
-						}
-						if (ppkf2[1]>300 && ppkf2[1]<350){
-							hdedxloc->Fill(tempdExn[3]);
-							hdedxlocp->Fill(tempdExn[3]);
-							hachloc->Fill(tempamp[3]);
-							hachlocp->Fill(tempamp[3]);
-						}
-
-						int iSecret = rand() % 100;
-						if(iSecret >= 80){
-							h2->Fill(ppkf2[0],tempamp[2]);
-							h1->Fill(ppkf2[1],tempamp[3]);
-						}
-						//if this particle which is good kaon by mc angles comparison is ok by my separation criteria - +1 to efficiency
-						all += 1;
-						if (!k2)
-							good += 1;
-						//if this particle which is good pion by mc angles comparison is ok by my separation criteria - +1 to efficiency
-						//all += 1;
-						//if (!p2)
-						//	good += 1;
-						if(x2kf2<x2kf3)
-							pEffChi2->Fill(ppkf2[0],1);
-						else
-							pEffChi2->Fill(ppkf2[0],0);
-					}
-					if ((appYN == 0 && fabs(mctheta[0] - thetakf2[0]) < 0.05 && fabs(mctheta[3] - thetakf2[1]) < 0.05 && fabs(mcphi[0] - phikf2[0]) < 0.01 && fabs(mcphi[3] - phikf2[1]) < 0.01)) {
-						ofile << ppkf2[0] / 1000. << "	" << tempdExn[2] << "	" << tempamp[2] <<  "	" << tempampE[2] << "	" << ppkf2[1] / 1000. << "	" << tempdExn[3] << "	" << tempamp[3] <<  "	" << tempampE[3] <<  "	" << x2kf2 << "	"  << x2kf3 << "	" << beam/750. << "	" << tag2 << endl;
-					}
+				if (ppkf2[0] > 300 && ppkf2[0] < 350) {
+					hdedxloc->Fill(tempdExn[2]);
+					hdedxlock->Fill(tempdExn[2]);
+					hachloc->Fill(tempamp[2]);
+					hachlock->Fill(tempamp[2]);
 				}
+				if (ppkf2[1]>300 && ppkf2[1]<350){
+					hdedxloc->Fill(tempdExn[3]);
+					hdedxlocp->Fill(tempdExn[3]);
+					hachloc->Fill(tempamp[3]);
+					hachlocp->Fill(tempamp[3]);
+				}
+
+				int iSecret = rand() % 100;
+				if(iSecret >= 80){
+					h2->Fill(ppkf2[0],tempamp[2]);
+					h1->Fill(ppkf2[1],tempamp[3]);
+				}
+
+				if(x2kf2<x2kf3)
+					pEffChi2->Fill(ppkf2[0],1);
+				else
+					pEffChi2->Fill(ppkf2[0],0);
 			}
 		}
 	}
 	ofile.close();
-	cout << (double)good / (double)all << endl;
 
 	if (appYN == 0){
-		TFile* MyFile = new TFile("/work/users/kladov/snd2k/R007-001/kkpi/2011/trainDistrKsKPi.root", "RECREATE");
+		TFile* MyFile = new TFile("/online/users2/kladov/R007-002/kkpi/2017/trainDistrKsKPi.root", "RECREATE");
 		hdedxloc->Write("hdedxloc");
 		hdedxlocp->Write("hdedxlocp");
 		hdedxlock->Write("hdedxlock");
@@ -4452,10 +3911,7 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 		chain.SetBranchAddress("nn", &nn);
 		chain.SetBranchAddress("z0", &z0);
 		chain.SetBranchAddress("d0", &d0);
-		chain.SetBranchAddress("x0", &x0);
-		chain.SetBranchAddress("y0", &y0);
 		chain.SetBranchAddress("phi", &phi);
-		chain.SetBranchAddress("phis", &phis);
 		chain.SetBranchAddress("theta", &theta);
 		chain.SetBranchAddress("region", &region);
 		chain.SetBranchAddress("amplitude", &amplitude);
@@ -4510,7 +3966,7 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 	}
 
 	TH1* hInvMass = new TH1F("invks01", "ks0 inv mass distr", 50, 497.611 - 265, 497.611 + 265);
-	TH1* hChi2 = new TH1F("Chi2", "chi squared", 200, -100, 100);
+	TH1* hChi2 = new TH1F("Chi2", "chi squared", 200, 0, 100);
 	TProfile* pEffChi2 = new TProfile("pEffChi2","chi squared;P, MeV/c;#chi^{2}",70,100,800);
 	TH1* hEgammas = new TH1F("hegammas", "energy dep of not used in kinfit particles", 100, 0, 1.5);
 	TH1* hEKPi = new TH1F("heKPi", "energy dep of k and pi charged", 100, 0, 1.5);
@@ -4520,9 +3976,10 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 	TH1* hz0 = new TH1F("hz0", "z0", 250, -25, 25);
 	TH1* hdz0 = new TH1F("hdz0", "z01 - z00", 250, -25, 25);
 	TH1* htheta = new TH1F("htheta", "theta", 250, 0, 180);
+	TH1* hnn = new TH1I("hnn", "nn", 10, 0, 10);
+	TH1* hnc = new TH1I("hnc", "nc", 10, 0, 10);
 	TH1* hthetaKsP0 = new TH1F("hthetaKsP0", "thetaKsP0", 50, -1, 1);
 	TH1* hp0invmass = new TH1F("hp0invmass", "p0invmass", 50, 0, 500);
-	TH2F* hDeDx = new TH2F("hDeDx","dEdxn / 605",500,0,500,100,0,25);
 	TH1* hchoice = new TH1D("hchoice","choice",3,0,3);
 	TProfile* pampphi = new TProfile("pampphi","amplitude profile",20,2,3);
 	TProfile* pampphi2 = new TProfile("pampphi2","amplitude profile",30,2,3);
@@ -4530,13 +3987,17 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 	TProfile* pampphi4 = new TProfile("pampphi4","amplitude profile",30,2,3);
 	TProfile* pampEphi = new TProfile("pampEphi","amplitudeE profile",30,2,3);
 	TProfile* effvspa = new TProfile("effvspa","efficiency vs p",100,0,1000);
+	TH2* hdEdx0 = new TH2F("devspk", "dEdx vs p,", 800, 0, 800, 300, 0, 10);
+	TH2* hdEdx1 = new TH2F("devspk1", "dEdx vs p,", 800, 0, 800, 300, 0, 10);
+	TH2* hAch0 = new TH2F("ach1vspp", "ach vs p,", 250, 300, 800, 20000, 0, 10);
+	TH2* hAch1 = new TH2F("ach0vspp", "ach vs p,", 250, 300, 800, 20000, 0, 10);
 	TFile* MyFile = new TFile(outdistr, "RECREATE");
 
 	
 
 	vector<int> countSelEventsBeam;
 	vector<int> countAllEventsBeam;
-	for(size_t i = 0; i<energiesEXP.size(); i++){
+	for(size_t i = 0; i<eranges.size(); i++){
 		countAllEventsBeam.push_back(0);
 		countSelEventsBeam.push_back(0);
 	}
@@ -4552,7 +4013,6 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 	cout << entries << endl;
 	int good = 0;
 	int all = 0;
-	int all1 = 0;
 	int selected = 0;
 	int good1 = 0;
 	int good2 = 0;
@@ -4565,183 +4025,101 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 	int linecount = 0;
 	int nEntries[11] = {0,0,0,0,0,0,0,0,0,0,0};
 	double nol = 0;
+	vector<double> badEnergies;
 	
 	for (int e = 0; e < entries; e++) {
 		chain.GetEntry(e);
 		//changeOn4pi();
 		//hthetaKsP0->Fill((anglekspi(1,1)));
 		//hthetaKsP0->Fill((anglekspi(1,2)));
-		if (x2kf1<20){
-			hthetaKsP0->Fill(anglekspi(1,1));
-			hthetaKsP0->Fill(anglekspi(1,2));
-		}
-		if (x2kf2<20){
-			hthetaKsP0->Fill(anglekspi(2,1));
-			hthetaKsP0->Fill(anglekspi(2,2));
-		}
-		//find where energy is
+		//find where we are
 		findhetonInd(beam,eranges);
 		findbeamInd(beam);
 		findclosestPind(beam);
-		if(beamInd <0 && regime == "exp")
-			cout << beam << endl;
-		if(indexCheck(regime)){
-			all1 += 1;
-			normalizedExn(regime);
-			normalizeAch();
-			if(goodEventCheck(regime)){
-				all += 1;
-				linecount++;
-				selected += 1;
-				if (goodKkpEntry1() && kf10 && kf11) {
-					ofile << ppkf1[0] / 1000. << "	" << tempdExn[0] << "	" << tempamp[0] <<  "	" << tempampE[0] << "	";
-					ofile << ppkf1[1] / 1000. << "	" << tempdExn[1] << "	" << tempamp[1] <<  "	" << tempampE[1] << "	" << x2kf1 << "	";
-				}
-				else
-					ofile << "0.2000	3.5000	0.0000	1.0000	0.5000	0.5000	0.2000	1.0000	100.0000	";
-				ofile << x2kf3 << "	" << beam/750. << "	" << ind << endl;
-				if (goodKkpEntry2() && kf20 && kf21) {
-					ofile << ppkf2[0] / 1000. << "	" << tempdExn[2] << "	" << tempamp[2] <<  "	" << tempampE[2] << "	";
-					ofile << ppkf2[1] / 1000. << "	" << tempdExn[3] << "	" << tempamp[3] <<  "	" << tempampE[3] << "	" << x2kf2 << "	";
-				}
-				else
-					ofile << "0.2000	3.5000	0.0000	1.0000	0.5000	0.5000	0.2000	1.0000	100.0000	";
-				ofile << x2kf3 << "	" << beam/750. << "	" << ind << endl;
-			
+		if (beamInd < 0 && regime == "exp" && find(badEnergies.begin(), badEnergies.end(), beam) != badEnergies.end()) {
+			badEnergies.push_back(beam);
+			cout << "bad beam energy detected (no such energy in energy list)" << beam << endl;
+		}
+		if (!indexCheck(regime)) { continue; }
+		normalizedExn(regime);
+		normalizeAch();
 
-				//Fill  hp0inv mass with all possible pairs of excessive photons (excluding kinfit)
-				hp0invmass->Fill(extraPartInvMass());
-				
-			}
+		//____________________________ main function to fill output file with lines of dataEvents
+		for (size_t kfmodel = 1; kfmodel <= 2; kfmodel++) {
+			if (!goodEventCheck(kfmodel)) { continue; }
+			linecount++;
+			countSelEventsBeam[hetonInd]++;
+			writeLine(kfmodel, ofile);
 		}
 		
-		if(indexCheck(regime)){
-			//normalizedExn(regime);
-			//normalizeAch();
-			if(goodEventCheck(regime)){
-				if (goodKkpEntry1() && kf10 && kf11) {
-					if(x2kf1<x2kf3)
-						pEffChi2->Fill(ppkf1[0],1);
-					else
-						pEffChi2->Fill(ppkf1[0],0);
-					//hthetaKsP0->Fill(anglekspi(1));
-					//random shit
-					if (choice == 1 && ks0InvMass(1) > 400 && ks0InvMass(1) < 600){
-						good1 += 1;
-						int indET = 2 + rand() % 4; //2-3-4-5
-						//cout << ppkf1[indET] << endl;
-						hegmean[0]->Fill(ppkf1[indET]);
-						//find first particle by energy that is not used in kinfit and its charge == 0, then write hegmax with it
-						if(x2ikf1<50 && hetonInd < hegmax.size() && nn>=4 && nc>=2){
-							int egmeind = 0;
-							int it = 0;
-							bool excessive = false;
-							while(it < nc+nn && egmeind == 0){
-								int equality = 0;
-								for(size_t j = 0; j < 6; j++)
-									if(ipkf1[j]-1 == it)
-										equality = 1;
-								if (equality == 0 && charge[it] == 0){
-									egmeind = it;
-									excessive = true;
-								}
-								it+=1;
-							}
-							if (excessive)
-								hegmax[hetonInd]->Fill(energy[egmeind]/(2.*beam));
-							else
-								hegmax[hetonInd]->Fill(0.);
-						}
-					}
-				}
-				if (goodKkpEntry2() && kf20 && kf21) {
-					if(x2kf2<x2kf3)
-						pEffChi2->Fill(ppkf2[0],1);
-					else
-						pEffChi2->Fill(ppkf2[0],0);
-					//hthetaKsP0->Fill(anglekspi(2));
-					//random shit
-					if (choice == 2 && ks0InvMass(2) > 400 && ks0InvMass(2) < 600){
-						good2 += 1;
-						int indET = 2 + rand() % 4; //2-3-4-5
-						hegmean[0]->Fill(ppkf2[indET]);
-					}
-				}
-			}
-			
-			
 
-			//random shit
+		//____________________________ filling and calculatimg something
+		if (goodEventCheck(1)) {
+			if (x2kf1 < x2kf3)
+				pEffChi2->Fill(ppkf1[0], 1);
+			else
+				pEffChi2->Fill(ppkf1[0], 0);
+			//hthetaKsP0->Fill(anglekspi(1));
 
-			//filling vector of temp efficiencies for test
-			//if(regime == "mod")
-			//	countAllEventsBeam[closestPind]+=1;
-			int fillyn = -1;
-			if(regime == "exp")
-				countAllEventsBeam[beamInd]+=1;
-			if(regime == "mod"){
-				//if (beam>900)
-				//	cout << closestPind << "	" << beam << endl;
-				//countSelEventsBeam[closestPind]+=1;
-				countAllEventsBeam[closestPind]+=1;
-				if(goodEventCheck(regime)){
-					countSelEventsBeam[closestPind]+=1;
-					fillyn = 0;
-					if(kf10 && kf11){
-						effvspa->Fill(beam,1);
-						fillyn = 1;
-					}
-				}
-			}
-			if(fillyn == 0)
-				effvspa->Fill(beam,0);
-			if(regime == "exp")
-				countSelEventsBeam[beamInd]+=1;
+			//Fill  hp0inv mass with all possible pairs of excessive photons (excluding kinfit)
+			hp0invmass->Fill(extraPartInvMass());
+		}
+		if (goodEventCheck(2)) {
+			if(x2kf2<x2kf3)
+				pEffChi2->Fill(ppkf2[0],1);
+			else
+				pEffChi2->Fill(ppkf2[0],0);
+			//hthetaKsP0->Fill(anglekspi(2));
 
-			choice = 0;
-			//_! and < for process, !_ and > for background
-			if (x2ikf1 < 50 && isITKaonOrPion(0, 1, 1) && !isITKaonOrPion(1, 1, 1))
-				choice = 1;
-			if (x2ikf2 < 50 && isITKaonOrPion(0, 2, 1) && !isITKaonOrPion(1, 2, 1) && (choice == 0 || x2ikf2 < x2ikf1))
-				choice = 2;
+			//Fill  hp0inv mass with all possible pairs of excessive photons (excluding kinfit)
+			hp0invmass->Fill(extraPartInvMass());
+		}
 
+		if (x2kf1 < 20) {
+			hthetaKsP0->Fill(anglekspi(1, 1));
+			hthetaKsP0->Fill(anglekspi(1, 2));
+		}
+		if (x2kf2 < 20) {
+			hthetaKsP0->Fill(anglekspi(2, 1));
+			hthetaKsP0->Fill(anglekspi(2, 2));
+		}
 
-			if(x2ikf1<50)
-				hchoice->Fill(choice);
-			if (choice == 1 && x2ikf1<50){
-				//if (x2ikf1<50 && ppkf1[1]>400 && region[ipkf1[1]-1]==1 && amplitude[ipkf1[1]-1]>0.4 && amplitude[ipkf1[1]-1]<100){
-				//	pampphi->Fill(phikf1[1],amplitude[ipkf1[1]-1]);
-				//	pampEphi->Fill(phikf1[1],amplitudeE[ipkf1[1]-1]);
-				//}
-				hEton->Fill(eton);
-				//hEgammas->Fill(eGammas(1));
-				hEKPi->Fill(eKPi(1));
-				htheta->Fill(theta[ipkf1[0] - 1] * 180. / 3.14159);
-				htheta->Fill(theta[ipkf1[1] - 1] * 180. / 3.14159);
+		// efficiencies of selection criteria and filling histograms
 
-				hInvMass->Fill(ks0InvMass(1));
-			}
+		if(goodEventCheck(1) || goodEventCheck(2))
+			effvspa->Fill(beam, 1);
+		else 
+			effvspa->Fill(beam, 0);
 
-			if (x2ikf1 < 50 && (goodKkpEntry1() && ((kf10 || ppkf1[0] < 300) && (kf11 || ppkf1[1] < 300))) && ks0InvMass(1) > 400 && ks0InvMass(1) < 600 && eton > 0.4 && eton < 0.85 && choice==1) {
-				if (x2ikf1<50 && ppkf1[1]>400 && region[ipkf1[1]-1]==1 && amplitude[ipkf1[1]-1]>0.4 && amplitude[ipkf1[1]-1]<100){
-					pampphi->Fill(phikf1[1],amplitude[ipkf1[1]-1]);
-					pampEphi->Fill(phikf1[1],amplitudeE[ipkf1[1]-1]);
-				}
-			}
-			if (choice==1) {
-				if (x2ikf1<50 && ppkf1[1]>400 && region[ipkf1[1]-1]==1 && amplitude[ipkf1[1]-1]>0.4 && amplitude[ipkf1[1]-1]<100){
-					pampphi2->Fill(phikf1[1],amplitude[ipkf1[1]-1]);
-				}
-			}
-			if (x2ikf1 < 50 && (goodKkpEntry1() && ((kf10 || ppkf1[0] < 300) && (kf11 || ppkf1[1] < 300))) && ks0InvMass(1) > 400 && ks0InvMass(1) < 600 && eton > 0.4 && eton < 0.85) {
-				if (x2ikf1<50 && ppkf1[1]>400 && region[ipkf1[1]-1]==1 && amplitude[ipkf1[1]-1]>0.4 && amplitude[ipkf1[1]-1]<100){
-					pampphi3->Fill(phikf1[1],amplitude[ipkf1[1]-1]);
-				}
-			}
-			if (x2ikf1<50 && ppkf1[1]>400 && region[ipkf1[1]-1]==1 && amplitude[ipkf1[1]-1]>0.4 && amplitude[ipkf1[1]-1]<100){
-				pampphi4->Fill(phikf1[1],amplitude[ipkf1[1]-1]);
-			}
+		if (x2kf1 < 999)
+			hChi2->Fill(x2kf1);
+		hetonT->Fill(eton);
+		for (int kfmodel = 1; kfmodel <= 2; kfmodel++) {
+			if (!goodEventCheck(kfmodel) || ks0InvMass(kfmodel) < 400 || ks0InvMass(kfmodel) > 600 || eton < 0.4 && eton < 0.85) { continue; }
+			double p0 = kfmodel < 2 ? ppkf1[0] : ppkf2[0];
+			double p1 = kfmodel < 2 ? ppkf1[1] : ppkf2[1];
+			int i0 = kfmodel < 2 ? ipkf1[0] : ipkf2[0];
+			int i1 = kfmodel < 2 ? ipkf1[1] : ipkf2[1];
 
+			hdEdx0->Fill(p0, tempdExn[(kfmodel-1)*2]);
+			hdEdx1->Fill(p1, tempdExn[(kfmodel-1)*2+1]);
+			hAch0->Fill(p0, tempamp[(kfmodel-1)*2]);
+			hAch1->Fill(p1, tempamp[(kfmodel-1)*2+1]);
+
+			hEgammas->Fill(eGammas(kfmodel));
+			hEKPi->Fill(eKPi(kfmodel));
+			hd0->Fill(d0[i1 - 1]);
+			hd0->Fill(d0[i0 - 1]);
+			hz0->Fill(z0[i1 - 1]);
+			hz0->Fill(z0[i0 - 1]);
+			hdz0->Fill(z0[i0 - 1] - z0[i1 - 1]);
+			htheta->Fill(theta[i0 - 1] * 180. / 3.14159);
+			htheta->Fill(theta[i1 - 1] * 180. / 3.14159);
+			hnc->Fill(nc);
+			hnn->Fill(nn);
+
+			hInvMass->Fill(ks0InvMass(kfmodel));
+		}
 
 			//x2ikf1 - have to cut seriously(1/3 mod, 1/16 exp), choice (neseccary) - also (-10% mod,), eton (strong cut), 
 			//thetabetween (?-seems like it cuts nothing, so why I would cut it? if I will completely remove this - nothing will change I suppose, maybe systematic will rise (but how)),
@@ -4753,93 +4131,13 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 				nEntries[2]+=1;
 			if(x2kf1 < 20 && ppkf1[0] > 10 && ppkf1[1] > 5 && nn <=7 && nc <=3 && eGammas(1) < 0.2 && eKPi(1) > 0.1 || x2kf2<20 && ppkf2[0] > 10 && ppkf2[1] > 5 && nn <=7 && nc <=3 && eGammas(2) < 0.2 && eKPi(2) > 0.1)
 				nEntries[3]+=1;
-			if(goodKkpEntry1() || goodKkpEntry2())
+			if (goodEventCheck(1) || goodEventCheck(2))
 				nEntries[4]+=1;
-			if (((goodKkpEntry1() && kf10 && kf11) || (goodKkpEntry2() && kf20 && kf21)))
-				nEntries[5]+=1;
-			if(((goodKkpEntry1() && kf10 && kf11) || (goodKkpEntry2() && kf20 && kf21)) && eton > 0.4 && eton < 0.85)
-				nEntries[6]+=1;
-			/*if (x2kf1 < 20) {
-				nEntries[1] += 1;
-				if(choice == 1){
-					nEntries[2]+=1;
-					if(eton<0.85 && eton>0.4){
-						nEntries[3]+=1;
-						if (ppkf1[0] > 10 && ppkf1[1] > 10) {
-							nEntries[4] += 1;
-							if(nc<=3 && nn<=7){
-								nEntries[5]+=1;
-								if (central(0, 1) && central(1, 1) && unionVertex(0, 1, 1)) {
-									nEntries[6] += 1;
-									if (eGammas(1) < 0.2 ) {
-										nEntries[7] += 1;
-										if(eKPi(1)>0.1){
-											nEntries[8] += 1;
-											if(thetaxBetween(0, 30, 150, 1) && thetaxBetween(1, 30, 150, 1)){
-												nEntries[9] += 1;
-												if (((kf11 || ppkf1[1] < 300) && (kf10 || ppkf1[0] < 300))) {
-													nEntries[10] += 1;
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}*/
-
-			if (x2kf1<999)
-				hChi2->Fill(x2kf1);
-			/*if (x2kf1<999 && x2kf1<x2kf2){
-				pChi2->Fill(ppkf1[0],x2kf1);
-			}
-			if (x2kf2<999 && x2kf2<x2kf1){
-				pChi2->Fill(ppkf2[0],x2kf2);
-			}*/
-			hetonT->Fill(eton);
-			if(x2kf1<15 && beam<700 && nc<=3 && nn<=7){
-				hEgammas->Fill(eGammas(1));
-				hd0->Fill(d0[ipkf1[1]-1]);
-				hd0->Fill(d0[ipkf1[0]-1]);
-				hz0->Fill(z0[ipkf1[1]-1]);
-				hz0->Fill(z0[ipkf1[0]-1]);
-				hdz0->Fill(z0[ipkf1[0]-1]- z0[ipkf1[1] - 1]);
-			}
-			if(x2kf2<=15 && beam<700 && nc<=3 && nn<=7)
-				hEgammas->Fill(eGammas(2));
-			if (x2ikf1 < 50 && (goodKkpEntry1() && ((kf10 || ppkf1[0] < 300) && (kf11 || ppkf1[1] < 300))) && ks0InvMass(1) > 400 && ks0InvMass(1) < 600 && eton > 0.4 && eton < 0.85 && nc >= 2) {
-				hDeDx->Fill(ppkf1[0],dExn[ipkf1[0]-1]/605.);
-			}
-			if (x2ikf2 < 50 && (goodKkpEntry2() && ((kf20 || ppkf2[0] < 300) && (kf21 || ppkf2[1] < 300))) && ks0InvMass(2) > 400 && ks0InvMass(2) < 600 && eton > 0.4 && eton < 0.85 && nc >= 2) {
-				hDeDx->Fill(ppkf2[0],dExn[ipkf2[0]-1]/605.);
-				//if(region[ipkf2[1]-1] == 1 && amplitude[ipkf2[1]-1]>0.4 && amplitude[ipkf2[1]-1] < 500 && ppkf2[1]>400){
-				//	pampphi->Fill(phikf2[1],amplitude[ipkf2[1]-1]);
-				//	pampEphi->Fill(phikf2[1],amplitudeE[ipkf2[1]-1]);
-				//}
-				if (choice == 2){
-					hEgammas->Fill(eGammas(2));
-					hEKPi->Fill(eKPi(2));
-					hd0->Fill(d0[ipkf2[1] - 1]);
-					hd0->Fill(d0[ipkf2[0] - 1]);
-					hz0->Fill(z0[ipkf2[1] - 1]);
-					hz0->Fill(z0[ipkf2[0] - 1]);
-					hdz0->Fill(z0[ipkf2[0] - 1] - z0[ipkf2[1] - 1]);
-					htheta->Fill(theta[ipkf2[0] - 1] * 180. / 3.14159);
-					htheta->Fill(theta[ipkf2[1] - 1] * 180. / 3.14159);
-
-					hInvMass->Fill(ks0InvMass(2));
-				}
-			}
-		}
 	}
 	cout << "linecount" << linecount << endl;
 	ofile.close();
-	cout << all << "	" << good1 << "	" << good2 << "	" << all - good1 - good2 << endl;
-	cout << selected << "	" << all1 << "	" << (double)selected / (double)all1 << endl << endl;
 
-	for (size_t i = 0; i < 7; i++)
+	for (size_t i = 0; i < 5; i++)
 		cout << (double)nEntries[i]/(double)nEntries[0]*100. << endl;
 
 	hInvMass->Write("hInvMass");
@@ -4853,9 +4151,14 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 	hz0->Write("hz0");
 	hdz0->Write("hdz0");
 	htheta->Write("htheta");
+	hAch0->Write("kaonsAch");
+	hAch1->Write("pionsAch");
+	hdEdx0->Write("kaonsDEdx");
+	hdEdx1->Write("pionsDEdx");
+	hnn->Write("hnn");
+	hnc->Write("hnc");
 	hthetaKsP0->Write("hthetaKsP0");
 	hp0invmass->Write("p0invmass");
-	hDeDx->Write("hdEdx");
 	hchoice->Write("hchoice");
 	pampphi->Write("pampphi");
 	pampphi2->Write("pampphi2");
@@ -4863,21 +4166,12 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 	pampphi4->Write("pampphi4");
 	pampEphi->Write("pampEphi");
 	for (size_t i = 0; i < eranges.size(); i++){
+		cout << "selected events for " << eranges[i].first << "-" << eranges[i].second << " : " << countSelEventsBeam[i] << endl;
 		hegmax[i]->Write(Form("hegmax%d",i));
 		hegmean[i]->Write(Form("hegmean%d",i));
 	}
 	MyFile->Close();
 
-	vector<double> tempRandEff;
-	for(size_t i = 0; i<energiesEXP.size(); i++){
-		cout << energiesEXP[i] << "	";
-		cout << countAllEventsBeam[i] << "	";
-		cout << countSelEventsBeam[i] << endl;
-		if(countAllEventsBeam[i]!=0)
-			tempRandEff.push_back((double)countSelEventsBeam[i]/(double)countAllEventsBeam[i] * 100);
-		else
-			tempRandEff.push_back(0.);
-	}
 	//cin.get();
 	effvspa->Draw();
 	/*TGraph* gr = new TGraph(energiesEXP.size(),&energiesEXP[0],&tempRandEff[0]);
@@ -4885,10 +4179,6 @@ void kkpDistr::genTableMLExp(char *add, char *outdistr, char *txtfile, int ind, 
 	gr->SetMarkerColor(4);
 	gr->SetMarkerStyle(21);
 	gr->Draw("AP");*/
-}
-
-double fitfunction(double *x, double *par) {
-	return par[0] + x[0] * par[1] + pow(x[0],2.) * par[2];
 }
 
 //just draw final efficiency/cross section graphs using manual array filling
@@ -4927,7 +4217,6 @@ double PhSp2(double en, double m1, double m2) {
 		return 0.5 * en * sqrt((1.0 - pow(tm2 - tm3,2)) * (1.0 - pow(tm2 + tm3,2)));
 	}
 }
-
 double funcBWK(double en) {
 	int n = 100;
 	double msKc = 495.;
@@ -4952,7 +4241,6 @@ double funcBWK(double en) {
 
 	return sum * h;
 }
-
 double crSAmplitude(double en){
 	double phphi1680 = 0.;
 	double msPhi1680 = 1680.;
@@ -5016,9 +4304,6 @@ double crSAmplitude(double en){
 	return ppcs;
 
 }
-
-
-
 void drawBWK() {
 	//TF1* fa1 = new TF1("fa1", "funcBWK(x)", 1400, 2000);
 	TF1* fa1 = new TF1("fa1", "crSAmplitude(x)", 1400, 2000);
@@ -5168,8 +4453,7 @@ void drawfittcross(char* infile1, char* infile2) {
 	cout << "};" << endl;
 }
 
-
-
+// very simple cross section parametrizations for energy regions selection and predicting the number of background events (not used for their subtraction though)
 double crsBB(double x) {
 	if (x < 1400)
 		return 0.1;
@@ -5180,7 +4464,6 @@ double crsBB(double x) {
 	else
 		return 0.5;
 }
-
 double fouPiCrosssect(double en){
 	if (en<1470.)
 		return 6.7 + (33.-6.7)/470. * (en-1000.);
@@ -5201,8 +4484,59 @@ double ksKPiPi0Crosssect(double en){
 }
 
 
+vector<pair<double, double> > makeEranges() {
+	// make ranges in energy in which the expected number of wvents will be at least more than 60
+	// if there is no KsKpi modeling point for this luminosity exp point, then recalculate between two adjacent
+
+	vector<pair<double, double> > eranges;
+
+	double en0 = 0, thnentr = 0, lbord = 1200, hbord = 0;
+	int f = 0;
+	vector<double> enmod;
+	vector<double> effmod;
+	ifstream enAndEffModIfstream("/online/users2/kladov/R007-002/enAndEffMod.dat");
+	while (enAndEffModIfstream.get() != EOF) {
+		double en = 0.0, eff = 0.0;
+		enAndEffModIfstream >> en >> eff;
+		enmod.push_back(en);
+		effmod.push_back(eff);
+	}
+	enAndEffModIfstream.close();
+	ifstream ifile("/work/users/kladov/snd2k/R007-001/2011/luminosity.dat");
+	while (ifile.get() != EOF) {
+		double eBeam, lum, lumErr;
+		ifile >> eBeam >> lum >> lumErr;
+		if (f == 0)
+			en0 = eBeam;
+		cout << eBeam * 2 << "	" << lum << "	" << lumErr << endl;
+		pair<size_t, size_t> modind = findclosest(eBeam, enmod);
+		double efftemp = effmod[modind.first];
+		if (modind.first != modind.second)
+			efftemp += (effmod[modind.second] - effmod[modind.first]) * (eBeam - enmod[modind.first]) / (enmod[modind.second] - enmod[modind.first]);
+		thnentr += lum * crsBB(eBeam * 2) * efftemp / 10. * 3.;
+		if (thnentr >= 60) {
+			thnentr = 0;
+			hbord = 2 * eBeam + 0.1;
+			eranges.push_back(make_pair(lbord, hbord));
+			lbord = hbord;
+		}
+		f++;
+	}
+	if (eranges.back().second < 2000) {
+		eranges.push_back(make_pair(eranges.back().second, 2010));
+	}
+	//eranges.clear();
+	//eranges.push_back(make_pair(1530, 1760));
+	ifile.close();
+	//eranges.push_back(make_pair(130, 17760));
+	for (size_t i = 0; i < eranges.size(); i++)
+		cout << eranges[i].first << "	-	" << eranges[i].second << endl;
+	return eranges;
+}
+
+
 //make ks0 inv mass distr for modeling and experiment in energy ranges "energygaps", fit them - > find efficiency, number of enries, integrated luminosity in range, store exp hists with fit to the file "spectres", display output arrays for fit
-void kkpDistr::calculateEffAndNoE() {
+void kkpDistr::calculateEffAndNoE(char* expFiles, char* modFiles, vector<pair<double, double> > eranges) {
 	vector<double> efficiencyArr;
 	vector<double> efficiencyErrArr;
 	vector<double> entriesExpArr;
@@ -5244,104 +4578,55 @@ void kkpDistr::calculateEffAndNoE() {
 									0.50644, 2.64921, 2.59956, 1.94529, 0.428749 ,
 									0.548634, 2.52885, 2.54577, 1.83083, 0.446011 };
 
-
-
-	//double baseCrSect[9] = {0.131411, 0.825262, 1.78216, 2.82785, 2.71616, 2.6189, 2.45985, 2.63786, 1.07576};
-	//double baseCrSect[9] = {0.131718, 0.786979, 1.82338, 2.82674, 2.74565, 2.67606, 2.30665, 2.60589, 1.10024};
 	//double baseCrSect[9] = {0.0396138, 0.86488, 2.38423, 3.08366, 2.96012, 2.88019, 1.54994, 2.25272, 0.452545};
 	double baseCrSect[12] = {0.227621, 1.09922, 2.03196, 1.23158, 3.14614, 2.58523, 0.755855, 0.704579, 0.721263, 0.885269, 0.29374, 0.366902};
-	//double baseCrSect[9] = {0.164876, 0.802952, 2.08926, 2.67804, 2.65615, 2.7048, 2.30513, 2.52432, 1.10234};
 	//double baseCrSectErr[9] = {0.054685, 0.176039, 0.302482, 0.37705, 0.496256, 0.414917, 0.427455, 0.373468, 0.160493};
 	double baseCrSectErr[12] = {0.056702, 0.308974, 0.442277, 0.37505, 0.440877, 0.491549, 0.144883, 0.171468, 0.161611, 0.188838, 0.17491, 0.129518};
 
-	//double entries4pi[9] = {97.0802, 78.461, 39.599, 36.0705, 19.1618, 39.6009, 37.5789, 43.4471, 115.638};
-	//double entries4pi[9] = {170.632, 77.4467, 47.6104, 47.2324, 23.8192, 41.7883, 44.9313, 52.5379, 136.799};
-	//double entries4pi[9] = {677.148, 197.395, 114.85, 95.2913, 46.5738, 70.5837, 60.3931, 71.3482, 163.433};
 	double entries4pi[9] = {677.148, 197.395, 114.85, 95.2913, 46.5738, 70.5837, 60.3931, 71.3482, 163.433};
-	//double entrieskskpp0[9] = {0, 0, 0, 6.59587, 7.57025, 20.6056, 31.4171, 58.7507, 352.948};
-	//double entrieskskpp0[15] = {0, 0, 0, 0, 0, 0.400469, 0.711906, 1.30864, 1.66758, 2.03551, 2.42558, 3.14834, 7.17717, 19.2752, 46.5599};
-	//double entrieskskpp0[15] = {0, 0, 0, 0, 0, 0.321543, 0.574611, 1.05575, 1.34471, 1.64731, 1.958, 2.53098, 5.73339, 15.1881, 35.7772};
-	//double entrieskskpp0[15] = {0, 0, 0, 0, 0, 0.70363, 1.22432, 2.13675, 2.58815, 2.98438, 3.40088, 4.22852, 8.993, 20.4276, 39.4013};
 	double entrieskskpp0[8] = { 0, 0, 0, 1.24716, 1.35717, 3.52858, 5.25401, 9.9807 };
-	//double entrieskskpp0[8] = {0, 0, 2.52579, 5.09155, 3.42369, 7.46554, 16.5081, 32.8375};
-	//double entrieskskpp0[12] = {0, 0, 0, 1.88623, 4.83941, 4.22317, 48.4439, 34.5174, 37.4401, 34.2308, 25.0402, 38.9704};
-	//double entries2kc2pi[9] = {0, 0, 0, 0, 0.115448, 0.589727, 1.0897, 2.5459, 23.5336};
 	double entries2kc2pi[9] = {0, 0, 0, 0, 0.017435, 0.0952805, 0.212486, 0.60844, 6.8576};
 
+	// for systematic 4pi
 	double n4pidivbyeff[15] = {67520.3, 52298.4, 19495.1, 12707, 14531.7, 12986.4, 11541.6, 11913.5, 10413.1, 9710.55, 9129.25, 9514.04, 16660.4, 22297, 21495.8};
 	double n4pidivbyeff80[15] = {66440, 51711.4, 19030.4, 12537.3, 14283.7, 12712.7, 11305.1, 11361.1, 9800.86, 9436.95, 8774.02, 9445.55, 15777.2, 21115.9, 19761.7};
 	double n4pidivbyeff25[15] = {63051.1, 49750.4, 18168.4, 11948.8, 13796.6, 12529.4, 10491.8, 11108.7, 8884.81, 8981.18, 8359.99, 8508.77, 14665.8, 18941.3, 18021.9};
 	double n4pidivbyeff25loose[15] = {67477.7, 52806, 19162.6, 12481, 15059.5, 13204.7, 11174.9, 11885.1, 9639.05, 9170.37, 9149.74, 9187.46, 16556.4, 20411.3, 19680.3};
 	double n4pidivbyeff80loose[15] = {70724.8, 54809.8, 20082.2, 13086.7, 15565.3, 13356.9, 12055.9, 12220.3, 10747.7, 9831.4, 9526.4, 10198.6, 17538.3, 22771.3, 21532.7};
-	
-	
 	double ne4pi[8] = { 182746, 47122.1, 35309, 30476.1, 15053.7, 26248.4, 27176.7, 34556.6 };
 
-
-
+	//for some systematic
 	double effbase[15] = {0.0253735, 0.0327809, 0.0347007, 0.0326093, 0.0317334, 0.0309954, 0.0288474, 0.0287814, 0.0275634, 0.0273235, 0.0256675, 0.0251995, 0.0232206, 0.0199766, 0.0158896};
 	double effbase2012[14] = {0,0.176216, 0.140637, 0.130117, 0.099278, 0.0973381, 0.0899982, 0.0777184, 0.0774785, 0.0722186, 0.0651387, 0.0655787, 0.0591988, 0.0591588};
 	for(size_t i = 0; i < 15; i++){
-		cout << n4pidivbyeff80loose[i]/n4pidivbyeff25loose[i] << "	" << (n4pidivbyeff80loose[i]/n4pidivbyeff25loose[i])/(n4pidivbyeff80[i]/n4pidivbyeff25[i]) << endl;
+		//cout << n4pidivbyeff80loose[i]/n4pidivbyeff25loose[i] << "	" << (n4pidivbyeff80loose[i]/n4pidivbyeff25loose[i])/(n4pidivbyeff80[i]/n4pidivbyeff25[i]) << endl;
 	}
 
+
 	ifstream ifile("/work/users/kladov/snd2k/R007-001/2011/luminosity.dat");
-	double thnentr = 0;
-	double lbord = 1200;
-	double hbord = 0;
-	vector<pair<double, double> > eranges;
-	vector<double> enmod;
-	vector<double> effmod;
-	for(size_t i = 0; i < sizeof(energiesMod2011)/sizeof(energiesMod2011[0]); i++){
-		enmod.push_back(energiesMod2011[i]);
-		effmod.push_back(efficienciesMod2011[i]);
-	}
 	while (ifile.get() != EOF) {
-		double a, b, c;
-		ifile >> a >> b >> c;
-		luminosityEn.push_back(a);
-		luminosity.push_back(b);
-		luminosityErr.push_back(c/3.);
-		cout << a*2 << "	" << b << "	" << c << endl;
-		pair<size_t,size_t> modind = findclosest(a,enmod);
-		double efftemp = effmod[modind.first];
-		if (modind.first != modind.second)
-			efftemp += (effmod[modind.second] - effmod[modind.first]) * (a - enmod[modind.first]) / (enmod[modind.second] - enmod[modind.first]);
-		thnentr += b * crsBB(a * 2) * efftemp/10.*3.;
-		if (thnentr >= 60) {
-			thnentr = 0;
-			hbord = 2*a + 0.1;
-			eranges.push_back(make_pair(lbord, hbord));
-			lbord = hbord;
-		}
+		double eBeam, lum, lumErr;
+		ifile >> eBeam >> lum >> lumErr;
+		luminosityEn.push_back(eBeam);
+		luminosity.push_back(lum);
+		luminosityErr.push_back(lumErr / 3.);
 	}
-	if (eranges.back().second < 1980) {
-		eranges.push_back(make_pair(eranges.back().second, 2010));
-	}
-	//eranges.clear();
-	//eranges.push_back(make_pair(1530, 1760));
 	ifile.close();
-	for (size_t k = 0; k < eranges.size(); k++) {
-		cout << eranges[k].first << "-----" << eranges[k].second << endl;
-	}
-	//for (size_t k = 0; k < luminosityEn.size(); k++)
-	//for (size_t k = 0; k < 12; k++)
-		//eranges.push_back(make_pair(2. * luminosityEn[k] - 30, 2. * luminosityEn[k] + 30));
-		//eranges.push_back(make_pair(energygaps[k], energygaps[k+1]));
 	
-	vector<TH1*> hkskpe = imvmass("/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2011/kkp_KsNFn/*.root", "invks04", "ks0 inv mass distr", 60, 497.611 - 265, 497.611 + 265, eranges, "exp");
+
+	vector<TH1*> hkskpe = imvmass(expFiles, "invks04", "ks0 inv mass distr", 60, 497.611 - 265, 497.611 + 265, eranges, "exp");
 	//vector<TH1*> hkskpe = imvmass("/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2012/kkp_KsNF/*.root", "invks04", "ks0 inv mass distr", 60, 497.611 - 265, 497.611 + 265, eranges, "exp");
 	//vector<TH1*> hkskpe = imvmass("/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2017/kkp_KsNFnn/*.root", "invks04", "ks0 inv mass distr", 60, 497.611 - 265, 497.611 + 265, eranges, "exp");
 	vector<TH1*> hksinvmass[5];
 	for(size_t k = 0; k < eranges.size(); k++) {
 		for(size_t i = 0; i < 5; i++) {
-			cout << k << "	" << i << endl;
 			hksinvmass[i].push_back((TH1*)hkskpe[k]->Clone(Form("hksinvmass%d",i)));
 		}
 	}
-	cout << "b" << endl;
 	//vector<TH1*> hkskpe = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp/exp2011_ks0notfixed/*.root", "invks04", "ks0 inv mass distr", 100, 497.611 - 265, 497.611 + 265, eranges, "exp");
-	vector<TH1*> hkskp = imvmass("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2011IA/*.root", "invks03", "ks0 inv mass distr", 80, 497.611 - 265, 497.611 + 265, eranges, "mod");
+	efficienciesModBeam.clear();
+	energiesMod.clear();
+	vector<TH1*> hkskp = imvmass(modFiles, "invks03", "ks0 inv mass distr", 80, 497.611 - 265, 497.611 + 265, eranges, "mod");
 	//vector<TH1*> hkskp = imvmass("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2012IA/*.root", "invks03", "ks0 inv mass distr", 80, 497.611 - 265, 497.611 + 265, eranges, "mod");
 	//vector<TH1*> hkskp = imvmass("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2017IA/*.root", "invks03", "ks0 inv mass distr", 80, 497.611 - 265, 497.611 + 265, eranges, "mod");
 	//vector<TH1*> hkskp = imvmass("/work/users/kladov/snd2k/R007-002/output/ntuples/4pi/2011A/*x.root", "invks03", "ks0 inv mass distr", 30, 497.611 - 265, 497.611 + 265, eranges, "mod");
@@ -5351,22 +4636,19 @@ void kkpDistr::calculateEffAndNoE() {
 	//vector<TH1*> hkskp = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/all_KsNF/et2p0g_wrc**x.root", "invks03", "ks0 inv mass distr", 30, 497.611 - 265, 497.611 + 265, eranges, "mod");
 	
 	vector<double> noleff;
-	TFile* fout = new TFile("/work/users/kladov/snd2k/R007-001/2011/spectres.root", "RECREATE");
+	TFile* fout = new TFile("/online/users2/kladov/R007-002/kkpi/2011/spectres.root", "RECREATE");
 	//TFile* fout = new TFile("/work/users/kladov/snd2k/R007-001/2011/spectres4pi.root", "RECREATE");
 	//TFile* fout = new TFile("/work/users/kladov/snd2k/R007-001/2011/spectresKsKpipi0.root", "RECREATE");
 	//TFile* fout = new TFile("/work/users/kladov/snd2k/R007-001/2011/spectres2kc2p0.root", "RECREATE");
 	//TFile* fout = new TFile("/work/users/kladov/snd2k/R007-001/2011/spectreskskleta.root", "RECREATE");
 
-	//______couting and drawing efficiencies in mod beam points
+	//______writing to file and drawing efficiencies in mod beam points
 	{
 		vector<double> effModErr;
-		cout << "double energiesMod2011[" << energiesMod.size() << "] = {";
+		//ofstream enAndEffModOfstream("/online/users2/kladov/R007-002/enAndEffMod.dat");
 		for(size_t i = 0; i < energiesMod.size(); i++){
-			cout << energiesMod[i];
-			if(i<energiesMod.size()-1)
-				cout << ", ";
-			else
-				cout << "};" << endl;
+			//enAndEffModOfstream << energiesMod[i] << "	" << efficienciesModBeam[i] << endl;
+			cout << energiesMod[i] << "	" << efficienciesModBeam[i] << endl;
 			effModErr.push_back(sqrt(efficienciesModBeam[i]*(1.-efficienciesModBeam[i])/countModEventsBeam[i]));
 			noleff.push_back(0);
 			//if(effbase2012[i]!=0){
@@ -5374,14 +4656,7 @@ void kkpDistr::calculateEffAndNoE() {
 			//	effModErr[i] = effModErr[i]/effbase2012[i]*100.;
 			//}
 		}
-		cout << "double efficienciesMod2011[" << energiesMod.size() << "] = {";
-		for(size_t i = 0; i < energiesMod.size(); i++){
-			cout << efficienciesModBeam[i];
-			if(i<energiesMod.size()-1)
-				cout << ", ";
-			else
-				cout << "};" << endl;
-		}
+		//enAndEffModOfstream.close();
 		TGraphErrors* gre = new TGraphErrors(energiesMod.size(), &energiesMod[0], &efficienciesModBeam[0], &noleff[0], &effModErr[0]);
 		gre->SetTitle("detection efficiency;beam energy, MeV");
 		gre->SetMarkerColor(4);
@@ -5397,19 +4672,13 @@ void kkpDistr::calculateEffAndNoE() {
 		c->Update();
 		cin.get();
 	}
-	//________recalculating of efficiency with lum weights (for eranges)
-	
-	
-	vector<double> nEntries4pi;
-	vector<double> nEntries4piErr;
-	vector<double> popr4pi;
-	vector<double> popr4piErr;
+
+	//________recalculating efficiency with lum weights (for eranges)
+	vector<double> nEntries4pi, nEntries4piErr, popr4pi, popr4piErr;
 	for (size_t k = 0; k < eranges.size(); k++) {
 		double lum1 = 0;
 		double modEventsSum = 0;
-		int countPointsInErange = 0;
 		double entriesNumber = 0;
-		pair<size_t,size_t>  closestInd;
 		meanEff.push_back(0);
 		meanEffErr.push_back(sqrt((double)hkskp[k]->GetEntries() * (1. - (double)hkskp[k]->GetEntries()/(double)countModEvents[k])) / (double)countModEvents[k]);
 		if((double)hkskp[k]->GetEntries()==0){
@@ -5424,14 +4693,11 @@ void kkpDistr::calculateEffAndNoE() {
 		double sumWeightPoints = 0.;
 		for (size_t j = 0; j < luminosityEn.size(); j++) {
 			if (2 * luminosityEn[j] >= eranges[k].first && 2 * luminosityEn[j] < eranges[k].second) {
-				countPointsInErange+=1;
 				lum1 += luminosity[j];
-				closestInd = findclosest(luminosityEn[j], energiesMod);
-				//cout << closestInd.first << "	ASDSAFASFAS	" << closestInd.second << endl;
+				pair<size_t, size_t> closestInd = findclosest(luminosityEn[j], energiesMod);
 				double tempEffPoint = efficienciesModBeam[closestInd.first];
 				if(closestInd.first != closestInd.second)
 					tempEffPoint += (efficienciesModBeam[closestInd.second] - efficienciesModBeam[closestInd.first]) * (luminosityEn[j] - energiesMod[closestInd.first]) / (energiesMod[closestInd.second] - energiesMod[closestInd.first]);
-				//meanEff.back() += luminosity[j] * efficienciesModBeam[closestInd] / countModEventsBeam[closestInd];
 
 				double tempWeightPoint = luminosity[j] * tempEffPoint * crsBB(2 * luminosityEn[j]);
 				sumWeightPoints += tempWeightPoint;
@@ -5443,16 +4709,16 @@ void kkpDistr::calculateEffAndNoE() {
 				entriesNumber += luminosity[j] * tempEffPoint * ksKPiPi0Crosssect(2.*luminosityEn[j])*3./10.;
 			}
 		}
-		//meanEff.back() = meanEff.back() / (double)countPointsInErange * modEventsSum / lum1;
 		meanEff.back() = meanEff.back() / sumWeightPoints;
 		//cout << "meaneff " << meanEff.back() << "	" << lum1 << "	" << k << " / " << eranges.size() << endl;
 		//cout << entriesNumber << ", ";
-		popr4pi.push_back(nEntries4pi[k]/meanEff[k] / ne4pi[k]);
-		popr4piErr.push_back(sqrt(2.)*sqrt(pow(nEntries4piErr[k]/meanEff[k] / ne4pi[k],2) + pow(popr4pi[k]*meanEffErr[k]/meanEff[k],2) ) );
-		cout << nEntries4pi[k]/meanEff[k]/ ne4pi[k] << ", ";
+		//popr4pi.push_back(nEntries4pi[k]/meanEff[k] / ne4pi[k]);
+		//popr4piErr.push_back(sqrt(2.)*sqrt(pow(nEntries4piErr[k]/meanEff[k] / ne4pi[k],2) + pow(popr4pi[k]*meanEffErr[k]/meanEff[k],2) ) );
+		//cout << nEntries4pi[k]/meanEff[k]/ ne4pi[k] << ", ";
 		//cout << nEntries4pi[k]/meanEff[k] << ", ";
 	}
 	cout << endl;
+
 	//________luminosity erange calculation, energy as arithmetic mean, and then error as standart dispersion
 	for (size_t k = 0; k < eranges.size(); k++) {
 		double backnorm = 0;
@@ -5495,15 +4761,6 @@ void kkpDistr::calculateEffAndNoE() {
 		meanEnErrTArr.back() = sqrt(meanEnErrTArr.back() / sumWeightPoints);
 	}
 
-	
-
-	TGraphErrors* gre = new TGraphErrors(eranges.size(), &meanEnTArr[0], &popr4pi[0], &meanEnErrTArr[0], &popr4piErr[0]);
-	gre->SetTitle("detection efficiency vs ISR photon energy parameter %d dependence on 2 beam;  2 * beam energy, MeV");
-	gre->SetMarkerColor(4);
-	gre->SetMarkerStyle(21);
-	gre->Draw("AP");
-	//c->Update();
-
 	//________drawing and fitting efficiency dependence on mce[1]
 	/*for(size_t i = 0; i < 5; i++){
 		//TGraphErrors* gre = new TGraphErrors(meanEnArr.size(), &meanEnArr[0], &pareffmce[i][0], &meanEnErrArr[0], &pareffmceErr[i][0]);
@@ -5541,8 +4798,6 @@ void kkpDistr::calculateEffAndNoE() {
 	//for (size_t k = 0; k < luminosityEn.size(); k++) {//12
 	for (size_t k = 0; k < eranges.size(); k++) {//12
 	//for (size_t k = 7; k < 8; k++) {//12
-		cout << "a" << endl;
-		//TH1* hkskp = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp_KsNF/2017/*.root", "invks03", "ks0 inv mass distr", 200, 497.611 - 265, 497.611 + 265, 2.*luminosityEn[k]-2.5, 2.*luminosityEn[k] + 2.5, "mod");
 		cout << hkskp[k]->GetEntries() << endl;
 		cout << hkskpe[k]->GetEntries() << endl;
 		int h4pisource = k;
@@ -5578,9 +4833,8 @@ void kkpDistr::calculateEffAndNoE() {
 			gStyle->SetOptStat(0);
 			c->Update();
 			//cin.get();
-
-			//TH1* hkskp = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp_KsNF/2011/*.root", "invks03", "ks0 inv mass distr", 200, 497.611 - 265, 497.611 + 265, k, "mod");
-			//Fit for kskp modeling pik with 3 gauss, fixed parameters
+			
+			//______________Fit for kskp modeling pik with 3 gauss, fixed parameters
 			//TF1* f1 = new TF1("f1", "[0]*(exp(-0.5*((x-[1]-[9])/[2])**2)+[3]*exp(-0.5*((x-[4]-[9])/[5])**2)+[6]*exp(-0.5*((x-[7]-[9])/[8])**2))*(265./100.)/53.3188", 300, 700);
 			TF1* f1 = new TF1("f1", "([0]*exp(-0.5*((x-[1])/[2])**2)+[3]*exp(-0.5*((x-[4])/[5])**2)+[6]*exp(-0.5*((x-[7])/[8])**2))*(265./40.)", 200, 700);
 			f1->SetParameters(50.0, 497.611, 20., 25., 500, 50., 25., 495, 50.);
@@ -5770,9 +5024,6 @@ void kkpDistr::calculateEffAndNoE() {
 			rebin[3] = 4;
 			rebin[4] = (int)((600. / (double)(hkskpe[k]->GetEntries()))*((pow((eranges[k].first-1550.)/300.,2)+1))) + 1;
 			//int rebin = 3;
-			for(size_t i = 0; i < 5; i++){
-				hksinvmass[i][k]->Rebin(rebin[i]);
-			}
 			hkskpe[k]->Rebin(rebin[0]);
 			//hkskpe[k]->Add(h4pi,-0.9);
 			//hksinvmass[0]->Rebin(rebin[0]);
@@ -5802,6 +5053,9 @@ void kkpDistr::calculateEffAndNoE() {
 			
 
 			/*
+			for(size_t i = 0; i < 5; i++){
+				hksinvmass[i][k]->Rebin(rebin[i]);
+			}
 			for(size_t j = 0; j < 5; j++){
 				for(size_t i = 0; i < 4; i++){
 					hksinvmass[j][k]->Fit("f1e", "", "", 200+i*50, 750);
@@ -5861,7 +5115,7 @@ void kkpDistr::calculateEffAndNoE() {
 			}*/
 			
 			
-
+			//_____just for drawing
 			c->Update();
 			//TF1* f2 = new TF1("f2", "[0]+[1]*x+[2]*x*x", 300, 700);
 			for (size_t i = 0; i < 3; i++)
@@ -5928,7 +5182,6 @@ void kkpDistr::calculateEffAndNoE() {
 			//luminosityArr.push_back(lum);
 			//luminosityErrArr.push_back(lumErr);
 			cin.get();
-			cout << "b" << endl;
 		}
 		else{
 			cout << "asdasd" << endl;
@@ -6094,216 +5347,93 @@ void kkpDistr::calculateEffAndNoE() {
 	fkskpipi0->Close();*/
 }
 
+void checkMeanLineDedx() {
+	TFile* f = new TFile("/online/users2/kladov/R007-002/kkpi/2011/SelIDistrKsKPiM.root");
+	TH2* hdk = (TH2*)f->Get("kaonsDEdx");
+	TH2* hdp = (TH2*)f->Get("pionsDEdx");
+	
+	hdp->SetMarkerStyle(8);
+	hdp->SetMarkerSize(0.4);
+	hdp->SetMarkerColor(4);
 
+	hdk->SetMarkerStyle(8);
+	hdk->SetMarkerSize(0.4);
+	//hdk->SetMarkerColor(4);
+	hdk->SetTitle("dE/dx vs p; P (MeV/c)");
 
-
-void drawCrossSection(){
-	TF1* f1 = new TF1("f1","crsBB(x)",1000,2000);
-	f1->Draw();
+	hdk->Draw();
+	//hdp->Draw("same");
+	TF1* f1 = new TF1("f1", "meanLine(x)", 100, 500);
+	f1->Draw("same");
+	
 }
-
 
 void go() {
 	kkpDistr processing;
-	processing.year = 2011;
-	processing.definededpopr();
-	//normcoeff = 671.395;
-	//effEeEnergy();
-	//luminosity();
-	//copy();
+	baseDataFile = "/online/users2/kladov/R007-002/dEdx/dEdxCoeff2011.dat";
+	processing.defineEnAndDEDX();
+	vector<pair<double, double> > eranges = makeEranges();
+	char* expFiles = "/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2011/kkp_KsNFnn/*.root";
+	char* modFiles = "/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2011IA/*.root";
 	//someAnalisis();
 	//effEnergy();
 	
-	//landaufit();
 	//draweffen();
 	//drawfittcross("pp_cs_thr.his", "pp_cs_exp.his");
 	//drawBWK();
-	//processing.calculateEffAndNoE();
 	//processing.invmass2part();
 	
+	processing.calculateEffAndNoE(expFiles, modFiles, eranges);
 	
-	/*
-	processing.genTableML("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2011IA/*.root","/work/users/kladov/snd2k/R007-001/2011/trainSet.txt",0);
-	processing.genTableML("/work/users/kladov/snd2k/R007-002/output/ntuples/4pi/2011A/*x.root","/work/users/kladov/snd2k/R007-001/2011/trainSet.txt",1);
-	processing.genTableML("/work/users/kladov/snd2k/R007-002/output/ntuples/2kc2p0/2011A/*x.root","/work/users/kladov/snd2k/R007-001/2011/trainSet.txt",2);
-	ifstream ifile("/work/users/kladov/snd2k/R007-001/2011/luminosity.dat");
-	double thnentr = 0;
-	double lbord = 1200;
-	double hbord = 0;
-	vector<pair<double, double> > eranges;
-	int f = 0;
-	double en0 = 0.;
-	vector<double> enmod;
-	vector<double> effmod;
-	for(size_t i = 0; i < sizeof(energiesMod2011)/sizeof(energiesMod2011[0]); i++){
-		enmod.push_back(energiesMod2011[i]);
-		effmod.push_back(efficienciesMod2011[i]);
-	}
-	while (ifile.get() != EOF) {
-		double a, b, c;
-		ifile >> a >> b >> c;
-		if (f==0)
-			en0 = a;
-		cout << a * 2 << "	" << b << "	" << c << endl;
-		pair<size_t,size_t> modind = findclosest(a,enmod);
-		double efftemp = effmod[modind.first];
-		if (modind.first != modind.second)
-			efftemp += (effmod[modind.second] - effmod[modind.first]) * (a - enmod[modind.first]) / (enmod[modind.second] - enmod[modind.first]);
-		thnentr += b * crsBB(a * 2) * efftemp/10.*3.;
-		if (thnentr >= 60) {
-			thnentr = 0;
-			hbord = 2 * a + 0.1;
-			eranges.push_back(make_pair(lbord, hbord));
-			lbord = hbord;
-		}
-		f++;
-	}
-	if (eranges.back().second < 1980) {
-		eranges.push_back(make_pair(eranges.back().second, 2010));
-	}
-	//eranges.clear();
-	//eranges.push_back(make_pair(1530, 1760));
-	ifile.close();
+	//processing.genTableML("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2011IA/*.root","/sweet/home/kladov/trainSet.txt",0);
+	//processing.genTableML("/work/users/kladov/snd2k/R007-002/output/ntuples/4pi/2011A/*x.root","/sweet/home/kladov/trainSet.txt",1);
+	//processing.genTableML("/work/users/kladov/snd2k/R007-002/output/ntuples/2kc2p0/2011A/*x.root","/sweet/home/kladov/trainSet.txt",2);
+	
 	//processing.drawdEvsp(eranges);
-	processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2011/kkp_KsNFn/*.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistrKsKPiE.root", "/work/users/kladov/snd2k/R007-001/2011/testSetExp.txt", 2 ,eranges, "exp");
+	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2011/kkp_KsNFn/*.root", "/online/users2/kladov/R007-002/kkpi/2011/SelDistrKsKPiE.root", "/work/users/kladov/snd2k/R007-001/2011/testSetExp.txt", 2 ,eranges, "exp");
 	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2012/kkp_KsNF/*.root", "/work/users/kladov/snd2k/R007-001/kkpi/2012/SelDistrKsKPiE.root", "/work/users/kladov/snd2k/R007-001/2011/testSetExp.txt", 2 ,eranges, "exp");
-	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/MHAD2017/kkp_KsNFnn/*.root", "/work/users/kladov/snd2k/R007-001/kkpi/2017/SelDistrKsKPiE.root", "/work/users/kladov/snd2k/R007-001/2011/testSetExp.txt", 2 ,eranges, "exp");
-	processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2011IA/*.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistrKsKPiM.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
+	//processing.genTableMLExp(expFiles, "/online/users2/kladov/R007-002/kkpi/2011/SelDistrKsKPiE.root", "/sweet/home/kladov/testSetExp.txt", 2 ,eranges, "exp");
+	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2011IA/*.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistrKsKPiM.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
 	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2012IA/*.root", "/work/users/kladov/snd2k/R007-001/kkpi/2012/SelDistrKsKPiM.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
-	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/kkp_KsNF/2017IA/*.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistrKsKPiM.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
+	//processing.genTableMLExp(modFiles, "/online/users2/kladov/R007-002/kkpi/2011/SelDistrKsKPiM.root", "/sweet/home/kladov/testSetMod.txt", 1 ,eranges, "mod");
 	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/4pi/2011A/*x.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistrKsKPiM4pi1.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
 	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/kskpp0/*x.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistrKsKPiMkskpp0.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
 	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/2kc2p0/*x.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistrKsKPiM4pi.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
 	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/kskleta/*x.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistrKsKPiMkskleta.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
 	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-001/output/ntuples/all_KsNF/eta3pi_wrc**x.root", "/work/users/kladov/snd2k/R007-001/kkpi/2011/SelDistreta3pi.root", "/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt", 1 ,eranges, "mod");
 	//processing.genTableMLExp("/work/users/kladov/snd2k/R007-002/output/ntuples/4pi/2011/*x.root", "/work/users/kladov/snd2k/R007-001/kkpi/SelDistrKsKPiB.root", "/work/users/kladov/snd2k/R007-001/2017/testSetBack.txt", 0 ,eranges, "mod");
-	*/
+	
+
+
+	//managedEdxCorrection dEdxCorrCalc;
+	//dEdxCorrCalc.calculatedEdxCorrections();
 
 
 	//compareSelectionCuts();
-	luminCalculation lumcalc;
+	//luminCalculation lumcalc;
 	//lumcalc.effEeEnergy("t1", "/work/users/kladov/snd2k/R007-001/2011/*x.root");
-	lumcalc.luminosityCalc();
+	//lumcalc.luminosityCalc();
 	//lumcalc.differenceForLum();
 	//lumcalc.drawdEdxspectrum();
 	//drawLum();
 	//sumpoints();
 	
-	//hwf hk("etonkkp", "etonkkp", 50, 0.3, 0.8);
-	//hwf he("etoneta", "etoneta", 50, 0.3, 0.8);
-	
-	//hk.fillhists("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp_ks0notfixed/*.root");
-	//he.fillhists("/work/users/kladov/snd2k/R007-001/output/ntuples/2etg_ks0notfixed/*.root");
-	/*
-	hk.hist->Draw();
-	he.hist->SetLineColor(2);
-	he.hist->Draw("same");*/
 
-	//TH1* hkp = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp/*.root");
-	//TH1* hkk = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/2kc2pi/*.root");
-	//TH1* hpp = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/4pi_KsNF/*.root", "invks01", "ks0 inv mass distr", 30, 497.611 - 265, 497.611 + 265, 1);
-	//TH1* hpp2= imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/2kc2pi_KsNF/*.root", "invks02", "ks0 inv mass distr", 30, 497.611 - 265, 497.611 + 265, 1);
-	//TH1* hkskp= imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp_ks0notfixed/*.root", "invks03", "ks0 inv mass distr", 30, 497.611 - 265, 497.611 + 265, 2);
-	//TH1* hexp= imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp/exp2011_ks0notfixed/*.root", "invks04", "ks0 inv mass distr", 30, 497.611 - 265, 497.611 + 265, 3);
-	
-	/*TH1* hs = new TH1F("invks05", "ks0 inv mass distr", 30, 497.611 - 265, 497.611 + 265);
-
-	hexp->Draw();
-
-	hs->Add(hpp, hpp2, 30, 0.5);
-	hs->Add(hkskp, 3);
-	hs->SetLineColor(2);
-	hs->Draw("same");
-
-	hpp->Scale(30);
-	hpp2->Scale(0.5);
-	hkskp->Scale(3);
-	hkskp->Draw("same");
-	hpp2->SetLineColor(2);
-	hpp2->Draw("same");
-	hpp->SetLineColor(3);
-	hpp->Draw("same");*/
-	
-	//TH1* hpp = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/all_KsNF/ksknppp0_wrc_nemcc_825-9426-27_wmix.root", "invks01", "ks0 inv mass distr", 25, 497.611 - 265, 497.611 + 265, 1);
-	//hpp->Draw();
-
-
-	//TH1* hkskp = imvmass("/work/users/kladov/snd2k/R007-001/output/ntuples/kkp_KsNF/2017/*.root", "invks03", "ks0 inv mass distr", 200, 497.611 - 265, 497.611 + 265, 4);
-	
-	//for kskpipi0
-	/*TF1* f1 = new TF1("f1", "gaus(0)+gaus(3)", 230, 800);
-	f1->SetParameters(50.0, 497.611, 20.0, 20, 500, 50);
-	hkskp->Draw();
-	hkskp->Fit("f1", "", "", 230, 800);
-	cout << "Chi2 / NDF	" << f1->GetChisquare() << " / " << f1->GetNDF() << endl;*/
-
-	//Fit for 4pi background or 2kc2pi
-	/*TF1* f1 = new TF1("f1", "[0]*exp(-0.5*((x-[1])/[2])**2)+[3]*exp(-0.5*((x-[4])/[5])**2)", 300, 700);
-	f1->SetParameters(50,350,20,20,400,100);
-	hkskp->Draw();
-	hkskp->Fit("f1", "", "", 300, 700);
-	cout << "Chi2 / NDF	" << f1->GetChisquare() << " / " << f1->GetNDF() << endl;*/
-	
-
-	/*hexp1->SetLineColor(1);
-	hexp2->SetLineColor(2);
-	hexp3->SetLineColor(3);
-	hexp4->SetLineColor(4);
-	hexp5->SetLineColor(5);
-	hexp6->SetLineColor(6);
-	TF1* f1 = new TF1("f1", "gaus(0)+[3]+[4]*(x-497.611)", 340, 740);
-	f1->SetParameters(50.0, 497.611, 20.0, 50.0, -0.25);
-	hexp1->Draw();
-	TCanvas* c = (TCanvas*)gROOT->GetListOfCanvases()->At(0);
-	//hexp1->Fit("f1", "", "", 340, 740);
-	c->Update();
-	cin.get();
-	hexp2->Draw();
-	//hexp2->Fit("f1", "", "", 340, 740);
-	c->Update();
-	cin.get();
-	hexp3->Draw();
-	//hexp3->Fit("f1", "", "", 340, 740);
-	c->Update();
-	cin.get();
-	hexp4->Draw();
-	//hexp4->Fit("f1", "", "", 340, 740);
-	c->Update();
-	cin.get();
-	hexp5->Draw();
-	//hexp5->Fit("f1", "", "", 340, 740);
-	c->Update();
-	cin.get();
-	hexp6->Draw();
-	//hexp6->Fit("f1", "", "", 340, 740);
-	c->Update();*/
-	
-	//hexp->Fit("f1","","",340,740);
-	//hexp->DrawNormalized("", 1);
-	//cout << hkp->Integral() << "	" << hkk->Integral() << "	" << hpp->Integral() << "	" << hexp->Integral() << endl;*/
-	
-	//pscp D:\programs\kkp_model.cpp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/kkpi/kkp_model.cpp
-	//pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/kkpi/kkp_model.cpp D:\programs\kkp_model.cpp
-
-	//pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2017/testSetExp.txt D:\programs\testSetExp.txt 
-	//pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2017/testSetMod.txt D:\programs\testSetMod.txt
-	//pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2017/testSetBack.txt D:\programs\testSetBack.txt
-	//pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2017/trainSet.txt D:\programs\trainSet.txt
 /*
-pscp D:\workProgramms\kkp_model.cpp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/kkpi/kkp_model.cpp
+pscp D:\workProgramms\KsKpiAnalysis\kkp_model.cpp kladov@sndxt1.inp.nsk.su:/sweet/home/kladov/kkp_model.cpp
 12081998Vkl
 
-pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2011/testSetExp.txt D:\workProgramms\testSetExp.txt
+pscp kladov@sndxt1.inp.nsk.su:/sweet/home/kladov/testSetExp.txt D:\workProgramms\KsKpiAnalysis\testSetExp.txt
 12081998Vkl
-pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2011/testSetMod.txt D:\workProgramms\testSetMod.txt
-12081998Vkl
-
-pscp kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2011/trainSet.txt D:\workProgramms\trainSet.txt
+pscp kladov@sndxt1.inp.nsk.su:/sweet/home/kladov/testSetMod.txt D:\workProgramms\KsKpiAnalysis\testSetMod.txt
 12081998Vkl
 
-pscp D:\workProgramms\testMarksExp.txt kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2011/testMarksExp.txt
+pscp kladov@sndxt1.inp.nsk.su:/sweet/home/kladov/trainSet.txt D:\workProgramms\KsKpiAnalysis\trainSet.txt
 12081998Vkl
-pscp D:\workProgramms\testMarksMod.txt kladov@sndxt1.inp.nsk.su:/work/users/kladov/snd2k/R007-001/2011/testMarksMod.txt
+
+pscp D:\workProgramms\KsKpiAnalysis\testMarksExp.csv kladov@sndxt1.inp.nsk.su:/sweet/home/kladov/testMarksExp.txt
+12081998Vkl
+pscp D:\workProgramms\KsKpiAnalysis\testMarksMod.csv kladov@sndxt1.inp.nsk.su:/sweet/home/kladov/testMarksMod.txt
 12081998Vkl
 
 */

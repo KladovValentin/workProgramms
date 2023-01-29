@@ -147,7 +147,7 @@ int getlist() {
 	fout.close();*/
 	
 	vector<TString> ans;
-	TString basedir = "/work/users/kladov/snd2k/R007-002/2019/*.hbook";
+	TString basedir = "/work/users/kladov/snd2k/R007-002/2017/*.hbook";
 	//TString basedir = "/online/simulation/MC/R006-004/ee/output/*.mod.gz";
 	TString files = gSystem->GetFromPipe("ls " + basedir);
 	TString elem;
@@ -183,10 +183,10 @@ int getlist() {
 		const char* a0 = (const char*)tokens[10];
 		int a = atoi(a0);
 		//cout << a << endl;
-		if (a > 27250 && a > 37919 && a < 42827) {
+		//if (a > 27250 && a > 37919 && a < 42827) {
 			fout << ".mainrelease/Offline/submit.sh -q clusters,1440 FAKERUN=" << a << " MODFILENAME=" << tokens1[7] << "     MODFILEDIR=/online/simulation/MC/R006-004/ee/output/ HBOOKDIR=./2019/  SimRecApp fwk/simreco_col_point.fwk" << endl;
-			cout << "h2root " << "2019/" << tokens1[7] << ".hbook " << "2019/" << tokens1[7] << ".root" << (char)59 << " ";
-		}
+			cout << "h2root " << "2017/" << tokens1[7] << ".hbook " << "2017/" << tokens1[7] << ".root" << (char)59 << " ";
+		//}
 		
 	}
 	cout << endl;
