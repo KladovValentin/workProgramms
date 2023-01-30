@@ -14,19 +14,19 @@ while True:
     if event == "train":
         print("training")
         window.Minimize()
-        ptrain = subprocess.run("python trainML.py NN")
+        ptrain = subprocess.run(["python3", "trainML.py", "NN"])
         window.Normal()
     elif event == "predictMod":
         window.Minimize()
-        ptest = subprocess.run("python predict.py Mod")
+        ptest = subprocess.run("python3 predict.py Mod")
         window.Normal()
     elif event == "predictExp":
         window.Minimize()
-        ptest = subprocess.run("python predict.py Exp")
+        ptest = subprocess.run("python3 predict.py Exp")
         window.Normal()
     elif event == "checkDistrs":
         window.Minimize()
-        pcheck = subprocess.run("python predict.py Dis")
+        pcheck = subprocess.run("python3 predict.py Dis")
     elif event == sg.WIN_CLOSED:
         break
 

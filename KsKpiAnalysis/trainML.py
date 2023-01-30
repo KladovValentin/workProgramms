@@ -8,13 +8,13 @@ import pandas
 import matplotlib.pyplot as plt
 import numpy as np
 
-device = "cuda:0" if torch.cuda.is_available() else "cpu"
-print(torch.cuda.get_device_name(0))
-print(f"Using {device} device")
-torch.cuda.empty_cache()
-print(torch.cuda.memory_allocated(0))
-print(torch.cuda.memory_reserved(0))
-cuda = torch.device('cuda:0')
+#device = "cuda:0" if torch.cuda.is_available() else "cpu"
+#print(torch.cuda.get_device_name(0))
+#print(f"Using {device} device")
+#torch.cuda.empty_cache()
+#print(torch.cuda.memory_allocated(0))
+#print(torch.cuda.memory_reserved(0))
+#cuda = torch.device('cuda:0')
 
 
 def prepareTable(datF):
@@ -97,9 +97,9 @@ def train_model(model, train_loader, loss, optimizer, num_epochs,validationX,val
         total_samples = 0
         #print(len(train_loader))
         for i_step, (x, y) in enumerate(train_loader):
-            x = x.to(device)
+            #x = x.to(device)
             y = y.type(torch.LongTensor)
-            y = y.to(device)
+            #y = y.to(device)
 
             prediction = model(x)
             loss_value = loss(prediction, y)
@@ -119,9 +119,9 @@ def train_model(model, train_loader, loss, optimizer, num_epochs,validationX,val
         model.eval()
         ave_valid_loss = 0
         with torch.no_grad():
-            x = torch.tensor(validationX).to(device)
+            x = torch.tensor(validationX)#.to(device)
             y = torch.tensor(validationY)
-            y = y.type(torch.LongTensor).to(device)
+            y = y.type(torch.LongTensor)#.to(device)
             prediction = model(x)
             #print(x)
             print(prediction.softmax(dim=1))
@@ -205,7 +205,7 @@ def train_NN(dataTable, nnname, validTable):
                   output_dim=4 
     ) # could use 1 for binary classification
     nn_model.type(torch.FloatTensor)
-    nn_model.to(device)
+    #nn_model.to(device)
     print(next(nn_model.parameters()).is_cuda)
 
     loss = nn.CrossEntropyLoss().type(torch.cuda.FloatTensor)
@@ -279,7 +279,7 @@ class RNN(torch.nn.Module):
         # This method generates the first hidden state of zeros which we'll use in the forward pass
         # We'll send the tensor holding the hidden state to the device we specified earlier as well
         hidden = torch.zeros(1, batch_size, self.hidden_dim)
-        return hidden.to(device)
+        return hidden#.to(device)
 
 
 def writeTrainData(energy,meanArr,stdArr):
